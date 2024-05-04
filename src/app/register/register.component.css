@@ -1,0 +1,143 @@
+* {
+    /* color: #000; */
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* BG LOGO  */
+.bg-img {
+    background-image: url('../../assets/images/hotel-logo-2300.png');
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-left: 30%;
+    z-index: -2;
+}
+
+/* BLUR EFFECT */
+.blur {
+    position: absolute;
+    backdrop-filter: blur(16px);
+    background-color: #27220071;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+/* DUMMY BODY  */
+.dummy-body {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* FORM WRAPPER  */
+.form-wrapper {
+    backdrop-filter: blur(20px);
+    background-color: rgba(158, 158, 158, 0.418);
+    border: 1px solid rgba(255, 255, 255, 0.274);
+    border-radius: 20px;
+    width: 600px;
+    padding: 20px 0;
+    justify-content: space-evenly;
+}
+
+.form-wrapper form {
+    flex-direction: column;
+    /* debug  */
+    /* outline: 3px solid red; */
+}
+
+.form-wrapper h1 {
+    text-align: center;
+}
+
+.form-wrapper .input-box {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.479);
+    border-radius: 10px;
+    width: 220px;
+    height: 40px;
+    margin-top: 20px;
+}
+
+.form-wrapper .input-box input {
+    background-color: transparent;
+    padding-left: 10px;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+}
+
+.form-wrapper .input-box input::placeholder {
+    color: #fff;
+}
+
+.form-wrapper .input-box input:focus {
+    background-color: rgba(0, 0, 0, 0.11);
+}
+
+.form-wrapper .input-box i {
+    position: absolute;
+    top: 30%;
+    right: 5%;
+}
+
+.form-wrapper .agree-terms {
+    margin-top: 10px;
+    font-size: 16px;
+}
+.form-wrapper .agree-terms label {
+    font-size: 11px;
+}
+
+.form-wrapper .btn {
+    background-color: #d3b30036;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ffffff48;
+    width: 100%;
+    height: 42px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.form-wrapper .btn:hover {
+    background-color: #ffd900c9;
+    cursor: pointer;
+    border-color: transparent;
+    color: #000;
+}
+
+.form-wrapper .login-link {
+    margin-top: 10px;
+    font-size: 14px;
+}
+.form-wrapper .login-link p {
+    cursor: default;
+    text-align: center;
+}
+.form-wrapper .login-link p a {
+    font-weight: 600;
+    color: #ffd700;
+}
+
+.form-wrapper .form-image {
+    /* debug  */
+    /* border: 1px solid red; */
+}
+.form-wrapper .form-image img {
+    width: 220px;
+}
+.form-wrapper .form-image p {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    cursor: default;
+}

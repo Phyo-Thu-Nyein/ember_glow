@@ -1,0 +1,114 @@
+<!-- NAB BAR  -->
+<app-navigation></app-navigation>
+
+<!-- BG IMAGE -->
+<div class="bg-img"></div>
+
+<!-- BLUR EFFECT  -->
+<div class="blur"></div>
+
+<div class="dummy-body flex">
+  <!-- FORM SECTION  -->
+  <div class="form-wrapper flex">
+    <form (ngSubmit)="register()" #regForm="ngForm" class="flex">
+      <h1>Register</h1>
+      <!-- USERNAME FIELD  -->
+      <div class="input-box">
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="Username"
+          [(ngModel)]="username"
+          required
+          minlength="4"
+          #name="ngModel"
+        />
+        <i class="bx bxs-user"></i>
+      </div>
+      <!-- EMAIL FIELD -->
+      <div class="input-box">
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Email Address"
+          [(ngModel)]="email"
+          required
+          minlength="4"
+          #mail="ngModel"
+        />
+        <i class="bx bxs-envelope"></i>
+      </div>
+      <!-- PHONE FIELD -->
+      <div class="input-box">
+        <input
+          type="tel"
+          name="phone"
+          id="phone"
+          placeholder="Phone Number"
+          [(ngModel)]="phone"
+          required
+          minlength="9"
+          #phoneno="ngModel"
+        />
+        <i class="bx bxs-phone"></i>
+      </div>
+      <!-- PASSWORD FIELD -->
+      <div class="input-box">
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Enter Password"
+          [(ngModel)]="password"
+          required
+          minlength="8"
+          #pass="ngModel"
+        />
+        <i class="bx bxs-lock-alt"></i>
+      </div>
+      <!-- COFIRM PSW FIELD -->
+      <div class="input-box">
+        <input
+          type="password"
+          name="password"
+          id="conpassword"
+          placeholder="Confirm Password"
+          [(ngModel)]="conpassword"
+          required
+          minlength="8"
+          #pass="ngModel"
+        />
+        <i class="bx bxs-lock-alt"></i>
+      </div>
+      <div class="agree-terms">
+        <label>
+          By registering, you agree to our terms & conditions.
+        </label>
+      </div>
+
+      <!-- <button type="submit" id="register" [disabled]="!agree.checked" class="btn">Register</button> -->
+      <button type="submit" id="register" class="btn">Register</button>
+      
+
+      <div class="login-link">
+        <p>
+          Already registered?
+          <a routerLink="/login">Login</a>
+          here!
+        </p>
+      </div>
+    </form>
+
+    <!-- FORM IMAGE  -->
+    <div class="form-image">
+      <img
+        src="../../assets/images/hotel-logo-600.png"
+        class=""
+        alt="hotel logo"
+      />
+      <p>EMBER GLOW</p>
+    </div>
+  </div>
+</div>
