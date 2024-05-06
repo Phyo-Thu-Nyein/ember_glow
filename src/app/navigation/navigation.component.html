@@ -6,34 +6,49 @@
     </a>
   </div>
   <div class="mid-part flex">
-    <a href="" class="flex">
-      <i class='bx bxs-hotel' style='color:#ffffff' ></i>
+    <a routerLink="/rooms" class="flex">
+      <i class="bx bxs-hotel" style="color: #ffffff"></i>
       Rooms
     </a>
-    <a href="" class="flex">
-      <i class='bx bxs-bowl-hot' style='color:#ffffff' ></i>
+    <a routerLink="/dining" class="flex">
+      <i class="bx bxs-bowl-hot" style="color: #ffffff"></i>
       Dining
     </a>
-    <a href="" class="flex">
-      <i class='bx bx-swim' style='color:#ffffff' ></i>
+    <a routerLink="/facilities" class="flex">
+      <i class="bx bx-swim" style="color: #ffffff"></i>
       Facilities
     </a>
-    <a href="" class="flex">
-      <i class='bx bxs-group' style='color:#ffffff' ></i>
+    <a routerLink="/about" class="flex">
+      <i class="bx bxs-group" style="color: #ffffff"></i>
       About
     </a>
-    <a href="" class="flex">
-      <i class='bx bxs-phone' style='color:#ffffff' ></i>
+    <a routerLink="/contact" class="flex">
+      <i class="bx bxs-phone" style="color: #ffffff"></i>
       Contact
     </a>
   </div>
   <div class="right-part flex">
-    <a href="" class="flex">
-        <i class="bx bxs-user"></i>
-        <span>Login</span>
+    <a routerLink="/login" class="flex">
+      <i class="bx bxs-user"></i>
+      <span>Login</span>
     </a>
-    <button class="right-part__menu">
-      <i class='bx bx-menu'></i>
+    <button class="right-part__menu" onclick="mobile_menu.showModal()">
+      <i class="bx bx-menu"></i>
     </button>
   </div>
 </div>
+
+<!-- MOBILE NAV -->
+<dialog id="mobile_menu">
+  <ul class="mobile___nav flex">
+    <li class="mobile__nav-link"><a routerLink="/rooms">Rooms</a></li>
+    <li class="mobile__nav-link"><a routerLink="/dining">Dining</a></li>
+    <li class="mobile__nav-link"><a routerLink="/facilities">Facilities</a></li>
+    <li class="mobile__nav-link"><a routerLink="/about">About</a></li>
+    <li class="mobile__nav-link"><a routerLink="/contact">Contact</a></li>
+    <li class="mobile__nav-line"></li>
+    <button class="mobile__nav-close" onclick="mobile_menu.close()">
+      <i class="bx bx-x-circle"></i>
+    </button>
+  </ul>
+</dialog>
