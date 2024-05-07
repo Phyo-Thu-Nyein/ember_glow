@@ -14,6 +14,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { RoomsComponent } from './rooms/rooms.component';
+import { FacilitiesComponent } from './facilities/facilities.component';
+import { DiningComponent } from './dining/dining.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { ReceptionComponent } from './reception/reception.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +31,12 @@ import { MaterialModule } from './material/material.module';
     FooterComponent,
     NotfoundComponent,
     DetailComponent,
+    RoomsComponent,
+    FacilitiesComponent,
+    DiningComponent,
+    AboutComponent,
+    ContactComponent,
+    ReceptionComponent,
   ],
   imports: [
     BrowserModule,
