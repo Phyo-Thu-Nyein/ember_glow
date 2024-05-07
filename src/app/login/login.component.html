@@ -1,1 +1,66 @@
-<p>login works!</p>
+<!-- BG IMAGE -->
+<div class="bg-img"></div>
+
+<!-- BLUR EFFECT  -->
+<div class="blur"></div>
+
+<div class="dummy-body flex">
+  <!-- FORM SECTION  -->
+  <div class="form-wrapper flex">
+    <h1>Login</h1>
+    <div class="form-img-container flex">
+      <form (ngSubmit)="register()" #loginForm="ngForm" class="flex">
+        <!-- EMAIL FIELD -->
+        <div class="input-box">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email Address"
+            [(ngModel)]="email"
+            required
+            minlength="4"
+            #mail="ngModel"
+          />
+          <i class="bx bxs-envelope"></i>
+        </div>
+        <!-- PASSWORD FIELD -->
+        <div class="input-box">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter Password"
+            [(ngModel)]="password"
+            required
+            minlength="8"
+            #pass="ngModel"
+          />
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+
+        <!-- <button type="submit" id="register" [disabled]="!agree.checked" class="btn">Register</button> -->
+        <button type="submit" id="login" class="btn">Login</button>
+        
+  
+        <div class="register-link">
+          <p>
+            Haven't registered?
+            <a routerLink="/register">Register</a>
+            here!
+          </p>
+        </div>
+      </form>
+  
+      <!-- FORM IMAGE  -->
+      <div class="form-image">
+        <img
+          src="../../assets/images/hotel-logo-600.png"
+          class=""
+          alt="hotel logo"
+        />
+        <p>EMBER GLOW</p>
+      </div>
+    </div>
+  </div>
+</div>

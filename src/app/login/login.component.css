@@ -1,0 +1,186 @@
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* BG LOGO  */
+.bg-img {
+    background-image: url('../../assets/images/hotel-logo-2300.png');
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-left: 30%;
+    z-index: -2;
+}
+
+/* BLUR EFFECT */
+.blur {
+    position: absolute;
+    backdrop-filter: blur(16px);
+    background-color: #27220071;
+    width: 100vw;
+    height: 100svh;
+    z-index: -1;
+}
+
+/* DUMMY BODY  */
+.dummy-body {
+    width: 100vw;
+    height: 100svh;
+}
+
+/* FORM WRAPPER */
+.form-wrapper {
+    flex-direction: column;
+    backdrop-filter: blur(20px);
+    background-color: rgba(158, 158, 158, 0.418);
+    border: 1px solid rgba(255, 255, 255, 0.274);
+    border-radius: 20px;
+    width: 300px;
+    padding: 20px 0;
+    margin: 3rem 20px 0;
+}
+
+/* FORM IMGAE CONTAINER  */
+.form-img-container {
+    width: 90%;
+    height: 250px;
+    /* border: 1px solid green; */
+    justify-content: space-evenly;
+}
+
+.form-img-container form {
+    flex-direction: column;
+    /* debug  */
+    /* outline: 3px solid red; */
+}
+
+.form-img-container .input-box {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.479);
+    border-radius: 10px;
+    width: 93%;
+    height: 40px;
+    margin-top: 20px;
+}
+
+.form-img-container .input-box input {
+    background-color: transparent;
+    color: var(--clr-amber50);
+    padding-left: 1rem;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+}
+
+.form-img-container .input-box input::placeholder {
+    color: #ffffffc5;
+}
+
+.form-img-container .input-box input:focus {
+    background-color: rgba(0, 0, 0, 0.11);
+}
+
+.form-img-container .input-box i {
+    position: absolute;
+    top: 30%;
+    right: 5%;
+}
+
+.form-img-container .agree-terms {
+    margin-top: 10px;
+}
+
+.form-img-container .agree-terms label {
+    font-size: 11px;
+}
+
+.form-img-container .btn {
+    margin-top: 1.5rem;
+    border: 1px solid #ffffff48;
+    width: 100%;
+    height: 42px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.form-img-container .btn:hover {
+    border-color: transparent;
+}
+
+.form-img-container .register-link {
+    margin-top: 1rem;
+    font-size: var(--size-sm);
+}
+
+.form-img-container .register-link p {
+    cursor: default;
+    text-align: center;
+}
+
+.form-img-container .register-link p a {
+    font-size: var(--size-base);
+    font-weight: 600;
+    color: var(--clr-gold);
+}
+
+.form-img-container .form-image {
+    display: none;
+    height: 100%;
+    /* debug  */
+    /* border: 1px solid red; */
+}
+
+.form-img-container .form-image img {
+    width: 180px;
+}
+
+.form-img-container .form-image p {
+    text-align: center;
+    font-size: var(--size-2xl);
+    font-weight: 600;
+    cursor: default;
+}
+
+/* xs */
+/* @media (min-width: 475px) {
+} */
+/* sm */
+/* @media (min-width: 640px) {
+} */
+/* md */
+@media (min-width: 768px) {
+
+    /* FORM WRAPPER */
+    .form-wrapper {
+        width: 550px;
+    }
+
+    /* FORM IMGAE CONTAINER  */
+    .form-img-container {
+        gap: 1rem;
+    }
+
+    /* form image */
+    .form-img-container .form-image {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 3%;
+    }
+}
+
+/* lg */
+/* @media (min-width: 1024px) {
+} */
+/* xl */
+/* @media (min-width: 1280px) {
+} */
+/* 2xl */
+/* @media (min-width: 1536px) {
+} */

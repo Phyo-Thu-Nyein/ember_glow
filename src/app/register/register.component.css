@@ -1,7 +1,3 @@
-* {
-    /* color: #000; */
-}
-
 .flex {
     display: flex;
     justify-content: center;
@@ -15,7 +11,7 @@
     height: 100vh;
     position: absolute;
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     padding-left: 30%;
     z-index: -2;
@@ -27,117 +23,169 @@
     backdrop-filter: blur(16px);
     background-color: #27220071;
     width: 100vw;
-    height: 100vh;
+    height: 100svh;
     z-index: -1;
 }
 
 /* DUMMY BODY  */
 .dummy-body {
     width: 100vw;
-    height: 100vh;
+    height: 100svh;
 }
 
-/* FORM WRAPPER  */
+/* FORM WRAPPER */
 .form-wrapper {
+    flex-direction: column;
     backdrop-filter: blur(20px);
     background-color: rgba(158, 158, 158, 0.418);
     border: 1px solid rgba(255, 255, 255, 0.274);
     border-radius: 20px;
-    width: 600px;
+    width: 350px;
+    height: 530px;
     padding: 20px 0;
+    margin: 3rem 20px 0;
+    gap: 1rem;
+}
+
+.form-wrapper h1 {
+    /* border: 1px solid black; */
+}
+
+/* FORM IMGAE CONTAINER  */
+.form-img-container {
+    height: 430px;
+    /* border: 1px solid green; */
     justify-content: space-evenly;
 }
 
-.form-wrapper form {
+.form-img-container form {
     flex-direction: column;
     /* debug  */
     /* outline: 3px solid red; */
 }
 
-.form-wrapper h1 {
-    text-align: center;
-}
-
-.form-wrapper .input-box {
+.form-img-container .input-box {
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.479);
     border-radius: 10px;
-    width: 220px;
+    width: 93%;
     height: 40px;
     margin-top: 20px;
 }
 
-.form-wrapper .input-box input {
+.form-img-container .input-box input {
     background-color: transparent;
-    padding-left: 10px;
+    color: var(--clr-amber50);
+    padding-left: 1rem;
     border-radius: 10px;
     width: 100%;
     height: 100%;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
-.form-wrapper .input-box input::placeholder {
-    color: #fff;
+.form-img-container .input-box input::placeholder {
+    color: #ffffffc5;
 }
 
-.form-wrapper .input-box input:focus {
+.form-img-container .input-box input:focus {
     background-color: rgba(0, 0, 0, 0.11);
 }
 
-.form-wrapper .input-box i {
+.form-img-container .input-box i {
     position: absolute;
     top: 30%;
     right: 5%;
 }
 
-.form-wrapper .agree-terms {
-    margin-top: 10px;
-    font-size: 16px;
+.form-img-container .agree-terms {
+    margin-top: 1.2rem;
 }
-.form-wrapper .agree-terms label {
+
+.form-img-container .agree-terms label {
     font-size: 11px;
 }
 
-.form-wrapper .btn {
-    background-color: #d3b30036;
+.form-img-container .btn {
     margin-top: 10px;
-    border-radius: 10px;
     border: 1px solid #ffffff48;
     width: 100%;
     height: 42px;
-    font-size: 20px;
+    font-size: 1.2rem;
     font-weight: 600;
 }
-.form-wrapper .btn:hover {
-    background-color: #ffd900c9;
-    cursor: pointer;
+
+.form-img-container .btn:hover {
     border-color: transparent;
-    color: #000;
 }
 
-.form-wrapper .login-link {
-    margin-top: 10px;
-    font-size: 14px;
+.form-img-container .login-link {
+    margin-top: 1rem;
+    font-size: var(--size-sm);
 }
-.form-wrapper .login-link p {
+
+.form-img-container .login-link p {
     cursor: default;
     text-align: center;
 }
-.form-wrapper .login-link p a {
+
+.form-img-container .login-link p a {
+    font-size: var(--size-base);
     font-weight: 600;
-    color: #ffd700;
+    color: var(--clr-gold);
 }
 
-.form-wrapper .form-image {
+.form-img-container .form-image {
+    display: none;
+    height: 100%;
     /* debug  */
     /* border: 1px solid red; */
 }
-.form-wrapper .form-image img {
+
+.form-img-container .form-image img {
     width: 220px;
 }
-.form-wrapper .form-image p {
+
+.form-img-container .form-image p {
     text-align: center;
     font-size: 30px;
     font-weight: 600;
     cursor: default;
 }
+
+/* xs */
+/* @media (min-width: 475px) {
+} */
+/* sm */
+/* @media (min-width: 640px) {
+} */
+/* md */
+@media (min-width: 768px) {
+
+    /* FORM WRAPPER */
+    .form-wrapper {
+        width: 600px;
+    }
+
+    /* FORM IMGAE CONTAINER  */
+    .form-img-container {
+        gap: 1rem;
+    }
+
+    /* form image */
+    .form-img-container .form-image {
+        display: flex;
+        flex-direction: column;
+        padding-top: 10%;
+        justify-content: flex-start;
+    }
+}
+
+/* lg */
+/* @media (min-width: 1024px) {
+} */
+/* xl */
+/* @media (min-width: 1280px) {
+} */
+/* 2xl */
+/* @media (min-width: 1536px) {
+} */
