@@ -23,14 +23,14 @@
     backdrop-filter: blur(16px);
     background-color: #27220071;
     width: 100vw;
-    height: 100svh;
+    height: 100vh;
     z-index: -1;
 }
 
 /* DUMMY BODY  */
 .dummy-body {
     width: 100vw;
-    height: 100svh;
+    height: 100vh;
 }
 
 /* FORM WRAPPER */

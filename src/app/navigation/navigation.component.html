@@ -41,11 +41,11 @@
 <!-- MOBILE NAV -->
 <dialog id="mobile_menu">
   <ul class="mobile___nav flex">
-    <li class="mobile__nav-link"><a routerLink="/rooms">Rooms</a></li>
-    <li class="mobile__nav-link"><a routerLink="/dining">Dining</a></li>
-    <li class="mobile__nav-link"><a routerLink="/facilities">Facilities</a></li>
-    <li class="mobile__nav-link"><a routerLink="/about">About</a></li>
-    <li class="mobile__nav-link"><a routerLink="/contact">Contact</a></li>
+    <li class="mobile__nav-link"><a routerLink="/rooms" onclick="mobile_menu.close()">Rooms</a></li>
+    <li class="mobile__nav-link"><a routerLink="/dining" onclick="mobile_menu.close()">Dining</a></li>
+    <li class="mobile__nav-link"><a routerLink="/facilities" onclick="mobile_menu.close()">Facilities</a></li>
+    <li class="mobile__nav-link"><a routerLink="/about" onclick="mobile_menu.close()">About</a></li>
+    <li class="mobile__nav-link"><a routerLink="/contact" onclick="mobile_menu.close()">Contact</a></li>
     <li class="mobile__nav-line"></li>
     <button class="mobile__nav-close" onclick="mobile_menu.close()">
       <i class="bx bx-x-circle"></i>

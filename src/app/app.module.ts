@@ -11,7 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DetailComponent } from './detail/detail.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { RoomsComponent } from './rooms/rooms.component';
@@ -40,11 +40,12 @@ import { ReceptionComponent } from './reception/reception.component';
   ],
   imports: [
     BrowserModule,
+    MaterialModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent],
