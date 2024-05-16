@@ -14,49 +14,56 @@
 
   <!-- FILTER (date, location, etc...) -->
   <form class="filter-container container flex" action="" method="post">
-    <!-- Location picker -->
-    <mat-form-field>
-      <mat-label>Select a location</mat-label>
-      <mat-select [(ngModel)]="selectedLocation" name="location">
-        <mat-option *ngFor="let location of locations" [value]="location.value">
-          {{ location.viewValue }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="filter-container__fields flex">
+      <!-- Location picker -->
+      <mat-form-field>
+        <mat-label>Select a location</mat-label>
+        <mat-select [(ngModel)]="selectedLocation" name="location">
+          <mat-option
+            *ngFor="let location of locations"
+            [value]="location.value"
+          >
+            {{ location.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <!-- Date picker -->
-    <mat-form-field>
-      <mat-label>Enter a date range</mat-label>
-      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-        <input matStartDate formControlName="start" placeholder="Check In" />
-        <input matEndDate formControlName="end" placeholder="Check Out" />
-      </mat-date-range-input>
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker"
-      ></mat-datepicker-toggle>
-      <mat-date-range-picker #picker></mat-date-range-picker>
+      <!-- Date picker -->
+      <mat-form-field>
+        <mat-label>Start - End date</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+          <input matStartDate formControlName="start" placeholder="Check In" />
+          <input matEndDate formControlName="end" placeholder="Check Out" />
+        </mat-date-range-input>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
 
-      <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')"
-        >Invalid start date</mat-error
-      >
-      <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')"
-        >Invalid end date</mat-error
-      >
-    </mat-form-field>
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')"
+          >Invalid start date</mat-error
+        >
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')"
+          >Invalid end date</mat-error
+        >
+      </mat-form-field>
 
-    <!-- Room type picker -->
-    <mat-form-field>
-      <mat-label>Select room type</mat-label>
-      <mat-select [(ngModel)]="selectedRoom" name="roomType">
-        <mat-option *ngFor="let roomType of roomTypes" [value]="roomType.value">
-          {{ roomType.viewValue }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
+      <!-- Room type picker -->
+      <mat-form-field>
+        <mat-label>Select room type</mat-label>
+        <mat-select [(ngModel)]="selectedRoom" name="roomType">
+          <mat-option
+            *ngFor="let roomType of roomTypes"
+            [value]="roomType.value"
+          >
+            {{ roomType.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <!-- FILTER BUTTON -->
-    <button class="filter-btn btn flex">
+    <button class="filter-btn btn flex" type="submit">
       <i class="bx bx-filter-alt"></i>
       <span>Filter</span>
     </button>
@@ -66,122 +73,36 @@
   <div class="rooms-container container flex">
     <!-- LOOP EACH ROOM -->
     <ng-container *ngFor="let i of fourTimes">
-      <div class="oneroom">
+      <div class="oneroom flex">
         <div class="oneroom__image">
           <img src="../../assets/images/Suite.webp" alt="" />
         </div>
-        <div class="oneroom__info">
-          <div class="oneroom__info-type flex">
-            <span>Type: </span><span>Suite</span>
+        <div class="oneroom__info-container">
+          <div class="oneroom__info flex">
+            <div class="oneroom__linfo-type one-info flex">
+              <span>Type: </span><span>Suite</span>
+            </div>
+            <div class="oneroom__linfo-number one-info flex">
+              <span>RoomNo: </span><span>A01</span>
+            </div>
+            <div class="oneroom__linfo-location one-info flex">
+              <span>Location: </span><span>Yangon</span>
+            </div>
           </div>
-          <div class="oneroom__info-number flex">
-            <span>RoomNo: </span><span>A01</span>
+          <div class="oneroom__vline"></div>
+          <div class="oneroom__info flex">
+            <div class="oneroom__rinfo-status one-info flex">
+              <span>Status: </span><span>Available</span>
+            </div>
+            <div class="oneroom__rinfo-price one-info flex">
+              <span>Price: </span><span>40,000</span>
+            </div>
+            <button class="oneroom__rinfo-btn btn">Check</button>
           </div>
-          <div class="oneroom__info-status flex">
-            <span>Status: </span><span>Available</span>
-          </div>
-          <div class="oneroom__info-location flex">
-            <span>Location: </span><span>Yangon</span>
-          </div>
-          <div class="oneroom__info-price flex">
-            <span>Price: </span><span>40,000</span>
-          </div>
-          <button class="oneroom__info-btn btn">Check</button>
         </div>
       </div>
     </ng-container>
   </div>
-
-  <!-- BIG CARD THAT CONTAINS ALL THE ROOMS FOR EACH TYPE -->
-  <div class="rooms-container container flex">
-    <!-- LOOP EACH ROOM -->
-    <ng-container *ngFor="let i of fourTimes">
-      <div class="oneroom">
-        <div class="oneroom__image">
-          <img src="../../assets/images/Superior.webp" alt="" />
-        </div>
-        <div class="oneroom__info">
-          <div class="oneroom__info-type flex">
-            <span>Type: </span><span>Superior</span>
-          </div>
-          <div class="oneroom__info-number flex">
-            <span>RoomNo: </span><span>A01</span>
-          </div>
-          <div class="oneroom__info-status flex">
-            <span>Status: </span><span>Available</span>
-          </div>
-          <div class="oneroom__info-location flex">
-            <span>Location: </span><span>Yangon</span>
-          </div>
-          <div class="oneroom__info-price flex">
-            <span>Price: </span><span>25,000</span>
-          </div>
-          <button class="oneroom__info-btn btn">Check</button>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-
-  <!-- BIG CARD THAT CONTAINS ALL THE ROOMS FOR EACH TYPE -->
-  <div class="rooms-container container flex">
-    <!-- LOOP EACH ROOM -->
-    <ng-container *ngFor="let i of fourTimes">
-      <div class="oneroom">
-        <div class="oneroom__image">
-          <img src="../../assets/images/Deluxe.webp" alt="" />
-        </div>
-        <div class="oneroom__info">
-          <div class="oneroom__info-type flex">
-            <span>Type: </span><span>Deluxe</span>
-          </div>
-          <div class="oneroom__info-number flex">
-            <span>RoomNo: </span><span>A01</span>
-          </div>
-          <div class="oneroom__info-status flex">
-            <span>Status: </span><span>Available</span>
-          </div>
-          <div class="oneroom__info-location flex">
-            <span>Location: </span><span>Yangon</span>
-          </div>
-          <div class="oneroom__info-price flex">
-            <span>Price: </span><span>15,000</span>
-          </div>
-          <button class="oneroom__info-btn btn">Check</button>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-
-  <!-- BIG CARD THAT CONTAINS ALL THE ROOMS FOR EACH TYPE -->
-  <div class="rooms-container container flex">
-    <!-- LOOP EACH ROOM -->
-    <ng-container *ngFor="let i of fourTimes">
-      <div class="oneroom">
-        <div class="oneroom__image">
-          <img src="../../assets/images/Standard.webp" alt="" />
-        </div>
-        <div class="oneroom__info">
-          <div class="oneroom__info-type flex">
-            <span>Type: </span><span>Standard</span>
-          </div>
-          <div class="oneroom__info-number flex">
-            <span>RoomNo: </span><span>A01</span>
-          </div>
-          <div class="oneroom__info-status flex">
-            <span>Status: </span><span>Available</span>
-          </div>
-          <div class="oneroom__info-location flex">
-            <span>Location: </span><span>Yangon</span>
-          </div>
-          <div class="oneroom__info-price flex">
-            <span>Price: </span><span>8,000</span>
-          </div>
-          <button class="oneroom__info-btn btn">Check</button>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-
 </div>
 
 <app-footer></app-footer>

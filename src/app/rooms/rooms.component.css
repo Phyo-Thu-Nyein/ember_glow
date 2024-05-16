@@ -16,77 +16,205 @@
 
 /* INTRO TO ROOMS PAGE */
 .headings {
-    border: 1px solid red;
     text-align: center;
     margin-top: 1rem;
     padding: .5rem 0;
     flex-direction: column;
     gap: .5rem;
 }
+
 .headings__title {
     font-size: var(--size-sm);
 }
+
 .headings__title h1 {
     line-height: 1.8rem;
 }
 
 /* FILTER SECTION */
 .filter-container {
-    border: 1px solid red;
     flex-direction: column;
 }
+.filter-container__fields {
+    flex-direction: column;
+}
+
 mat-form-field {
-    border: 1px solid green;
     width: 260px;
     margin-bottom: 0;
 }
+
 .filter-btn {
     width: 100px;
     justify-content: center;
     align-items: center;
     gap: .5rem;
 }
+
 .filter-btn i {
     font-size: var(--size-xl);
 }
+
 .filter-btn span {
     font-size: var(--size-base);
 }
 
 /* BIG CARD THAT CONTAINS ALL THE ROOMS FOR EACH TYPE */
-.container {
-    border: 1px solid red;
-}
+
 .rooms-container {
     color: var(--clr-amber50);
     flex-wrap: wrap;
-    gap: .3rem;
+    gap: .5rem;
 }
 
 /* LOOP EACH ROOM */
 .oneroom {
     background-color: var(--clr-dark);
-    border-radius: 10px;
-    width: 168px;
+    border-radius: 5px;
+    width: 100%;
 }
+
 .oneroom__image {
     width: 100%;
 }
+
 .oneroom__info {
-    padding: 0 .5rem;
+    flex-direction: column;
 }
-/* .oneroom__info-type,
-.oneroom__info-number,
-.oneroom__info-status,
-.oneroom__info-location,
-.oneroom__info-price {} */
-.oneroom__info span{
+
+.oneroom__info .one-info {
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+/* .oneroom__linfo-type,
+.oneroom__linfo-number,
+.oneroom__linfo-location,
+.oneroom__rinfo-status,
+.oneroom__rinfo-price, 
+.oneroom__rinfo-btn {
+    flex: 1;
+} */
+.oneroom__info span {
+    /* border: 1px solid red; */
+    font-size: var(--size-sm);
+    letter-spacing: -.055rem;
+    margin: .16rem;
+    text-align: left;
     flex: 1;
 }
-.oneroom__info-btn {
+
+.oneroom__rinfo-btn {
     display: block;
-    margin: .5rem auto;
-    padding: 0 .5rem;
-    width: 70px;
-    height: 25px;
+    margin: .2rem auto;
+    padding: 0;
+    width: 90%;
+    font-size: var(--size-sm);
 }
+
+
+/* xs */
+@media (min-width: 475px) {
+    .oneroom__image {
+        width: 70%;
+    }
+
+    .oneroom__info span {
+        font-size: var(--size-base);
+        letter-spacing: -.05rem;
+        margin: .35rem;
+    }
+
+    .oneroom__rinfo-btn {
+        font-size: var(--size-base);
+    }
+
+}
+
+/* sm */
+@media (min-width: 640px) {
+
+    /* FILTER SECTION */
+    .filter-container {
+        flex-direction: column;
+    }
+    .filter-container__fields {
+        width: 100%;
+        flex-direction: row;
+        gap: .5rem;
+    }
+
+    mat-form-field {
+        flex: 1;
+    }
+
+
+    /* LOOP EACH ROOM */
+    .oneroom {
+        width: 307px;
+    }
+
+    .oneroom__info span {
+        /* border: 1px solid red; */
+        font-size: var(--size-sm);
+        letter-spacing: -.055rem;
+        margin: 0 .25rem;
+    }
+
+    .oneroom__rinfo-btn {
+        font-size: var(--size-sm);
+    }
+}
+
+/* md */
+@media (min-width: 768px) {
+    /* FILTER SECTION */
+    .filter-container {
+        width: 768px;
+    }
+
+    /* LOOP EACH ROOM */
+    .oneroom {
+        flex-direction: column;
+        justify-content: space-between;
+        width: 360px;
+        height: 370px;
+        padding-bottom: 1rem;
+    }
+    .oneroom__image {
+        width: 100%;
+    }
+
+    .oneroom__info-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .oneroom__vline {
+        height: 50px;
+        border: 1px solid var(--clr-gold);
+    }
+
+    .oneroom__info span {
+        /* border: 1px solid red; */
+        font-size: var(--size-base);
+        letter-spacing: 0;
+        margin: 0 .25rem;
+    }
+
+    .oneroom__rinfo-btn {
+        font-size: var(--size-base);
+    }
+}
+/* lg */
+/* @media (min-width: 1024px) {
+} */
+/* xl */
+/* @media (min-width: 1280px) {
+} */
+/* 2xl */
+/* @media (min-width: 1536px) {
+} */
