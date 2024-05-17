@@ -108,6 +108,15 @@ button {
     color: inherit;
 }
 
+strong {
+    color: var(--clr-gold);
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* custom scrollbar */
 ::-webkit-scrollbar {
