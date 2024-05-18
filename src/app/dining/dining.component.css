@@ -22,13 +22,13 @@
 }
 
 .container {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100vw;
     height: 100vh;
     position: relative;
 }
 
-/* Welcome text */
+/* Welcome text & btn */
 .welcome {
     flex-direction: column;
     gap: 1rem;
@@ -62,12 +62,122 @@
     font-size: var(--size-2xl);
 }
 
+/* Restaurant Overview */
+.restaur-section {
+    height: auto;
+    color: var(--clr-dark);
+    text-align: center;
+}
+
+.restaur-section__greeting {
+    padding: 0 .5rem;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+.restaur-section__greeting h1 {
+    font-size: var(--size-2xl);
+}
+
+.restaur-section__greeting p {
+    font-size: var(--size-base);
+}
+
+.restaur__title {
+    font-size: var(--size-xl);
+}
+
+.restaur__img-wrapper {
+    margin: 1rem 0;
+    position: relative;
+}
+
+.restaur__text {
+    margin-bottom: 1rem;
+}
+
+.restaur__subtitle {
+    display: none;
+}
+
+.restaur__desc1 {
+    font-weight: 600;
+    margin-bottom: .3rem;
+}
+
+.restaur__btn {
+    gap: .3rem;
+    width: fit-content;
+    margin: 1rem auto 0;
+}
+.restaur__btn i {
+    font-size: var(--size-2xl);
+}
+
 /* xs */
 /* @media (min-width: 475px) {
 } */
 /* sm */
-/* @media (min-width: 640px) {
-} */
+@media (min-width: 640px) {
+
+    /* RESTAURANT OVERVIEW */
+    .restaurs__container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            'img1 content1'
+            'content2 img2'
+            'img3 content3';
+        place-items: center;
+    }
+
+    .restaur__img1 {
+        grid-area: img1;
+    }
+
+    .restaur__img2 {
+        grid-area: img2;
+    }
+
+    .restaur__img3 {
+        grid-area: img3;
+    }
+
+    .restaur__content1 {
+        grid-area: content1;
+    }
+
+    .restaur__content2 {
+        grid-area: content2;
+    }
+
+    .restaur__content3 {
+        grid-area: content3;
+    }
+
+
+    .restaur-section__greeting {
+        margin-bottom: 2rem;
+    }
+
+    .restaur__img-wrapper {
+        margin: 0;
+    }
+
+    .restaur__text {
+        padding: .5rem;
+    }
+
+    .restaur__title {
+        display: none;
+    }
+
+    .restaur__subtitle {
+        display: block;
+        margin-bottom: .5rem;
+    }
+}
+
 /* md */
 @media (min-width: 768px) {
 
@@ -89,6 +199,33 @@
     .welcome__text-paragraph {
         width: 350px;
     }
+
+    /* RESTAURANT OVERVIEW */
+    .restaur-section__greeting {
+        margin-bottom: 2rem;
+    }
+
+    .restaur-section__greeting h1 {
+        font-size: var(--size-3xl);
+    }
+
+    .restaur-section__greeting p {
+        font-size: var(--size-lg);
+    }
+
+    .restaur__img-wrapper {
+        margin: 0;
+    }
+
+    .restaur__subtitle {
+        font-size: var(--size-2xl);
+    }
+
+    .restaur__text {
+        font-size: var(--size-lg);
+    }
+
+
 }
 
 /* lg */

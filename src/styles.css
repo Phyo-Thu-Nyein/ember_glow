@@ -55,6 +55,7 @@
     scroll-behavior: smooth;
     padding: 0;
     margin: 0;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     list-style: none;
     line-height: calc(1rem + .5rem);
@@ -158,6 +159,9 @@ body {
     margin-right: auto;
     padding-left: .5rem;
     padding-right: .5rem;
+}
+.top-m {
+    margin-top: 1.5rem;
 }
 
 /* xs */
