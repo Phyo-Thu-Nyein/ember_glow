@@ -110,6 +110,7 @@
     width: fit-content;
     margin: 1rem auto 0;
 }
+
 .restaur__btn i {
     font-size: var(--size-2xl);
 }
@@ -238,6 +239,45 @@
     .welcome__text-paragraph {
         font-size: var(--size-lg);
         width: 420px;
+    }
+
+
+    /* RESTAURANT OVERVIEW */
+    .restaur-section__greeting {
+        margin: 3rem 0;
+    }
+
+    .restaur-section__greeting h1 {
+        font-size: var(--size-4xl);
+    }
+
+    .restaur-section__greeting p {
+        font-size: var(--size-xl);
+    }
+
+    .restaur__subtitle {
+        font-size: var(--size-3xl);
+    }
+
+    .restaur__text {
+        font-size: var(--size-xl);
+        padding: 1rem;
+    }
+    .restaur__desc1 {
+        margin: 1rem 0;
+    }
+
+    .restaur__btn {
+        gap: .3rem;
+        width: fit-content;
+        margin: 1rem auto 0;
+    }
+
+    .restaur__btn i {
+        font-size: var(--size-3xl);
+    }
+    .restaur__btn span {
+        font-size: var(--size-xl);
     }
 
 }
