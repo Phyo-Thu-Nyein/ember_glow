@@ -3,10 +3,8 @@
     background-image: url(../../assets/images/backgrounds/landing-dining.jpg);
     width: 100vw;
     height: 100vh;
-    height: 100dvh;
     background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
     background-attachment: fixed;
     position: absolute;
     z-index: -1;
@@ -22,7 +20,6 @@
 }
 
 .container {
-    /* border: 1px solid red; */
     width: 100vw;
     height: 100vh;
     position: relative;
@@ -132,7 +129,6 @@
     width: 100%;
     height: 50%;
     margin: auto 0;
-    padding: 0;
     gap: .5rem;
 }
 
@@ -150,11 +146,11 @@
 
 .close-menu .bx-x-circle {
     margin: 1rem;
-    font-size: var(--size-3xl);
+    color: var(--clr-amber50);
+    font-size: var(--size-4xl);
     position: absolute;
-    left: 47%;
-    bottom: 0;
-    transform: translate(-47%, 0);
+    top: 0;
+    right: 0;
 }
 
 /* bg clrs for each dialog */
@@ -185,11 +181,6 @@
         width: 90%;
         height: 60%;
         margin: auto;
-    }
-
-    .left-menu,
-    .right-menu {
-        width: 80px;
     }
 
     .main-menu {
@@ -243,7 +234,7 @@
 
 
     .restaur-section__greeting {
-        margin-bottom: 2rem;
+        margin: 2rem 0;
     }
 
     .restaur__img-wrapper {
@@ -274,7 +265,7 @@
     /* Dining img bg */
     .bg-img::after {
         background: var(--clr-dark);
-        background: linear-gradient(90deg, rgba(7, 10, 19, 1) 0%, rgba(8, 13, 31, 0.9222398432029062) 20%, rgba(9, 16, 42, 0.6505311597295168) 40%, rgba(11, 22, 67, 0) 60%);
+        background: linear-gradient(90deg, rgba(7, 10, 19, 1) 0%, rgba(8, 13, 31, 0.966) 30%, rgba(9, 16, 42, 0.6505311597295168) 45%, rgba(11, 22, 67, 0) 60%);
         opacity: 1;
     }
 
@@ -288,11 +279,6 @@
 
     .welcome__text-paragraph {
         width: 350px;
-    }
-
-    /* RESTAURANT OVERVIEW */
-    .restaur-section__greeting {
-        margin-bottom: 2rem;
     }
 
     .restaur-section__greeting h1 {
@@ -315,7 +301,6 @@
         font-size: var(--size-lg);
     }
 
-
     .menu-container {
         border: none;
         width: 100%;
@@ -324,7 +309,6 @@
     }
     .left-menu,
     .right-menu {
-        /* border: 1px solid red; */
         width: 120px;
         gap: 2rem;
     }
@@ -350,16 +334,6 @@
         width: 300px !important;
     }
 
-
-    .close-menu .bx-x-circle {
-        margin: 1rem;
-        font-size: var(--size-3xl);
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        transform: translate(-50%, 0);
-    }
-
     /* dialog manipulation */
     dialog {
         scale: 0;
@@ -367,15 +341,11 @@
         transform: translateY(100vh);
         transition: transform .45s;
     }
-    
     dialog[open] {
         scale: 1;
         opacity: 1;
         transform: translateY(0);
     }
-
-
-
 }
 
 /* lg */
@@ -396,16 +366,7 @@
 
 /* xl */
 @media (min-width: 1280px) {
-    .welcome__text-heading {
-        font-size: var(--size-4xl);
-    }
-
-    .welcome__text-paragraph {
-        font-size: var(--size-lg);
-        width: 420px;
-    }
-
-    /* RESTAURANT OVERVIEW */
+    
     .restaur-section {
         width: 75%;
     }
@@ -419,10 +380,6 @@
 }
 /* 2xl */
 @media (min-width: 1536px) {
-
-    .bg-img::after {
-        background: linear-gradient(90deg, rgba(7, 10, 19, 1) 20%, rgba(8, 13, 31, 0.9222398432029062) 40%, rgba(9, 16, 42, 0.6505311597295168) 55%, rgba(11, 22, 67, 0) 70%);
-    }
 
     .welcome__text-heading {
         font-size: var(--size-5xl);
@@ -442,18 +399,12 @@
         font-size: var(--size-3xl);
     }
 
-
-    /* RESTAURANT OVERVIEW */
     .restaur-section__greeting {
         margin: 3rem 0;
     }
 
     .restaur-section__greeting h1 {
         font-size: var(--size-4xl);
-    }
-
-    .restaur-section__greeting p {
-        font-size: var(--size-xl);
     }
 
     .restaur__subtitle {
