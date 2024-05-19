@@ -122,10 +122,12 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
+
 .menu-container {
-    background-color: rgba(255, 255, 255, 0.486);
+    background-color: rgba(255, 255, 255, 0.199);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    border: 1px solid #ffffff50;
     border-radius: 8px;
     width: 100%;
     height: 50%;
@@ -133,31 +135,74 @@
     padding: 0;
     gap: .5rem;
 }
-.left-menu, .right-menu {
+
+.left-menu,
+.right-menu {
     /* border: 1px solid red; */
     width: 70px;
     flex-direction: column;
     gap: .5rem;
 }
+
 .main-menu {
     width: 160px;
 }
-.close-menu .bx-x-circle{
+
+.close-menu .bx-x-circle {
     margin: 1rem;
     font-size: var(--size-3xl);
     position: absolute;
+    left: 47%;
     bottom: 0;
-    right: 40%;
+    transform: translate(-47%, 0);
+}
+
+/* bg clrs for each dialog */
+#sushi {
+    background: rgb(91, 253, 39);
+    background: linear-gradient(45deg, rgba(91, 253, 39, 0.31811276891014795) 0%, rgba(9, 16, 42, 0) 70%);
+}
+
+#wine {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.31811276891014795) 0%, rgba(9, 16, 42, 0) 100%);
+}
+
+#taproom {
+    background: rgb(253, 221, 39);
+    background: linear-gradient(45deg, rgba(253, 221, 39, 0.31811276891014795) 0%, rgba(9, 16, 42, 0) 70%);
 }
 
 /* Taproom image adjustment */
-#taproom .main-menu, #taproom .right-menu {
+.taproom .main-menu,
+.taproom .right-menu {
     width: 120px;
 }
 
 /* xs */
-/* @media (min-width: 475px) {
-} */
+@media (min-width: 475px) {
+    .menu-container {
+        width: 90%;
+        height: 60%;
+        margin: auto;
+    }
+
+    .left-menu,
+    .right-menu {
+        width: 80px;
+    }
+
+    .main-menu {
+        width: 180px;
+    }
+
+    /* Taproom image adjustment */
+    #taproom .main-menu,
+    #taproom .right-menu {
+        width: 150px;
+    }
+}
+
 /* sm */
 @media (min-width: 640px) {
 
@@ -271,6 +316,66 @@
     }
 
 
+    .menu-container {
+        border: none;
+        width: 100%;
+        height: 100vh;
+        gap: 1rem;
+    }
+    .left-menu,
+    .right-menu {
+        /* border: 1px solid red; */
+        width: 120px;
+        gap: 2rem;
+    }
+    .main-menu {
+        width: 300px !important;
+    }
+
+    .left-menu-img1 {
+        transform: rotate(-15deg);
+    }
+    .left-menu-img2 {
+        transform: rotate(-30deg);
+    }
+    .right-menu-img1 {
+        transform: rotate(15deg);
+    }
+    .right-menu-img2 {
+        transform: rotate(30deg);
+    }
+
+    /* taproom img adjustment */
+    .taproom > .right-menu {
+        width: 300px !important;
+    }
+
+
+    .close-menu .bx-x-circle {
+        margin: 1rem;
+        font-size: var(--size-3xl);
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 0);
+    }
+
+    /* dialog manipulation */
+    dialog {
+        scale: 0;
+        opacity: 0;
+        transform: translateY(100vh);
+        transition: transform .45s;
+    }
+    
+    dialog[open] {
+        scale: 1;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+
 }
 
 /* lg */
@@ -300,12 +405,18 @@
         width: 420px;
     }
 
-    /* REstaurant Overview */
+    /* RESTAURANT OVERVIEW */
     .restaur-section {
         width: 75%;
     }
-}
+    .restaur-section__greeting {
+        margin: 2rem 0;
+    }
 
+    .restaur__btn span{
+        font-size: var(--size-lg);
+    }
+}
 /* 2xl */
 @media (min-width: 1536px) {
 

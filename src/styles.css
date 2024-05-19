@@ -167,17 +167,29 @@ body {
 
 /* Dialog popup */
 dialog {
+    scale: 0;
     opacity: 0;
-    transition: all .25s;
+    transition: opacity .25s;
 }
 
 dialog[open] {
+    scale: 1;
     opacity: 1;
 }
 
 dialog:modal {
     max-width: 100vw;
     max-height: 100svh;
+}
+
+/* some animations for the menus */
+@keyframes pop {
+    0% {
+        transform: translateY(90vh);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 /* xs */
