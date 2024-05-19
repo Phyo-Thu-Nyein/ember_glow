@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./dining.component.css']
 })
 export class DiningComponent {
-
+  scroll(el: HTMLElement) {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
 }

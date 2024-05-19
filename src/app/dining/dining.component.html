@@ -12,7 +12,7 @@
         be savored. Join us and elevate your dining experience to new heights!
       </p>
     </div>
-    <button class="welcome__btn btn flex">
+    <button class="welcome__btn btn flex" (click)="scroll(restaurant_section)">
       <i class="bx bx-search-alt"></i>
       <span>Explore</span>
     </button>
@@ -20,7 +20,7 @@
 </div>
 
 <!-- Restaurants Overview -->
-<section class="restaur-section container top-m">
+<section #restaurant_section class="restaur-section container top-m">
   <div class="restaur-section__greeting flex">
     <h1>Discover Your Taste!</h1>
     <p>Let your taste buds be your guide on a delicious journey</p>
@@ -31,7 +31,7 @@
     <div class="restaur__img-wrapper restaur__img1">
       <img
         class="lazy loading"
-        src="../../assets/images/res-green.jpg"
+        src="../../assets/images/restaurants/res-green.jpg"
         alt="suite image"
       />
     </div>
@@ -46,9 +46,9 @@
         Prepare to be delighted by the freshest ingredients and innovative flavors that
         await you at Sushi Zen.
       </p>
-      <a href="#" class="btn restaur__btn flex"> 
+      <button onclick="sushi.showModal()" class="btn restaur__btn flex"> 
         <i class='bx bx-food-menu'></i>
-        <span>Menu</span> </a>
+        <span>Menu</span> </button>
     </div>
 
     <!-- WHITE RESTAURANT -->
@@ -56,7 +56,7 @@
     <div class="restaur__img-wrapper restaur__img2">
       <img
         class="lazy loading"
-        src="../../assets/images/res-white.jpg"
+        src="../../assets/images/restaurants/res-white.jpg"
         alt="Superior restaur image"
       />
     </div>
@@ -70,9 +70,9 @@
         Prepare to tantalize your taste buds with our diverse menu of gourmet
         delights.
       </p>
-      <a href="#" class="btn restaur__btn flex"> 
+      <button onclick="wine.showModal()" class="btn restaur__btn flex"> 
         <i class='bx bx-food-menu'></i>
-        <span>Menu</span> </a>
+        <span>Menu</span> </button>
     </div>
 
     <!-- GOLD RESTAURANT -->
@@ -80,7 +80,7 @@
     <div class="restaur__img-wrapper restaur__img3">
       <img
         class="lazy loading"
-        src="../../assets/images/res-gold.jpg"
+        src="../../assets/images/restaurants/res-gold.jpg"
         alt="Deluxe restaur image"
       />
     </div>
@@ -94,12 +94,57 @@
         Step back in time and experience the charm of yesteryears at The Golden
         Taproom.
       </p>
-      <a href="#" class="btn restaur__btn flex"> 
+      <button onclick="taproom.showModal()" class="btn restaur__btn flex"> 
         <i class='bx bx-food-menu'></i>
-        <span>Menu</span> </a>
+        <span>Menu</span> </button>
     </div>
   </div>
 </section>
+
+<!-- Food Menus -->
+<dialog id="sushi" class="menu-container flex">
+  <div class="left-menu flex">
+    <img src="../../assets/images/menus/sushi-menu-sm1.jpg" alt="">
+    <img src="../../assets/images/menus/sushi-menu-sm2.jpg" alt="">
+  </div>
+  <img class="main-menu" src="../../assets/images/menus/sushi-menu.jpg" alt="">
+  <div class="right-menu flex">
+    <img src="../../assets/images/menus/sushi-menu-sm3.jpg" alt="">
+    <img src="../../assets/images/menus/sushi-menu-sm4.jpg" alt="">
+  </div>
+  <button class="close-menu" onclick="sushi.close()">
+    <i class='bx bx-x-circle'></i>
+  </button>
+</dialog>
+
+<dialog id="wine" class="menu-container flex">
+  <div class="left-menu flex">
+    <img src="../../assets/images/menus/wine-menu-sm1.jpg" alt="">
+    <img src="../../assets/images/menus/wine-menu-sm2.jpg" alt="">
+  </div>
+  <img class="main-menu" src="../../assets/images/menus/wine-menu.jpg" alt="">
+  <div class="right-menu flex">
+    <img src="../../assets/images/menus/wine-menu-sm3.jpg" alt="">
+    <img src="../../assets/images/menus/wine-menu-sm4.jpg" alt="">
+  </div>
+  <button class="close-menu" onclick="wine.close()">
+    <i class='bx bx-x-circle'></i>
+  </button>
+</dialog>
+
+<dialog id="taproom" class="menu-container flex">
+  <div class="left-menu flex">
+    <img src="../../assets/images/menus/taproom-menu-sm1.jpg" alt="">
+    <img src="../../assets/images/menus/taproom-menu-sm2.jpg" alt="">
+  </div>
+  <img class="main-menu" src="../../assets/images/menus/taproom-menu.jpg" alt="">
+  <div class="right-menu">
+    <img src="../../assets/images/menus/taproom-menu-sm3.jpg" alt="">
+  </div>
+  <button class="close-menu" onclick="taproom.close()">
+    <i class='bx bx-x-circle'></i>
+  </button>
+</dialog>
 
 <!-- FOOTER -->
 <app-footer></app-footer>
