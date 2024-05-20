@@ -20,6 +20,7 @@ import { DiningComponent } from './dining/dining.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ReceptionComponent } from './reception/reception.component';
+import { DiningRestaurantsComponent } from './dining-restaurants/dining-restaurants.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ReceptionComponent } from './reception/reception.component';
     AboutComponent,
     ContactComponent,
     ReceptionComponent,
+    DiningRestaurantsComponent,
   ],
   imports: [
     BrowserModule,
