@@ -1,0 +1,257 @@
+/* Carousel */
+.facil {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.facil__list-item {
+    position: absolute;
+    inset: 0 0 0 0;
+}
+
+.facil__list-item .item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.facil__list-item .item-content {
+    position: absolute;
+    top: 30%;
+    width: 350px;
+    max-width: 95%;
+    left: 25%;
+    transform: translateX(-25%);
+    color: var(--clr-light);
+    text-shadow: 2px 2px 5px #0004;
+    opacity: 0;
+    filter: blur(20px);
+    animation: showContentContainer .5s .8s linear forwards;
+}
+@keyframes showContentContainer {
+    0%, 70%{
+        opacity: .2;
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+.facil__list-item .item-content__title {
+    font-size: var(--size-3xl);
+    line-height: 1.8rem;
+    margin-bottom: .5rem;
+}
+.facil__list-item .item-content__desc {
+    font-size: var(--size-lg);
+}
+/* ------------------------ */
+
+
+
+
+/* Thumbnails */
+.thumbnail {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: max-content;
+    z-index: 100;
+    display: flex;
+    gap: 10px;
+}
+
+.thumb__item {
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.thumb__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+.thumb__item-content {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+}
+.thumb__title {
+    font-weight: 600;
+}
+
+/* Carousel Navigation Arrows */
+.arrows {
+    position: absolute;
+    top: 85%;
+    right: 56%;
+    width: 300px;
+    max-width: 30%;
+    gap: 2rem;
+    z-index: 100;
+}
+
+.arrows .btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.arrows .btn i {
+    font-size: var(--size-2xl);
+}
+
+.facil__list-item:nth-child(1) {
+    z-index: 1;
+}
+
+.facil__list-item:nth-child(1) .item-content__title,
+.facil__list-item:nth-child(1) .item-content__desc {
+    opacity: 0;
+    transform: translateY(50px);
+    filter: blur(20px);
+    animation: showContent .5s 1s linear 1 forwards;
+}
+
+@keyframes showContent {
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+    }
+}
+
+.facil__list-item:nth-child(1) .item-content__title {
+    animation-delay: .6s;
+}
+
+.facil__list-item:nth-child(1) .item-content__desc {
+    animation-delay: .8s;
+}
+
+/* Effect on "next" click */
+.facil.next .facil__list-item:nth-child(1) img {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    border-radius: 20px;
+    animation: showImage .4s linear 1 forwards;
+}
+
+@keyframes showImage {
+    to {
+        width: 100%;
+        height: 100%;
+        left: 0;
+        bottom: 0;
+        border-radius: 0;
+    }
+}
+.facil.next .thumb__item:nth-last-child(1) {
+    width: 0;
+    overflow: hidden;
+    animation: showThumbnail .4s linear 1 forwards;
+}
+@keyframes showThumbnail {
+    to {
+        width: 150px;
+    }
+}
+.facil.next .thumbnail {
+    transform: translateX(150px);
+    animation: transformThumbnail .4s linear 1 forwards;
+}
+@keyframes transformThumbnail {
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Effect on "prev" click */
+.facil.prev .facil__list-item:nth-child(2) {
+    z-index: 2;
+}
+
+.facil.prev .facil__list-item:nth-child(2) img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: outImage .8s linear 1 forwards;
+}
+
+@keyframes outImage {
+    to {
+        width: 150px;
+        height: 150px;
+        border-radius: 20px;
+        left: 50%;
+        bottom: 10px;
+    }
+}
+
+.facil.prev .thumb__item:nth-child(1) {
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    animation: showThumbnail .8s linear 1 forwards;
+}
+
+.facil.prev .facil__list-item:nth-child(2) .item-content__title,
+.facil.prev .facil__list-item:nth-child(2) .item-content__desc {
+    animation: contentOut .7s linear 1 forwards;
+}
+
+@keyframes contentOut {
+    to {
+        transform: translateY(-150px);
+        filter: blur(20px);
+        opacity: 0;
+    }
+}
+
+/* restrict clickin during animation */
+.facil.next .arrows button,
+.facil.prev .arrows button {
+    pointer-events: none;
+}
+
+
+/* MEDIA QUERIES */
+@media (min-width:640px) {
+    .facil__list-item .item-content {
+        width: 1140px;
+        max-width: 90%;
+        padding-right: 25%;
+
+    }
+
+    .facil__list-item .item-content__title {
+        font-size: var(--size-5xl);
+        line-height: 3rem;
+    }
+
+    .facil__list-item .item-content__desc {
+        font-size: var(--size-2xl);
+        line-height: 2rem;
+    }
+
+}
+@media (min-width: 1280px) {
+    .facil__list-item .item-content {
+        border-radius: 0 2rem;
+        padding: 2rem;
+        width: fit-content;
+        left: 10%;
+        transform: translateX(-10%);
+    }
+    .facil__list-item .item-content__desc {
+        width: 450px;
+    }
+}

@@ -1,0 +1,47 @@
+[
+    {
+      "imgPath": "../../assets/images/facilities/f1-assist.webp",
+      "title": "Personalized Care for All",
+      "description": "Our dedicated team provides comprehensive support to ensure a comfortable stay for guests with special needs."
+    },
+    {
+      "imgPath": "../../assets/images/facilities/f1-gym.webp",
+      "title": "Stay Fit on the Go",
+      "description": "Keep up with your fitness routine in our state-of-the-art gym equipped with the latest workout machines."
+    },
+    {
+      "imgPath": "../../assets/images/facilities/f1-laundry.webp",
+      "title": "Convenient Laundry Services",
+      "description": "Enjoy the convenience of our on-site laundry facilities to keep your wardrobe fresh and clean."
+    },
+    {
+      "imgPath": "../../assets/images/facilities/f1-spa.webp",
+      "title": "Relax and Rejuvenate",
+      "description": "Indulge in our luxurious spa services, offering a range of treatments to rejuvenate your mind and body."
+    },
+    {
+      "imgPath": "../../assets/images/facilities/f1-wheel.webp",
+      "title": "Accessible Comfort for Everyone",
+      "description": "Our hotel is fully equipped with wheelchair-accessible facilities to ensure ease of movement for all guests."
+    },
+    {
+      "imgPath": "../../assets/images/facilities/f1-outdoor.webp",
+      "title": "Adventure Awaits Outside",
+      "description": "Explore a variety of outdoor activities designed to offer excitement and relaxation in beautiful natural settings."
+    },
+    {
+      "imgPath": "../../assets/images/facilities/f1-meet.webp",
+      "title": "Professional Meeting Venues",
+      "description": "Host your business meetings in our versatile event spaces, equipped with modern amenities to ensure success."
+    },
+    {
+      "imgPath": "../../assets/images/facilities/f1-wed.webp",
+      "title": "Celebrate Your Special Day",
+      "description": "Create unforgettable memories in our elegant wedding venues, perfect for your special day."
+    },
+    {
+      "imgPath": "../../assets/images/facilities/f9-pool.webp",
+      "title": "Dive into Relaxation",
+      "description": "Enjoy a refreshing dip in our pristine swimming pools, ideal for both relaxation and recreation."
+    }
+  ]

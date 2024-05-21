@@ -1,3 +1,4 @@
+/* Restaurant Section */
 .restaur-section {
     height: auto;
     color: var(--clr-dark);
@@ -40,6 +41,7 @@
     font-size: var(--size-2xl);
 }
 
+/* Food menu dialogs */
 .menu-container::backdrop {
     background-color: rgba(0, 0, 0, 0.493);
     backdrop-filter: blur(10px);
