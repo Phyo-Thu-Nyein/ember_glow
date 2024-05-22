@@ -157,8 +157,9 @@
 #mobile_menu {
     display: flex;
     background-color: var(--clr-amber100);
-    width: 100vw !important;
-    height: 100vh !important;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     justify-content: center;
     align-items: center;
 }
