@@ -3,91 +3,23 @@
 <!-- Facilities Section -->
 <section #carousel class="facil">
   <!-- List -->
-  <div #listItem class="facil__list">
+  <div #listItem *ngIf="carouselItems.length" class="facil__list">
     <!-- Loop the carousel cells -->
-    <div class="facil__list-item">
-      <img
-        class="item-img"
-        src="../../assets/images/facilities/f1-assist.webp"
-        alt=""
-      />
+    <div *ngFor="let item of carouselItems" class="facil__list-item">
+      <img class="item-img" [src]="item.imgPath" alt="{{ item.title }}" />
       <div class="item-content">
-        <h1 class="item-content__title">Personalized Care for All</h1>
-        <p class="item-content__desc">
-          Our dedicated team provides comprehensive support to ensure a
-          comfortable stay for guests with special needs.
-        </p>
-      </div>
-    </div>
-    <div class="facil__list-item flex">
-      <img
-        class="item-img"
-        src="../../assets/images/facilities/f2-gym.webp"
-        alt=""
-      />
-      <div class="item-content">
-        <h1 class="item-content__title">Title</h1>
-        <p class="item-content__desc">
-          Our dedicated team provides comprehensive support to ensure a
-          comfortable stay for guests with special needs.
-        </p>
-      </div>
-    </div>
-    <div class="facil__list-item flex">
-      <img
-        class="item-img"
-        src="../../assets/images/facilities/f3-laund.webp"
-        alt=""
-      />
-      <div class="item-content">
-        <h1 class="item-content__title">Title</h1>
-        <p class="item-content__desc">
-          Our dedicated team provides comprehensive support to ensure a
-          comfortable stay for guests with special needs.
-        </p>
-      </div>
-    </div>
-    <div class="facil__list-item flex">
-      <img
-        class="item-img"
-        src="../../assets/images/facilities/f4-spa.webp"
-        alt=""
-      />
-      <div class="item-content">
-        <h1 class="item-content__title">Personalized Care for All</h1>
-        <p class="item-content__desc">
-          Our dedicated team provides comprehensive support to ensure a
-          comfortable stay for guests with special needs.
-        </p>
+        <h1 class="item-content__title">{{ item.title }}</h1>
+        <p class="item-content__desc">{{ item.description}}</p>
       </div>
     </div>
   </div>
 
   <!-- Thumbnails -->
-  <div #thumbnail class="thumbnail">
-    
-    <div class="thumb__item">
-      <img src="../../assets/images/facilities/f2-gym.webp" alt="" />
+  <div #thumbnail *ngIf="thumbnails.length" class="thumbnail">
+    <div *ngFor="let item of thumbnails" class="thumb__item">
+      <img  [src]="item.imgPath" alt="{{ item.title }}" />
       <div class="thumb__item-content">
-        <div class="thumb__title">A Title</div>
-      </div>
-    </div>
-    <div class="thumb__item">
-      <img src="../../assets/images/facilities/f3-laund.webp" alt="" />
-      <div class="thumb__item-content">
-        <div class="thumb__title">A Title</div>
-      </div>
-    </div>
-    <div class="thumb__item">
-      <img src="../../assets/images/facilities/f4-spa.webp" alt="" />
-      <div class="thumb__item-content">
-        <div class="thumb__title">A Title</div>
-      </div>
-    </div>
-    <div class="thumb__item">
-      <img src="../../assets/images/facilities/f1-assist.webp" alt="" />
-      <div class="thumb__item-content">
-        <div class="thumb__title">A Title</div>
+        <div class="thumb__title">{{ item.title }}</div>
       </div>
     </div>
   </div>

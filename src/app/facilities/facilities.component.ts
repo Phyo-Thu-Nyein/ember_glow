@@ -1,4 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ApiService } from '../services/api.service';
+import { Carousel } from '../interface/carousel-detail';
 
 @Component({
   selector: 'app-facilities',
@@ -6,7 +8,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./facilities.component.css'],
 })
 export class FacilitiesComponent {
-
   @ViewChild('next') nextDom!: ElementRef;
   @ViewChild('prev') prevDom!: ElementRef;
   @ViewChild('carousel') carouselDom!: ElementRef;
@@ -16,9 +17,17 @@ export class FacilitiesComponent {
   timeRunning = 1000;
   runTimeOut: any;
 
-  constructor() {}
+  carouselItems: any[] = [];
+  thumbnails: any[] = [];
 
-  ngOnInit(): void {}
+  constructor(private carouselService: ApiService) {}
+
+  ngOnInit(): void {
+    this.carouselService.getCarouselData().subscribe((data) => {
+      this.carouselItems = data;
+      this.setupThumbnails();
+    });
+  }
 
   ngAfterViewInit(): void {
     this.nextDom.nativeElement.onclick = () => {
@@ -27,6 +36,11 @@ export class FacilitiesComponent {
     this.prevDom.nativeElement.onclick = () => {
       this.showSlider('prev');
     };
+  }
+
+  setupThumbnails(): void {
+    // Create a copy of carouselItems and move the first item to the end for thumbnails
+    this.thumbnails = [...this.carouselItems.slice(1), this.carouselItems[0]];
   }
 
   showSlider(type: string): void {

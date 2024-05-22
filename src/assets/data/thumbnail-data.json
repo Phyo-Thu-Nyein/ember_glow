@@ -1,10 +1,5 @@
 [
     {
-      "imgPath": "../../assets/images/facilities/f1-assist.webp",
-      "title": "Personalized Care for All",
-      "description": "Our dedicated team provides comprehensive support to ensure a comfortable stay for guests with special needs."
-    },
-    {
       "imgPath": "../../assets/images/facilities/f2-gym.webp",
       "title": "Stay Fit on the Go",
       "description": "Keep up with your fitness routine in our state-of-the-art gym equipped with the latest workout machines."
@@ -43,5 +38,10 @@
       "imgPath": "../../assets/images/facilities/f9-pool.webp",
       "title": "Dive into Relaxation",
       "description": "Enjoy a refreshing dip in our pristine swimming pools, ideal for both relaxation and recreation."
+    },
+    {
+      "imgPath": "../../assets/images/facilities/f1-assist.webp",
+      "title": "Personalized Care for All",
+      "description": "Our dedicated team provides comprehensive support to ensure a comfortable stay for guests with special needs."
     }
   ]

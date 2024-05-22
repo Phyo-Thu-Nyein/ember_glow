@@ -2,6 +2,7 @@
 .facil {
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     position: relative;
 }
@@ -15,16 +16,17 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(.4);
 }
 .facil__list-item .item-content {
     position: absolute;
-    top: 30%;
+    top: 35%;
     width: 350px;
     max-width: 95%;
     left: 25%;
-    transform: translateX(-25%);
+    transform: translateX(-25%);;
     color: var(--clr-light);
-    text-shadow: 2px 2px 5px #0004;
+    text-shadow: 2px 2px 1px #000;
     opacity: 0;
     filter: blur(20px);
     animation: showContentContainer .5s .8s linear forwards;
@@ -46,10 +48,6 @@
 .facil__list-item .item-content__desc {
     font-size: var(--size-lg);
 }
-/* ------------------------ */
-
-
-
 
 /* Thumbnails */
 .thumbnail {
@@ -74,6 +72,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 20px;
+    filter: brightness(.7);
 }
 .thumb__item-content {
     position: absolute;
@@ -100,6 +99,10 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    box-shadow: none;
+}
+.arrows .btn:hover {
+    transform: none;
 }
 
 .arrows .btn i {
@@ -155,22 +158,21 @@
     }
 }
 .facil.next .thumb__item:nth-last-child(1) {
-    width: 0;
     overflow: hidden;
     animation: showThumbnail .4s linear 1 forwards;
 }
 @keyframes showThumbnail {
-    to {
-        width: 150px;
+    from {
+        width: 0;
+        opacity: 0;
     }
 }
 .facil.next .thumbnail {
-    transform: translateX(150px);
-    animation: transformThumbnail .4s linear 1 forwards;
+    animation: effectNext .5s linear 1 forwards;
 }
-@keyframes transformThumbnail {
-    to {
-        transform: translateX(0);
+@keyframes effectNext {
+    from{
+        transform: translateX(150px);
     }
 }
 
@@ -183,7 +185,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    animation: outImage .8s linear 1 forwards;
+    animation: outImage .5s linear 1 forwards;
 }
 
 @keyframes outImage {
@@ -197,10 +199,9 @@
 }
 
 .facil.prev .thumb__item:nth-child(1) {
-    width: 0;
     opacity: 0;
     overflow: hidden;
-    animation: showThumbnail .8s linear 1 forwards;
+    animation: showThumbnail .5s linear 1 forwards;
 }
 
 .facil.prev .facil__list-item:nth-child(2) .item-content__title,
