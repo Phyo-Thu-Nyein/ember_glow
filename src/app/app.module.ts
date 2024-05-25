@@ -22,6 +22,8 @@ import { ContactComponent } from './contact/contact.component';
 import { ReceptionComponent } from './reception/reception.component';
 import { DiningRestaurantsComponent } from './dining-restaurants/dining-restaurants.component';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,5 +53,8 @@ import { DiningRestaurantsComponent } from './dining-restaurants/dining-restaura
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class AppModule {}
