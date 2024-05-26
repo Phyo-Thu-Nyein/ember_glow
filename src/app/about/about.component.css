@@ -196,10 +196,11 @@
 /* xl */
 @media (min-width: 1280px) {
     .three-d spline-viewer {
-        padding-right: 45%;
+        padding-right: 42%;
     }
 
     .content {
+        left: 45%;
         top: 100px;
         max-width: 860px;
     }
