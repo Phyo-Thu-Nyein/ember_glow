@@ -29,6 +29,7 @@
     text-shadow: 2px 2px 1px #000;
     opacity: 0;
     filter: blur(20px);
+    -webkit-animation: showContentContainer .5s .8s linear forwards;
     animation: showContentContainer .5s .8s linear forwards;
 }
 @keyframes showContentContainer {
@@ -118,6 +119,7 @@
     opacity: 0;
     transform: translateY(50px);
     filter: blur(20px);
+    -webkit-animation: showContent .5s 1s linear 1 forwards;
     animation: showContent .5s 1s linear 1 forwards;
 }
 
@@ -125,15 +127,17 @@
     to {
         opacity: 1;
         filter: blur(0);
-        transform: translateY(0);
+        -webkit-transform: translateY(0);
     }
 }
 
 .facil__list-item:nth-child(1) .item-content__title {
+    -webkit-animation-delay: .6s;
     animation-delay: .6s;
 }
 
 .facil__list-item:nth-child(1) .item-content__desc {
+    -webkit-animation-delay: .8s;
     animation-delay: .8s;
 }
 
@@ -145,6 +149,7 @@
     left: 50%;
     bottom: 10px;
     border-radius: 20px;
+    -webkit-animation: showImage .4s linear 1 forwards;
     animation: showImage .4s linear 1 forwards;
 }
 
@@ -159,6 +164,7 @@
 }
 .facil.next .thumb__item:nth-last-child(1) {
     overflow: hidden;
+    -webkit-animation: showThumbnail .4s linear 1 forwards;
     animation: showThumbnail .4s linear 1 forwards;
 }
 @keyframes showThumbnail {
@@ -168,11 +174,12 @@
     }
 }
 .facil.next .thumbnail {
+    -webkit-animation: effectNext .5s linear 1 forwards;
     animation: effectNext .5s linear 1 forwards;
 }
 @keyframes effectNext {
     from{
-        transform: translateX(150px);
+        -webkit-transform: translateX(150px);
     }
 }
 
@@ -185,6 +192,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
+    -webkit-animation: outImage .5s linear 1 forwards;
     animation: outImage .5s linear 1 forwards;
 }
 
@@ -201,17 +209,19 @@
 .facil.prev .thumb__item:nth-child(1) {
     opacity: 0;
     overflow: hidden;
+    -webkit-animation: showThumbnail .5s linear 1 forwards;
     animation: showThumbnail .5s linear 1 forwards;
 }
 
 .facil.prev .facil__list-item:nth-child(2) .item-content__title,
 .facil.prev .facil__list-item:nth-child(2) .item-content__desc {
+    -webkit-animation: contentOut .7s linear 1 forwards;
     animation: contentOut .7s linear 1 forwards;
 }
 
 @keyframes contentOut {
     to {
-        transform: translateY(-150px);
+        -webkit-transform: translateY(-150px);
         filter: blur(20px);
         opacity: 0;
     }
