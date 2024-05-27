@@ -1,52 +1,3 @@
-/* xs */
-/* @media (min-width: 475px) {
-} */
-/* sm */
-/* @media (min-width: 640px) {
-} */
-/* md */
-/* @media (min-width: 768px) {
-} */
-/* lg */
-/* @media (min-width: 1024px) {
-} */
-/* xl */
-/* @media (min-width: 1280px) {
-} */
-/* 2xl */
-/* @media (min-width: 1536px) {
-} */
-
-:root {
-    /* fonts */
-    --clr-amber50: #fffbeb;
-    /* for some backgrounds */
-    --clr-amber100: #fef3c7;
-    /* for some  things...*/
-    --clr-amber200: #fde68a;
-    /* for dark mode */
-    --clr-dark: #070a13;
-    --clr-gold: #fddd27;
-
-    /* sizes */
-    --size-xxs: .5rem;
-    --size-xs: .75rem;
-    --size-sm: .875rem;
-    --size-base: 1rem;
-    --size-lg: 1.125rem;
-    --size-xl: 1.25rem;
-    --size-2xl: 1.5rem;
-    --size-3xl: 1.875rem;
-    --size-4xl: 2.25rem;
-    --size-5xl: 3rem;
-    --size-6xl: 3.75rem;
-    --size-7xl: 4.5rem;
-    --size-8xl: 6rem;
-    --size-9xl: 8rem;
-    --size-10xl: 10rem;
-
-}
-
 * {
     outline: none;
     border: none;
@@ -81,25 +32,6 @@ a {
     color: var(--clr-amber100);
 }
 
-.btn {
-    display: inline-block;
-    font-weight: 600;
-    letter-spacing: -.05rem;
-    background-color: var(--clr-gold);
-    color: var(--clr-dark);
-    padding: .5em 1em;
-    border-radius: 6px;
-    box-shadow: 0 10px 20px #fddd277e, 0 6px 6px #fddd277e;
-    transition: transform 0.3s, box-shadow .2s;
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 28px #fddd273b,
-        0 10px 10px #fddd2728,
-        0 0 120px -10px var(--clr-gold);
-}
-
 button {
     display: inline-block;
     padding: 0;
@@ -113,11 +45,6 @@ strong {
     color: var(--clr-gold);
 }
 
-.flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 /* custom scrollbar */
 ::-webkit-scrollbar {
@@ -152,18 +79,6 @@ body {
     color: var(--clr-amber50);
 }
 
-/* utils */
-.container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: .5rem;
-    padding-right: .5rem;
-}
-
-.top-m {
-    margin-top: 1.5rem;
-}
 
 /* Dialog popup */
 dialog {
@@ -182,15 +97,6 @@ dialog:modal {
     max-height: 100svh;
 }
 
-/* some animations for the menus */
-@keyframes pop {
-    0% {
-        transform: translateY(90vh);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
 
 /* xs */
 @media (min-width: 475px) {
