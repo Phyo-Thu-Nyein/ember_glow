@@ -7,23 +7,16 @@
     overflow: hidden;
 }
 .three-d spline-viewer {
-    /* border: 1px solid red; */
     transform: scale(1.21);
     z-index: -1;
-    /* padding-right: 40%; */
+    margin: 0 auto;
 }
 
 .content {
-    /* border: 1px solid red; */
     background-color: var(--clr-dark);
     padding: 1rem;
     text-align: center;
     padding-top: 2rem;
-    /* padding: .5rem 2rem 0 0;
-    margin-left: -4rem; */
-    /* position: absolute;
-    right: 1rem;
-    top: 90px; */
 }
 .content__heading {
     font-size: var(--size-4xl);
@@ -55,40 +48,6 @@
     line-height: 1rem;
     opacity: 1;
 }
-/* content date animation */
-/* .content__dates span
- {
-    opacity: 0;
-    animation: slidesRight .5s linear forwards;
-}
-.content__dates:nth-of-type(1) span {
-    animation-delay: 1s;
-}
-
-.content__dates:nth-of-type(2) span {
-    animation-delay: 1.6s;
-}
-
-.content__dates:nth-of-type(3) span {
-    animation-delay: 2.2s;
-}
-
-.content__dates:nth-of-type(4) span {
-    animation-delay: 2.9s;
-}
-
-.content__dates:nth-of-type(5) span {
-    animation-delay: 3.5s;
-}
-
-.content__dates:nth-of-type(6) span {
-    animation-delay: 4.1s;
-}
-
-.content__dates:nth-of-type(7) span {
-    animation-delay: 4.6s;
-} */
-
 
 .content__dates i {
     display: none;
@@ -167,7 +126,9 @@
         padding: .5rem 2rem 0 0;
         position: absolute;
         left: 40%;
-        top: 80px;
+        top: 0;
+        padding-top: 10%;
+        height: 100vh;
     }
     .content__para {
         line-height: 1.3rem;
@@ -201,8 +162,24 @@
 
     .content {
         left: 45%;
-        top: 100px;
         max-width: 860px;
+    }
+    .content__heading {
+        font-size: var(--size-5xl);
+        margin-bottom: 1rem;
+    }
+    .content__para {
+        font-size: var(--size-lg);
+    }
+    .content__subheading {
+        font-size: var(--size-3xl);
+        margin-top: 2rem;
+    }
+    .content__dates strong {
+        font-size: var(--size-lg);
+    }
+    .content__dates p {
+        font-size: var(--size-base);
     }
 
     .content__dates .line::after {
@@ -212,7 +189,6 @@
     /* content date animation */
     .content__dates p
      {
-        font-size: var(--size-sm);
         opacity: 0;
         animation: slidesRight .5s linear forwards;
     }
