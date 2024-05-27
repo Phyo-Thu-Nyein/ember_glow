@@ -23,6 +23,9 @@ import { ReceptionComponent } from './reception/reception.component';
 import { DiningRestaurantsComponent } from './dining-restaurants/dining-restaurants.component';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AboutMissionComponent } from './about-mission/about-mission.component';
+import { AboutTeamComponent } from './about-team/about-team.component';
+import { AboutReviewsComponent } from './about-reviews/about-reviews.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     ContactComponent,
     ReceptionComponent,
     DiningRestaurantsComponent,
+    AboutMissionComponent,
+    AboutTeamComponent,
+    AboutReviewsComponent,
   ],
   imports: [
     BrowserModule,
