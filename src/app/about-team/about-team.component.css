@@ -1,0 +1,30 @@
+.team-container {
+    background-color: var(--clr-dark);
+    text-align: center;
+    padding: 3rem;
+    width: 100%;
+}
+
+.heading__title {
+    margin-bottom: .5rem;
+}
+.heading__para {
+}
+
+.card-container {
+    
+}
+.card {
+    text-align: left;
+    margin-top: 2rem;
+}
+.card img {
+    
+}
+.card span {}
+.card h2 {
+    color: var(--clr-gold);
+}
+.card p {
+
+}
