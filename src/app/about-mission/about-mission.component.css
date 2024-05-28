@@ -1,5 +1,4 @@
 .mission-container {
-    /* border: 1px solid red; */
     color: var(--clr-dark);
     flex-direction: column;
     text-align: center;
@@ -35,7 +34,6 @@
 /* md */
 @media (min-width: 768px) {
     .mission-container {
-        border: 1px solid red;
         height: auto;
         flex-direction: row;
         padding-bottom: 2rem;
@@ -59,7 +57,6 @@
         font-size: var(--size-xl);
     }
     .card p {
-        border: 1px solid green;
         height: 70px;
         line-height: 1.1rem;
         font-size: var(--size-sm);
