@@ -1,7 +1,7 @@
 .eco-container {
-    /* border: 1px solid red; */
     text-align: center;
 }
+
 .heading {
     padding: 2rem 0;
     color: var(--clr-dark);
@@ -10,17 +10,10 @@
     margin-bottom: .5rem;
 }
 
-.mobile-gallery {
-    /* border: 1px solid green; */
-}
 .card {
-    /* border: 1px solid green; */
     width: 300px;
     margin: 0 auto 1rem;
     position: relative;
-}
-.card img {
-    
 }
 .card span {
     background-color: rgba(0, 0, 0, 0.815);
@@ -46,10 +39,10 @@
     opacity: 1;
 }
 .mobile-gallery:hover i {
-    animation: DisappearOnHover .4s linear forwards;
+    animation: disappearOnHover .4s linear forwards;
 }
 
-@keyframes DisappearOnHover {
+@keyframes disappearOnHover {
     0%, 100% {
         display: none;
     }
