@@ -26,6 +26,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AboutMissionComponent } from './about-mission/about-mission.component';
 import { AboutTeamComponent } from './about-team/about-team.component';
 import { AboutReviewsComponent } from './about-reviews/about-reviews.component';
+import { AboutEcoComponent } from './about-eco/about-eco.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AboutReviewsComponent } from './about-reviews/about-reviews.component';
     AboutMissionComponent,
     AboutTeamComponent,
     AboutReviewsComponent,
+    AboutEcoComponent,
   ],
   imports: [
     BrowserModule,
