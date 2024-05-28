@@ -16,7 +16,7 @@
     background-color: var(--clr-dark);
     padding: 1rem;
     text-align: center;
-    padding-top: 2rem;
+    padding: 3rem 0;
 }
 .content__heading {
     font-size: var(--size-4xl);

@@ -35,11 +35,14 @@
 /* md */
 @media (min-width: 768px) {
     .mission-container {
+        border: 1px solid red;
+        height: auto;
         flex-direction: row;
         padding-bottom: 2rem;
     }
 
     .card {
+        width: 250px;
         padding-top: 2rem;
         flex-direction: column;
         gap: .5rem;
@@ -56,8 +59,11 @@
         font-size: var(--size-xl);
     }
     .card p {
+        border: 1px solid green;
+        height: 70px;
+        line-height: 1.1rem;
         font-size: var(--size-sm);
-        padding: 0 3rem;
+        /* padding: 0 3rem; */
         font-weight: 600;
     }
     .card p span {
@@ -66,10 +72,7 @@
 }
 
 /* lg */
-/* @media (min-width: 1024px) {
-} */
-/* xl */
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
     .card {
         padding-top: 2rem;
         flex-direction: column;
@@ -77,12 +80,16 @@
         flex: 1;
     }
     .card p {
-        height: 200px;
+        height: 125px;
     }
     .card p span {
+        line-height: 1.1rem;
         display: inline;
     }
 }
+/* xl */
+/* @media (min-width: 1280px) {
+} */
 /* 2xl */
 /* @media (min-width: 1536px) {
 } */

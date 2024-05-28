@@ -1,8 +1,11 @@
 .team-container {
     background-color: var(--clr-dark);
     text-align: center;
-    padding: 3rem;
+    padding: 3rem 0;
     width: 100%;
+}
+.left-corner, .right-corner {
+    display: none;
 }
 
 .heading__title {
@@ -12,19 +15,122 @@
 }
 
 .card-container {
-    
+    padding: 0 1rem;
+}
+.founder-row {
+    display: none;
 }
 .card {
+    /* border: 1px solid red; */
     text-align: left;
     margin-top: 2rem;
 }
 .card img {
-    
+    margin-bottom: .5rem;
 }
-.card span {}
+.card span {
+    /* font-weight: 600; */
+}
 .card h2 {
     color: var(--clr-gold);
+    font-size: var(--size-3xl);
+    margin-bottom: .5rem;
 }
 .card p {
-
+    line-height: 1rem;
+    padding-right: 1rem;
 }
+
+
+/* xs */
+/* @media (min-width: 475px) {
+} */
+/* sm */
+@media (min-width: 640px) {
+    .card span {
+        font-size: var(--size-2xl);
+    }
+    .card p {
+        font-size: var(--size-lg);
+        line-height: 1.3rem;
+        padding-right: 0;
+    }
+}
+/* md */
+@media (min-width: 768px) {
+    .team-container {
+        position: relative;
+    }
+    .left-corner, .right-corner {
+        display: block;
+        width: 120px;
+        position: absolute;
+    }
+    .left-corner {
+        top: 7px;
+        left: 7px;
+        transform: rotate(90deg);
+    }
+    .right-corner {
+        bottom: 7px;
+        right: 7px;
+        transform: rotate(-90deg);
+    }
+
+    .heading {
+        padding: 0 7%;
+    }
+    .card-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .card {
+        width: 250px;
+        text-align: center;
+    }
+    .card span {
+        font-size: var(--size-base);
+    }
+    .card p {
+        font-size: var(--size-sm);
+        line-height: 1.3rem;
+    }
+
+    .founder-col {
+        display: none;
+    }
+    .founder-row {
+        display: block;
+    }
+    .manager-row, .chef-row {
+        transform: translateY(50px);
+        width: 200px;
+    }
+    .manager-row span, .chef-row span {
+        font-size: var(--size-sm);
+    }
+    .manager-row h2, .chef-row h2 {
+        font-size: var(--size-xl);
+    }
+}
+/* lg */
+@media (min-width: 1024px) {
+    .card-container {
+        gap: 1.5rem;
+    }
+    .founder-row {
+        width: 300px;
+    }
+    .manager-row, .chef-row {
+        transform: translateY(50px);
+        width: 250px;
+    }
+}
+/* xl */
+/* @media (min-width: 1280px) {
+} */
+/* 2xl */
+/* @media (min-width: 1536px) {
+} */
