@@ -1,0 +1,50 @@
+[
+  {
+    "imgSrc": "../../assets/images/about/gallery/Solar.jpg",
+    "imgAlt": "hotel using solar energy",
+    "artImgSrc": "../../assets/images/about/gallery/arts/art-solar.png",
+    "description": "We harness the power of the sun with our state-of-the-art solar panels. This commitment to renewable energy helps us reduce our carbon footprint and operate more sustainably, ensuring a greener future for all."
+  },
+  {
+    "imgSrc": "../../assets/images/about/gallery/toiletries.jpg",
+    "imgAlt": "hotel using eco-friendly toiletries",
+    "artImgSrc": "../../assets/images/about/gallery/arts/art-toilet.png",
+    "description": "Our rooms feature eco-friendly amenities, including biodegradable toiletries and reusable water bottles. These thoughtful touches are part of our broader effort to minimize waste and promote sustainable living among our guests."
+  },
+  {
+    "imgSrc": "../../assets/images/about/gallery/recycle.jpg",
+    "imgAlt": "hotel recycling",
+    "artImgSrc": "../../assets/images/about/gallery/arts/art-recycle.png",
+    "description": "Recycling is a cornerstone of our sustainability efforts. We have implemented comprehensive recycling programs throughout the hotel, encouraging both guests and staff to participate in reducing waste and supporting environmental conservation."
+  },
+  {
+    "imgSrc": "../../assets/images/about/gallery/green-path.jpg",
+    "imgAlt": "hotel with green trees surrounding",
+    "artImgSrc": "../../assets/images/about/gallery/arts/art-green.png",
+    "description": "Embrace nature at Ember Glow Hotel with our beautifully maintained green spaces. From lush gardens to serene rooftop terraces, we prioritize creating environments that support biodiversity and offer peaceful retreats for our guests."
+  },
+  {
+    "imgSrc": "../../assets/images/about/gallery/charity.jpg",
+    "imgAlt": "hotel team giving a charity",
+    "artImgSrc": "../../assets/images/about/gallery/arts/art-charity.png",
+    "description": "We actively engage with our local community by hosting and participating in various events. From charity fundraisers to cultural festivals, our involvement helps strengthen community bonds and support local causes."
+  },
+  {
+    "imgSrc": "../../assets/images/about/gallery/local.jpg",
+    "imgAlt": "hotel using local resources",
+    "artImgSrc": "../../assets/images/about/gallery/arts/art-local.png",
+    "description": "Our commitment to sustainability extends to our dining options, where we prioritize locally sourced products. By supporting local farmers and producers, we reduce our carbon footprint and provide our guests with the freshest ingredients."
+  },
+  {
+    "imgSrc": "../../assets/images/about/gallery/training.jpg",
+    "imgAlt": "hotel employees traning",
+    "artImgSrc": "../../assets/images/about/gallery/arts/art-training.png",
+    "description": "Our team is trained in sustainable practices and community engagement. Through regular workshops and training sessions, we empower our staff to contribute to our green initiatives and provide exceptional, eco-conscious service."
+  },
+  {
+    "imgSrc": "../../assets/images/about/gallery/planting.jpg",
+    "imgAlt": "hotel guests planting trees",
+    "artImgSrc": "../../assets/images/about/gallery/arts/art-plant.png",
+    "description": "We invite our guests to join us in our sustainability efforts through various eco-friendly activities. Participate in beach clean-ups, tree planting, or guided nature tours and help us make a positive impact on the environment and community."
+  }
+]
