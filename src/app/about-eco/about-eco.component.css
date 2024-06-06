@@ -150,6 +150,7 @@
 
     .heading {
         border: 1px solid var(--clr-amber100);
+        border: 1px solid red;
         border-radius: 1rem 3rem;
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
@@ -249,5 +250,20 @@
 }
 
 /* 2xl */
-/* @media (min-width: 1536px) {
-} */
+@media (min-width: 1536px) {
+    .grid-gallery span {
+        color: var(--clr-dark);
+        font-size: var(--size-lg);
+        text-align: left;
+        width: 400px;
+        height: 200px;
+        position: absolute;
+        top: 79.89%;
+        left: 25.25%;
+        transform: translate(-35%, -65%);
+        display: flex;
+        align-items: flex-start;
+        opacity: 0;
+        z-index: -1;
+    }
+}
