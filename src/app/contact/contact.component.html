@@ -1,1 +1,80 @@
-<p>contact works!</p>
+<!-- BG IMAGE -->
+<div class="bg-img"></div>
+
+<!-- BLUR EFFECT  -->
+<div class="blur"></div>
+
+<div class="dummy-body flex">
+  <!-- FORM SECTION  -->
+  <div class="form-wrapper flex">
+    <h1>Connect</h1>
+    <div class="form-img-container flex">
+      <form
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        class="flex"
+      >
+        <input
+          type="hidden"
+          name="access_key"
+          value="a7eb4194-6103-4c3f-b311-f8480c3e19a2"
+        />
+        <!-- EMAIL FIELD -->
+        <div class="input-box">
+          <input
+            type="name"
+            name="name"
+            id="name"
+            placeholder="Enter Name"
+            required
+            minlength="4"
+          />
+          <i class="bx bxs-user"></i>
+        </div>
+        <!-- PASSWORD FIELD -->
+        <div class="input-box">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email Address"
+            required
+            minlength="8"
+          />
+          <i class="bx bxs-envelope"></i>
+        </div>
+        <!-- TEXT AREA -->
+        <div class="input-box">
+          <textarea
+            name="textarea"
+            id="textarea"
+            class="textarea"
+            placeholder="Your Message Here..."
+          ></textarea>
+        </div>
+
+        <!-- <button type="submit" id="register" [disabled]="!agree.checked" class="btn">Register</button> -->
+        <button type="submit" id="login" class="btn flex">
+          Submit <i class="bx bxs-send"></i>
+        </button>
+      </form>
+
+      <!-- FORM IMAGE  -->
+      <div class="form-image">
+        <img
+          src="../../assets/images/icons/hotel-logo-600.png"
+          class=""
+          alt="hotel logo"
+        />
+        <p>EMBER GLOW</p>
+      </div>
+    </div>
+    <h3 class="other-options">-- Or --</h3>
+    <div class="link-wrapper flex">
+      <a href="#"><i class="bx bxl-facebook"></i></a>
+      <a href="#"><i class="bx bxl-twitter"></i></a>
+      <a href="#"><i class="bx bxl-instagram"></i></a>
+      <a href="#"><i class="bx bxl-discord-alt"></i></a>
+    </div>
+  </div>
+</div>
