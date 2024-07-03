@@ -1,0 +1,89 @@
+.facil-detail-container {
+    color: var(--clr-dark);
+    text-align: center;
+    padding-top: 2rem;
+}
+
+/* Opening hours & policies */
+.openhr-container {
+    flex-direction: column;
+}
+
+.open-title {
+    font-size: var(--size-xl);
+    margin-bottom: 1rem;
+}
+
+.openhr-container table {
+    width: 100%;
+    max-width: 1024px;
+}
+
+/* hide the large-screen cells for mobile view */
+.pc-cells {
+    display: none;
+}
+
+tr {
+    height: 79px;
+}
+
+td {
+    font-size: var(--size-sm);
+}
+
+tr:nth-last-child(1),
+tr:nth-last-child(3),
+tr:nth-last-child(5) {
+    background-color: var(--clr-amber50);
+}
+
+/* RESPONSIVE */
+/* xs */
+/* @media (min-width: 475px) {
+} */
+/* sm */
+@media (min-width: 640px) {
+
+
+    /* Opening hours table */
+
+    .open-title {
+        font-size: var(--size-2xl);
+        margin-bottom: 1.5rem;
+    }
+
+    /* display the large-screen cells for desktop view */
+    .pc-cells {
+        display: table-cell;
+    }
+
+    tr {
+        height: 90px;
+    }
+
+    th {
+        font-size: var(--size-xl);
+    }
+
+    td {
+        font-size: var(--size-lg);
+    }
+}
+
+/* md */
+/* @media (min-width: 768px) {
+} */
+/* lg */
+@media (min-width: 1024px) {
+    /* table {
+        max-width: 1024px;
+    } */
+}
+
+/* xl */
+/* @media (min-width: 1280px) {
+} */
+/* 2xl */
+/* @media (min-width: 1536px) {
+} */

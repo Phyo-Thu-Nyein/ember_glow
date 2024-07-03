@@ -27,6 +27,7 @@ import { AboutMissionComponent } from './about-mission/about-mission.component';
 import { AboutTeamComponent } from './about-team/about-team.component';
 import { AboutReviewsComponent } from './about-reviews/about-reviews.component';
 import { AboutEcoComponent } from './about-eco/about-eco.component';
+import { FacilitiesDetailComponent } from './facilities-detail/facilities-detail.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AboutEcoComponent } from './about-eco/about-eco.component';
     AboutTeamComponent,
     AboutReviewsComponent,
     AboutEcoComponent,
+    FacilitiesDetailComponent,
   ],
   imports: [
     BrowserModule,
