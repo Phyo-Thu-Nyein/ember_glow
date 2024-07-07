@@ -11,52 +11,98 @@
     <div class="form-img-container flex">
       <form
         action="https://api.web3forms.com/submit"
-        method="POST"
         class="flex"
+        #contactForm="ngForm"
+        (ngSubmit)="submitEmail(contactForm)"
       >
-        <input
-          type="hidden"
-          name="access_key"
-          value="a7eb4194-6103-4c3f-b311-f8480c3e19a2"
-        />
-        <!-- EMAIL FIELD -->
+        <!-- NAME FIELD -->
         <div class="input-box">
           <input
-            type="name"
+            type="text"
+            [(ngModel)]="contactFormValues.name"
+            #name="ngModel"
             name="name"
-            id="name"
             placeholder="Enter Name"
             required
             minlength="4"
           />
           <i class="bx bxs-user"></i>
+          <!-- input error message -->
+          <p
+            class="ml-1 text-red-400 text-sm"
+            *ngIf="name.errors && name.touched && name.dirty"
+          >
+            name is required
+          </p>
         </div>
-        <!-- PASSWORD FIELD -->
+
+        <!-- EMAIL FIELD -->
         <div class="input-box">
           <input
             type="email"
+            [(ngModel)]="contactFormValues.email"
+            #email="ngModel"
             name="email"
-            id="email"
             placeholder="Email Address"
             required
-            minlength="8"
+            pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
           />
           <i class="bx bxs-envelope"></i>
+          <!-- input error message -->
+          <p
+            class="ml-1 text-red-400 text-sm"
+            *ngIf="email.errors && email.touched && email.dirty"
+          >
+            invalid email
+          </p>
         </div>
-        <!-- TEXT AREA -->
+        <!-- TEXT AREA (body field) -->
         <div class="input-box">
           <textarea
-            name="textarea"
-            id="textarea"
+            name="body"
+            [(ngModel)]="contactFormValues.body"
+            #body="ngModel"
+            cols="30"
+            rows="10"
             class="textarea"
             placeholder="Your Message Here..."
+            required
+            minlength="20"
           ></textarea>
+          <!-- input error message -->
+          <p
+            class="ml-1 text-red-400 text-sm"
+            *ngIf="body.errors && body.touched && body.dirty"
+          >
+            write at least 20 words
+          </p>
         </div>
 
-        <!-- <button type="submit" id="register" [disabled]="!agree.checked" class="btn">Register</button> -->
-        <button type="submit" id="login" class="btn flex">
-          Submit <i class="bx bxs-send"></i>
-        </button>
+        <!-- Alert -->
+        <div
+          [ngClass]="{
+            hidden: !showAlert
+          }"
+        >
+          <p [ngClass]="alertColor" class="font-semibold">
+            {{ alertMessage }}
+          </p>
+        </div>
+
+        <!-- submit button -->
+  <button
+  [disabled]="contactForm.invalid || onSubmit"
+  class="btn p-2 rounded-md font-bold uppercase text-white bg-light-color hover:bg-primary-color transition disabled:opacity-50 disabled:bg-light-color"
+>
+  <ng-container *ngIf="onSubmit === false; else submittingEmail">
+    send
+  </ng-container>
+  <ng-template #submittingEmail>
+    <div class="animate-spin">
+      <i class='bx bx-loader-circle bx-spin' ></i>
+    </div>
+  </ng-template>
+</button>
       </form>
 
       <!-- FORM IMAGE  -->
