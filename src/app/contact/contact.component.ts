@@ -24,7 +24,7 @@ export class ContactComponent {
   };
 
   get alertColor() {
-    return `text-${this.color}-400`;
+    return `text-${this.color}-bold`;
   }
 
   hideAlert() {
@@ -51,13 +51,13 @@ export class ContactComponent {
       if (!res.ok) {
         throw new Error();
       }
-      this.alertMessage = 'Email sent successfully!'
       this.color = 'green';
-      contactForm.reset();
+      this.alertMessage = 'Email sent successfully!'
+      contactForm.resetForm();
     } catch (err) {
       // handle error
-      this.alertMessage = 'Something went wrong, try again later!';
       this.color = 'red';
+      this.alertMessage = 'Something went wrong!';
     }
     // reset submit & hide alert
     this.onSubmit = false;

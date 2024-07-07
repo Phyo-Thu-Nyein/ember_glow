@@ -8,7 +8,7 @@ export class MailService {
   constructor() { }
 
   sendEmail(formData: FormData): Promise<Response> {
-    return fetch('https://api.web3forms.com/submithttps://api.web3forms.com/submit', {
+    return fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       body: formData,
     })
