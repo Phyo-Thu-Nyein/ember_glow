@@ -13,8 +13,7 @@ export class ApiService {
   private ecoUrl: string = `${this.baseDataUrl}about-eco-data.json`;
 
   constructor(private http: HttpClient) {}
-
-  baseUrl: string = 'https://api-hotel-e271.onrender.com/';
+  baseUrl: string = 'https://hotel-api-v2-ocur.onrender.com';
 
   registerUrl: string = `${this.baseUrl}/api/v1/auth/register/`;
   loginUrl: string = `${this.baseUrl}/api/v1/auth/login/`;
@@ -26,6 +25,7 @@ export class ApiService {
     }),
   };
 
+  // UI
   getCarouselData(): Observable<any> {
     return this.http.get<any>(this.carouselUrl);
   }
@@ -34,6 +34,8 @@ export class ApiService {
     return this.http.get<any>(this.ecoUrl)
   }
 
+  //BACK-END
+  //AUTH
   register(userData: UserDetails) {
     return this.http.post(this.registerUrl, userData, this.options);
   }

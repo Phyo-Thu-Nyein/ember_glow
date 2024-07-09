@@ -12,32 +12,30 @@ import { LoginUser } from '../interface/login-details';
 })
 export class LoginComponent {
 
-  @ViewChild('loginForm') RegisterForm?: NgForm;
+  @ViewChild('loginForm') loginForm?: NgForm;
   constructor(private router: Router, private apiService: ApiService) { }
   
-  username: string = '';
   email: string = '';
-  phone?: Number;
   password: string = '';
-  conpassword: string = '';
 
-  register() {
-    var result = this.apiService.register({
-      'name': this.username,
-      'email': this.email,
-      'phone': this.phone,
-      'password': this.password,
-    });
-    result.subscribe({
+  login() {
+    console.log('form submitted');
+    const loginPayLoad = {
+      email: this.email,
+      password: this.password,
+    };
+
+    this.apiService.login(loginPayLoad).subscribe({
       next: (response: LoginUser) => {
-        if (response.status == 'success') {
+        if (response.status == 'login success') { //api responded with login success
+          localStorage.setItem('token', response.accessToken!);
           alert(response.status);
-          this.router.navigateByUrl('login');
+          this.router.navigateByUrl('rooms');
         }
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
-        const { message } = err['error'];
+        const { message } = err.error;
         alert(message);
       }
     });

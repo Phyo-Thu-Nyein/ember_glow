@@ -28,9 +28,9 @@
     </a>
   </div>
   <div class="right-part flex">
-    <a routerLink="/login" class="flex">
+    <a [routerLink]="isLoggedIn() ? '/profile' : '/login'" class="flex">
       <i class="bx bxs-user"></i>
-      <span>Login</span>
+      <span>{{ isLoggedIn() ? 'Profile' : 'Login' }}</span>
     </a>
     <button class="right-part__menu" onclick="mobile_menu.showModal()">
       <i class="bx bx-menu"></i>

@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent {
-
+  constructor() { }
+  isLoggedIn() {
+    return !!localStorage.getItem('token');
+  }
 }

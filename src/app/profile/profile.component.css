@@ -1,0 +1,50 @@
+.profile-wrapper {
+    padding-top: 70px;
+    color: var(--clr-dark);
+    flex-direction: column;
+}
+
+h1 {
+    margin: -1rem 0;
+}
+.role-text {
+    margin: 0 .5rem;
+}
+.flower {
+    width: 90px;
+}
+
+img {
+    width: 250px;
+    object-fit: cover;
+    aspect-ratio: 1;
+}
+
+.info {
+    margin-top: 1.2rem;
+    height: 180px;
+}
+
+td {
+    vertical-align: top;
+    padding-left: .7rem;
+}
+
+/* xs */
+/* @media (min-width: 475px) {
+} */
+/* sm */
+/* @media (min-width: 640px) {
+} */
+/* md */
+/* @media (min-width: 768px) {
+} */
+/* lg */
+/* @media (min-width: 1024px) {
+} */
+/* xl */
+/* @media (min-width: 1280px) {
+} */
+/* 2xl */
+/* @media (min-width: 1536px) {
+} */

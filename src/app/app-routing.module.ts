@@ -11,6 +11,8 @@ import { DiningComponent } from './dining/dining.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { ProfileComponent } from './profile/profile.component';
+import { authGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -41,6 +43,11 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'register',
