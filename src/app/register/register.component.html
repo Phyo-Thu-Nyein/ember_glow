@@ -75,6 +75,7 @@
             [(ngModel)]="phone"
             (input)="onPhoneChange($event)"
             required
+            min="0"
             minlength="9"
             #phno="ngModel"
           />
