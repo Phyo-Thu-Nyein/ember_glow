@@ -21,8 +21,19 @@
             required
             minlength="4"
             #mail="ngModel"
+            pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
           />
-          <i class="bx bxs-envelope"></i>
+          <i [ngClass]="{
+            'green-icon' : isFieldValid(mail),
+            'red-icon' : isFieldInvalid(mail)
+          }" class="bx bxs-envelope"></i>
+          <!-- input error message -->
+          <p
+            class="text-red-bold"
+            *ngIf="mail.errors && mail.touched && mail.dirty"
+          >
+            invalid email
+          </p>
         </div>
         <!-- PASSWORD FIELD -->
         <div class="input-box">
@@ -36,12 +47,29 @@
             minlength="8"
             #pass="ngModel"
           />
-          <i class="bx bxs-lock-alt"></i>
+          <i [ngClass]="{
+            'green-icon': isFieldValid(pass),
+            'red-icon': isFieldInvalid(pass)
+          }" class="bx bxs-lock-alt"></i>
+          <!-- input error message -->
+          <p
+            class="text-red-bold"
+            *ngIf="pass.errors && pass.touched && pass.dirty"
+          >
+            at least 8 characters
+          </p>
         </div>
 
         <!-- <button type="submit" id="register" [disabled]="!agree.checked" class="btn">Register</button> -->
-        <button type="submit" id="login" class="btn">Login</button>
-        
+        <!-- <button type="submit" [disabled]="loginForm.invalid || onSubmit" id="login" class="btn">Login</button> -->
+        <button class="btn flex" [disabled]="loginForm.invalid || onSubmit">
+          <ng-container *ngIf="onSubmit === false; else submittingEmail">
+            Login 
+          </ng-container>
+          <ng-template #submittingEmail>
+              <i class="bx bx-loader-circle bx-spin"></i>
+          </ng-template>
+        </button>
   
         <div class="register-link">
           <p>

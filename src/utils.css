@@ -93,7 +93,22 @@
     margin-top: 1.5rem;
 }
 
-
+/* Form validations */
+/* Alert/ Error message */
+.text-green-bold {
+    color: #a3e635;
+    font-weight: bold;
+}
+.text-red-bold {
+    color: #ef4444;
+    font-weight: bold;
+}
+.green-icon {
+    color: #a3e635;
+}
+.red-icon {
+    color: #ef4444;
+}
 
 /* some animations for the menus */
 @keyframes pop {

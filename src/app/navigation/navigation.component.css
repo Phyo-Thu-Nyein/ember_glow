@@ -189,6 +189,38 @@
     padding-left: 3.4rem;
 }
 
+/* LOGOUT BUTTONS */
+/* mobile button */
+.logout-btn {
+    height: 100%;
+    font-weight: 600;
+    font-size: var(--size-xl);
+    color: #fff;
+    background-color: #ef4444;
+    box-shadow: none;
+}
+/* desktop button */
+.desktop-logout {
+    display: none;
+    font-size: var(--size-base);
+    padding: .3rem;
+    border-radius: 5px;
+    transform: translateX(8px);
+}
+.desktop-logout:hover {
+    transform: translateX(0);
+}
+.desktop-logout i {
+    font-size: var(--size-xl);
+    opacity: 0;
+    transform: translate(10px, 3px);
+    transition: all .2s;
+}
+.desktop-logout:hover i{
+    opacity: 1;
+    transform: translate(0, 3px);
+}
+
 .mobile__nav-close {
     font-size: var(--size-3xl);
 }
@@ -222,6 +254,11 @@
     }
 
     .right-part a span {
+        display: block;
+    }
+
+    /* desktop logout */
+    .desktop-logout {
         display: block;
     }
 

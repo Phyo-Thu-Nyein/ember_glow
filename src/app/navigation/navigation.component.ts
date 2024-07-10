@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -6,8 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent {
-  constructor() { }
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    this.isLoggedIn();
+  }
+
   isLoggedIn() {
     return !!localStorage.getItem('token');
+  }
+  logOut() {
+    localStorage.removeItem('token');
+    this.router.navigateByUrl('login');
   }
 }

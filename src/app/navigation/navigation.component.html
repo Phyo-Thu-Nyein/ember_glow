@@ -30,8 +30,12 @@
   <div class="right-part flex">
     <a [routerLink]="isLoggedIn() ? '/profile' : '/login'" class="flex">
       <i class="bx bxs-user"></i>
-      <span>{{ isLoggedIn() ? 'Profile' : 'Login' }}</span>
+      <span>{{ isLoggedIn() ? '' : 'Login' }}</span>
     </a>
+    <button *ngIf="isLoggedIn()" class="desktop-logout flex" (click)="logOut()">
+      <span>Logout</span> 
+      <i class="bx bx-log-out"></i>
+    </button>
     <button class="right-part__menu" onclick="mobile_menu.showModal()">
       <i class="bx bx-menu"></i>
     </button>
@@ -47,6 +51,11 @@
     <li class="mobile__nav-link"><a routerLink="/about" onclick="mobile_menu.close()">About</a></li>
     <li class="mobile__nav-link"><a routerLink="/contact" onclick="mobile_menu.close()">Contact</a></li>
     <li class="mobile__nav-line"></li>
+    <li *ngIf="isLoggedIn()">
+      <button class="logout-btn btn flex" (click)="logOut()" onclick="mobile_menu.close()">
+        Logout
+      </button>
+    </li>
     <button class="mobile__nav-close" onclick="mobile_menu.close()">
       <i class="bx bx-x-circle"></i>
     </button>

@@ -19,10 +19,23 @@
             placeholder="Username"
             [(ngModel)]="username"
             required
-            minlength="4"
+            minlength="5"
             #name="ngModel"
           />
-          <i class="bx bxs-user"></i>
+          <i
+            [ngClass]="{
+              'green-icon': isFieldValid(name),
+              'red-icon': isFieldInvalid(name)
+            }"
+            class="bx bxs-user"
+          ></i>
+          <!-- input error message -->
+          <p
+            class="text-red-bold"
+            *ngIf="name.errors && name.touched && name.dirty"
+          >
+            at least 4 characters
+          </p>
         </div>
         <!-- EMAIL FIELD -->
         <div class="input-box">
@@ -35,22 +48,47 @@
             required
             minlength="4"
             #mail="ngModel"
+            pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
           />
-          <i class="bx bxs-envelope"></i>
+          <i
+            [ngClass]="{
+              'green-icon': isFieldValid(mail),
+              'red-icon': isFieldInvalid(mail)
+            }"
+            class="bx bxs-envelope"
+          ></i>
+          <!-- input error message -->
+          <p
+            class="text-red-bold"
+            *ngIf="mail.errors && mail.touched && mail.dirty"
+          >
+            invalid email
+          </p>
         </div>
         <!-- PHONE FIELD -->
         <div class="input-box">
           <input
-            type="tel"
+            type="number"
             name="phone"
             id="phone"
             placeholder="Phone Number"
             [(ngModel)]="phone"
+            (input)="onPhoneChange($event)"
             required
             minlength="9"
-            #phoneno="ngModel"
+            #phno="ngModel"
           />
-          <i class="bx bxs-phone"></i>
+          <i
+            [ngClass]="{
+              'green-icon': isFieldValid(phno) && isPhoneValid,
+              'red-icon': isFieldInvalid(phno) || !isPhoneValid
+            }"
+            class="bx bxs-phone"
+          ></i>
+          <!-- input error message -->
+          <p class="text-red-bold" *ngIf="!isPhoneValid && phno.touched">
+            invalid phone number
+          </p>
         </div>
         <!-- PASSWORD FIELD -->
         <div class="input-box">
@@ -60,36 +98,67 @@
             id="password"
             placeholder="Enter Password"
             [(ngModel)]="password"
+            (input)="onPasswordChange()"
             required
             minlength="8"
             #pass="ngModel"
           />
-          <i class="bx bxs-lock-alt"></i>
+          <i
+            [ngClass]="{
+              'green-icon': isFieldValid(pass),
+              'red-icon': isFieldInvalid(pass)
+            }"
+            class="bx bxs-lock-alt"
+          ></i>
+          <!-- input error message -->
+          <p
+            class="text-red-bold"
+            *ngIf="!pass.valid && pass.touched && pass.dirty"
+          >
+            at least 8 characters
+          </p>
         </div>
         <!-- COFIRM PSW FIELD -->
         <div class="input-box">
           <input
             type="password"
-            name="password"
+            name="conpassword"
             id="conpassword"
             placeholder="Confirm Password"
             [(ngModel)]="conpassword"
+            (input)="onConfirmPasswordChange()"
             required
             minlength="8"
-            #pass="ngModel"
+            #cpass="ngModel"
           />
-          <i class="bx bxs-lock-alt"></i>
+          <i
+            [ngClass]="{
+              'green-icon': isFieldValid(cpass) && passwordsMatch,
+              'red-icon': isFieldInvalid(cpass)
+            }"
+            class="bx bxs-lock-alt"
+          ></i>
+          <!-- input error message -->
+          <p class="text-red-bold" *ngIf="!passwordsMatch && cpass.touched">
+            passwords must match
+          </p>
         </div>
         <div class="agree-terms">
           <label>
-            By registering, you agree to our terms & conditions.
+            By registering, you agree to our
+            <a routerLink="terms">terms & conditions</a>.
           </label>
         </div>
-  
-        <!-- <button type="submit" id="register" [disabled]="!agree.checked" class="btn">Register</button> -->
-        <button type="submit" id="register" class="btn">Register</button>
-        
-  
+
+        <button class="btn flex" [disabled]="regForm.invalid || onSubmit">
+          <ng-container *ngIf="onSubmit === false; else submittingEmail">
+            Register
+          </ng-container>
+          <ng-template #submittingEmail>
+            <i class="bx bx-loader-circle bx-spin"></i>
+          </ng-template>
+        </button>
+
         <div class="login-link">
           <p>
             Already registered?
@@ -98,7 +167,7 @@
           </p>
         </div>
       </form>
-  
+
       <!-- FORM IMAGE  -->
       <div class="form-image">
         <img

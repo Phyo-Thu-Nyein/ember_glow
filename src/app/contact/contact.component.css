@@ -129,15 +129,6 @@
     /* border: 1px solid red; */
 }
 
-/* Alert message */
-.text-green-bold {
-    color: #a3e635;
-    font-weight: bold;
-}
-.text-red-bold {
-    color: #ef4444;
-    font-weight: bold;
-}
 
 /* IMAGE SECTION FORM CONTAINER */
 .form-img-container .form-image img {
