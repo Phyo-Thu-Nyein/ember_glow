@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
@@ -13,7 +13,26 @@ import { RegisterUser } from '../interface/register-details';
 export class RegisterComponent {
 
   @ViewChild('regForm') RegisterForm?: NgForm;
-  constructor(private router: Router, private apiService: ApiService) { }
+  @ViewChild('passwordField') passwordField?: ElementRef;
+  @ViewChild('confirmPasswordField') confirmPasswordField?: ElementRef;
+
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private renderer: Renderer2
+  ) { }
+
+  //prevent the user from copy/pasting the password
+  ngAfterViewInit() {
+    if (this.passwordField && this.confirmPasswordField) {
+      this.renderer.listen(this.passwordField.nativeElement, 'copy', (event: ClipboardEvent) => {
+        event.preventDefault();
+      });
+      this.renderer.listen(this.confirmPasswordField.nativeElement, 'paste', (event: ClipboardEvent) => {
+        event.preventDefault();
+      });
+    }
+  }
   
   onSubmit: boolean = false; //loading animation
   username: string = '';
