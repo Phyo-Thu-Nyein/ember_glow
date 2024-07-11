@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MailService } from '../services/mail.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { env } from 'src/env/env';
 
 @Component({
@@ -22,6 +22,14 @@ export class ContactComponent {
     email: '',
     body: '',
   };
+
+    //Turn green if valid else red
+    isFieldValid(field: NgModel) {
+      return field.valid && (field.touched || field.dirty)
+    }
+    isFieldInvalid(field: NgModel) {
+      return !field.valid && (field.touched || field.dirty)
+    }
 
   get alertColor() {
     return `text-${this.color}-bold`;

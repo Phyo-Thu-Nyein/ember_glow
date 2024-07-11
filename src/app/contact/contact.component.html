@@ -25,7 +25,10 @@
             required
             minlength="2"
           />
-          <i class="bx bxs-user"></i>
+          <i [ngClass]="{
+            'green-icon': isFieldValid(name),
+            'red-icon': isFieldInvalid(name)
+          }" class="bx bxs-user"></i>
           <!-- input error message -->
           <p
             class="text-red-bold"
@@ -46,7 +49,10 @@
             required
             pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
           />
-          <i class="bx bxs-envelope"></i>
+          <i [ngClass]="{
+            'green-icon': isFieldValid(email),
+            'red-icon': isFieldInvalid(email)
+          }" class="bx bxs-envelope"></i>
           <!-- input error message -->
           <p
             class="text-red-bold"
