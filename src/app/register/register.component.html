@@ -137,7 +137,7 @@
           <i
             [ngClass]="{
               'green-icon': isFieldValid(cpass) && passwordsMatch,
-              'red-icon': isFieldInvalid(cpass)
+              'red-icon': isFieldInvalid(cpass) || !passwordsMatch
             }"
             class="bx bxs-lock-alt"
           ></i>
@@ -153,7 +153,7 @@
           </label>
         </div>
 
-        <button class="btn flex" [disabled]="regForm.invalid || onSubmit">
+        <button class="btn flex" [disabled]="regForm.invalid || !passwordsMatch || onSubmit">
           <ng-container *ngIf="onSubmit === false; else submittingEmail">
             Register
           </ng-container>

@@ -62,7 +62,7 @@ export class RegisterComponent {
   passwordsMatch: boolean = true;
 
   validatePasswords() {
-    this.passwordsMatch = this.password === this.conpassword;
+    this.passwordsMatch = this.password === this.conpassword && this.conpassword.length == this.password.length;
   }
 
   onPasswordChange() {
