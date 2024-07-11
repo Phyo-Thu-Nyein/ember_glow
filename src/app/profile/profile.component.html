@@ -2,26 +2,26 @@
   <div class="profile-wrapper flex">
     <h1 class="flex">
         <img class="flower" src="../../assets/images/about/testimonial/left-flower.svg" alt="">
-        <span class="role-text">Guest</span>
+        <span class="role-text">{{ roleText }}</span>
         <img class="flower" src="../../assets/images/about/testimonial/right-flower.svg" alt="">
     </h1>
     <img src="../../assets/images/dummy_pfp.jpg" alt="profile picture" />
     <table class="info">
         <tr>
             <td>Name</td>
-            <td>Ko Phyo</td>
+            <td>{{ userData?.data?.name}}</td>
         </tr>
         <tr>
             <td>Email</td>
-            <td>phyo@email.com</td>
+            <td>{{ userData?.data?.email}}</td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td>Address</td>
             <td>Rose Street, Mandalay</td>
-        </tr>
+        </tr> -->
         <tr>
             <td>Phone</td>
-            <td>123456789</td>
+            <td>{{ userData?.data?.phone}}</td>
         </tr>
     </table>
   </div>

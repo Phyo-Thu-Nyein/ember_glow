@@ -22,8 +22,13 @@ img {
 
 .info {
     margin-top: 1.2rem;
-    height: 180px;
+    height: 100px;
 }
+.info td {
+    word-break: break-word; /* This will allow the text to break and wrap to the next line */
+    white-space: normal; /* This ensures that text wraps normally */
+    max-width: 200px; 
+  }
 
 td {
     vertical-align: top;
