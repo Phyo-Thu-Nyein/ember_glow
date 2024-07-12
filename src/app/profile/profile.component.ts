@@ -14,7 +14,7 @@ export class ProfileComponent {
 
   //Profile pic
   selectedFile?: File;
-  defaultPfp: string = '../../assests/images/default-profile.svg'; //default profile
+  profilePicture: string = '../../assests/images/default-profile.svg'; //default profile
   isLoading: boolean = false;
 
   constructor(private apiService: ApiService) {}
@@ -78,7 +78,7 @@ export class ProfileComponent {
     this.apiService.uploadPfp(formData).subscribe({
       next: (response: PfpUpload) => {
         console.log('Profile picture uploaded successfully', response);
-        this.defaultPfp = response.data?.profilePicture!;
+        this.profilePicture = response.data?.profilePicture!;
         this.isLoading = false;
       },
       error: (error) => {
