@@ -37,7 +37,7 @@ export class LoginComponent {
 
     this.apiService.login(loginPayLoad).subscribe({
       next: (response: LoginUser) => {
-        if (response.status == 'login success') {
+        if (response.status == 'success') {
           //api responded with login success
           localStorage.setItem('token', response.accessToken!);
           this.onSubmit = false;

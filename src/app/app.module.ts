@@ -29,6 +29,7 @@ import { AboutReviewsComponent } from './about-reviews/about-reviews.component';
 import { AboutEcoComponent } from './about-eco/about-eco.component';
 import { FacilitiesDetailComponent } from './facilities-detail/facilities-detail.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AllusersComponent } from './allusers/allusers.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ProfileComponent } from './profile/profile.component';
     AboutEcoComponent,
     FacilitiesDetailComponent,
     ProfileComponent,
+    AllusersComponent,
   ],
   imports: [
     BrowserModule,

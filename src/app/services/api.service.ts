@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { UserDetails } from '../interface/user-details';
 import { Observable } from 'rxjs';
 import { MyProfileDetail } from '../interface/profile-detail';
+import { AllUsers } from '../interface/allusers-detail';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,8 @@ export class ApiService {
   registerUrl: string = `${this.baseUrl}/api/v1/auth/register/`;
   loginUrl: string = `${this.baseUrl}/api/v1/auth/login/`;
   profileUrl: string = `${this.baseUrl}/api/v1/users/me`;
+  allUsersUrl: string = `${this.baseUrl}/api/v1/users/all-users`;
+  pfpUploadUrl: string = `${this.baseUrl}/api/v1/upload-pfp`;
 
   options = {
     headers: new HttpHeaders({
@@ -25,6 +28,14 @@ export class ApiService {
       'Content-Type': 'application/json',
     }),
   };
+
+  //Authorization
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+  }
 
   // UI
   getCarouselData(): Observable<any> {
@@ -46,10 +57,19 @@ export class ApiService {
 
   //Get user profile
   getUserProfile(): Observable<MyProfileDetail> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
+    const headers = this.getAuthHeaders();
     return this.http.get(this.profileUrl, { headers });
+  }
+
+  //Get all users for manager role (1)
+  getAllUsers(): Observable<AllUsers> {
+    const headers = this.getAuthHeaders();
+    return this.http.get(this.allUsersUrl, { headers });
+  }
+
+  //Upload profile pic
+  uploadPfp(formData: FormData): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.post(this.pfpUploadUrl, formData, { headers });
   }
 }

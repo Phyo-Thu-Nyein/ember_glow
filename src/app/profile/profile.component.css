@@ -1,12 +1,23 @@
-.profile-wrapper {
+.profile-container {
     padding-top: 70px;
-    color: var(--clr-dark);
-    flex-direction: column;
+    color: var(--clr-amber50);
 }
 
+.profile-wrapper {
+    border-radius: 10px;
+    background-color: rgba(27, 27, 27, 0.397);
+    margin-top: 1rem;
+    padding: 1rem 0 .8rem 0;
+}
 h1 {
     margin: -1rem 0;
 }
+
+.info-wrapper {
+    flex-direction: column;
+    font-weight: bold;
+}
+
 .role-text {
     margin: 0 .5rem;
 }
@@ -16,6 +27,7 @@ h1 {
 
 img {
     width: 250px;
+    border-radius: 50%;
     object-fit: cover;
     aspect-ratio: 1;
 }
@@ -36,8 +48,14 @@ td {
 }
 
 /* xs */
-/* @media (min-width: 475px) {
-} */
+@media (min-width: 475px) {
+    .info-wrapper {
+        flex-direction: row;
+    }
+    img {
+        width: 150px;
+    }
+}
 /* sm */
 /* @media (min-width: 640px) {
 } */

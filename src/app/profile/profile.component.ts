@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { MyProfileDetail } from '../interface/profile-detail';
+import { PfpUpload } from '../interface/pfp-detail';
 
 @Component({
   selector: 'app-profile',
@@ -10,6 +11,11 @@ import { MyProfileDetail } from '../interface/profile-detail';
 export class ProfileComponent {
   userData?: MyProfileDetail = {};
   roleText: string = 'Guest';
+
+  //Profile pic
+  selectedFile?: File;
+  defaultPfp: string = '../../assests/images/default-profile.svg'; //default profile
+  isLoading: boolean = false;
 
   constructor(private apiService: ApiService) {}
 
@@ -24,6 +30,9 @@ export class ProfileComponent {
         this.userData = response;
         this.setRoleText(this.userData?.data?.role!);
       },
+      error: (err) => {
+        console.log(err.message);
+      }
     });
   }
 
@@ -45,5 +54,37 @@ export class ProfileComponent {
         this.roleText = 'Guest';
         break;
     }
+  }
+
+  //Upload/ change PROFILE PIC
+  loadProfilePic() {
+    this.apiService.getUserProfile()
+  }
+
+  onFileChange(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  uploadProfilePicture() {
+    if (!this.selectedFile) {
+      console.error('No file selected');
+      return;
+    }
+
+    this.isLoading = true;
+    const formData = new FormData();
+    formData.append('profilePicture', this.selectedFile);
+
+    this.apiService.uploadPfp(formData).subscribe({
+      next: (response: PfpUpload) => {
+        console.log('Profile picture uploaded successfully', response);
+        this.defaultPfp = response.data?.profilePicture!;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error uploading profile picture', error);
+        this.isLoading = false;
+      }
+    })
   }
 }
