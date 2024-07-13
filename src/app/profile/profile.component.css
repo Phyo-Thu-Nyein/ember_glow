@@ -25,6 +25,10 @@ h1 {
     width: 90px;
 }
 
+.upload-wrapper {
+    flex-direction: column;
+}
+
 .pfp {
     width: 250px;
     border: 5px solid var(--clr-gold);
@@ -38,6 +42,10 @@ h1 {
     flex-direction: column;
     gap: .5rem;
     position: relative;
+}
+.profile-upload-form button {
+    padding: .2rem 1rem;
+    font-size: var(--size-3xl);
 }
 input[type="file"] {
     width: 200px;
@@ -57,7 +65,7 @@ input[type="file"]::file-selector-button {
     /* border: 1px solid green; */
     position: absolute;
     top: .55rem;
-    right: 1.2rem;
+    right: -.3rem;
 }
 .tooltip-wrapper span {
     background-color: var(--clr-dark);
@@ -96,11 +104,33 @@ td {
 } */
 /* sm */
 @media (min-width: 640px) {
+    .profile-container {
+        max-width: 640px;
+    }
     .info-wrapper {
         flex-direction: row;
     }
-    img {
-        width: 150px;
+    .upload-wrapper {
+        flex-direction: column;
+    }
+    .pfp {
+        width: 200px;
+    }
+
+    .info {
+        /* border: 1px solid red; */
+        margin: -5rem 0 0 1rem;
+        width: 280px;
+    }
+
+    .profile-upload-form {
+        flex-direction: row;
+    }
+    .tooltip-wrapper {
+        /* border: 1px solid green; */
+        position: absolute;
+        top: .7rem;
+        right: 4.4rem;
     }
 }
 /* md */

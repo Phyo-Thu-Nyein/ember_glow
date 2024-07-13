@@ -6,12 +6,12 @@
             <img class="flower" src="../../assets/images/about/testimonial/right-flower.svg" alt="">
         </h1>
       <div class="info-wrapper flex">
-        <div class="upload-wrapper">
+        <div class="upload-wrapper flex">
             <img class="pfp" [src]="profilePicture" alt="" />
             <i *ngIf="isLoading" class="bx bx-loader-circle bx-spin"></i>
             <form class="profile-upload-form flex" (ngSubmit)="uploadProfilePicture()" enctype="multipart/form-data">
                 <input #fileInput (change)="onFileChange($event)" type="file" (change)="onFileChange($event)" />
-                <button class="btn" type="submit" [disabled]="!fileInput.files || fileInput.files.length === 0 || isLoading">Upload</button>
+                <button class="btn" type="submit" [disabled]="!fileInput.files || fileInput.files.length === 0 || isLoading"><i class='bx bx-cloud-upload'></i></button>
                 <div class="tooltip-wrapper">
                     <i class='bx bx-info-circle tooltip'></i>
                     <span>limit < 500KB</span>
@@ -27,10 +27,10 @@
                 <td>Email</td>
                 <td>{{ userData?.data?.email}}</td>
             </tr>
-            <!-- <tr>
+            <tr>
                 <td>Address</td>
-                <td>Rose Street, Mandalay</td>
-            </tr> -->
+                <td>{{ userData?.data?.address}}</td>
+            </tr>
             <tr>
                 <td>Phone</td>
                 <td>{{ userData?.data?.phone}}</td>
