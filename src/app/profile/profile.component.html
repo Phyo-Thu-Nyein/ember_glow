@@ -12,6 +12,10 @@
             <form class="profile-upload-form flex" (ngSubmit)="uploadProfilePicture()" enctype="multipart/form-data">
                 <input #fileInput (change)="onFileChange($event)" type="file" (change)="onFileChange($event)" />
                 <button class="btn" type="submit" [disabled]="!fileInput.files || fileInput.files.length === 0 || isLoading">Upload</button>
+                <div class="tooltip-wrapper">
+                    <i class='bx bx-info-circle tooltip'></i>
+                    <span>limit < 500KB</span>
+                </div>
             </form>
         </div>
         <table class="info">
