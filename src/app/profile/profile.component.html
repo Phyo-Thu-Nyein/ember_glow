@@ -18,24 +18,50 @@
                 </div>
             </form>
         </div>
-        <table class="info">
-            <tr>
+        <form class="edit-info-form flex" (ngSubmit)="saveUserInfo()" *ngIf="isEditMode">
+            <table class="info">
+              <tr>
                 <td>Name</td>
-                <td>{{ userData?.data?.name}}</td>
-            </tr>
-            <tr>
+                <td class="input-box"><input [(ngModel)]="userData!.data!.name" name="name" /></td>
+              </tr>
+              <tr>
+                <!-- I did this, gpt -->
                 <td>Email</td>
-                <td>{{ userData?.data?.email}}</td>
-            </tr>
-            <tr>
+                <td>{{ userData?.data?.email }}</td>
+              </tr>
+              <tr>
                 <td>Address</td>
-                <td>{{ userData?.data?.address}}</td>
+                <td class="input-box"><input [(ngModel)]="userData!.data!.address" name="address" /></td>
+              </tr>
+              <tr>
+                <td>Phone</td>
+                <td class="input-box"><input [(ngModel)]="userData!.data!.phone" name="phone" /></td>
+              </tr>
+            </table>
+            <button class="btn save-btn">Save</button>
+          </form>
+        
+          <table class="info non-edit-info" *ngIf="!isEditMode">
+            <tr>
+              <td>Name</td>
+              <td>{{ userData?.data?.name }}</td>
             </tr>
             <tr>
-                <td>Phone</td>
-                <td>{{ userData?.data?.phone}}</td>
+              <td>Email</td>
+              <td>{{ userData?.data?.email }}</td>
             </tr>
-        </table>
+            <tr>
+              <td>Address</td>
+              <td>{{ userData?.data?.address }}</td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>{{ userData?.data?.phone }}</td>
+            </tr>
+          </table>
+          <button *ngIf="!isEditMode" class="btn toggle-btn" (click)="toggleEditMode()">Update</button>
+          <button *ngIf="isEditMode" class="btn toggle-btn cancel-btn" (click)="toggleEditMode()">Cancel</button>
+          
       </div>
     </div>
 </section>

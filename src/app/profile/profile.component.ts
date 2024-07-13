@@ -12,6 +12,7 @@ export class ProfileComponent {
 
   userData?: UserDetails = {};
   roleText: string = 'Guest';
+  isEditMode: boolean = false;
 
   //Profile pic
   selectedFile?: File;
@@ -99,6 +100,30 @@ export class ProfileComponent {
   resetFileInput() {
     if (this.fileInput) {
       this.fileInput.nativeElement.value = '';
+    }
+  }
+
+  //Update user info
+  toggleEditMode() {
+    // if (this.isEditMode) {
+    //   this.saveUserInfo();
+    // } else {
+    //   this.isEditMode = true;
+    // }
+    this.isEditMode = !this.isEditMode;
+  }
+
+  saveUserInfo() {
+    if (this.userData && this.userData.data) {
+      this.apiService.updateUserInfo(this.userData!.data!).subscribe({
+        next: (response) => {
+          console.log('info updated', response);
+          this.isEditMode = false;
+        },
+        error: (err) => {
+          console.error('Error updating user info', err.message);
+        }
+      });
     }
   }
 

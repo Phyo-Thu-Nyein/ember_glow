@@ -21,6 +21,7 @@ export class ApiService {
   profileUrl: string = `${this.baseUrl}/api/v1/users/me`;
   allUsersUrl: string = `${this.baseUrl}/api/v1/users/all-users`;
   pfpUploadUrl: string = `${this.baseUrl}/api/v1/users/upload-pfp`;
+  userInfoUpdateUrl: string = `${this.baseUrl}/api/v1/users/update-user-info`;
 
   options = {
     headers: new HttpHeaders({
@@ -70,5 +71,11 @@ export class ApiService {
   uploadPfp(formData: FormData): Observable<UserDetails> {
     const headers = this.getAuthHeaders();
     return this.http.post<UserDetails>(this.pfpUploadUrl, formData, { headers });
+  }
+
+  //Update User Info in profile page
+  updateUserInfo(userData: UserData): Observable<UserDetails> {
+    const headers = this.getAuthHeaders();
+    return this.http.patch(`${this.userInfoUpdateUrl}`, userData, { headers });
   }
 }
