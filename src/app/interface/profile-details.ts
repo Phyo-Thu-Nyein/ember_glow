@@ -1,16 +1,15 @@
-export interface PfpUpload {
-    success?: boolean;
+export interface ProfileDetails {
+    status?:  string;
     message?: string;
-    data?:    PfpData;
+    data?:    Data;
 }
 
-export interface PfpData {
-    profilePicture?: string;
+export interface Data {
     _id?:            string;
+    profilePicture?: null;
     name?:           string;
     email?:          string;
     password?:       string;
-    address?:        string;
     phone?:          number;
     role?:           number;
     createdAt?:      Date;

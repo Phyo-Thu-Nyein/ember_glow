@@ -3,7 +3,7 @@ import { NgForm, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { RegisterUser } from '../interface/register-details';
+import { UserDetails } from '../interface/user-details';
 
 @Component({
   selector: 'app-register',
@@ -37,7 +37,7 @@ export class RegisterComponent {
   onSubmit: boolean = false; //loading animation
   username: string = '';
   email: string = '';
-  phone?: Number;
+  phone?: number;
   password: string = '';
   conpassword: string = '';
 
@@ -91,7 +91,7 @@ export class RegisterComponent {
       'password': this.password,
     });
     result.subscribe({
-      next: (response: RegisterUser) => {
+      next: (response: UserDetails) => {
         if (response.status == 'success') {
           this.onSubmit = false;
           alert(response.status);

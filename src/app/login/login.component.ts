@@ -3,7 +3,7 @@ import { NgForm, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { LoginUser } from '../interface/login-details';
+import { UserDetails } from '../interface/user-details';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +36,7 @@ export class LoginComponent {
     };
 
     this.apiService.login(loginPayLoad).subscribe({
-      next: (response: LoginUser) => {
+      next: (response: UserDetails) => {
         if (response.status == 'success') {
           //api responded with login success
           localStorage.setItem('token', response.accessToken!);

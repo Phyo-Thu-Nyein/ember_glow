@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserDetails } from '../interface/user-details';
+import { UserDetails, UserData } from '../interface/user-details';
 import { Observable } from 'rxjs';
-import { MyProfileDetail } from '../interface/profile-detail';
 import { AllUsers } from '../interface/allusers-detail';
+import { ProfileDetails } from '../interface/profile-details';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,7 @@ export class ApiService {
   loginUrl: string = `${this.baseUrl}/api/v1/auth/login/`;
   profileUrl: string = `${this.baseUrl}/api/v1/users/me`;
   allUsersUrl: string = `${this.baseUrl}/api/v1/users/all-users`;
-  pfpUploadUrl: string = `${this.baseUrl}/api/v1/upload-pfp`;
+  pfpUploadUrl: string = `${this.baseUrl}/api/v1/users/upload-pfp`;
 
   options = {
     headers: new HttpHeaders({
@@ -41,22 +41,21 @@ export class ApiService {
   getCarouselData(): Observable<any> {
     return this.http.get<any>(this.carouselUrl);
   }
-
   getEcoData(): Observable<any> {
     return this.http.get<any>(this.ecoUrl);
   }
 
   //BACK-END
   //AUTH
-  register(userData: UserDetails) {
+  register(userData: UserData) {
     return this.http.post(this.registerUrl, userData, this.options);
   }
-  login(userData: UserDetails) {
+  login(userData: UserData) {
     return this.http.post(this.loginUrl, userData, this.options);
   }
 
   //Get user profile
-  getUserProfile(): Observable<MyProfileDetail> {
+  getUserProfile(): Observable<ProfileDetails> {
     const headers = this.getAuthHeaders();
     return this.http.get(this.profileUrl, { headers });
   }
@@ -68,8 +67,8 @@ export class ApiService {
   }
 
   //Upload profile pic
-  uploadPfp(formData: FormData): Observable<any> {
+  uploadPfp(formData: FormData): Observable<UserDetails> {
     const headers = this.getAuthHeaders();
-    return this.http.post(this.pfpUploadUrl, formData, { headers });
+    return this.http.post<UserDetails>(this.pfpUploadUrl, formData, { headers });
   }
 }

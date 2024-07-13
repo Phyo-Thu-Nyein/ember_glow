@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { MyProfileDetail } from '../interface/profile-detail';
-import { PfpUpload } from '../interface/pfp-detail';
+import { UserDetails } from '../interface/user-details';
 
 @Component({
   selector: 'app-profile',
@@ -9,13 +8,16 @@ import { PfpUpload } from '../interface/pfp-detail';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
-  userData?: MyProfileDetail = {};
+  @ViewChild('fileInput') fileInput?: ElementRef;
+
+  userData?: UserDetails = {};
   roleText: string = 'Guest';
 
   //Profile pic
   selectedFile?: File;
-  profilePicture: string = '../../assests/images/default-profile.svg'; //default profile
+  profilePicture: string = 'assets/images/default-profile.svg'; //default profile
   isLoading: boolean = false;
+  backendUrl: string = 'https://hotel-api-v2-ocur.onrender.com'; //backend server URL
 
   constructor(private apiService: ApiService) {}
 
@@ -24,14 +26,22 @@ export class ProfileComponent {
   }
 
   fetchUserData() {
-    console.log("fetching user data!!!!!!!!!!!!1")
+    console.log("fetching user data!!!!!!!!!!!!")
     this.apiService.getUserProfile().subscribe({
-      next: (response: MyProfileDetail) => {
+      next: (response: UserDetails) => {
         this.userData = response;
-        this.setRoleText(this.userData?.data?.role!);
+        console.log("User data: ", this.userData);
+        if (this.userData && this.userData.data) {
+          this.setRoleText(this.userData.data?.role!);
+          if (this.userData.data.profilePicture) {
+            console.log("there is a pfp", this.userData.data.profilePicture);
+            this.profilePicture = `${this.backendUrl}${this.userData.data.profilePicture}`;
+            console.log(this.profilePicture);
+          } 
+        }
       },
       error: (err) => {
-        console.log(err.message);
+        console.log("Error fetching user data: ", err.message);
       }
     });
   }
@@ -57,10 +67,6 @@ export class ProfileComponent {
   }
 
   //Upload/ change PROFILE PIC
-  loadProfilePic() {
-    this.apiService.getUserProfile()
-  }
-
   onFileChange(event: any) {
     this.selectedFile = event.target.files[0];
   }
@@ -76,15 +82,24 @@ export class ProfileComponent {
     formData.append('profilePicture', this.selectedFile);
 
     this.apiService.uploadPfp(formData).subscribe({
-      next: (response: PfpUpload) => {
+      next: (response: UserDetails) => {
         console.log('Profile picture uploaded successfully', response);
-        this.profilePicture = response.data?.profilePicture!;
+        this.profilePicture = `${this.backendUrl}${response.data?.profilePicture}`;
         this.isLoading = false;
+        this.resetFileInput();
       },
       error: (error) => {
         console.error('Error uploading profile picture', error);
         this.isLoading = false;
+        this.resetFileInput();
       }
     })
   }
+
+  resetFileInput() {
+    if (this.fileInput) {
+      this.fileInput.nativeElement.value = '';
+    }
+  }
+
 }

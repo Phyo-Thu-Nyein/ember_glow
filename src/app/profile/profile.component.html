@@ -6,12 +6,14 @@
             <img class="flower" src="../../assets/images/about/testimonial/right-flower.svg" alt="">
         </h1>
       <div class="info-wrapper flex">
-        <img [src]="profilePicture" alt="profile picture" />
-        <i *ngIf="isLoading" class="bx bx-loader-circle bx-spin"></i>
-        <form (ngSubmit)="uploadProfilePicture()" enctype="multipart/form-data">
-            <input type="file" (change)="onFileChange($event)" />
-            <button type="submit" [disabled]="isLoading">Upload</button>
-        </form>
+        <div class="upload-wrapper">
+            <img class="pfp" [src]="profilePicture" alt="" />
+            <i *ngIf="isLoading" class="bx bx-loader-circle bx-spin"></i>
+            <form class="profile-upload-form flex" (ngSubmit)="uploadProfilePicture()" enctype="multipart/form-data">
+                <input #fileInput (change)="onFileChange($event)" type="file" (change)="onFileChange($event)" />
+                <button class="btn" type="submit" [disabled]="!fileInput.files || fileInput.files.length === 0 || isLoading">Upload</button>
+            </form>
+        </div>
         <table class="info">
             <tr>
                 <td>Name</td>
