@@ -6,8 +6,11 @@ import { Router } from '@angular/router';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent {
-  constructor(private router: Router) { }
+export class NavigationComponent implements OnInit {
+
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.isLoggedIn();
@@ -20,4 +23,5 @@ export class NavigationComponent {
     localStorage.removeItem('token');
     this.router.navigateByUrl('login');
   }
+
 }

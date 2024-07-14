@@ -121,6 +121,12 @@ td {
     background-color: rgba(0, 0, 0, 0.11);
 }
 
+/* ERROR MESSAGE FOR INFO UPDATE */
+.error-message {
+    color: #fa2828;
+    font-size: var(--size-sm);
+}
+
 /* BUTTONS (SAVE, UPDATE, CANCEL) */
 .save-btn, .toggle-btn {
     margin-top: 1rem;

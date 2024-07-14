@@ -1,16 +1,20 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserDetails } from '../interface/user-details';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
+
+  // Subscriptions
+  regSub: Subscription = new Subscription();
 
   @ViewChild('regForm') RegisterForm?: NgForm;
   @ViewChild('passwordField') passwordField?: ElementRef;
@@ -90,7 +94,7 @@ export class RegisterComponent {
       'phone': this.phone,
       'password': this.password,
     });
-    result.subscribe({
+    this.regSub = result.subscribe({
       next: (response: UserDetails) => {
         if (response.status == 'success') {
           this.onSubmit = false;
@@ -104,6 +108,12 @@ export class RegisterComponent {
         this.onSubmit = false;
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.regSub) {
+      this.regSub.unsubscribe();
+    }
   }
 
 }

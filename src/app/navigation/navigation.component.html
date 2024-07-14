@@ -29,7 +29,7 @@
   </div>
   <div class="right-part flex">
     <a [routerLink]="isLoggedIn() ? '/profile' : '/login'" class="flex">
-      <i class="bx bxs-user"></i>
+        <i class="bx bxs-user"></i>
       <span>{{ isLoggedIn() ? '' : 'Login' }}</span>
     </a>
     <button *ngIf="isLoggedIn()" class="desktop-logout flex" (click)="logOut()">

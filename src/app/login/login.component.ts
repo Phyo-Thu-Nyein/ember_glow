@@ -1,16 +1,20 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserDetails } from '../interface/user-details';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
+  // Subscriptions
+  loginSub: Subscription = new Subscription();
+
   @ViewChild('loginForm') loginForm?: NgForm;
   constructor(private router: Router, private apiService: ApiService) {}
 
@@ -34,8 +38,9 @@ export class LoginComponent {
       email: this.email,
       password: this.password,
     };
-
-    this.apiService.login(loginPayLoad).subscribe({
+    var result = this.apiService.login(loginPayLoad);
+    this.loginSub = result
+    .subscribe({
       next: (response: UserDetails) => {
         if (response.status == 'success') {
           //api responded with login success
@@ -51,5 +56,11 @@ export class LoginComponent {
         this.onSubmit = false;
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.loginSub) {
+      this.loginSub.unsubscribe();
+    }
   }
 }
