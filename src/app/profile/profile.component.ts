@@ -18,6 +18,8 @@ export class ProfileComponent {
   selectedFile?: File;
   profilePicture: string = 'assets/images/default-profile.svg'; //default profile
   isLoading: boolean = false;
+  isLoadingUpload: boolean = false;
+  isLoadingUpdateInfo: boolean = false;
   backendUrl: string = 'https://hotel-api-v2-ocur.onrender.com'; //backend server URL
 
   constructor(private apiService: ApiService) {}
@@ -28,6 +30,7 @@ export class ProfileComponent {
 
   fetchUserData() {
     console.log("fetching user data!!!!!!!!!!!!")
+    this.isLoading = true;
     this.apiService.getUserProfile().subscribe({
       next: (response: UserDetails) => {
         this.userData = response;
@@ -40,6 +43,7 @@ export class ProfileComponent {
             console.log(this.profilePicture);
           } 
         }
+        this.isLoading = false;
       },
       error: (err) => {
         console.log("Error fetching user data: ", err.message);
@@ -78,7 +82,7 @@ export class ProfileComponent {
       return;
     }
 
-    this.isLoading = true;
+    this.isLoadingUpload = true;
     const formData = new FormData();
     formData.append('profilePicture', this.selectedFile);
 
@@ -86,12 +90,12 @@ export class ProfileComponent {
       next: (response: UserDetails) => {
         console.log('Profile picture uploaded successfully', response);
         this.profilePicture = `${this.backendUrl}${response.data?.profilePicture}`;
-        this.isLoading = false;
+        this.isLoadingUpload = false;
         this.resetFileInput();
       },
       error: (error) => {
         console.error('Error uploading profile picture', error);
-        this.isLoading = false;
+        this.isLoadingUpload = false;
         this.resetFileInput();
       }
     })

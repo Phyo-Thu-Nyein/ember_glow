@@ -8,10 +8,15 @@
       <div class="info-wrapper flex">
         <div class="upload-wrapper flex">
             <img class="pfp" [src]="profilePicture" alt="" />
-            <i *ngIf="isLoading" class="bx bx-loader-circle bx-spin"></i>
             <form class="profile-upload-form flex" (ngSubmit)="uploadProfilePicture()" enctype="multipart/form-data">
                 <input #fileInput (change)="onFileChange($event)" type="file" (change)="onFileChange($event)" />
-                <button class="btn" type="submit" [disabled]="!fileInput.files || fileInput.files.length === 0 || isLoading"><i class='bx bx-cloud-upload'></i></button>
+                <button class="btn" type="submit" [disabled]="!fileInput.files || fileInput.files.length === 0 || isLoadingUpload">
+                    <i class="bx" [ngClass]="{
+                        'bx-cloud-upload': !isLoadingUpload,
+                        'bx-loader-circle bx-spin': isLoadingUpload
+                        }">
+                    </i>
+                </button>
                 <div class="tooltip-wrapper">
                     <i class='bx bx-info-circle tooltip'></i>
                     <span>limit < 500KB</span>
@@ -25,13 +30,12 @@
                 <td class="input-box"><input [(ngModel)]="userData!.data!.name" name="name" /></td>
               </tr>
               <tr>
-                <!-- I did this, gpt -->
                 <td>Email</td>
-                <td>{{ userData?.data?.email }}</td>
+                <td class="input-box"><input disabled [(ngModel)]="userData!.data!.email" name="email" /></td>
               </tr>
-              <tr>
+              <tr *ngIf="roleText != 'Guest'">
                 <td>Address</td>
-                <td class="input-box"><input [(ngModel)]="userData!.data!.address" name="address" /></td>
+                <td class="input-box"><input [(ngModel)]="userData!.data!.address" name="address" minlength="15" /></td>
               </tr>
               <tr>
                 <td>Phone</td>
@@ -50,7 +54,7 @@
               <td>Email</td>
               <td>{{ userData?.data?.email }}</td>
             </tr>
-            <tr>
+            <tr *ngIf="roleText != 'Guest'">
               <td>Address</td>
               <td>{{ userData?.data?.address }}</td>
             </tr>
@@ -60,7 +64,7 @@
             </tr>
           </table>
           <button *ngIf="!isEditMode" class="btn toggle-btn" (click)="toggleEditMode()">Update</button>
-          <button *ngIf="isEditMode" class="btn toggle-btn cancel-btn" (click)="toggleEditMode()">Cancel</button>
+          <button *ngIf="isEditMode" class="btn toggle-btn cancel-btn" (click)="toggleEditMode(); fetchUserData()">Cancel</button>
           
       </div>
     </div>
