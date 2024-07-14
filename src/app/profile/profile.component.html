@@ -15,6 +15,7 @@
     </h1>
     <div class="info-wrapper flex">
       <div class="upload-wrapper flex">
+        <!-- Update User Profile Pic -->
         <img class="pfp" [src]="profilePicture" alt="" />
         <form
           class="profile-upload-form flex"
@@ -51,108 +52,120 @@
           </div>
         </form>
       </div>
-      <form
-        class="edit-info-form flex"
-        #editForm="ngForm"
-        (ngSubmit)="saveUserInfo()"
-        *ngIf="isEditMode"
-      >
-        <table class="info">
+
+      <!-- Update User Info Form -->
+      <div class="update-form-wrapper flex">
+        <form
+          class="edit-info-form flex"
+          #editForm="ngForm"
+          (ngSubmit)="saveUserInfo()"
+          *ngIf="isEditMode"
+        >
+          <table class="info">
+            <tr>
+              <td>Name</td>
+              <td class="input-box">
+                <input
+                  [(ngModel)]="userData!.data!.name"
+                  name="name"
+                  required
+                  minlength="5"
+                  #name="ngModel"
+                />
+                <div *ngIf="name.invalid && name.touched" class="error-message">
+                  at least 5 characters.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td class="input-box">
+                <input
+                  disabled
+                  [(ngModel)]="userData!.data!.email"
+                  name="email"
+                />
+              </td>
+            </tr>
+            <tr *ngIf="roleText != 'Guest'">
+              <td>Address</td>
+              <td class="input-box">
+                <input
+                  [(ngModel)]="userData!.data!.address"
+                  name="address"
+                  minlength="15"
+                  #address="ngModel"
+                />
+                <div
+                  *ngIf="address.invalid && address.touched"
+                  class="error-message"
+                >
+                  at least 15 characters long.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td class="input-box">
+                <input
+                  [(ngModel)]="userData!.data!.phone"
+                  type="number"
+                  name="phone"
+                  (input)="onPhoneChange($event)"
+                  required
+                  min="0"
+                  #phone="ngModel"
+                />
+                <div
+                  *ngIf="!isPhoneValid && phone.touched"
+                  class="error-message"
+                >
+                  Phone is required.
+                </div>
+              </td>
+            </tr>
+          </table>
+          <button
+            class="btn save-btn"
+            [disabled]="editForm.invalid || !isPhoneValid"
+          >
+            Save
+          </button>
+        </form>
+
+        <table class="info non-edit-info" *ngIf="!isEditMode">
           <tr>
             <td>Name</td>
-            <td class="input-box">
-              <input
-                [(ngModel)]="userData!.data!.name"
-                name="name"
-                required
-                minlength="5"
-                #name="ngModel"
-              />
-              <div *ngIf="name.invalid && name.touched" class="error-message">
-                at least 5 characters.
-              </div>
-            </td>
+            <td>{{ userData?.data?.name }}</td>
           </tr>
           <tr>
             <td>Email</td>
-            <td class="input-box">
-              <input
-                disabled
-                [(ngModel)]="userData!.data!.email"
-                name="email"
-              />
-            </td>
+            <td>{{ userData?.data?.email }}</td>
           </tr>
           <tr *ngIf="roleText != 'Guest'">
             <td>Address</td>
-            <td class="input-box">
-              <input
-                [(ngModel)]="userData!.data!.address"
-                name="address"
-                minlength="15"
-                #address="ngModel"
-              />
-              <div
-                *ngIf="address.invalid && address.touched"
-                class="error-message"
-              >
-                at least 15 characters long.
-              </div>
-            </td>
+            <td>{{ userData?.data?.address }}</td>
           </tr>
           <tr>
             <td>Phone</td>
-            <td class="input-box">
-              <input
-                [(ngModel)]="userData!.data!.phone"
-                type="number"
-                name="phone"
-                (input)="onPhoneChange($event)"
-                required
-                min="0"
-                #phone="ngModel"
-              />
-              <div *ngIf="!isPhoneValid && phone.touched" class="error-message">
-                Phone is required.
-              </div>
-            </td>
+            <td>{{ userData?.data?.phone }}</td>
           </tr>
         </table>
-        <button class="btn save-btn" [disabled]="editForm.invalid || !isPhoneValid">Save</button>
-      </form>
-
-      <table class="info non-edit-info" *ngIf="!isEditMode">
-        <tr>
-          <td>Name</td>
-          <td>{{ userData?.data?.name }}</td>
-        </tr>
-        <tr>
-          <td>Email</td>
-          <td>{{ userData?.data?.email }}</td>
-        </tr>
-        <tr *ngIf="roleText != 'Guest'">
-          <td>Address</td>
-          <td>{{ userData?.data?.address }}</td>
-        </tr>
-        <tr>
-          <td>Phone</td>
-          <td>{{ userData?.data?.phone }}</td>
-        </tr>
-      </table>
-      <button
-        *ngIf="!isEditMode"
-        class="btn toggle-btn"
-        (click)="toggleEditMode()"
-      >
-        Update
-      </button>
-      <button
-        *ngIf="isEditMode"
-        class="btn toggle-btn cancel-btn"
-        (click)="toggleEditMode(); fetchUserData()"
-      >
-        Cancel
-      </button>
+        <button
+          *ngIf="!isEditMode"
+          class="btn toggle-btn"
+          (click)="toggleEditMode()"
+        >
+          Update
+        </button>
+        <button
+          *ngIf="isEditMode"
+          class="btn toggle-btn cancel-btn"
+          (click)="toggleEditMode(); fetchUserData()"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   </div>
 </section>

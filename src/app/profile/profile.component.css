@@ -9,6 +9,7 @@
     margin-top: 1rem;
     padding: 1rem 0 .8rem 0;
 }
+
 h1 {
     margin: -1rem 0;
 }
@@ -21,6 +22,7 @@ h1 {
 .role-text {
     margin: 0 .5rem;
 }
+
 .flower {
     width: 90px;
 }
@@ -36,6 +38,7 @@ h1 {
     object-fit: cover;
     aspect-ratio: 1;
 }
+
 /* profile pic upload */
 .profile-upload-form {
     margin-top: .5rem;
@@ -43,13 +46,16 @@ h1 {
     gap: .5rem;
     position: relative;
 }
+
 .profile-upload-form button {
     padding: .2rem 1rem;
     font-size: var(--size-3xl);
 }
+
 input[type="file"] {
     width: 200px;
 }
+
 input[type="file"]::file-selector-button {
     font-family: 'Chillax', sans-serif;
     background-color: transparent;
@@ -60,6 +66,7 @@ input[type="file"]::file-selector-button {
     border-radius: 5px;
     cursor: pointer;
 }
+
 /* tooltip for pfp size limit */
 .tooltip-wrapper {
     /* border: 1px solid green; */
@@ -67,6 +74,7 @@ input[type="file"]::file-selector-button {
     top: .55rem;
     right: -.3rem;
 }
+
 .tooltip-wrapper span {
     background-color: var(--clr-dark);
     border-radius: 5px;
@@ -80,19 +88,29 @@ input[type="file"]::file-selector-button {
     right: 0;
     opacity: 0;
 }
-.tooltip:hover + span {
+
+.tooltip:hover+span {
     opacity: 1;
+}
+
+/* Forms' wrapper */
+.update-form-wrapper {
+    flex-direction: column;
+    position: relative;
 }
 
 .info {
     margin-top: 1.2rem;
     height: 100px;
 }
+
 .info td {
-    word-break: break-word; /* This will allow the text to break and wrap to the next line */
-    white-space: normal; /* This ensures that text wraps normally */
-    max-width: 200px; 
-  }
+    word-break: break-word;
+    /* This will allow the text to break and wrap to the next line */
+    white-space: normal;
+    /* This ensures that text wraps normally */
+    max-width: 200px;
+}
 
 td {
     vertical-align: top;
@@ -103,6 +121,7 @@ td {
 .edit-info-form {
     flex-direction: column;
 }
+
 .input-box input {
     border: 1px solid rgba(255, 255, 255, 0.479);
     border-radius: 10px;
@@ -114,9 +133,11 @@ td {
     height: 100%;
     font-size: var(--size-base);
 }
+
 .input-box input:disabled {
     opacity: .6;
 }
+
 .input-box input:focus {
     background-color: rgba(0, 0, 0, 0.11);
 }
@@ -128,14 +149,22 @@ td {
 }
 
 /* BUTTONS (SAVE, UPDATE, CANCEL) */
-.save-btn, .toggle-btn {
+.toggle-btn {
     margin-top: 1rem;
+}
+.save-btn {
+    margin: 1rem -30% 0 0;
+    box-shadow: none;
+    padding: .5rem 1.2rem;
 }
 .cancel-btn {
     background-color: transparent;
     border: 1px solid #fa3e25;
     color: #fa2828;
     box-shadow: none;
+    position: absolute;
+    bottom: 0;
+    left: 25%;
 }
 
 /* xs */
@@ -146,32 +175,47 @@ td {
     .profile-container {
         max-width: 640px;
     }
+
     .info-wrapper {
         flex-direction: row;
     }
+
     .upload-wrapper {
         flex-direction: column;
     }
+
     .pfp {
         width: 200px;
     }
 
+    /* Forms' wrapper */
+    .update-form-wrapper {
+        /* height: 250px; */
+    }
+
     .info {
         /* border: 1px solid red; */
-        margin: -5rem 0 0 1rem;
+        margin: -.5rem 0 0 1rem;
         width: 280px;
     }
 
     .profile-upload-form {
         flex-direction: row;
     }
+
     .tooltip-wrapper {
         /* border: 1px solid green; */
         position: absolute;
         top: .55rem;
         right: 4.15rem;
     }
+
+    /* buttons */
+    .save-btn, .cancel-btn {
+        margin-left: 1rem;
+    }
 }
+
 /* md */
 /* @media (min-width: 768px) {
 } */
