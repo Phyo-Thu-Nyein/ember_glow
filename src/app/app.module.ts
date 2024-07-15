@@ -29,7 +29,8 @@ import { AboutReviewsComponent } from './about-reviews/about-reviews.component';
 import { AboutEcoComponent } from './about-eco/about-eco.component';
 import { FacilitiesDetailComponent } from './facilities-detail/facilities-detail.component';
 import { ProfileComponent } from './profile/profile.component';
-import { AllusersComponent } from './allusers/allusers.component';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { AllusersComponent } from './allusers/allusers.component';
     AboutEcoComponent,
     FacilitiesDetailComponent,
     ProfileComponent,
-    AllusersComponent,
+    AllUsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +65,7 @@ import { AllusersComponent } from './allusers/allusers.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgxSkeletonLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent],

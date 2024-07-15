@@ -1,4 +1,5 @@
 <section class="profile-container container">
+  <!-- Profile card -->
   <div class="profile-wrapper">
     <h1 class="flex">
       <img
@@ -16,7 +17,23 @@
     <div class="info-wrapper flex">
       <div class="upload-wrapper flex">
         <!-- Update User Profile Pic -->
-        <img class="pfp" [src]="profilePicture" alt="" />
+        <ng-container *ngIf="isLoading; else pfpField">
+          <ngx-skeleton-loader
+            count="1"
+            appearance="circle"
+            [theme]="{
+              margin: '0 0 0 .7rem',
+              border: '5px solid var(--clr-gold)',
+              width: '250px',
+              height: '250px',
+              'background-color': '#0000006c'
+            }"
+          ></ngx-skeleton-loader>
+        </ng-container>
+        <ng-template #pfpField>
+          <img class="pfp" [src]="profilePicture" alt="" />
+        </ng-template>
+
         <form
           class="profile-upload-form flex"
           (ngSubmit)="uploadProfilePicture()"
@@ -55,6 +72,7 @@
 
       <!-- Update User Info Form -->
       <div class="update-form-wrapper flex">
+        <!-- Update form -->
         <form
           class="edit-info-form flex"
           #editForm="ngForm"
@@ -133,22 +151,83 @@
           </button>
         </form>
 
+        <!-- Displayed Form -->
         <table class="info non-edit-info" *ngIf="!isEditMode">
           <tr>
             <td>Name</td>
-            <td>{{ userData?.data?.name }}</td>
+            <ng-container *ngIf="isLoading; else nameField">
+              <ngx-skeleton-loader
+                count="1"
+                appearance="line"
+                [theme]="{
+                  'border-radius': '5px',
+                  margin: '0 0 0 .7rem',
+                  width: '170px',
+                  height: '30px',
+                  'background-color': '#0000006c'
+                }"
+              ></ngx-skeleton-loader>
+            </ng-container>
+            <ng-template #nameField>
+              <td>{{ userData?.data?.name }}</td>
+            </ng-template>
           </tr>
           <tr>
             <td>Email</td>
-            <td>{{ userData?.data?.email }}</td>
+            <ng-container *ngIf="isLoading; else emailField">
+              <ngx-skeleton-loader
+                count="1"
+                appearance="line"
+                [theme]="{
+                  'border-radius': '5px',
+                  margin: '0 0 0 .7rem',
+                  width: '170px',
+                  height: '30px',
+                  'background-color': '#0000006c'
+                }"
+              ></ngx-skeleton-loader>
+            </ng-container>
+            <ng-template #emailField>
+              <td>{{ userData?.data?.email }}</td>
+            </ng-template>
           </tr>
           <tr *ngIf="roleText != 'Guest'">
             <td>Address</td>
-            <td>{{ userData?.data?.address }}</td>
+            <ng-container *ngIf="isLoading; else addrField">
+              <ngx-skeleton-loader
+                count="1"
+                appearance="line"
+                [theme]="{
+                  'border-radius': '5px',
+                  margin: '0 0 0 .7rem',
+                  width: '170px',
+                  height: '30px',
+                  'background-color': '#0000006c'
+                }"
+              ></ngx-skeleton-loader>
+            </ng-container>
+            <ng-template #addrField>
+              <td>{{ userData?.data?.address }}</td>
+            </ng-template>
           </tr>
           <tr>
             <td>Phone</td>
-            <td>{{ userData?.data?.phone }}</td>
+            <ng-container *ngIf="isLoading; else phField">
+              <ngx-skeleton-loader
+                count="1"
+                appearance="line"
+                [theme]="{
+                  'border-radius': '5px',
+                  margin: '0 0 0 .7rem',
+                  width: '170px',
+                  height: '30px',
+                  'background-color': '#0000006c'
+                }"
+              ></ngx-skeleton-loader>
+            </ng-container>
+            <ng-template #phField>
+              <td>{{ userData?.data?.phone }}</td>
+            </ng-template>
           </tr>
         </table>
         <button
@@ -167,5 +246,13 @@
         </button>
       </div>
     </div>
+  </div>
+
+  <!-- Get all users button/ link for Manager Role -->
+  <div *ngIf="roleText == 'Manager'" class="all-users-wrapper">
+    <h2>Manager Previlege</h2>
+    <button class="btn get-all-btn flex" routerLink="/all-users">
+      View All Users <i class="bx bx-group"></i>
+    </button>
   </div>
 </section>

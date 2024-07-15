@@ -117,6 +117,11 @@ td {
     padding-left: .7rem;
 }
 
+/* Skeleton loader */
+/* ngx-skeleton-loader {
+    background-color: #0000006c;
+} */
+
 /* UPDATE USER INFO (name, address, phone) */
 .edit-info-form {
     flex-direction: column;
@@ -165,6 +170,20 @@ td {
     position: absolute;
     bottom: 0;
     left: 25%;
+}
+
+/* GET ALL USERS SECTION */
+.all-users-wrapper {
+    color: var(--clr-dark);
+    margin: 2rem 0;
+}
+.get-all-btn {
+    margin-top: 1rem;
+    gap: .3rem;
+    font-size: var(--size-lg);
+}
+.get-all-btn i {
+    font-size: var(--size-xl);
 }
 
 /* xs */
