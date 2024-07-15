@@ -1,18 +1,19 @@
-export interface AllUsers {
+export interface AllUsersDetails {
     status?:  string;
     message?: string;
-    data?:    AllUsersData[];
+    data?:    AllUserDatum[];
 }
 
-export interface AllUsersData {
-    _id?:       string;
-    name?:      string;
-    email?:     string;
-    password?:  string;
-    phone?:     number;
-    role?:      number;
-    createdAt?: Date;
-    updatedAt?: Date;
-    __v?:       number;
-    address?:   string;
+export interface AllUserDatum {
+    _id?:            string;
+    profilePicture?: null | string;
+    name?:           string;
+    email?:          string;
+    password?:       string;
+    phone?:          number;
+    role?:           number;
+    createdAt?:      Date;
+    updatedAt?:      Date;
+    __v?:            number;
+    address?:        string;
 }

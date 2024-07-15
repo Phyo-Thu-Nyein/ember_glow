@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserDetails, UserData } from '../interface/user-details';
 import { Observable } from 'rxjs';
-import { AllUsers } from '../interface/allusers-detail';
+import { AllUsersDetails } from '../interface/allusers-detail';
 import { ProfileDetails } from '../interface/profile-details';
 
 @Injectable({
@@ -22,6 +22,8 @@ export class ApiService {
   allUsersUrl: string = `${this.baseUrl}/api/v1/users/all-users`;
   pfpUploadUrl: string = `${this.baseUrl}/api/v1/users/upload-pfp`;
   userInfoUpdateUrl: string = `${this.baseUrl}/api/v1/users/update-user-info`;
+  //update psw will come later
+  deleteUserUrl: string = `${this.baseUrl}/api/v1/users/delete-user`;
 
   options = {
     headers: new HttpHeaders({
@@ -62,7 +64,7 @@ export class ApiService {
   }
 
   //Get all users for manager role (1)
-  getAllUsers(): Observable<AllUsers> {
+  getAllUsers(): Observable<AllUsersDetails> {
     const headers = this.getAuthHeaders();
     return this.http.get(this.allUsersUrl, { headers });
   }
@@ -77,5 +79,14 @@ export class ApiService {
   updateUserInfo(userData: UserData): Observable<UserDetails> {
     const headers = this.getAuthHeaders();
     return this.http.patch(`${this.userInfoUpdateUrl}`, userData, { headers });
+  }
+
+  // Update Password
+
+
+  // Delete User by ID
+  deleteUserById(userId: string) {
+    const headers = this.getAuthHeaders();
+    return this.http.delete(`${this.deleteUserUrl}/${userId}`, { headers });
   }
 }
