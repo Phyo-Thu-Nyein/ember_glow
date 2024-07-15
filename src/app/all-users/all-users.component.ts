@@ -78,9 +78,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
         return 'Guest';
     }
   }
-
-  // for UI
-  
+ 
 
   // On Destroy
   ngOnDestroy(): void {

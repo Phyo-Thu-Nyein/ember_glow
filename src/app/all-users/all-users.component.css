@@ -19,7 +19,23 @@
     border-radius: 10px;
     justify-content: space-around;
     margin-bottom: 1rem;
-    padding: 1rem;
+    padding: 1.5rem 1rem;
+    /* position for logo */
+    position: relative;
+}
+.user-card:hover {
+    transform: translateY(-6px);
+    background-color: rgba(27, 27, 27, 0.882);;
+
+    th {
+        color: var(--clr-gold);
+    }
+    td {
+        color: var(--clr-amber100);
+    }
+    .left-corner, .right-corner {
+        opacity: 1;
+    }
 }
 .user-info {
     word-break: break-word;
@@ -49,6 +65,23 @@ th, td {
 }
 .trash-btn:hover {
     color: #fa3e25;
+}
+
+/* Corner arts appear on Hover */
+.left-corner, .right-corner {
+    opacity: 0;
+    position: absolute;
+    width: 40px;
+}
+.left-corner {
+    transform: rotate(90deg);
+    top: 4px;
+    left: 1%;
+}
+.right-corner {
+    transform: rotate(-90deg);
+    bottom: 4px;
+    right: 1%;
 }
 
 
@@ -137,25 +170,23 @@ dialog[open]::backdrop {
     }
     .desktop-view {
         width: 100%;
-        max-width: 1280px;
-        /* border: 1px solid red; */
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
+        max-width: 768px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 50% 50%;
+        justify-items: center;
     }
-    .user-card:nth-last-child(2) {
-        margin-right: 327px;
-    } 
 }
 /* lg */
 /* @media (min-width: 1024px) {
 } */
 /* xl */
 @media (min-width: 1280px) {
-    .user-card:nth-last-child(2) {
-        margin-right: 668px;
-    } 
+    .desktop-view {
+        max-width: 1280px;
+        grid-template-columns: 33.3% 33.3% 33.3%;
+    }
 }
 /* 2xl */
 /* @media (min-width: 1536px) {

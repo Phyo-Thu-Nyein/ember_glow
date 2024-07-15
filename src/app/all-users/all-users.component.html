@@ -5,50 +5,62 @@
     <h1>All Users</h1>
 
     <!-- Display User cards -->
-     <div class="desktop-view">
-         <div
-           class="user-card flex"
-           *ngFor="let user of allUsers"
-           [ngClass]="{ 'user-card': user.role != 1 }"
-         >
-           <ng-container *ngIf="user.role != 1">
-             <div class="user-info">
-               <table>
-                 <tr>
-                     <th colspan="2">
-                         <p>{{ user.name }}</p>
-                     </th>
-                 </tr>
-                 <tr>
-                   <td class="icons"><i class="bx bxs-user-badge"></i></td>
-                   <td>
-                     <p>{{ getRoleText(user.role!) }}</p>
-                   </td>
-                 </tr>
-                 <tr>
-                   <td class="icons"><i class="bx bxs-envelope"></i></td>
-                   <td>
-                     <p>{{ user.email }}</p>
-                   </td>
-                 </tr>
-                 <tr>
-                   <td class="icons"><i class="bx bxs-phone"></i></td>
-                   <td>
-                     <p>{{ user.phone }}</p>
-                   </td>
-                 </tr>
-               </table>
-             </div>
-             <button
-               class="trash-btn"
-               (click)="showUserId(user._id!, user.name!)"
-               onclick="confirmDel.showModal()"
-             >
-               <i class="bx bxs-trash"></i>
-             </button>
-           </ng-container>
-         </div>
-     </div>
+    <div class="desktop-view">
+      <div
+        class="user-card flex"
+        *ngFor="let user of allUsers"
+        [ngClass]="{ 'user-card': user.role != 1 }"
+      >
+        <ng-container *ngIf="user.role != 1">
+          <div class="user-info">
+            <table>
+              <tr>
+                <th colspan="2">
+                  <p>{{ user.name }}</p>
+                </th>
+              </tr>
+              <tr>
+                <td class="icons"><i class="bx bxs-user-badge"></i></td>
+                <td>
+                  <p>{{ getRoleText(user.role!) }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td class="icons"><i class="bx bxs-envelope"></i></td>
+                <td>
+                  <p>{{ user.email }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td class="icons"><i class="bx bxs-phone"></i></td>
+                <td>
+                  <p>{{ user.phone }}</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <button
+            class="trash-btn"
+            (click)="showUserId(user._id!, user.name!)"
+            onclick="confirmDel.showModal()"
+          >
+            <i class="bx bxs-trash"></i>
+          </button>
+        </ng-container>
+        <img
+        *ngIf="user.role != 1"
+          class="left-corner"
+          src="../../assets/images/about/team/corner.svg"
+          alt="corner art"
+        />
+        <img
+        *ngIf="user.role != 1"
+          class="right-corner"
+          src="../../assets/images/about/team/corner.svg"
+          alt="corner art"
+        />
+      </div>
+    </div>
 
     <!-- Dialog to confirm the user delete -->
     <dialog id="confirmDel" class="flex">
