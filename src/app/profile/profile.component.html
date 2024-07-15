@@ -250,9 +250,41 @@
 
   <!-- Get all users button/ link for Manager Role -->
   <div *ngIf="roleText == 'Manager'" class="all-users-wrapper">
-    <h2>Manager Previlege</h2>
+    <h3>Manager Previlege</h3>
     <button class="btn get-all-btn flex" routerLink="/all-users">
       View All Users <i class="bx bx-group"></i>
     </button>
   </div>
+
+  <!-- Change password -->
+  <div class="update-psw-wrapper">
+    <h3>Other Settings</h3>
+    <button class="btn psw-toggle-btn flex" (click)="toggleUpdatePswMode()">
+      Change Password <i class="bx bx-lock"></i>
+    </button>
+  </div>
+  <form #updatePswForm="ngForm" (ngSubmit)="changePassword()" *ngIf="isPswMode">
+    <input
+      [(ngModel)]="oldPassword"
+      name="oldPassword"
+      type="password"
+      placeholder="Old Password"
+      required
+    />
+    <input
+      [(ngModel)]="newPassword"
+      name="newPassword"
+      type="password"
+      placeholder="New Password"
+      required
+    />
+    <input
+      [(ngModel)]="confirmNewPassword"
+      name="confirmNewPassword"
+      type="password"
+      placeholder="Confirm New Password"
+      required
+    />
+    <button class="btn">Change Password</button>
+  </form>
 </section>

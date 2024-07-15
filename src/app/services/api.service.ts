@@ -22,7 +22,7 @@ export class ApiService {
   allUsersUrl: string = `${this.baseUrl}/api/v1/users/all-users`;
   pfpUploadUrl: string = `${this.baseUrl}/api/v1/users/upload-pfp`;
   userInfoUpdateUrl: string = `${this.baseUrl}/api/v1/users/update-user-info`;
-  //update psw will come later
+  updatePswUrl: string = `${this.baseUrl}/api/v1/users/update-user-psw`
   deleteUserUrl: string = `${this.baseUrl}/api/v1/users/delete-user`;
 
   options = {
@@ -82,7 +82,10 @@ export class ApiService {
   }
 
   // Update Password
-
+  updatePsw(payload: { oldPassword: string;  newPassword: string}) {
+    const headers = this.getAuthHeaders();
+    return this.http.patch(`${this.updatePswUrl}`, payload, { headers });
+  }
 
   // Delete User by ID
   deleteUserById(userId: string) {

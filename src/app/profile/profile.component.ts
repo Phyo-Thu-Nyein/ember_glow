@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   uploadSub: Subscription = new Subscription();
   updateUserInfoSub: Subscription = new Subscription();
 
+  // Update info
   userData?: UserDetails = {};
   roleText: string = 'Guest';
   isEditMode: boolean = false;
@@ -31,6 +32,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   //Validate the ph no
   phoneNum: number | null = null;
   isPhoneValid: boolean = true;
+
+  // Update Password
+  isPswMode: boolean = false;
+  oldPassword: string = '';
+  newPassword: string = '';
+  confirmNewPassword: string = '';
   
   constructor(private apiService: ApiService) {}
 
@@ -152,6 +159,35 @@ export class ProfileComponent implements OnInit, OnDestroy {
     const input = (event.target as HTMLInputElement).value;
     this.phoneNum = input ? parseInt(input) : null;
     this.validatePhone(this.phoneNum);
+  }
+
+  // Update Password
+  toggleUpdatePswMode() {
+    this.isPswMode = !this.isPswMode;
+  }
+  changePassword() {
+    if (this.newPassword !== this.confirmNewPassword) {
+      alert('New passwords do not match');
+      return;
+    }
+
+    const payload = {
+      oldPassword: this.oldPassword,
+      newPassword: this.newPassword,
+    };
+
+    this.apiService.updatePsw(payload).subscribe({
+      next: (response) => {
+        alert('Password updated successfully');
+        this.isPswMode = false;
+        this.oldPassword = '';
+        this.newPassword = '';
+        this.confirmNewPassword = '';
+      },
+      error: (err) => {
+        alert(`Error updating password: ${err.message}`);
+      },
+    });
   }
 
   // Unsubscribe after view

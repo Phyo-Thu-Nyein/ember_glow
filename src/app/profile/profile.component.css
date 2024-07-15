@@ -1,5 +1,5 @@
 .profile-container {
-    padding-top: 70px;
+    padding: 70px .5rem 50px;
     color: var(--clr-amber50);
 }
 
@@ -177,13 +177,21 @@ td {
     color: var(--clr-dark);
     margin: 2rem 0;
 }
-.get-all-btn {
+.get-all-btn, .psw-toggle-btn {
     margin-top: 1rem;
     gap: .3rem;
     font-size: var(--size-lg);
 }
 .get-all-btn i {
     font-size: var(--size-xl);
+}
+
+/* UPDATE PASSWORD SETTING */
+.update-psw-wrapper {
+    color: var(--clr-dark);
+    
+}
+.form-wrapper h3 {
 }
 
 /* xs */

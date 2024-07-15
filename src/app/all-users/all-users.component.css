@@ -1,11 +1,12 @@
 .all-users-container {
     color: var(--clr-dark);
-    padding-top: 90px;
+    padding-top: 100px;
     max-width: 400px;
     margin: 0 auto;
 }
 .all-users-container h1 {
-    margin-bottom: 1rem;
+    font-size: var(--size-3xl);
+    margin-bottom: 1.7rem;
     text-align: center;
 }
 
@@ -74,14 +75,13 @@ th, td {
     width: 40px;
 }
 .left-corner {
-    transform: rotate(90deg);
+    transform: rotate(180deg);
     top: 4px;
-    left: 1%;
+    right: 1%;
 }
 .right-corner {
-    transform: rotate(-90deg);
     bottom: 4px;
-    right: 1%;
+    left: 1%;
 }
 
 
