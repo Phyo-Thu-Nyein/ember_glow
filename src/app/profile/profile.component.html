@@ -264,27 +264,59 @@
     </button>
   </div>
   <form #updatePswForm="ngForm" (ngSubmit)="changePassword()" *ngIf="isPswMode">
-    <input
-      [(ngModel)]="oldPassword"
-      name="oldPassword"
-      type="password"
-      placeholder="Old Password"
-      required
-    />
-    <input
-      [(ngModel)]="newPassword"
-      name="newPassword"
-      type="password"
-      placeholder="New Password"
-      required
-    />
-    <input
-      [(ngModel)]="confirmNewPassword"
-      name="confirmNewPassword"
-      type="password"
-      placeholder="Confirm New Password"
-      required
-    />
+    <div class="input-box">
+      <input
+        [(ngModel)]="oldPassword"
+        name="oldPassword"
+        type="password"
+        placeholder="Old Password"
+        required
+        minlength="8"
+        #oldPsw = "ngModel"
+      />
+      <!-- error message -->
+      <p
+      class="text-red-bold"
+      *ngIf="!oldPsw.valid && oldPsw.touched"
+    >
+      at least 8 characters
+    </p>
+    </div>
+    <div class="input-box">
+      <input
+        [(ngModel)]="newPassword"
+        name="newPassword"
+        type="password"
+        placeholder="New Password"
+        required
+        #newPsw = "ngModel"
+      />
+      <!-- error message -->
+      <p
+      class="text-red-bold"
+      *ngIf="!newPsw.valid && newPsw.touched"
+    >
+      at least 8 characters
+    </p>
+    </div>
+    <div class="input-box">
+      <input
+        [(ngModel)]="confirmNewPassword"
+        name="confirmNewPassword"
+        type="password"
+        placeholder="Confirm New Password"
+        required
+        #cNewPsw = "ngModel"
+      />
+      <!-- error message -->
+      <p
+      class="text-red-bold"
+      *ngIf="!cNewPsw.valid && cNewPsw.touched"
+    >
+      at least 8 characters
+    </p>
+    </div>
+
     <button class="btn">Change Password</button>
   </form>
 </section>

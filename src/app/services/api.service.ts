@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserDetails, UserData } from '../interface/user-details';
 import { Observable } from 'rxjs';
@@ -64,9 +64,16 @@ export class ApiService {
   }
 
   //Get all users for manager role (1)
-  getAllUsers(): Observable<AllUsersDetails> {
+  getAllUsers(params: any): Observable<AllUsersDetails> {
     const headers = this.getAuthHeaders();
-    return this.http.get(this.allUsersUrl, { headers });
+    let queryParams = new HttpParams();
+    Object.keys(params).forEach(key => {
+      if (params[key]) {
+        queryParams = queryParams.append(key, params[key]);
+      }
+    });
+    const options = { headers: headers, params: queryParams };
+    return this.http.get(this.allUsersUrl, options);
   }
 
   //Upload profile pic

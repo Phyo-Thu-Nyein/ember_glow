@@ -1,7 +1,10 @@
 export interface AllUsersDetails {
     status?:  string;
     message?: string;
-    data?:    AllUserDatum[];
+    data?: AllUserDatum[];
+    totalUsers?: number;
+    totalPages?: number;
+    currentPage?: number;
 }
 
 export interface AllUserDatum {

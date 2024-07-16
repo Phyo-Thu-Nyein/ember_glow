@@ -4,6 +4,38 @@
     <!-- Heading -->
     <h1>Manage Users</h1>
 
+    <!-- Filter/ Search Bar -->
+    <form (ngSubmit)="filterUsers()" class="search-bar">
+      <div class="name-search-container">
+        <input
+          type="text"
+          class="name-search"
+          [(ngModel)]="params.name"
+          name="name"
+          placeholder="Search by name"
+        />
+        <button type="submit" class="btn">Search</button>
+      </div>
+      <div class="dropdowns-container">
+        <select [(ngModel)]="params.filterByRole" name="role">
+          <option value="">Role</option>
+          <option value="0">Guest</option>
+          <option value="2">Reception</option>
+          <option value="3">Housekeeper</option>
+          <option value="4">Server</option>
+        </select>
+        <select [(ngModel)]="params.sortOrder" name="order">
+          <option value="">Order</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+        <select [(ngModel)]="params.sortBy" name="date">
+          <option value="">Date</option>
+          <option value="createdAt">CreatedAt</option>
+        </select>
+      </div>
+    </form>
+
     <!-- Display User cards -->
     <div class="desktop-view">
       <div
@@ -48,13 +80,13 @@
           </button>
         </ng-container>
         <img
-        *ngIf="user.role != 1"
+          *ngIf="user.role != 1"
           class="left-corner"
           src="../../assets/images/about/team/corner.svg"
           alt="corner art"
         />
         <img
-        *ngIf="user.role != 1"
+          *ngIf="user.role != 1"
           class="right-corner"
           src="../../assets/images/about/team/corner.svg"
           alt="corner art"
@@ -87,5 +119,18 @@
         </button>
       </div>
     </dialog>
+
+    <!-- pagination container -->
+    <div class="pagination">
+      <button class="arrow-btn btn" [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
+          &lt;
+      </button>
+      <!-- Here will be for eg 1 of 2 
+       DONT FORGET TO CODE HEREEEEEE -->
+      <button class="arrow-btn btn" [disabled]="currentPage === totalPages" (click)="onPageChange(currentPage + 1)">
+          &gt;
+      </button>
+  </div>
+  
   </section>
 </div>

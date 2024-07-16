@@ -146,6 +146,52 @@ dialog[open]::backdrop {
     backdrop-filter: blur(5px);
     background-color: #0000006a;
 }
+
+/* Pagination controller arrow buttons */
+/* pagination container */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  /* pagination buttons */
+  .pagination-container button {
+    border: none;
+    background-color: #f0f0f0;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .pagination-container button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* active page button */
+  .pagination-container button.active {
+    background-color: #337ab7;
+    color: #fff;
+  }
+  
+  /* disabled buttons */
+  .pagination-container button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* page numbers container */
+  .page-numbers {
+    display: flex;
+    justify-content: center;
+    margin: 0 10px;
+  }
+  
+  /* page number buttons */
+  .page-numbers button {
+    margin: 0 5px;
+  }
+
 /* Animation for dialog open/close */
 @keyframes appear {
     from {
