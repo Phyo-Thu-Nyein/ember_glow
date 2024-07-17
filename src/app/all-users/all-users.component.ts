@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { ApiService } from '../services/api.service';
 import { AllUserDatum, AllUsersDetails } from '../interface/allusers-detail';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FilterParams } from '../interface/filter-params';
+import { UserFilterParams } from '../interface/filter-params';
 
 @Component({
   selector: 'app-all-users',
@@ -23,7 +23,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   isFetching: boolean = false;
 
   // Filtering, Sorting the users
-  params: FilterParams = {
+  params: UserFilterParams = {
     page: 1,
     limit: 10,
     sortBy: 'createdAt',
@@ -35,7 +35,6 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   // Pagination
   currentPage: number = 1;
   totalPages: number = 0;
-  pageLimit: number = 3;
 
   constructor(
     private apiService: ApiService,
@@ -53,7 +52,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
 
   // LOGICS
   //Get all users, Filtering, Pagination
-  getAllUsers(params: FilterParams) {
+  getAllUsers(params: UserFilterParams) {
     this.isFetching = true;
     var result = this.apiService.getAllUsers(params);
     this.allUsersSub = result.subscribe({
@@ -65,7 +64,11 @@ export class AllUsersComponent implements OnInit, OnDestroy {
         this.isFetching = false;
       },
       error: (err) => {
-        console.error('Error getting all users', err.message);
+        if (err.status === 404) {
+          this.router.navigate(['/not-found']);
+        } else {
+          console.error('Error getting all users', err.message);
+        }
         this.isFetching = false;
       },
     });
@@ -75,6 +78,13 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   onPageChange(pageNumber: number) {
     this.params.page = pageNumber;
     this.filterUsers();
+  }
+
+  
+  // Update page param to reset it to 1
+  resetPage() {
+    // Update page param to reset it to 1
+    this.params.page = 1;
   }
 
   // Method to filter users based on the form inputs
@@ -91,8 +101,6 @@ export class AllUsersComponent implements OnInit, OnDestroy {
         this.getAllUsers(this.params);
       });
   }
-
-  // Pagination
 
   //Show user id on click (for debugging)
   showUserId(userId: string, userName: string) {

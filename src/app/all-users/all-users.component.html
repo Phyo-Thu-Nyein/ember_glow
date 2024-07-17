@@ -14,7 +14,11 @@
           name="name"
           placeholder="Search by name"
         />
-        <button type="submit" class="search-btn btn">Search</button>
+        <button class="reset-btn" type="reset">x</button>
+        <button type="submit" class="search-btn btn flex" (click)="resetPage()">
+          Search
+          <i class="bx bx-search-alt"></i>
+        </button>
       </div>
       <div class="dropdowns-container flex">
         <select [(ngModel)]="params.filterByRole" name="role">

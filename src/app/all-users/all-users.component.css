@@ -5,6 +5,7 @@
     margin: 0 auto;
     position: relative;
 }
+
 .all-users-container h1 {
     font-size: var(--size-3xl);
     margin-bottom: 1.7rem;
@@ -30,61 +31,77 @@
     /* position for logo */
     position: relative;
 }
+
 .user-card:hover {
     transform: translateY(-6px);
-    background-color: rgba(27, 27, 27, 0.882);;
+    background-color: rgba(27, 27, 27, 0.882);
+    ;
 
     th {
         color: var(--clr-gold);
     }
+
     td {
         color: var(--clr-amber100);
     }
-    .left-corner, .right-corner {
+
+    .left-corner,
+    .right-corner {
         opacity: 1;
     }
 }
+
 .user-info {
     word-break: break-word;
     white-space: normal;
     width: 270px;
 }
+
 th {
     font-size: var(--size-2xl);
     padding-bottom: .5rem;
     color: var(--clr-amber100);
 }
-th, td {
+
+th,
+td {
     text-align: left;
     vertical-align: top;
 }
+
 .icons {
     padding-right: .5rem;
     padding-bottom: .4rem;
     min-height: 30px;
 }
+
 .icons i {
     margin-top: .2rem;
 }
+
 .trash-btn {
     font-size: var(--size-2xl);
     transition: color .1s;
 }
+
 .trash-btn:hover {
     color: #fa3e25;
 }
 
 /* Corner arts appear on Hover */
-.left-corner, .right-corner {
+.left-corner,
+.right-corner {
     opacity: 0;
     position: absolute;
     width: 40px;
 }
+
 .left-corner {
     transform: rotate(180deg);
     top: 4px;
     right: 1%;
 }
+
 .right-corner {
     bottom: 4px;
     left: 1%;
@@ -99,6 +116,7 @@ dialog {
     top: 30%;
     transform: translateX(-50%);
 }
+
 /* dialog styles */
 #confirmDel {
     border-radius: 10px;
@@ -108,6 +126,7 @@ dialog {
     padding: 3.7rem 1rem 1rem 1rem;
     position: relative;
 }
+
 #confirmDel h1 {
     width: 300px;
     height: 50px;
@@ -117,36 +136,44 @@ dialog {
     top: 0;
     left: 0;
 }
-#confirmDel h1 i{
+
+#confirmDel h1 i {
     margin-top: .2rem;
 }
+
 #confirmDel p {
     font-weight: bold;
     padding: 0 .5rem;
 }
+
 .to-be-deleted-name {
     color: #fa3e25;
     font-size: var(--size-xl);
 }
+
 .btn-wrapper {
     margin-top: 1rem;
     gap: 1rem;
 }
+
 .cancel-btn {
     border: 1px solid var(--clr-dark);
     background-color: transparent;
     box-shadow: none;
 }
+
 .confirm-btn {
     background-color: #fa3e25;
     border: 1px solid #fa3e25;
     color: #fff;
     box-shadow: none;
 }
+
 dialog[open] {
     display: block;
     animation: appear .5s;
 }
+
 dialog[open]::backdrop {
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
@@ -161,10 +188,13 @@ dialog[open]::backdrop {
     gap: .5rem;
     max-width: 768px;
 }
+
 /* Name search bar */
 .name-search-container {
     gap: .5rem;
+    position: relative;
 }
+
 .name-search-container input {
     background-color: #fff;
     color: var(--clr-dark);
@@ -175,12 +205,33 @@ dialog[open]::backdrop {
     font-size: var(--size-base);
     font-weight: bold;
 }
+
 .name-search-container input:focus {
-    background-color: #dfdfdf;
+    background-color: #f0f0f0;
 }
+
+.name-search-container input:focus+.reset-btn {
+    opacity: 1;
+}
+
 .search-btn {
     font-size: var(--size-base);
     box-shadow: none;
+    gap: .2rem;
+}
+
+.search-btn i {
+    font-size: var(--size-xl);
+}
+
+/* reset button to clear filters and name */
+.reset-btn {
+    position: absolute;
+    top: 20%;
+    right: 40%;
+    opacity: 0;
+    font-size: var(--size-xl);
+    font-weight: bold;
 }
 
 /* Dropdown selectors */
@@ -188,6 +239,7 @@ dialog[open]::backdrop {
     width: 100%;
     gap: .5rem
 }
+
 .dropdowns-container select {
     border-radius: 10px;
     flex: 1;
@@ -206,17 +258,19 @@ dialog[open]::backdrop {
     bottom: 4%;
     transform: translateX(-50%);
 }
+
 .pagination .arrow-btn {
     font-size: var(--size-2xl);
     box-shadow: none;
 }
-  
+
 
 /* Animation for dialog open/close */
 @keyframes appear {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -234,6 +288,7 @@ dialog[open]::backdrop {
     .all-users-container {
         max-width: unset;
     }
+
     .desktop-view {
         width: 100%;
         max-width: 768px;
@@ -255,19 +310,27 @@ dialog[open]::backdrop {
         font-size: var(--size-lg);
         font-weight: bold;
     }
+
     .name-search-container input:focus {
         background-color: #dfdfdf;
     }
+
     .search-btn {
         font-size: var(--size-lg);
         box-shadow: none;
     }
-    
+
+    /* reset button to clear filters and name */
+    .reset-btn {
+        right: 34%;
+    }
+
     /* Dropdown selectors */
     .dropdowns-container {
         width: 100%;
         gap: .5rem
     }
+
     .dropdowns-container select {
         border-radius: 10px;
         flex: 1;
@@ -277,6 +340,7 @@ dialog[open]::backdrop {
         color: var(--clr-dark);
     }
 }
+
 /* lg */
 /* @media (min-width: 1024px) {
 } */
@@ -287,6 +351,7 @@ dialog[open]::backdrop {
         grid-template-columns: 33.3% 33.3% 33.3%;
     }
 }
+
 /* 2xl */
 /* @media (min-width: 1536px) {
 } */

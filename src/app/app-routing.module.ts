@@ -61,8 +61,12 @@ const routes: Routes = [
     component: AllUsersComponent,
   },
   {
-    path: '**', //Wildcard
+    path: 'not-found',
     component: NotfoundComponent,
+  },
+  {
+    path: '**', //Wildcard
+    redirectTo: 'not-found',
   },
 ];
 
