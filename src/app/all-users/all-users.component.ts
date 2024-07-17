@@ -19,6 +19,9 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   user2BeDeletedId: string = '';
   user2BeDeletedName: string = '';
 
+  // For loading
+  isFetching: boolean = false;
+
   // Filtering, Sorting the users
   params: FilterParams = {
     page: 1,
@@ -51,6 +54,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   // LOGICS
   //Get all users, Filtering, Pagination
   getAllUsers(params: FilterParams) {
+    this.isFetching = true;
     var result = this.apiService.getAllUsers(params);
     this.allUsersSub = result.subscribe({
       next: (response: AllUsersDetails) => {
@@ -58,9 +62,11 @@ export class AllUsersComponent implements OnInit, OnDestroy {
         this.currentPage = response.currentPage!;
         this.totalPages = response.totalPages!;
         console.log('all users fetched');
+        this.isFetching = false;
       },
       error: (err) => {
         console.error('Error getting all users', err.message);
+        this.isFetching = false;
       },
     });
   }

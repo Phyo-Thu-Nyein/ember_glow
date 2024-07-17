@@ -5,8 +5,8 @@
     <h1>Manage Users</h1>
 
     <!-- Filter/ Search Bar -->
-    <form (ngSubmit)="filterUsers()" class="search-bar">
-      <div class="name-search-container">
+    <form (ngSubmit)="filterUsers()" class="search-bar flex">
+      <div class="name-search-container flex">
         <input
           type="text"
           class="name-search"
@@ -14,9 +14,9 @@
           name="name"
           placeholder="Search by name"
         />
-        <button type="submit" class="btn">Search</button>
+        <button type="submit" class="search-btn btn">Search</button>
       </div>
-      <div class="dropdowns-container">
+      <div class="dropdowns-container flex">
         <select [(ngModel)]="params.filterByRole" name="role">
           <option value="">Role</option>
           <option value="0">Guest</option>
@@ -37,62 +37,76 @@
     </form>
 
     <!-- Display User cards -->
-    <div class="desktop-view">
-      <div
-        class="user-card flex"
-        *ngFor="let user of allUsers"
-        [ngClass]="{ 'user-card': user.role != 1 }"
+    <ng-container *ngIf="isFetching; else displayCards">
+      <ngx-skeleton-loader
+        count="1"
+        [theme]="{
+          width: '100%',
+          'max-width': '400px',
+          height: '200px',
+          'background-color': '#0000006c'
+        }"
       >
-        <ng-container *ngIf="user.role != 1">
-          <div class="user-info">
-            <table>
-              <tr>
-                <th colspan="2">
-                  <p>{{ user.name }}</p>
-                </th>
-              </tr>
-              <tr>
-                <td class="icons"><i class="bx bxs-user-badge"></i></td>
-                <td>
-                  <p>{{ getRoleText(user.role!) }}</p>
-                </td>
-              </tr>
-              <tr>
-                <td class="icons"><i class="bx bxs-envelope"></i></td>
-                <td>
-                  <p>{{ user.email }}</p>
-                </td>
-              </tr>
-              <tr>
-                <td class="icons"><i class="bx bxs-phone"></i></td>
-                <td>
-                  <p>{{ user.phone }}</p>
-                </td>
-              </tr>
-            </table>
-          </div>
-          <button
-            class="trash-btn"
-            (click)="showUserId(user._id!, user.name!)"
-            onclick="confirmDel.showModal()"
-          >
-            <i class="bx bxs-trash"></i>
-          </button>
-        </ng-container>
-        <img
-          *ngIf="user.role != 1"
-          class="left-corner"
-          src="../../assets/images/about/team/corner.svg"
-          alt="corner art"
-        />
-        <img
-          *ngIf="user.role != 1"
-          class="right-corner"
-          src="../../assets/images/about/team/corner.svg"
-          alt="corner art"
-        />
+      </ngx-skeleton-loader>
+    </ng-container>
+    <ng-template #displayCards>
+      <div class="desktop-view">
+        <div
+          class="user-card flex"
+          *ngFor="let user of allUsers"
+          [ngClass]="{ 'user-card': user.role != 1 }"
+        >
+          <ng-container *ngIf="user.role != 1">
+            <div class="user-info">
+              <table>
+                <tr>
+                  <th colspan="2">
+                    <p>{{ user.name }}</p>
+                  </th>
+                </tr>
+                <tr>
+                  <td class="icons"><i class="bx bxs-user-badge"></i></td>
+                  <td>
+                    <p>{{ getRoleText(user.role!) }}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="icons"><i class="bx bxs-envelope"></i></td>
+                  <td>
+                    <p>{{ user.email }}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="icons"><i class="bx bxs-phone"></i></td>
+                  <td>
+                    <p>{{ user.phone }}</p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <button
+              class="trash-btn"
+              (click)="showUserId(user._id!, user.name!)"
+              onclick="confirmDel.showModal()"
+            >
+              <i class="bx bxs-trash"></i>
+            </button>
+          </ng-container>
+          <img
+            *ngIf="user.role != 1"
+            class="left-corner"
+            src="../../assets/images/about/team/corner.svg"
+            alt="corner art"
+          />
+          <img
+            *ngIf="user.role != 1"
+            class="right-corner"
+            src="../../assets/images/about/team/corner.svg"
+            alt="corner art"
+          />
+        </div>
       </div>
-    </div>
+    </ng-template>
 
     <!-- Dialog to confirm the user delete -->
     <dialog id="confirmDel" class="flex">
@@ -121,16 +135,22 @@
     </dialog>
 
     <!-- pagination container -->
-    <div class="pagination">
-      <button class="arrow-btn btn" [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
-          &lt;
+    <div class="pagination flex">
+      <button
+        class="arrow-btn btn"
+        [disabled]="currentPage === 1"
+        (click)="onPageChange(currentPage - 1)"
+      >
+        &lt;
       </button>
-      <!-- Here will be for eg 1 of 2 
-       DONT FORGET TO CODE HEREEEEEE -->
-      <button class="arrow-btn btn" [disabled]="currentPage === totalPages" (click)="onPageChange(currentPage + 1)">
-          &gt;
+      <span> page {{ currentPage }} of {{ totalPages }}</span>
+      <button
+        class="arrow-btn btn"
+        [disabled]="currentPage === totalPages"
+        (click)="onPageChange(currentPage + 1)"
+      >
+        &gt;
       </button>
-  </div>
-  
+    </div>
   </section>
 </div>

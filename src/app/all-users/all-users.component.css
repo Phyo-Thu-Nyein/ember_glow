@@ -3,6 +3,7 @@
     padding-top: 100px;
     max-width: 400px;
     margin: 0 auto;
+    position: relative;
 }
 .all-users-container h1 {
     font-size: var(--size-3xl);
@@ -11,6 +12,11 @@
 }
 
 /* Display User cards */
+/* Loading animation while fetching users */
+.ngx-container {
+    flex-direction: column;
+}
+
 /* User Card Design */
 .user-card {
     background-color: rgba(27, 27, 27, 0.589);
@@ -147,50 +153,64 @@ dialog[open]::backdrop {
     background-color: #0000006a;
 }
 
-/* Pagination controller arrow buttons */
-/* pagination container */
-.pagination-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
+/* Filter/ Search Bar */
+.search-bar {
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    flex-direction: column;
+    gap: .5rem;
+    max-width: 768px;
+}
+/* Name search bar */
+.name-search-container {
+    gap: .5rem;
+}
+.name-search-container input {
+    background-color: #fff;
+    color: var(--clr-dark);
+    padding-left: 1rem;
+    border-radius: 10px;
+    width: 200px;
+    height: 40px;
+    font-size: var(--size-base);
+    font-weight: bold;
+}
+.name-search-container input:focus {
+    background-color: #dfdfdf;
+}
+.search-btn {
+    font-size: var(--size-base);
+    box-shadow: none;
+}
+
+/* Dropdown selectors */
+.dropdowns-container {
+    width: 100%;
+    gap: .5rem
+}
+.dropdowns-container select {
+    border-radius: 10px;
+    flex: 1;
+    height: 40px;
+    font-size: var(--size-sm);
+    font-weight: bold;
+    color: var(--clr-dark);
+}
+
+/* Page navigation controller arrow buttons */
+.pagination {
+    gap: 1rem;
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    bottom: 4%;
+    transform: translateX(-50%);
+}
+.pagination .arrow-btn {
+    font-size: var(--size-2xl);
+    box-shadow: none;
+}
   
-  /* pagination buttons */
-  .pagination-container button {
-    border: none;
-    background-color: #f0f0f0;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .pagination-container button:hover {
-    background-color: #e0e0e0;
-  }
-  
-  /* active page button */
-  .pagination-container button.active {
-    background-color: #337ab7;
-    color: #fff;
-  }
-  
-  /* disabled buttons */
-  .pagination-container button[disabled] {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  /* page numbers container */
-  .page-numbers {
-    display: flex;
-    justify-content: center;
-    margin: 0 10px;
-  }
-  
-  /* page number buttons */
-  .page-numbers button {
-    margin: 0 5px;
-  }
 
 /* Animation for dialog open/close */
 @keyframes appear {
@@ -222,6 +242,39 @@ dialog[open]::backdrop {
         grid-template-rows: auto;
         grid-template-columns: 50% 50%;
         justify-items: center;
+    }
+
+    /* search bar */
+    .name-search-container input {
+        background-color: #fff;
+        color: var(--clr-dark);
+        padding-left: 1rem;
+        border-radius: 10px;
+        width: 280px;
+        height: 40px;
+        font-size: var(--size-lg);
+        font-weight: bold;
+    }
+    .name-search-container input:focus {
+        background-color: #dfdfdf;
+    }
+    .search-btn {
+        font-size: var(--size-lg);
+        box-shadow: none;
+    }
+    
+    /* Dropdown selectors */
+    .dropdowns-container {
+        width: 100%;
+        gap: .5rem
+    }
+    .dropdowns-container select {
+        border-radius: 10px;
+        flex: 1;
+        height: 40px;
+        font-size: var(--size-base);
+        font-weight: bold;
+        color: var(--clr-dark);
     }
 }
 /* lg */
