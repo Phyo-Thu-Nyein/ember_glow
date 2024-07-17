@@ -54,7 +54,7 @@
         <div
           class="user-card flex"
           *ngFor="let user of allUsers"
-          [ngClass]="{ 'user-card': user.role != 1 }"
+          [ngStyle] = "{ display: user.role ===1 ? 'none' : 'flex'}"
         >
           <ng-container *ngIf="user.role != 1">
             <div class="user-info">
