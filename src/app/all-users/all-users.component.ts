@@ -4,6 +4,7 @@ import { ApiService } from '../services/api.service';
 import { AllUserDatum, AllUsersDetails } from '../interface/allusers-detail';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserFilterParams } from '../interface/filter-params';
+import { NotFoundService } from '../services/not-found.service';
 
 @Component({
   selector: 'app-all-users',
@@ -39,7 +40,8 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, 
+    private notFoundService: NotFoundService
   ) {}
 
   // On Init
@@ -48,9 +50,18 @@ export class AllUsersComponent implements OnInit, OnDestroy {
       this.params = { ...this.params, ...params };
       this.getAllUsers(this.params);
     });
+    this.checkNotFound();
   }
 
   // LOGICS
+  // Check if the user has alrdy been redirected 
+  checkNotFound() {
+    if (this.notFoundService.getRedirectedToNotFound()) {
+      this.notFoundService.setRedirectedToNotFound(false); // Reset the flag
+      return; // Prevent further processing
+    }
+  }
+
   //Get all users, Filtering, Pagination
   getAllUsers(params: UserFilterParams) {
     this.isFetching = true;
@@ -65,6 +76,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         if (err.status === 404) {
+          this.notFoundService.setRedirectedToNotFound(true);
           this.router.navigate(['/not-found']);
         } else {
           console.error('Error getting all users', err.message);
