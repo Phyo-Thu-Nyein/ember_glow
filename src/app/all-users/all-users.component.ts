@@ -114,11 +114,11 @@ export class AllUsersComponent implements OnInit, OnDestroy {
       });
   }
 
-  //Show user id on click (for debugging)
+  // Store the id and name for later use
   showUserId(userId: string, userName: string) {
     this.user2BeDeletedId = userId; // Stored for later use
     this.user2BeDeletedName = userName;
-    console.log(this.user2BeDeletedId, this.user2BeDeletedName);
+    console.log(this.user2BeDeletedId, this.user2BeDeletedName); //Show user id on click (for debugging)
   }
 
   // Delete User By Id

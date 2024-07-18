@@ -12,61 +12,63 @@
     </div>
   </div>
 
-  <!-- FILTER (date, location, etc...) -->
-  <form class="filter-container container flex" action="" method="post">
-    <div class="filter-container__fields flex">
-      <!-- Location picker -->
-      <mat-form-field>
-        <mat-label>Select a location</mat-label>
-        <mat-select [(ngModel)]="selectedLocation" name="location">
-          <mat-option
-            *ngFor="let location of locations"
-            [value]="location.value"
-          >
-            {{ location.viewValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+  <!-- >>>> FILTER (search bar) <<<< -->
+  <form (ngSubmit)="filterRooms()" class="filter-bar flex">
+    <!-- dropdowns -->
+    <div class="dropdowns-containers flex">
+      <!-- room type -->
+      <select [(ngModel)]="params.roomType" name="type">
+        <option value="">Type</option>
+        <option value="Suite">Suite</option>
+        <option value="Superior">Superior</option>
+        <option value="Deluxe">Deluxe</option>
+        <option value="Standard">Standard</option>
+      </select>
 
-      <!-- Date picker -->
-      <mat-form-field>
-        <mat-label>Start - End date</mat-label>
-        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-          <input matStartDate formControlName="start" placeholder="Check In" />
-          <input matEndDate formControlName="end" placeholder="Check Out" />
-        </mat-date-range-input>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-
-        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')"
-          >Invalid start date</mat-error
-        >
-        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')"
-          >Invalid end date</mat-error
-        >
-      </mat-form-field>
-
-      <!-- Room type picker -->
-      <mat-form-field>
-        <mat-label>Select room type</mat-label>
-        <mat-select [(ngModel)]="selectedRoom" name="roomType">
-          <mat-option
-            *ngFor="let roomType of roomTypes"
-            [value]="roomType.value"
-          >
-            {{ roomType.viewValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <!-- room status -->
+      <select [(ngModel)]="params.status" name="status">
+        <option value="">Status</option>
+        <option value="Available">Available</option>
+        <option value="Booked">Booked</option>
+      </select>
     </div>
-    <!-- FILTER BUTTON -->
-    <button class="filter-btn btn flex" type="submit">
-      <i class="bx bx-filter-alt"></i>
-      <span>Filter</span>
-    </button>
+
+    <div class="dropdowns-containers flex">
+      <!-- min - max price -->
+      <div class="mimx-price-wrapper input-box flex">
+        <input
+          [(ngModel)]="params.minPrice"
+          type="number"
+          placeholder="Min price"
+        />
+        <span>-</span>
+        <input
+          [(ngModel)]="params.maxPrice"
+          type="number"
+          placeholder="Max price"
+        />
+      </div>
+      <!-- sort order -->
+      <select [(ngModel)]="params.sortOrder" name="sortOrder">
+        <option value="asc">Sort Order</option>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+      <!-- sort by -->
+      <!-- <select [(ngModel)]="params.sortBy" name="sortBy">
+      <option value="">Sort By</option>
+      <option value="price">Price</option>
+    </select> -->
+    </div>
+
+    <!-- buttons -->
+    <div class="filter-btn-container flex">
+      <button class="reset-btn btn" type="reset">Clear</button>
+      <button type="submit" class="filter-btn btn flex" (click)="resetPage()">
+        Filter
+        <i class="bx bx-filter-alt"></i>
+      </button>
+    </div>
   </form>
 
   <!-- BIG CARD THAT CONTAINS ALL THE ROOMS FOR EACH TYPE -->

@@ -29,6 +29,7 @@ export class ApiService {
 
   // Room related URLs
   allRoomsUrl: string = `${this.baseUrl}/api/v1/rooms/all-rooms`;
+  // POST, PATCH, DELETE ROOMS will come later
 
   options = {
     headers: new HttpHeaders({

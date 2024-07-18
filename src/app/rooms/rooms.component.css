@@ -32,32 +32,71 @@
 }
 
 /* FILTER SECTION */
-.filter-container {
-    flex-direction: column;
+.filter-bar {
+    margin: 0 .5rem;
+    display: grid;
+    grid-template-rows: 50px 50px 50px;
 }
-.filter-container__fields {
-    flex-direction: column;
+.dropdowns-containers {
+    width: 100%;
+    gap: .5rem
 }
-
-mat-form-field {
-    width: 260px;
-    margin-bottom: 0;
+.dropdowns-containers > * {
+    flex: 1;
+    border-radius: 10px;
+    height: 40px;
+    font-size: var(--size-sm);
+    font-weight: bold;
+    color: var(--clr-dark);
+    padding: 0 .5rem;
 }
-
-.filter-btn {
-    width: 100px;
-    justify-content: center;
-    align-items: center;
-    gap: .5rem;
+.input-box {
+    background-color: #ffffff;
+    color: var(--clr-dark);
+    font-weight: bold;
+    justify-content: space-around;
 }
-
+.mimx-price-wrapper input {
+    background-color: transparent;
+    width: 44%;
+    height: 100%;
+    color: var(--clr-dark);
+    font-weight: bold;
+}
+    /* buttons to clear or submit */
+.filter-btn-container {
+    gap: 2rem;
+}
+.filter-btn-container button {
+    box-shadow: none;
+}
+.reset-btn {
+    border: 1px solid var(--clr-dark);
+    background-color: transparent;
+    padding: .35rem .9rem;
+}
 .filter-btn i {
-    font-size: var(--size-xl);
+    font-size: var(--size-lg);
+    margin-top: .1rem;
 }
 
-.filter-btn span {
-    font-size: var(--size-base);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* BIG CARD THAT CONTAINS ALL THE ROOMS FOR EACH TYPE */
 
