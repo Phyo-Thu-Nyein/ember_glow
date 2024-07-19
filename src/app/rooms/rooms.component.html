@@ -54,11 +54,6 @@
         <option value="asc">Ascending</option>
         <option value="desc">Descending</option>
       </select>
-      <!-- sort by -->
-      <!-- <select [(ngModel)]="params.sortBy" name="sortBy">
-      <option value="">Sort By</option>
-      <option value="price">Price</option>
-    </select> -->
     </div>
 
     <!-- buttons -->
@@ -71,39 +66,55 @@
     </div>
   </form>
 
-  <!-- BIG CARD THAT CONTAINS ALL THE ROOMS FOR EACH TYPE -->
-  <div class="rooms-container container flex">
-    <!-- LOOP EACH ROOM -->
-    <ng-container *ngFor="let i of fourTimes">
-      <div class="oneroom flex">
-        <div class="oneroom__image">
-          <img src="../../assets/images/rooms/Suite.webp" alt="" />
-        </div>
-        <div class="oneroom__info-container">
-          <div class="oneroom__info flex">
-            <div class="oneroom__linfo-type one-info flex">
-              <span>Type: </span><span>Suite</span>
-            </div>
-            <div class="oneroom__linfo-number one-info flex">
-              <span>RoomNo: </span><span>A01</span>
-            </div>
-            <div class="oneroom__linfo-location one-info flex">
-              <span>Location: </span><span>Yangon</span>
-            </div>
-          </div>
-          <div class="oneroom__vline"></div>
-          <div class="oneroom__info flex">
-            <div class="oneroom__rinfo-status one-info flex">
-              <span>Status: </span><span>Available</span>
-            </div>
-            <div class="oneroom__rinfo-price one-info flex">
-              <span>Price: </span><span>40,000</span>
-            </div>
-            <button class="oneroom__rinfo-btn btn">Check</button>
-          </div>
-        </div>
+  <!-- Display room cards -->
+  <div class="cards-wrapper">
+    <div *ngFor="let room of allRooms" class="room-card flex">
+      <img class="room-img" src="{{ room.images }}" alt="hotel room image" />
+      <div class="room-info">
+        <span class="room-type">
+          <i class="bx bx-building-house"></i>
+          {{ room.room_type! }}
+        </span>
+        <span class="room-price">
+          <i class="bx bx-money"></i>
+          {{ room.price }}
+        </span>
+        <span class="room-status">
+          <i
+            class="bx bxs-circle"
+            [ngStyle]="{
+              color: room.status === 'Available' ? '#a3e635' : '#ef4444'
+            }"
+          ></i>
+          {{ room.status! }}
+        </span>
+        <span class="room-desc">
+          {{ room.description! }}
+        </span>
       </div>
-    </ng-container>
+      <button class="btn flex">
+        Details
+        <i class='bx bxs-chevron-right'></i>
+      </button>
+    </div>
+    <!-- pagination container -->
+    <div class="pagination flex">
+      <button
+        class="arrow-btn btn"
+        [disabled]="currentPage === 1"
+        (click)="onPageChange(currentPage - 1)"
+      >
+        &lt;
+      </button>
+      <span> page {{ currentPage }} of {{ totalPages }}</span>
+      <button
+        class="arrow-btn btn"
+        [disabled]="currentPage === totalPages"
+        (click)="onPageChange(currentPage + 1)"
+      >
+        &gt;
+      </button>
+    </div>
   </div>
 </div>
 

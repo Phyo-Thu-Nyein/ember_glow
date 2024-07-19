@@ -13,7 +13,7 @@ export interface AllRoomsDatum {
     room_type?:   string;
     price?:       number;
     status?:      string;
-    images?:      null;
+    images?:      string[];
     description?: string;
     checkIn?:     Date;
     checkOut?:    Date;
