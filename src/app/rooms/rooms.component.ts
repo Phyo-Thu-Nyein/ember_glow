@@ -51,30 +51,6 @@ export class RoomsComponent implements OnInit, OnDestroy {
   currentPage: number = 1;
   totalPages: number = 0;
 
-  // ........... dummy codes ........
-  fourTimes = [0, 1, 2, 3];
-
-  selectedLocation?: string;
-  selectedRoom?: string;
-
-  locations: Location[] = [
-    { value: 'mandalay', viewValue: 'Mandalay' },
-    { value: 'yangon', viewValue: 'Yangon' },
-  ];
-
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
-
-  roomTypes: roomType[] = [
-    { value: 'Standard', viewValue: 'Standard' },
-    { value: 'Deluxe', viewValue: 'Deluxe' },
-    { value: 'Superior', viewValue: 'Superior' },
-    { value: 'Suite', viewValue: 'Suite' },
-  ];
-  // ................ dummy codes...............
-
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -156,8 +132,6 @@ export class RoomsComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(`room-details/${roomId}`);
     console.log(roomId);
   }
-
-  // Delete room by id for manager/ reception role logic here <<<<<<<<<<
 
   // Unsubscribe on page leave
   ngOnDestroy(): void {

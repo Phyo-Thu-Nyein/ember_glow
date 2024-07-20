@@ -70,38 +70,53 @@
 
   <!-- Display room cards -->
   <div class="cards-wrapper">
-    <div *ngFor="let room of allRooms" class="room-card flex">
-      <div class="img-container">
-        <img class="room-img" src="{{ room.images }}" alt="hotel room image" />
-        <span class="room-number">RoomNo. {{ room.room_number! }}</span>
+    <ng-container *ngIf="isFetching; else displayRooms">
+      <ngx-skeleton-loader
+        animation="pulse"
+        count="1"
+        [theme]="{
+          'width': '350px',
+          'height': '400px',
+          'background-color': '#fff',
+          'border-radius': '10px',
+        }"
+      ></ngx-skeleton-loader>
+    </ng-container>
+    <ng-template #displayRooms>
+      <div *ngFor="let room of allRooms" class="room-card flex">
+        <div class="img-container">
+          <img class="room-img" src="{{ room.images }}" alt="hotel room image" />
+          <span class="room-number">RoomNo. {{ room.room_number! }}</span>
+        </div>
+        <div class="room-info">
+          <span class="room-type">
+            <i class="bx bx-building-house"></i>
+            {{ room.room_type! }}
+          </span>
+          <span class="room-price">
+            <i class="bx bx-money"></i>
+            {{ room.price }}
+          </span>
+          <span class="room-status">
+            <i
+              class="bx bxs-circle"
+              [ngStyle]="{
+                color: room.status === 'Available' ? '#a3e635' : '#ef4444'
+              }"
+            ></i>
+            {{ room.status! }}
+          </span>
+          <span class="room-desc">
+            {{ room.description! }}
+          </span>
+        </div>
+        <button class="btn flex" (click)="goToRoomDetails(room._id!)">
+          Details
+          <i class='bx bxs-chevron-right'></i>
+        </button>
       </div>
-      <div class="room-info">
-        <span class="room-type">
-          <i class="bx bx-building-house"></i>
-          {{ room.room_type! }}
-        </span>
-        <span class="room-price">
-          <i class="bx bx-money"></i>
-          {{ room.price }}
-        </span>
-        <span class="room-status">
-          <i
-            class="bx bxs-circle"
-            [ngStyle]="{
-              color: room.status === 'Available' ? '#a3e635' : '#ef4444'
-            }"
-          ></i>
-          {{ room.status! }}
-        </span>
-        <span class="room-desc">
-          {{ room.description! }}
-        </span>
-      </div>
-      <button class="btn flex" (click)="goToRoomDetails(room._id!)">
-        Details
-        <i class='bx bxs-chevron-right'></i>
-      </button>
-    </div>
+    </ng-template>
+
     <!-- pagination container -->
     <div class="pagination flex">
       <button
