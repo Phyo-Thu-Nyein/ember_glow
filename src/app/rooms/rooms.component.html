@@ -40,12 +40,14 @@
           [(ngModel)]="params.minPrice"
           type="number"
           placeholder="Min price"
+          name="minprice"
         />
         <span>-</span>
         <input
           [(ngModel)]="params.maxPrice"
           type="number"
           placeholder="Max price"
+          name="maxprice"
         />
       </div>
       <!-- sort order -->
@@ -69,7 +71,10 @@
   <!-- Display room cards -->
   <div class="cards-wrapper">
     <div *ngFor="let room of allRooms" class="room-card flex">
-      <img class="room-img" src="{{ room.images }}" alt="hotel room image" />
+      <div class="img-container">
+        <img class="room-img" src="{{ room.images }}" alt="hotel room image" />
+        <span class="room-number">RoomNo. {{ room.room_number! }}</span>
+      </div>
       <div class="room-info">
         <span class="room-type">
           <i class="bx bx-building-house"></i>
@@ -92,7 +97,7 @@
           {{ room.description! }}
         </span>
       </div>
-      <button class="btn flex">
+      <button class="btn flex" (click)="goToRoomDetails(room._id!)">
         Details
         <i class='bx bxs-chevron-right'></i>
       </button>

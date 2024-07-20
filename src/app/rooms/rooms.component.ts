@@ -151,6 +151,12 @@ export class RoomsComponent implements OnInit, OnDestroy {
       });
   }
 
+  // Go to one room deails page
+  goToRoomDetails(roomId : string) {
+    this.router.navigateByUrl(`room-details/${roomId}`);
+    console.log(roomId);
+  }
+
   // Delete room by id for manager/ reception role logic here <<<<<<<<<<
 
   // Unsubscribe on page leave

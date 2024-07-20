@@ -31,6 +31,7 @@ import { FacilitiesDetailComponent } from './facilities-detail/facilities-detail
 import { ProfileComponent } from './profile/profile.component';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     FacilitiesDetailComponent,
     ProfileComponent,
     AllUsersComponent,
+    RoomDetailsComponent,
   ],
   imports: [
     BrowserModule,
