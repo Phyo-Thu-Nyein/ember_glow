@@ -1,1 +1,73 @@
-<p>room-details works!</p>
+<section class="container room-container">
+  <div class="room-detail-wrapper">
+    <!-- Room Image -->
+    <div class="room-image-container flex">
+      <!-- Big image -->
+      <img [src]="bigImg" alt="Room Image" class="big-image" />
+
+      <!-- Small images -->
+      <div class="small-images-wrapper flex">
+        <img
+          #smallImage
+          *ngFor="let image of imgArray"
+          [src]="image"
+          alt="Room Image"
+          class="small-image"
+          (click)="changeImg(image); addSelectedEffect($event.target)"
+        />
+      </div>
+    </div>
+
+    <!-- Room Details -->
+    <div class="room-info">
+      <p class="number">Number: {{ oneRoomData.room_number }}</p>
+      <p class="type">Type: {{ oneRoomData.room_type }}</p>
+      <p class="price">Price: {{ oneRoomData.price }}</p>
+      <p class="status">Status: {{ oneRoomData.status }}</p>
+    </div>
+
+    <!-- Select check in/ out dates and book the room -->
+    <form (ngSubmit)="onSubmit()" class="checkin-out-wrapper flex">
+        <mat-form-field class="example-full-width">
+          <mat-label>Check-In Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="checkInpicker"
+            [matDatepickerFilter]="checkInDateFilter"
+            (dateChange)="onCheckInDateChange($event.value)"
+            placeholder="Choose a date"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="checkInpicker"></mat-datepicker-toggle>
+          <mat-datepicker #checkInpicker></mat-datepicker>
+          <mat-error *ngIf="range.controls.start.hasError('minDate')">
+            Check-in date cannot be before today.
+          </mat-error>
+        </mat-form-field>
+      
+        <mat-form-field class="example-full-width">
+          <mat-label>Check-Out Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="checkOutpicker"
+            [matDatepickerFilter]="checkOutDateFilter"
+            placeholder="Choose a date"
+            [disabled]="!checkInDateSelected"
+            [min]="minCheckOutDate"
+            (dateChange)="onCheckOutDateChange($event)"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="checkOutpicker"></mat-datepicker-toggle>
+          <mat-datepicker #checkOutpicker></mat-datepicker>
+          <mat-error *ngIf="range.controls.end.hasError('minDate')">
+            Check-out date must be after check-in date.
+          </mat-error>
+        </mat-form-field>
+      
+        <button class="btn book-btn" type="submit">Book Now</button>
+      </form>
+      
+      
+      
+      
+      
+  </div>
+</section>

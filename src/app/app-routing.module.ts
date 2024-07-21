@@ -66,7 +66,7 @@ const routes: Routes = [
     component: NotfoundComponent,
   },
   {
-    path: 'room-details/:id',
+    path: 'room-details/:roomId',
     component: RoomDetailsComponent
   },
   {

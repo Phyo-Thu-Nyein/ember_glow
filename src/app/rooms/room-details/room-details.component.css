@@ -1,0 +1,55 @@
+.room-container {
+    color: var(--clr-dark);
+    padding-top: 90px;
+}
+.room-detail-wrapper {
+    background-color: #fff;
+    padding: .7rem;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+/* Room Image Part */
+.room-image-container {
+    flex-direction: column;
+    gap: .4rem;
+}
+.big-image {
+    width: 100%;
+    border-radius: 10px;
+}
+.small-images-wrapper {
+    width: 100%;
+    gap: .4rem;
+}
+.small-image {
+    width: 18.4%;
+    border-radius: 10px;
+}
+.selected-img {
+    opacity: .8;
+    filter: grayscale(1);
+}
+
+/* Room Info Part */
+.room-info {
+    margin-top: .5rem;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 40px 40px;
+    place-items: center;
+    text-align: left;
+    font-size: var(--size-lg);
+    font-weight: bold;
+}
+
+/* CheckIn/Out part */
+.checkin-out-wrapper {
+    flex-direction: column;
+    gap: 1rem;
+    font-weight: bold;
+}
+.book-btn {
+    margin-bottom: 1rem;
+    font-size: var(--size-base);
+}

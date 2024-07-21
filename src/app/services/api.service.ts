@@ -29,6 +29,7 @@ export class ApiService {
 
   // Room related URLs
   allRoomsUrl: string = `${this.baseUrl}/api/v1/rooms/all-rooms`;
+  getOneRoomUrl: string = `${this.baseUrl}/api/v1/rooms/one-room`;
   // POST, PATCH, DELETE ROOMS will come later
 
   options = {
@@ -115,4 +116,10 @@ export class ApiService {
     const options = { headers: headers, params: queryParams };
     return this.http.get(this.allRoomsUrl, options);
   }
+
+  // Get one room
+  getRoomById(roomId: string) {
+    return this.http.get(`${this.getOneRoomUrl}/${roomId}`);
+  }
+
 }
