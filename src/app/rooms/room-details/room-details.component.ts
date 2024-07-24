@@ -42,6 +42,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     end: new FormControl<Date | null>(null, minDateValidator),
   });
   checkInDateSelected = false;
+  checkOutDateSelected = false;
   minCheckOutDate: Date | null = null;
 
   // Add the image selected effect
@@ -151,6 +152,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   
   onCheckOutDateChange(event: any) {
     console.log('Check-Out Date Changed:', event.value);
+    this.checkOutDateSelected = !!event.value;
     this.range.controls.end.setValue(event.value);
   }
 

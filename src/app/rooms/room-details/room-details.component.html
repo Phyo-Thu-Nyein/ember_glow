@@ -28,7 +28,7 @@
 
     <!-- Select check in/ out dates and book the room -->
     <form (ngSubmit)="onSubmit()" class="checkin-out-wrapper flex">
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <mat-label>Check-In Date</mat-label>
         <input
           matInput
@@ -36,6 +36,7 @@
           [matDatepickerFilter]="checkInDateFilter"
           (dateChange)="onCheckInDateChange($event.value)"
           placeholder="Choose a date"
+          required
         />
         <mat-datepicker-toggle
           matIconSuffix
@@ -47,7 +48,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <mat-label>Check-Out Date</mat-label>
         <input
           matInput
@@ -57,6 +58,7 @@
           [disabled]="!checkInDateSelected"
           [min]="minCheckOutDate"
           (dateChange)="onCheckOutDateChange($event)"
+          required
         />
         <mat-datepicker-toggle
           matIconSuffix
@@ -68,7 +70,7 @@
         </mat-error>
       </mat-form-field>
 
-      <button class="btn book-btn" type="submit">Book Now</button>
+      <button class="btn book-btn" type="submit" [disabled]="!(checkInDateSelected && checkOutDateSelected)">Book Now</button>
     </form>
   </div>
 </section>
