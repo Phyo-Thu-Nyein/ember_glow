@@ -109,7 +109,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.uploadSub = result.subscribe({
       next: (response: UserDetails) => {
         console.log('Profile picture uploaded successfully', response);
-        this.profilePicture = `${this.backendUrl}${response.data?.profilePicture}`;
+        this.profilePicture = `${response.data?.profilePicture}`;
         this.isLoadingUpload = false;
         this.resetFileInput();
       },
