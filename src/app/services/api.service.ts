@@ -32,6 +32,15 @@ export class ApiService {
   getOneRoomUrl: string = `${this.baseUrl}/api/v1/rooms/one-room`;
   // POST, PATCH, DELETE ROOMS will come later
 
+  // Booking related URLS
+  allBookingsUrl: string = `${this.baseUrl}/api/v1/bookings/all`;
+  myBookingsUrl: string = `${this.baseUrl}/api/v1/bookings/my`;
+  oneBookingUrl: string = `${this.baseUrl}/api/v1/bookings/one`;
+  newBookingUrl: string = `${this.baseUrl}/api/v1/bookings/new`;
+  updateBookingUrl: string = `${this.baseUrl}/api/v1/bookings/update`;
+  cancelBookingUrl: string = `${this.baseUrl}/api/v1/bookings/cancel`;
+  archiveBookingUrl: string = `${this.baseUrl}/api/v1/bookings/archive`;
+
   options = {
     headers: new HttpHeaders({
       Accept: 'text/html, application/json',
@@ -106,20 +115,55 @@ export class ApiService {
   // ROOM SECTION
   // Get all rooms (with sorting, filtering, pagination)
   getAllRooms(params: any): Observable<AllRoomsDetails> {
-    const headers = this.getAuthHeaders();
     let queryParams = new HttpParams();
     Object.keys(params).forEach(key => {
       if (params[key]) {
         queryParams = queryParams.append(key, params[key]);
       }
     });
-    const options = { headers: headers, params: queryParams };
+    const options = { params: queryParams };
     return this.http.get(this.allRoomsUrl, options);
   }
-
   // Get one room
   getRoomById(roomId: string) {
     return this.http.get(`${this.getOneRoomUrl}/${roomId}`);
+  }
+
+  // BOOKING SECTION
+  // Get all bookings
+  getAllBookings() {
+    const headers = this.getAuthHeaders();
+    return this.http.get(`${this.allBookingsUrl}`, { headers });
+  }
+  // Get my bookings
+  getMyBookings() {
+    const headers = this.getAuthHeaders();
+    return this.http.get(`${this.myBookingsUrl}`, { headers });
+  }
+  // Get one booking
+  getOneBooking() {
+    const headers = this.getAuthHeaders();
+    return this.http.get(`${this.oneBookingUrl}`, { headers });
+  }
+  // Create a new booking
+  createNewBooking(roomId: string) {
+    const headers = this.getAuthHeaders();
+    return this.http.post(`${this.newBookingUrl}/${roomId}`, { headers });
+  }
+  // Update the booking
+  updateBooking(bookingId: string) {
+    const headers = this.getAuthHeaders();
+    return this.http.patch(`${this.updateBookingUrl}/${bookingId}`, { headers });
+  }
+  // Cancel the booking
+  cancelBooking(bookingId: string) {
+    const headers = this.getAuthHeaders();
+    return this.http.patch(`${this.cancelBookingUrl}/${bookingId}`, { headers });
+  }
+  // Archive the booking (soft delete)
+  archiveBooking(bookingId: string) {
+    const headers = this.getAuthHeaders();
+    return this.http.patch(`${this.archiveBookingUrl}/${bookingId}`, { headers });
   }
 
 }

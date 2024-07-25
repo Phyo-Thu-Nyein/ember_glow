@@ -1,0 +1,50 @@
+.payment-container {
+    color: var(--clr-dark);
+    padding-top: 90px;
+}
+
+.payment-form {
+    text-align: center;
+  }
+  
+  nav {
+    margin-bottom: 20px;
+  }
+  
+  nav p {
+    font-weight: bold;
+  }
+  
+  .steps {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .steps span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    margin: 0 5px;
+  }
+  
+  .steps span.active {
+    background: #f00;
+  }
+  
+  .room-confirmation img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  button {
+    margin: 10px;
+  }
+  

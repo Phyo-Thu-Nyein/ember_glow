@@ -27,7 +27,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   isLoadingUpload: boolean = false;
   isLoadingUpdateInfo: boolean = false;
-  backendUrl: string = 'https://hotel-api-v2-ocur.onrender.com'; //backend server URL
 
   //Validate the ph no
   phoneNum: number | null = null;
@@ -57,7 +56,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.setRoleText(this.userData.data?.role!);
           if (this.userData.data.profilePicture) {
             console.log("there is a pfp", this.userData.data.profilePicture);
-            this.profilePicture = `${this.backendUrl}${this.userData.data.profilePicture}`;
+            this.profilePicture = `${this.userData.data.profilePicture}`;
             console.log(this.profilePicture);
           } 
         }

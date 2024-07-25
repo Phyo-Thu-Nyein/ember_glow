@@ -1,0 +1,47 @@
+<section class="container payment-container">
+    <div class="payment-form">
+        <nav>
+          <p>Payment Form</p>
+          <div class="steps">
+            <span *ngFor="let step of steps; let i = index" [class.active]="i <= currentStep"></span>
+          </div>
+        </nav>
+      
+        <div *ngIf="currentStep === 0">
+          <h3>Room confirmation</h3>
+          <div class="room-confirmation">
+            <img [src]="roomImages![0]" alt="Room Image">
+            <p>Room Number: {{ roomData.room_number }}</p>
+            <p>Room Type: {{ roomData.room_type }}</p>
+          </div>
+          <button (click)="nextStep()">Next</button>
+        </div>
+      
+        <div *ngIf="currentStep === 1">
+          <h3>Booking confirmation</h3>
+          <div class="booking-confirmation">
+            <p>Check In: {{ startDate | date }}</p>
+            <p>Check Out: {{ endDate | date }}</p>
+            <label for="paymentMethod">Payment Method</label>
+            <select id="paymentMethod" [(ngModel)]="paymentMethod">
+              <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
+            </select>
+            <label for="fileUpload">File Upload</label>
+            <input type="file" id="fileUpload" (change)="onFileChange($event)">
+            <p *ngIf="file">{{ file.name }}</p>
+            <p class="error" *ngIf="fileError">{{ fileError }}</p>
+          </div>
+          <button (click)="previousStep()">Previous</button>
+          <button (click)="nextStep()">Next</button>
+        </div>
+      
+        <div *ngIf="currentStep === 2">
+          <h3>All done!</h3>
+          <div class="confirmation">
+            <p>Thank you for booking at EmberGlow! The details will be sent to your email.</p>
+          </div>
+          <button (click)="makeBooking(roomId)">Next</button>
+        </div>
+      </div>
+      
+</section>

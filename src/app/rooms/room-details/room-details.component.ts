@@ -7,19 +7,25 @@ import {
   ViewChildren,
   QueryList,
 } from '@angular/core';
-import { FormControl, FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  AbstractControl,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OneRoomData, OneRoomDetails } from 'src/app/interface/allrooms-detail';
 import { ApiService } from 'src/app/services/api.service';
 
-const minDateValidator: ValidatorFn = (control: AbstractControl): { [key: string]: boolean } | null => {
+const minDateValidator: ValidatorFn = (
+  control: AbstractControl
+): { [key: string]: boolean } | null => {
   if (control.value && control.value < new Date()) {
     return { minDate: true };
   }
   return null;
 };
-
 
 @Component({
   selector: 'app-room-details',
@@ -32,6 +38,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Variables
   oneRoomData: OneRoomData = {};
+  roomId: string = ''; // pass to booking details page
   // Image showcase
   bigImg: string = '';
   imgArray: OneRoomData['images'] = [];
@@ -53,8 +60,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private route: ActivatedRoute,
-    private elementRef: ElementRef
+    private route: ActivatedRoute
   ) {}
 
   // OnInit & OnDestroy
@@ -80,6 +86,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.oneRoomData = response.data!;
         this.imgArray = this.oneRoomData.images!;
         this.bigImg = this.imgArray[0];
+        this.roomId = this.oneRoomData._id!;
 
         // Add the selected class to the first image after setting imgArray
         setTimeout(() => {
@@ -149,19 +156,21 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.range.controls.end.reset();
     }
   }
-  
+
   onCheckOutDateChange(event: any) {
     console.log('Check-Out Date Changed:', event.value);
     this.checkOutDateSelected = !!event.value;
     this.range.controls.end.setValue(event.value);
   }
 
+  // REDIRECT TO THE BOOKING DETAILS PAGE AFTER SELECTING DATES
   onSubmit() {
     if (this.range.valid) {
       const { start, end } = this.range.value;
       console.log('Selected dates:', { start, end });
+      this.router.navigate(['/payment', this.roomId], {
+        queryParams: { start: start!.toISOString(), end: end!.toISOString() },
+      });
     }
   }
-
-  // BOOK THE ROOM AFTER SELECTING DATES
 }

@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { authGuard } from './auth.guard';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
+import { PaymentComponent } from './rooms/payment/payment.component';
 
 const routes: Routes = [
   {
@@ -68,6 +69,10 @@ const routes: Routes = [
   {
     path: 'room-details/:roomId',
     component: RoomDetailsComponent
+  },
+  {
+    path: 'payment/:roomId',
+    component: PaymentComponent
   },
   {
     path: '**', //Wildcard
