@@ -146,9 +146,9 @@ export class ApiService {
     return this.http.get(`${this.oneBookingUrl}`, { headers });
   }
   // Create a new booking
-  createNewBooking(roomId: string) {
+  createNewBooking(roomId: string, formData: FormData) {
     const headers = this.getAuthHeaders();
-    return this.http.post(`${this.newBookingUrl}/${roomId}`, { headers });
+    return this.http.post(`${this.newBookingUrl}/${roomId}`, formData, { headers });
   }
   // Update the booking
   updateBooking(bookingId: string) {

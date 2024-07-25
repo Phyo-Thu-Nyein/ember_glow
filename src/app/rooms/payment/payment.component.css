@@ -1,50 +1,241 @@
 .payment-container {
-    color: var(--clr-dark);
-    padding-top: 90px;
+  color: var(--clr-amber50);
+  padding-top: 90px;
 }
 
 .payment-form {
-    text-align: center;
-  }
+  height: 505.38px;
+  text-align: center;
+  background-color: #00000055;
+  border-radius: 10px;
+  padding: .7rem 1rem;
+}
+
+nav {
+  margin-bottom: 20px;
+}
+
+nav h1 {
+  font-weight: bold;
+  font-size: var(--size-2xl);
+  margin: .5rem 0 1rem;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.steps span {
+  width: 15px;
+  height: 15px;
+  background-color: #d2b61a;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  transition: color .4s;
+}
+
+.steps span.active {
+  background-color: var(--clr-gold);
+}
+
+.steps::before {
+  content: '';
+  border-radius: 2px;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 3px;
+  background-color: #d2b61a;
+  z-index: 0;
+}
+
+.steps .progress {
+  border-radius: 2px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 3px;
+  background-color: var(--clr-gold);
+  z-index: 0;
+  transition: width .2s;
+}
+
+/* Confirmation part */
+.confirmation-wrapper {
+  position: relative;
+  height: 100%;
+}
+.confirmation-wrapper .btn {
+  position: absolute;
+  font-size: var(--size-base);
+}
+
+/* STEP-1 Room confimation */
+.room-confirmation {
   
-  nav {
-    margin-bottom: 20px;
-  }
-  
-  nav p {
-    font-weight: bold;
-  }
-  
-  .steps {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
-  
-  .steps span {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #ccc;
-    margin: 0 5px;
-  }
-  
-  .steps span.active {
-    background: #f00;
-  }
-  
-  .room-confirmation img {
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-  }
-  
-  .error {
-    color: red;
-  }
-  
-  button {
-    margin: 10px;
-  }
-  
+}
+.room-confirm-text {
+  margin-bottom: .7rem;
+}
+.room-info {
+  justify-content: space-around;
+}
+.room-info p {
+  margin: .5rem 0 1rem;
+  font-size: var(--size-lg);
+  font-weight: bold;
+}
+.room-confirm-btn {
+  bottom: 15px;
+  right: 25px;
+}
+
+.room-confirmation img {
+  max-width: 100%;
+  border-radius: 10px;
+  height: auto;
+  margin: .5rem 0;
+}
+
+/* STEP-2 Booking confirmation part */
+.booking-confirmation {
+  background-color: #00000047;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.booking-confirmation th {
+  width: 100%;
+  height: 50px;
+  font-size: var(--size-lg);
+  text-align: left;
+  padding: .7rem;
+}
+td {
+  height: 10px;
+}
+.hr-line-row {
+  height: 20px;
+}
+.line {
+  width: 90%;
+  margin: 0 auto;
+  border: 3px solid #fff;
+}
+/* file upload style */
+.file-msg {
+  font-weight: bold;
+  gap: .2rem;
+}
+.file-msg i {
+  font-size: var(--size-lg);
+}
+input[type="file"] {
+  margin: .4rem 0 0 1.4rem;
+  font-size: var(--size-base);
+  width: 250px;
+}
+input[type="file"]::file-selector-button {
+  font-family: 'Chillax', sans-serif;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  padding: .5rem;
+  border: 2px solid var(--clr-gold);
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* booking confirm step buttons */
+.prev-btn {
+  background-color: transparent;
+  border: 1px solid var(--clr-dark);
+  box-shadow: none;
+  bottom: 15px;
+  left: 25px;
+}
+.book-btn {
+  padding: .5rem 1.8rem;
+  bottom: 15px;
+  right: 25px;
+}
+
+.file-error {
+  color: #ef4444;
+  font-size: var(--size-sm);
+}
+
+/* STEP-3 ALL DONE PART */
+.all-done-card {
+  background-color: #0000007e;
+  border-radius: 10px;
+  flex-direction: column;
+  padding: 1rem .6rem 1.5rem;
+  position: relative;
+}
+.all-done-card i {
+  font-size: 13rem;
+  color: #a3e635;
+}
+.all-done-card h3 {
+  font-size: var(--size-2xl);
+  margin-bottom: .4rem;
+}
+.finish-btn {
+  bottom: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--size-xl) !important;
+}
+
+/* Error Dialog */
+.error-wrapper {
+  background-color: #0000002e;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  z-index: 10000;
+}
+.error-dialog {
+  background-color: var(--clr-amber100);
+  border-radius: 10px;
+  width: 300px;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: .7rem;
+  text-align: center;
+}
+.error-status {
+  width: 100%;
+  background-color: #ef4444;
+  border-radius: 10px 10px 0 0;
+  padding: 1rem;
+  font-size: var(--size-4xl);
+}
+.error-message {
+  padding: 0 .2rem;
+  color: var(--clr-dark);
+  font-size: var(--size-xl);
+  font-weight: bold;
+}
+.close-btn {
+  background-color: transparent;
+  margin: .5rem 0 1rem;
+  box-shadow: none;
+  border: 1px solid var(--clr-dark);
+  font-size: var(--size-lg);
+}
