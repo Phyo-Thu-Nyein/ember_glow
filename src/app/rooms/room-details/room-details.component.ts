@@ -35,10 +35,12 @@ const minDateValidator: ValidatorFn = (
 export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   // Subscription
   oneRoomSub: Subscription = new Subscription();
+  bookedDatesSub: Subscription = new Subscription();
 
   // Variables
   oneRoomData: OneRoomData = {};
   roomId: string = ''; // pass to booking details page
+  bookedDates: { checkIn: string, checkOut: string }[] = [];
   // Image showcase
   bigImg: string = '';
   imgArray: OneRoomData['images'] = [];
@@ -69,11 +71,15 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     this.route.params.subscribe((params) => {
       const roomId = params['roomId'];
       this.getRoomDetailsById(roomId);
+      this.getBookedDates(roomId);
     });
   }
   ngOnDestroy(): void {
     if (this.oneRoomSub) {
       this.oneRoomSub.unsubscribe();
+    }
+    if (this.bookedDatesSub) {
+      this.bookedDatesSub.unsubscribe();
     }
   }
 
@@ -87,7 +93,6 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.imgArray = this.oneRoomData.images!;
         this.bigImg = this.imgArray[0];
         this.roomId = this.oneRoomData._id!;
-
         // Add the selected class to the first image after setting imgArray
         setTimeout(() => {
           this.addInitialSelectedClass();
@@ -95,6 +100,17 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
       },
       error: (err) => {
         console.log('Error getting the room with such ID', err);
+      },
+    });
+  }
+  // Get Booked Dates
+  getBookedDates(roomId: string) {
+    this.bookedDatesSub = this.apiService.getBookedDates(roomId).subscribe({
+      next: (response: any) => {
+        this.bookedDates = response.data;
+      },
+      error: (err) => {
+        console.log("Error getting booded dates", err.message);
       },
     });
   }
@@ -130,17 +146,25 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   // DATE PICKER (CheckIn/ Out)
+  // Check if a date is booked
+  isDateBooked(date: Date): boolean {
+    return this.bookedDates.some((booking) => {
+      const checkIn = new Date(booking.checkIn);
+      const checkOut = new Date(booking.checkOut);
+      return date >= checkIn && date <= checkOut;
+    })
+  }
   // Filter for check-in date picker (no date before today)
   checkInDateFilter = (date: Date | null): boolean => {
     if (!date) return true;
     const today = new Date();
-    return date >= today;
+    return date >= today && !this.isDateBooked(date);
   };
 
   // Filter for check-out date picker (no date before check-in date)
   checkOutDateFilter = (date: Date | null): boolean => {
     if (!date || !this.range.controls.start.value) return true;
-    return date > this.range.controls.start.value;
+    return date > this.range.controls.start.value && !this.isDateBooked(date);
   };
 
   // Method to handle check-in date change

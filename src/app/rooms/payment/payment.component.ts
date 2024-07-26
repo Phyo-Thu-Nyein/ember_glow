@@ -28,7 +28,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   totalAmount?: number;
   file: File | null = null;
   fileError: string | null = null;
-  currentStep: number = 1;
+  currentStep: number = 0;
   steps: number[] = [0, 1, 2];
   isPaymentLoading: boolean = false;
 
@@ -138,7 +138,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
         this.isPaymentLoading = false;
         this.currentStep = 1;
         this.errorStatus = error.status;
-        this.errorMessage = error.message;
+        this.errorMessage = error.error.message;
         this.isError = true;
       },
     });

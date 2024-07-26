@@ -36,6 +36,7 @@ export class ApiService {
   allBookingsUrl: string = `${this.baseUrl}/api/v1/bookings/all`;
   myBookingsUrl: string = `${this.baseUrl}/api/v1/bookings/my`;
   oneBookingUrl: string = `${this.baseUrl}/api/v1/bookings/one`;
+  bookedDatesUrl: string = `${this.baseUrl}/api/v1/bookings/booked-dates`;
   newBookingUrl: string = `${this.baseUrl}/api/v1/bookings/new`;
   updateBookingUrl: string = `${this.baseUrl}/api/v1/bookings/update`;
   cancelBookingUrl: string = `${this.baseUrl}/api/v1/bookings/cancel`;
@@ -144,6 +145,11 @@ export class ApiService {
   getOneBooking() {
     const headers = this.getAuthHeaders();
     return this.http.get(`${this.oneBookingUrl}`, { headers });
+  }
+  // Get booked dates
+  getBookedDates(roomId: string) {
+    const headers = this.getAuthHeaders();
+    return this.http.get(`${this.bookedDatesUrl}/${roomId}`, { headers });
   }
   // Create a new booking
   createNewBooking(roomId: string, formData: FormData) {
