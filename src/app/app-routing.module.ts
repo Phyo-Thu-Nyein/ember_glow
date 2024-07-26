@@ -14,6 +14,7 @@ import { authGuard } from './auth.guard';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
 import { PaymentComponent } from './rooms/payment/payment.component';
+import { BookingsComponent } from './profile/bookings/bookings.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,10 @@ const routes: Routes = [
   {
     path: 'payment/:roomId',
     component: PaymentComponent
+  },
+  {
+    path: 'mybookings',
+    component: BookingsComponent
   },
   {
     path: '**', //Wildcard

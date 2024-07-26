@@ -1,0 +1,37 @@
+<section class="container mybookings-container">
+  <h1>My Bookings</h1>
+  <div class="cards-wrapper">
+    <div *ngFor="let booking of myBookings" class="booking-cards">
+    <span 
+    class="booking-status"
+    [ngClass]="{
+        'amber100' : booking.status === 'Pending' || booking.status === 'Archived',
+        'green' : booking.status === 'Confirmed',
+        'red' : booking.status === 'Failed' || booking.status === 'Cancelled'
+    }"
+    >
+    {{ booking.status }}
+</span>
+      <img src="{{ (booking.room?.images)![0] }}" alt="Room Image" />
+      <p>
+        <span class="room-no"> RoomNo. {{ booking.room?.room_number! }} </span>
+        <span class="room-type"> Type: {{ booking.room?.room_type! }} </span>
+        <span class="check-in">
+          {{ booking.checkIn! | date : "yyyy-MMM-dd" }}
+        </span>
+        <span class="check-out">
+          {{ booking.checkOut! | date : "yyyy-MMM-dd" }}
+        </span>
+      </p>
+      <button class="proof-btn" onclick="proof.showModal()" (click)="getPaymentProof(booking.paymentProof!)">Show Payment Proof</button>
+      <!-- <img src="{{ booking.paymentProof! }}" alt="Payment Proof"> -->
+    </div>
+  </div>
+  <!-- dialog to show the payment proof image -->
+   <dialog id="proof">
+        <img src="{{paymentProof}}" alt="payment proof image">
+        <button class="close-btn" onclick="proof.close()">
+            <i class='bx bx-x-circle'></i>
+        </button>
+   </dialog>
+</section>

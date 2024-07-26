@@ -33,6 +33,7 @@ import { AllUsersComponent } from './all-users/all-users.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
 import { PaymentComponent } from './rooms/payment/payment.component';
+import { BookingsComponent } from './profile/bookings/bookings.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { PaymentComponent } from './rooms/payment/payment.component';
     AllUsersComponent,
     RoomDetailsComponent,
     PaymentComponent,
+    BookingsComponent,
   ],
   imports: [
     BrowserModule,

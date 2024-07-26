@@ -6,8 +6,8 @@ export interface BookingPaymentDetails {
 }
 export interface BookingPaymentData {
     _id?:           string;
-    room?:          Room;
-    user?:          User;
+    room?:          BookingPaymentRoom;
+    user?:          BookingPaymentUser;
     checkIn?:       Date;
     checkOut?:      Date;
     status?:        string;
@@ -18,11 +18,11 @@ export interface BookingPaymentData {
     updatedAt?:     Date;
     __v?:           number;
 }
-export interface Room {
+export interface BookingPaymentRoom {
     _id?:         string;
     room_number?: string;
 }
-export interface User {
+export interface BookingPaymentUser {
     _id?:             string;
     normalized_name?: string;
 }
@@ -72,3 +72,42 @@ export interface OneBookingData {
     updatedAt?:     Date;
     __v?:           number;
 }
+
+
+// My Bookings
+export interface MyBookings {
+    status?:        string;
+    message?:       string;
+    data?:          MyBookingsDatum[];
+    totalBookings?: number;
+    totalPages?:    number;
+    currentPage?:   number;
+}
+
+export interface MyBookingsDatum {
+    _id?:           string;
+    room?:          MyBookingsRoom;
+    user?:          MyBookingsUser;
+    checkIn?:       Date;
+    checkOut?:      Date;
+    status?:        string;
+    paymentMethod?: string;
+    paymentProof?:  string;
+    paymentStatus?: string;
+    createdAt?:     Date;
+    updatedAt?:     Date;
+    __v?:           number;
+}
+
+export interface MyBookingsRoom {
+    _id?:         string;
+    room_number?: string;
+    room_type?: string;
+    images?:      string[];
+}
+
+export interface MyBookingsUser {
+    _id?:  string;
+    name?: string;
+}
+
