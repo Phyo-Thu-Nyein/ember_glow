@@ -1,6 +1,6 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserDetails } from '../interface/user-details';
@@ -16,7 +16,11 @@ export class LoginComponent implements OnDestroy {
   loginSub: Subscription = new Subscription();
 
   @ViewChild('loginForm') loginForm?: NgForm;
-  constructor(private router: Router, private apiService: ApiService) {}
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private route: ActivatedRoute
+  ) {}
 
   onSubmit: boolean = false; //loading animation
   email: string = '';
@@ -24,10 +28,10 @@ export class LoginComponent implements OnDestroy {
 
   //Turn green if valid else red
   isFieldValid(field: NgModel) {
-    return field.valid && (field.touched || field.dirty)
+    return field.valid && (field.touched || field.dirty);
   }
   isFieldInvalid(field: NgModel) {
-    return !field.valid && (field.touched || field.dirty)
+    return !field.valid && (field.touched || field.dirty);
   }
 
   //Login
@@ -39,15 +43,17 @@ export class LoginComponent implements OnDestroy {
       password: this.password,
     };
     var result = this.apiService.login(loginPayLoad);
-    this.loginSub = result
-    .subscribe({
+    this.loginSub = result.subscribe({
       next: (response: UserDetails) => {
         if (response.status == 'success') {
           //api responded with login success
           localStorage.setItem('token', response.accessToken!);
           this.onSubmit = false;
-          // alert(response.status);
-          this.router.navigateByUrl('rooms');
+
+          // Get the last page's url from query params or default route to 'rooms'
+          const returnUrl =
+            this.route.snapshot.queryParams['returnUrl'] || 'rooms';
+          this.router.navigateByUrl(returnUrl);
         }
       },
       error: (err: HttpErrorResponse) => {

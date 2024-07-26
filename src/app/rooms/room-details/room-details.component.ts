@@ -41,6 +41,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   oneRoomData: OneRoomData = {};
   roomId: string = ''; // pass to booking details page
   bookedDates: { checkIn: string, checkOut: string }[] = [];
+  checkLoggedIn: boolean = true;
   // Image showcase
   bigImg: string = '';
   imgArray: OneRoomData['images'] = [];
@@ -67,6 +68,8 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // OnInit & OnDestroy
   ngOnInit(): void {
+    this.loginCheck(); // check the user is logged in or not
+    console.log("is logged in?",this.checkLoggedIn);
     // GET the Room ID passed from parameter
     this.route.params.subscribe((params) => {
       const roomId = params['roomId'];
@@ -189,12 +192,28 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // REDIRECT TO THE BOOKING DETAILS PAGE AFTER SELECTING DATES
   onSubmit() {
-    if (this.range.valid) {
+    if (this.checkLoggedIn == false) {
+      this.redirectToLogin();
+    }
+    else if (this.range.valid) {
       const { start, end } = this.range.value;
       console.log('Selected dates:', { start, end });
       this.router.navigate(['/payment', this.roomId], {
         queryParams: { start: start!.toISOString(), end: end!.toISOString() },
       });
     }
+  }
+  
+  // Check if the user is logged in
+  loginCheck() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.checkLoggedIn = false;
+    }
+  }
+  // After log in, user should return back to his last page (position)
+  redirectToLogin() {
+    const returnUrl = this.router.url; // Get the current url
+    this.router.navigate(['/login'], { queryParams: { returnUrl } });
   }
 }
