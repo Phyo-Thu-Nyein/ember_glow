@@ -1,5 +1,9 @@
 <section class="container payment-container">
   <div class="payment-form">
+    <div class="payment-imgs">
+      <img *ngIf="currentStep === 0 || currentStep === 1" src="../../../assets/images/payment/payment1.png" alt="">
+      <img *ngIf="currentStep === 2" src="../../../assets/images/payment/payment2.png" alt="">
+    </div>
     <nav>
       <h1 *ngIf="currentStep === 0">Confirmation</h1>
       <h1 *ngIf="currentStep === 1">Payment</h1>
@@ -68,8 +72,8 @@
         </tr>
       </table>
       <span class="file-msg flex" title="Image should be under 1MB">
-        Upload an image of payment check 
-        <i class='bx bx-info-circle' title="Image should be under 1MB"></i>
+        Upload an image of payment check
+        <i class="bx bx-info-circle" title="Image should be under 1MB"></i>
       </span>
       <input
         type="file"
@@ -81,7 +85,11 @@
       <button class="btn prev-btn" type="reset" (click)="previousStep()">
         Previous
       </button>
-      <button [disabled]="!file"class="btn book-btn" type="submit">
+      <button
+        [disabled]="!file || isPaymentLoading"
+        class="btn book-btn"
+        type="submit"
+      >
         <span *ngIf="!isPaymentLoading">Book</span>
         <i *ngIf="isPaymentLoading" class="bx bx-loader-circle bx-spin"></i>
       </button>
