@@ -16,24 +16,6 @@
   <form (ngSubmit)="filterRooms()" class="filter-bar flex">
     <!-- dropdowns -->
     <div class="dropdowns-containers flex">
-      <!-- room type -->
-      <select [(ngModel)]="params.roomType" name="type">
-        <option value="">Type</option>
-        <option value="Suite">Suite</option>
-        <option value="Superior">Superior</option>
-        <option value="Deluxe">Deluxe</option>
-        <option value="Standard">Standard</option>
-      </select>
-
-      <!-- room status -->
-      <select [(ngModel)]="params.status" name="status">
-        <option value="">Status</option>
-        <option value="Available">Available</option>
-        <option value="Booked">Booked</option>
-      </select>
-    </div>
-
-    <div class="dropdowns-containers flex">
       <!-- min - max price -->
       <div class="mimx-price-wrapper input-box flex">
         <input
@@ -50,6 +32,17 @@
           name="maxprice"
         />
       </div>
+    </div>
+
+    <div class="dropdowns-containers flex">
+      <!-- room type -->
+      <select [(ngModel)]="params.roomType" name="type">
+        <option value="">Type</option>
+        <option value="Suite">Suite</option>
+        <option value="Superior">Superior</option>
+        <option value="Deluxe">Deluxe</option>
+        <option value="Standard">Standard</option>
+      </select>
       <!-- sort order -->
       <select [(ngModel)]="params.sortOrder" name="sortOrder">
         <option value="asc">Sort Order</option>
