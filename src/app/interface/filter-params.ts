@@ -21,3 +21,12 @@ export interface RoomFilterParams {
   checkIn:        string;
   checkOut:       string;
 }
+
+// My Bookings filters
+export interface MyBookingsFilterParams {
+  page:           number;
+  limit:          number;
+  sortBy:         string;
+  orderBy:        string;
+  status:         string;
+}

@@ -137,9 +137,16 @@ export class ApiService {
     return this.http.get(`${this.allBookingsUrl}`, { headers });
   }
   // Get my bookings
-  getMyBookings() {
+  getMyBookings(params: any) {
+    let queryParams = new HttpParams();
     const headers = this.getAuthHeaders();
-    return this.http.get(`${this.myBookingsUrl}`, { headers });
+    Object.keys(params).forEach(key => {
+      if (params[key]) {
+        queryParams = queryParams.append(key, params[key]);
+      }
+    });
+    const options = { headers: headers, params: queryParams }
+    return this.http.get(`${this.myBookingsUrl}`, options);
   }
   // Get one booking
   getOneBooking() {
