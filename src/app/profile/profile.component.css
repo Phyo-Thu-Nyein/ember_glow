@@ -1,5 +1,5 @@
 .profile-container {
-    padding: 70px .5rem 50px;
+    padding: 70px .5rem 100px;
     color: var(--clr-amber50);
 }
 
@@ -42,8 +42,7 @@ h1 {
 /* profile pic upload */
 .profile-upload-form {
     margin-top: .5rem;
-    flex-direction: column;
-    gap: .5rem;
+    gap: 1.5rem;
     position: relative;
 }
 
@@ -72,7 +71,7 @@ input[type="file"]::file-selector-button {
     /* border: 1px solid green; */
     position: absolute;
     top: .55rem;
-    right: -.3rem;
+    right: 4.6rem;
 }
 
 .tooltip-wrapper span {
@@ -174,11 +173,10 @@ td {
 
 /* GET ALL USERS SECTION */
 .all-users-wrapper {
-    color: var(--clr-dark);
     margin: 2rem 0;
 }
-.get-all-btn, .psw-toggle-btn {
-    margin-top: 1rem;
+.get-all-btn {
+    margin: 1rem 0 .5rem;
     gap: .3rem;
     font-size: var(--size-lg);
 }
@@ -186,12 +184,42 @@ td {
     font-size: var(--size-xl);
 }
 
+/* Other settings heading */
+h3.other-settings {
+    font-size: var(--size-2xl);
+    color: var(--clr-dark);
+    margin: 2rem auto 1rem;
+}
+
 /* UPDATE PASSWORD SETTING */
 .update-psw-wrapper {
     color: var(--clr-dark);
     
 }
-.form-wrapper h3 {
+.psw-update-form {
+    background-color: rgba(27, 27, 27, 0.397);
+    padding: 1rem;
+    border-radius: .6rem;
+}
+.psw-update-form .input-box input{
+    height: 40px;
+    margin: .3rem 0;
+}
+.psw-update-form .input-box input::placeholder {
+    color: var(--clr-amber50);
+}
+.save-psw-btn {
+    width: 8rem;
+}
+.save-psw-btn i {
+    font-size: var(--size-2xl);
+}
+
+/* Get My Bookings */
+.get-bookings-btn {
+    font-size: var(--size-xl);
+    display: block;
+    margin: 1rem auto;
 }
 
 /* xs */
@@ -224,10 +252,6 @@ td {
         /* border: 1px solid red; */
         margin: -.5rem 0 0 1rem;
         width: 280px;
-    }
-
-    .profile-upload-form {
-        flex-direction: row;
     }
 
     .tooltip-wrapper {

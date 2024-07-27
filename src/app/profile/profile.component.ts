@@ -33,10 +33,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   isPhoneValid: boolean = true;
 
   // Update Password
-  isPswMode: boolean = false;
   oldPassword: string = '';
   newPassword: string = '';
   confirmNewPassword: string = '';
+  passwordsMatch: boolean = true;
+  pswLoading: boolean = false;
   
   constructor(private apiService: ApiService) {}
 
@@ -45,22 +46,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   fetchUserData() {
-    console.log("fetching user data!!!!!!!!!!!!")
+    console.log("fetching user data!")
     this.isLoading = true;
     var result = this.apiService.getUserProfile();
     this.userProfileSub = result.subscribe({
       next: (response: UserDetails) => {
         this.userData = response;
-        console.log("User data: ", this.userData);
         if (this.userData && this.userData.data) {
           this.setRoleText(this.userData.data?.role!);
           if (this.userData.data.profilePicture) {
-            console.log("there is a pfp", this.userData.data.profilePicture);
             this.profilePicture = `${this.userData.data.profilePicture}`;
-            console.log(this.profilePicture);
           } 
         }
         this.isLoading = false;
+        console.log("user data fetched!");
       },
       error: (err) => {
         console.log("Error fetching user data: ", err.message);
@@ -160,11 +159,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.validatePhone(this.phoneNum);
   }
 
-  // Update Password
-  toggleUpdatePswMode() {
-    this.isPswMode = !this.isPswMode;
+  //Validate the passwords
+  validatePasswords() {
+    this.passwordsMatch = this.newPassword === this.confirmNewPassword && this.confirmNewPassword.length == this.newPassword.length;
+  }
+  onPasswordChange() {
+    this.validatePasswords();
+  }
+  onConfirmPasswordChange() {
+    this.validatePasswords();
   }
   changePassword() {
+    this.pswLoading = true;
     if (this.newPassword !== this.confirmNewPassword) {
       alert('New passwords do not match');
       return;
@@ -178,13 +184,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.apiService.updatePsw(payload).subscribe({
       next: (response) => {
         alert('Password updated successfully');
-        this.isPswMode = false;
         this.oldPassword = '';
         this.newPassword = '';
         this.confirmNewPassword = '';
+        this.pswLoading = false;
       },
       error: (err) => {
         alert(`Error updating password: ${err.message}`);
+        this.pswLoading = false;
       },
     });
   }

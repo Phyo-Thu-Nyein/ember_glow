@@ -65,7 +65,7 @@
           </button>
           <div class="tooltip-wrapper">
             <i class="bx bx-info-circle tooltip"></i>
-            <span>limit < 500KB</span>
+            <span>limit < 1MB</span>
           </div>
         </form>
       </div>
@@ -248,6 +248,9 @@
     </div>
   </div>
 
+  <!-- Get My Bookings -->
+  <button class="btn get-bookings-btn">My Bookings</button>
+
   <!-- Get all users button/ link for Manager Role -->
   <div *ngIf="roleText == 'Manager'" class="all-users-wrapper">
     <h3>Manager Previlege</h3>
@@ -257,66 +260,68 @@
   </div>
 
   <!-- Change password -->
+  <h3 class="other-settings">Other Settings</h3>
   <div class="update-psw-wrapper">
-    <h3>Other Settings</h3>
-    <button class="btn psw-toggle-btn flex" (click)="toggleUpdatePswMode()">
-      Change Password <i class="bx bx-lock"></i>
-    </button>
-  </div>
-  <form #updatePswForm="ngForm" (ngSubmit)="changePassword()" *ngIf="isPswMode">
-    <div class="input-box">
-      <input
-        [(ngModel)]="oldPassword"
-        name="oldPassword"
-        type="password"
-        placeholder="Old Password"
-        required
-        minlength="8"
-        #oldPsw = "ngModel"
-      />
-      <!-- error message -->
-      <p
-      class="text-red-bold"
-      *ngIf="!oldPsw.valid && oldPsw.touched"
+    <form
+      class="psw-update-form"
+      #updatePswForm="ngForm"
+      (ngSubmit)="changePassword()"
     >
-      at least 8 characters
-    </p>
-    </div>
-    <div class="input-box">
-      <input
-        [(ngModel)]="newPassword"
-        name="newPassword"
-        type="password"
-        placeholder="New Password"
-        required
-        #newPsw = "ngModel"
-      />
-      <!-- error message -->
-      <p
-      class="text-red-bold"
-      *ngIf="!newPsw.valid && newPsw.touched"
-    >
-      at least 8 characters
-    </p>
-    </div>
-    <div class="input-box">
-      <input
-        [(ngModel)]="confirmNewPassword"
-        name="confirmNewPassword"
-        type="password"
-        placeholder="Confirm New Password"
-        required
-        #cNewPsw = "ngModel"
-      />
-      <!-- error message -->
-      <p
-      class="text-red-bold"
-      *ngIf="!cNewPsw.valid && cNewPsw.touched"
-    >
-      at least 8 characters
-    </p>
-    </div>
+      <div class="input-box">
+        <input
+          [(ngModel)]="oldPassword"
+          name="oldPassword"
+          type="password"
+          placeholder="Old Password"
+          required
+          minlength="8"
+          #oldPsw="ngModel"
+        />
+        <!-- error message -->
+        <p class="text-red-bold" *ngIf="!oldPsw.valid && oldPsw.touched">
+          at least 8 characters
+        </p>
+      </div>
+      <div class="input-box">
+        <input
+          [(ngModel)]="newPassword"
+          name="newPassword"
+          type="password"
+          placeholder="New Password"
+          (input)="onPasswordChange()"
+          required
+          #newPsw="ngModel"
+          #passwordField
+        />
+        <!-- error message -->
+        <p class="text-red-bold" *ngIf="!newPsw.valid && newPsw.touched">
+          at least 8 characters
+        </p>
+      </div>
+      <div class="input-box">
+        <input
+          [(ngModel)]="confirmNewPassword"
+          name="confirmNewPassword"
+          type="password"
+          placeholder="Confirm New Password"
+          (input)="onConfirmPasswordChange()"
+          required
+          #cNewPsw="ngModel"
+          #confirmPasswordField
+        />
+        <!-- error message -->
+        <p class="text-red-bold" *ngIf="!passwordsMatch && cNewPsw.touched">
+          passwords must match
+        </p>
+      </div>
 
-    <button class="btn">Change Password</button>
-  </form>
+      <button
+        class="btn save-psw-btn flex"
+        [disabled]="updatePswForm.invalid || !passwordsMatch || pswLoading"
+      >
+        <i *ngIf="pswLoading" class="bx bx-loader-circle bx-spin"></i>
+        <span *ngIf="!pswLoading">Save Password</span>
+      </button>
+    </form>
+  </div>
 </section>
