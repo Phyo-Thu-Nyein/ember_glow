@@ -18,6 +18,10 @@ h1 {
     box-shadow: 10px 10px 10px #070a1311,
         -10px -10px 10px #fef8dd;
     position: relative;
+    scale: .9; opacity: 0;
+    animation: fade-in linear forwards;
+    animation-timeline: view();
+    animation-range: 100px 300px;
 
 }
 .booking-status {

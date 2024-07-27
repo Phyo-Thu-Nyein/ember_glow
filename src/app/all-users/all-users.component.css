@@ -30,6 +30,10 @@
     padding: 1.5rem 1rem;
     /* position for logo */
     position: relative;
+    scale: .9; opacity: 0;
+    animation: fade-in linear forwards;
+    animation-timeline: view();
+    animation-range: 100px 300px;
 }
 
 .user-card:hover {

@@ -104,6 +104,10 @@
     width: 350px;
     padding: .5rem .5rem 1rem;
     margin-bottom: 1.5rem;
+    scale: .9; opacity: 0;
+    animation: fade-in linear forwards;
+    animation-timeline: view();
+    animation-range: 100px 300px;
 }
 
 .img-container {

@@ -249,7 +249,7 @@
   </div>
 
   <!-- Get My Bookings -->
-  <button [disabled]="isLoading" *ngIf="roleText =='Guest'" class="btn get-bookings-btn">My Bookings</button>
+  <button routerLink="/mybookings" [disabled]="isLoading" *ngIf="roleText =='Guest'" class="btn get-bookings-btn">My Bookings</button>
 
   <!-- Get all users button/ link for Manager Role -->
   <div *ngIf="roleText == 'Manager'" class="all-users-wrapper">

@@ -22,6 +22,12 @@
     margin: 1rem 0;
     position: relative;
 }
+.restaur__img-wrapper img {
+    scale: .9; opacity: 0;
+    animation: fade-in linear forwards;
+    animation-timeline: view();
+    animation-range: 100px 300px;
+}
 .restaur__text {
     margin-bottom: 1rem;
 }

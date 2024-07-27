@@ -4,8 +4,6 @@
     overflow-x: hidden;
     overflow-y: auto;
     perspective: 10px;
-    scroll-snap-type: y proximity;
-    scroll-padding-top: 70px;
 }
 
 /* FLEX FOR GLOBAL USE  */
@@ -24,7 +22,6 @@
     align-items: center;
     height: 100%;
     transform-style: preserve-3d;
-    scroll-snap-align: center;
     z-index: -1;
 }
 
@@ -77,8 +74,7 @@
     height: auto;
     text-align: center;
     color: var(--clr-dark);
-    border-radius: 10px; 
-    scroll-snap-align: start;
+    border-radius: 10px;
 }
 
 .room-section__greeting {
@@ -102,6 +98,12 @@
 
 .room__img-wrapper {
     position: relative;
+}
+.room__img-wrapper img {
+    scale: .9; opacity: 0;
+    animation: fade-in linear forwards;
+    animation-timeline: view();
+    animation-range: 100px 500px;
 }
 
 .room__text {
