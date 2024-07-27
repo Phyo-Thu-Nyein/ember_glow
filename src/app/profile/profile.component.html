@@ -249,11 +249,11 @@
   </div>
 
   <!-- Get My Bookings -->
-  <button class="btn get-bookings-btn">My Bookings</button>
+  <button [disabled]="isLoading" *ngIf="roleText =='Guest'" class="btn get-bookings-btn">My Bookings</button>
 
   <!-- Get all users button/ link for Manager Role -->
   <div *ngIf="roleText == 'Manager'" class="all-users-wrapper">
-    <h3>Manager Previlege</h3>
+    <h3 class="manager-settings-h3">Manager Previlege</h3>
     <button class="btn get-all-btn flex" routerLink="/all-users">
       View All Users <i class="bx bx-group"></i>
     </button>

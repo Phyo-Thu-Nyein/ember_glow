@@ -167,7 +167,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
   // Finished booking
   finish() {
-    this.router.navigateByUrl('/profile');
+    this.router.navigateByUrl('/mybookings');
   }
 
   // Error dialog (modal/ handling)
