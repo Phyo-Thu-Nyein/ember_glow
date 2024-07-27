@@ -6,8 +6,22 @@ export const authGuard: CanActivateFn = (
   state: RouterStateSnapshot
 ) => {
   const router = inject(Router);
+
   if (isLoggedIn()) {
-    return true; //User is authenticated
+
+    const requiredRole = route.data['role'];
+
+    if (requiredRole === undefined) {
+      return true;
+    } else {
+      const userRole = getUserRole();
+      if (userRole == requiredRole) {
+        return true; // Authenticated and has the exact required role
+      } else {
+        router.navigate(['/login']);
+        return false;
+      }
+    }
   } else {
     router.navigate(['/login']);
     return false;
@@ -16,4 +30,10 @@ export const authGuard: CanActivateFn = (
 
 function isLoggedIn(): boolean {
   return !!localStorage.getItem('token');
+}
+
+// Get the user's role
+function getUserRole(): number {
+  const role = localStorage.getItem('role');
+  return role ? parseInt(role, 10) : 0; // Guest role if no role found
 }

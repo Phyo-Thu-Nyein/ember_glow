@@ -48,6 +48,7 @@ export class LoginComponent implements OnDestroy {
         if (response.status == 'success') {
           //api responded with login success
           localStorage.setItem('token', response.accessToken!);
+          localStorage.setItem('role', response.data?.role?.toString()!);
           this.onSubmit = false;
 
           // Get the last page's url from query params or default route to 'rooms'

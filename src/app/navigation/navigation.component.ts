@@ -21,6 +21,7 @@ export class NavigationComponent implements OnInit {
   }
   logOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     this.router.navigateByUrl('login');
   }
 

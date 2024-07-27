@@ -11,6 +11,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
 import { authGuard } from './auth.guard';
+import { alreadyLoggedInGuard } from './already-logged-in.guard';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
 import { PaymentComponent } from './rooms/payment/payment.component';
@@ -54,14 +55,18 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate: [alreadyLoggedInGuard] // Redirect to profile if already logged in
   },
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [alreadyLoggedInGuard] // Redirect if already logged in
   },
   {
     path: 'all-users',
     component: AllUsersComponent,
+    canActivate: [authGuard],
+    data: { role: 1} // Manager role required
   },
   {
     path: 'not-found',
@@ -77,7 +82,9 @@ const routes: Routes = [
   },
   {
     path: 'mybookings',
-    component: BookingsComponent
+    component: BookingsComponent,
+    canActivate: [authGuard],
+    data: { role: 0 }
   },
   {
     path: '**', //Wildcard
