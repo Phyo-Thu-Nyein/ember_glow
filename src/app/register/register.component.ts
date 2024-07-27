@@ -98,7 +98,6 @@ export class RegisterComponent implements OnDestroy {
       next: (response: UserDetails) => {
         if (response.status == 'success') {
           this.onSubmit = false;
-          alert(response.status);
           this.router.navigateByUrl('login');
         }
       },
