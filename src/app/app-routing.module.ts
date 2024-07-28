@@ -12,10 +12,12 @@ import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
 import { authGuard } from './auth.guard';
 import { alreadyLoggedInGuard } from './already-logged-in.guard';
-import { AllUsersComponent } from './all-users/all-users.component';
+import { AllUsersComponent } from './manager/all-users/all-users.component';
 import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
 import { PaymentComponent } from './rooms/payment/payment.component';
 import { BookingsComponent } from './profile/bookings/bookings.component';
+import { AllBookingsComponent } from './manager/all-bookings/all-bookings.component';
+import { UpdateBookingComponent } from './manager/update-booking/update-booking.component';
 
 const routes: Routes = [
   {
@@ -50,23 +52,35 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [alreadyLoggedInGuard] // Redirect to profile if already logged in
+    canActivate: [alreadyLoggedInGuard], // Redirect to profile if already logged in
   },
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [alreadyLoggedInGuard] // Redirect if already logged in
+    canActivate: [alreadyLoggedInGuard], // Redirect if already logged in
   },
   {
     path: 'all-users',
     component: AllUsersComponent,
     canActivate: [authGuard],
-    data: { role: 1} // Manager role required
+    data: { role: [1] }, // Manager role required
+  },
+  {
+    path: 'all-bookings',
+    component: AllBookingsComponent,
+    canActivate: [authGuard],
+    data: { role: [1, 2] }, // Manager & Reception roles required
+  },
+  {
+    path: 'update-booking/:bookingId',
+    component: UpdateBookingComponent,
+    canActivate: [authGuard],
+    data: { role: [1, 2] },
   },
   {
     path: 'not-found',
@@ -74,17 +88,17 @@ const routes: Routes = [
   },
   {
     path: 'room-details/:roomId',
-    component: RoomDetailsComponent
+    component: RoomDetailsComponent,
   },
   {
     path: 'payment/:roomId',
-    component: PaymentComponent
+    component: PaymentComponent,
   },
   {
     path: 'mybookings',
     component: BookingsComponent,
     canActivate: [authGuard],
-    data: { role: 0 }
+    data: { role: 0 },
   },
   {
     path: '**', //Wildcard

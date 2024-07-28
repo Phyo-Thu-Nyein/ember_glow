@@ -1,21 +1,20 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-about-eco',
   templateUrl: './about-eco.component.html',
-  styleUrls: ['./about-eco.component.css']
+  styleUrls: ['./about-eco.component.css'],
 })
 export class AboutEcoComponent {
-
   @ViewChild('paragraph') paragraph!: ElementRef;
 
   hoveredIndex: number | null = null;
   hoverIn: boolean = true;
 
   ecoItems: any[] = [];
-  
-  constructor(private ecoDataService: ApiService) { }
+
+  constructor(private ecoDataService: ApiService) {}
 
   ngOnInit(): void {
     this.ecoDataService.getEcoData().subscribe((data) => {
@@ -42,6 +41,4 @@ export class AboutEcoComponent {
   opacityOut(): void {
     this.paragraph.nativeElement.style.opacity = '1';
   }
-
-
 }

@@ -1,0 +1,102 @@
+<section class="container booking-container">
+    <h1 class="heading">Update Booking Details</h1>
+    <!-- Displayed Booking Card -->
+     <table *ngIf="!isUpdateMode" class="booking-card">
+        <tr>
+            <td class="booking-id" colspan="2">Id: {{oneBooking._id }}</td>
+        </tr>
+        <tr>
+            <td>Room No: </td>
+            <td>{{ oneBooking.room?.room_number }}</td>
+        </tr>
+        <tr>
+            <td>Booked By: </td>
+            <td>{{ oneBooking.user?.name }}</td>
+        </tr>
+        <tr>
+            <td class="payment-proof" colspan="2">
+                <button class="view-proof-btn" popovertarget="popup">Click To View Payment Proof</button>
+            </td>
+                 <!-- View Payment Proof Image -->
+            <div class="payment-proof-img" id="popup" popover>
+              <img src="{{ oneBooking.paymentProof }}" alt="payment proof image">
+              <button popovertarget="popup" popovertargetaction="hide" class="close-popup-btn flex">
+              </button>
+            </div>
+        </tr>
+        <tr>
+            <td>Booking Status: </td>
+            <td>{{ oneBooking.status }}</td>
+        </tr>
+        <tr>
+            <td>Payment Status: </td>
+            <td>{{ oneBooking.paymentStatus }}</td>
+        </tr>
+        <tr>
+            <td>Check In: </td>
+            <td>{{ oneBooking.checkIn | date: 'yyyy-MMM-dd' }}</td>
+        </tr>
+        <tr>
+            <td>Check Out: </td>
+            <td>{{ oneBooking.checkOut | date: 'yyyy-MMM-dd' }}</td>
+        </tr>
+     </table>
+
+    <!-- Update Booking Mode -->
+     <form *ngIf="isUpdateMode">
+        <table class="booking-card">
+           <tr>
+               <td class="booking-id" colspan="2">Id: {{oneBooking._id }}</td>
+           </tr>
+           <tr>
+               <td>Room No: </td>
+               <td>{{ oneBooking.room?.room_number }}</td>
+           </tr>
+           <tr>
+               <td>Booked By: </td>
+               <td>{{ oneBooking.user?.name }}</td>
+           </tr>
+           <tr>
+               <td class="payment-proof" colspan="2">
+                   <button class="view-proof-btn" popovertarget="popup">Click To View Payment Proof</button>
+               </td>
+                    <!-- View Payment Proof Image -->
+               <div class="payment-proof-img" id="popup" popover>
+                 <img src="{{ oneBooking.paymentProof }}" alt="payment proof image">
+                 <button popovertarget="popup" popovertargetaction="hide" class="close-popup-btn flex">
+                 </button>
+               </div>
+           </tr>
+           <tr>
+               <td>Booking Status: </td>
+               <td>
+                    <select name="" id="">
+                        <option value=""></option>
+                    </select>
+               </td>
+           </tr>
+           <tr>
+               <td>Payment Status: </td>
+               <td>
+                <select name="" id="">
+                    <option value=""></option>
+                </select>
+           </td>
+           </tr>
+           <tr>
+               <td>Check In: </td>
+               <td>{{ oneBooking.checkIn | date: 'yyyy-MMM-dd' }}</td>
+           </tr>
+           <tr>
+               <td>Check Out: </td>
+               <td>{{ oneBooking.checkOut | date: 'yyyy-MMM-dd' }}</td>
+           </tr>
+        </table>
+    </form>
+
+     <!-- Update Mode Toggle button -->
+      <button class="btn toggle-btn flex" (click)="toggleUpdateMode()">
+        <span>Update</span>
+        <i class='bx bx-edit'></i>
+      </button>
+</section>

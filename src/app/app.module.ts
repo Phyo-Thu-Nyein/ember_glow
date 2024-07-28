@@ -9,9 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { DetailComponent } from './detail/detail.component';
 import { HttpClientModule } from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { RoomsComponent } from './rooms/rooms.component';
@@ -19,21 +18,22 @@ import { FacilitiesComponent } from './facilities/facilities.component';
 import { DiningComponent } from './dining/dining.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-import { ReceptionComponent } from './reception/reception.component';
-import { DiningRestaurantsComponent } from './dining-restaurants/dining-restaurants.component';
+import { DiningRestaurantsComponent } from './dining/dining-restaurants/dining-restaurants.component';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AboutMissionComponent } from './about-mission/about-mission.component';
-import { AboutTeamComponent } from './about-team/about-team.component';
-import { AboutReviewsComponent } from './about-reviews/about-reviews.component';
-import { AboutEcoComponent } from './about-eco/about-eco.component';
-import { FacilitiesDetailComponent } from './facilities-detail/facilities-detail.component';
+import { AboutMissionComponent } from './about/about-mission/about-mission.component';
+import { AboutTeamComponent } from './about/about-team/about-team.component';
+import { AboutReviewsComponent } from './about/about-reviews/about-reviews.component';
+import { AboutEcoComponent } from './about/about-eco/about-eco.component';
+import { FacilitiesDetailComponent } from './facilities/facilities-detail/facilities-detail.component';
 import { ProfileComponent } from './profile/profile.component';
-import { AllUsersComponent } from './all-users/all-users.component';
+import { AllUsersComponent } from './manager/all-users/all-users.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
 import { PaymentComponent } from './rooms/payment/payment.component';
 import { BookingsComponent } from './profile/bookings/bookings.component';
+import { AllBookingsComponent } from './manager/all-bookings/all-bookings.component';
+import { UpdateBookingComponent } from './manager/update-booking/update-booking.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +44,11 @@ import { BookingsComponent } from './profile/bookings/bookings.component';
     NavigationComponent,
     FooterComponent,
     NotfoundComponent,
-    DetailComponent,
     RoomsComponent,
     FacilitiesComponent,
     DiningComponent,
     AboutComponent,
     ContactComponent,
-    ReceptionComponent,
     DiningRestaurantsComponent,
     AboutMissionComponent,
     AboutTeamComponent,
@@ -62,6 +60,8 @@ import { BookingsComponent } from './profile/bookings/bookings.component';
     RoomDetailsComponent,
     PaymentComponent,
     BookingsComponent,
+    AllBookingsComponent,
+    UpdateBookingComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,12 +71,10 @@ import { BookingsComponent } from './profile/bookings/bookings.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

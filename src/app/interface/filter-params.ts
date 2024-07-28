@@ -30,3 +30,16 @@ export interface MyBookingsFilterParams {
   orderBy:        string;
   status:         string;
 }
+
+// All Bookings filters
+export interface AllBookingsFilterParams {
+  page:           number;
+  limit:          number;
+  sortBy:         string;
+  sortOrder:      string;
+  roomNumber:     string;
+  // userName:       string;
+  bookingStatus:  string;
+  paymentStatus:  string;
+  bookingId:      string;
+}

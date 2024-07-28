@@ -39,8 +39,6 @@ export class ApiService {
   bookedDatesUrl: string = `${this.baseUrl}/api/v1/bookings/booked-dates`;
   newBookingUrl: string = `${this.baseUrl}/api/v1/bookings/new`;
   updateBookingUrl: string = `${this.baseUrl}/api/v1/bookings/update`;
-  cancelBookingUrl: string = `${this.baseUrl}/api/v1/bookings/cancel`;
-  archiveBookingUrl: string = `${this.baseUrl}/api/v1/bookings/archive`;
 
   options = {
     headers: new HttpHeaders({
@@ -132,9 +130,16 @@ export class ApiService {
 
   // BOOKING SECTION
   // Get all bookings
-  getAllBookings() {
+  getAllBookings(params: any) {
+    let queryParams = new HttpParams();
     const headers = this.getAuthHeaders();
-    return this.http.get(`${this.allBookingsUrl}`, { headers });
+    Object.keys(params).forEach(key => {
+      if (params[key]) {
+        queryParams = queryParams.append(key, params[key]);
+      }
+    });
+    const options = { headers: headers, params: queryParams }
+    return this.http.get(`${this.allBookingsUrl}`, options);
   }
   // Get my bookings
   getMyBookings(params: any) {
@@ -149,9 +154,9 @@ export class ApiService {
     return this.http.get(`${this.myBookingsUrl}`, options);
   }
   // Get one booking
-  getOneBooking() {
+  getOneBooking(bookingId: string) {
     const headers = this.getAuthHeaders();
-    return this.http.get(`${this.oneBookingUrl}`, { headers });
+    return this.http.get(`${this.oneBookingUrl}/${bookingId}`, { headers });
   }
   // Get booked dates
   getBookedDates(roomId: string) {
@@ -167,16 +172,6 @@ export class ApiService {
   updateBooking(bookingId: string) {
     const headers = this.getAuthHeaders();
     return this.http.patch(`${this.updateBookingUrl}/${bookingId}`, { headers });
-  }
-  // Cancel the booking
-  cancelBooking(bookingId: string) {
-    const headers = this.getAuthHeaders();
-    return this.http.patch(`${this.cancelBookingUrl}/${bookingId}`, { headers });
-  }
-  // Archive the booking (soft delete)
-  archiveBooking(bookingId: string) {
-    const headers = this.getAuthHeaders();
-    return this.http.patch(`${this.archiveBookingUrl}/${bookingId}`, { headers });
   }
 
 }

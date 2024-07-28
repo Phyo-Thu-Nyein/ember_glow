@@ -4,7 +4,7 @@
   <!-- >>>> FILTER (search bar) <<<< -->
   <form (ngSubmit)="filterBookings()" class="filter-bar flex">
     <div class="dropdowns-containers flex">
-      <!-- room status -->
+      <!-- booking status -->
       <select [(ngModel)]="params.status" name="status">
         <option value="">Status</option>
         <option value="Pending">Pending</option>
@@ -71,8 +71,8 @@
           </span>
         </p>
         <button
-          class="proof-btn"
-          onclick="proof.showModal()"
+          class="proof-btn" 
+          popovertarget="popup"
           (click)="getPaymentProof(booking.paymentProof!)"
         >
           Show Payment Proof
@@ -101,11 +101,10 @@
     </button>
   </div>
 
-  <!-- dialog to show the payment proof image -->
-  <dialog id="proof">
-    <img src="{{ paymentProof }}" alt="payment proof image" />
-    <button class="close-btn" onclick="proof.close()">
-      <i class="bx bx-x-circle"></i>
+  <!-- popup to show the payment proof image -->
+  <div id="popup" popover>
+    <img src="{{ paymentProof }}" alt="payment proof image">
+    <button popovertarget="popup" popovertargetaction="hide" class="close-popup-btn flex">
     </button>
-  </dialog>
+</div>
 </section>

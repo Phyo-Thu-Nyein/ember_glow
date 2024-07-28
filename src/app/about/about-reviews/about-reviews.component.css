@@ -107,7 +107,7 @@
 }
 
 .card {
-    background-image: url(../../assets/images/about/testimonial/pattern-clean.png);
+    background-image: url(../../../assets/images/about/testimonial/pattern-clean.png);
     background-size: cover;
     border: 1px solid var(--clr-gold);
     border-radius: .5rem;

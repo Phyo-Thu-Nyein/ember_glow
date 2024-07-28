@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ApiService } from '../services/api.service';
-import { AllUserDatum, AllUsersDetails } from '../interface/allusers-detail';
+import { ApiService } from '../../services/api.service';
+import { AllUserDatum, AllUsersDetails } from '../../interface/allusers-detail';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserFilterParams } from '../interface/filter-params';
-import { NotFoundService } from '../services/not-found.service';
+import { UserFilterParams } from '../../interface/filter-params';
+import { NotFoundService } from '../../services/not-found.service';
 
 @Component({
   selector: 'app-all-users',
@@ -40,7 +40,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private notFoundService: NotFoundService
   ) {}
 
@@ -54,7 +54,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   }
 
   // LOGICS
-  // Check if the user has alrdy been redirected 
+  // Check if the user has alrdy been redirected
   checkNotFound() {
     if (this.notFoundService.getRedirectedToNotFound()) {
       this.notFoundService.setRedirectedToNotFound(false); // Reset the flag
@@ -92,7 +92,6 @@ export class AllUsersComponent implements OnInit, OnDestroy {
     this.filterUsers();
   }
 
-  
   // Update page param to reset it to 1
   resetPage() {
     // Update page param to reset it to 1

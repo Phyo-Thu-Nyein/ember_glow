@@ -1,0 +1,109 @@
+<section class="container all-bookings-container">
+  <h1>All Bookings</h1>
+  <h3>Search/ Update the bookings as needed</h3>
+
+  <!-- >>>> FILTER (search bar) <<<< -->
+  <form (ngSubmit)="filterBookings()" class="filter-bar flex">
+    <div class="dropdowns-containers flex">
+      <!-- Search with booking id (Main search) -->
+      <input type="text" [(ngModel)]="params.bookingId" name="bookingId" placeholder="Enter Booking Id" />
+      
+     <!-- booking status -->
+     <select class="booking-status" [(ngModel)]="params.bookingStatus" name="bookingStatus">
+        <option value="">Booking Status</option>
+        <option value="Pending">Pending</option>
+        <option value="Confirmed">Confirmed</option>
+        <option value="Failed">Failed</option>
+        <option value="Cancelled">Cancelled</option>
+        <option value="Archived">Archived</option>
+      </select>
+    </div>
+
+    <div class="dropdowns-containers flex">
+       <!-- payment status -->
+      <select class="payment-status" [(ngModel)]="params.paymentStatus" name="paymentStatus">
+        <option value="">Payment Status</option>
+        <option value="Pending">Pending</option>
+        <option value="Paid">Paid</option>
+        <option value="Failed">Failed</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+
+      <!-- order by -->
+      <select [(ngModel)]="params.sortOrder" name="orderBy">
+        <option value="">Order</option>
+        <option value="desc">Descending</option>
+        <option value="asc">Ascending</option>
+      </select>
+    </div>
+
+    <!-- buttons -->
+    <div class="filter-btn-container flex">
+      <button class="reset-btn btn" type="reset">Clear</button>
+      <button type="submit" class="filter-btn btn flex" (click)="resetPage()">
+        Filter
+        <i class="bx bx-filter-alt"></i>
+      </button>
+    </div>
+  </form>
+
+  <!-- Display the booking cards -->
+  <div class="booking-cards-wrapper">
+    <ng-container *ngIf="isFetching else displayBookings"> 
+        <ngx-skeleton-loader
+        count="1"
+        [theme]="{
+          'width': '344px',
+          'height': '313px',
+          'margin-top': '2rem',
+          'background-color': '#fff8db',
+          'border-radius': '10px',
+        }"
+      ></ngx-skeleton-loader>
+    </ng-container>
+    <ng-template #displayBookings> 
+        <div class="booking-card" *ngFor="let booking of bookingsDatum">
+            <p class="booking-id">Booking Id: {{ booking._id }}</p>
+            <p><span>Booked By: </span><span>{{ booking.user?.name!}}</span></p>
+            <p><span>Issued At: </span><span>{{ booking.createdAt }}</span></p>
+            <p><span>RoomNo: </span><span>{{ booking.room?.room_number!}}</span></p>
+            <p><span>CheckIn: </span><span>{{ booking.checkIn}}</span></p>
+            <p><span>CheckOut: </span><span>{{ booking.checkOut}}</span></p>
+            <p><span>Booking Status: </span><span>{{ booking.status}}</span></p>
+            <p><span>Payment Status: </span><span>{{ booking.paymentStatus}}</span></p>
+            <button class="proof-btn" popovertarget="popup" (click)="getPaymentProof(booking.paymentProof!)" >
+                Show Payment Proof
+            </button>
+            <button class="btn update-booking-btn" (click)="goToUpdateBooking(booking._id!)">
+                Update Booking
+            </button>
+            <!-- Click btn to open image popup -->
+        </div>
+        <div id="popup" popover>
+            <img src="{{ paymentProofUrl }}" alt="payment proof image">
+            <button popovertarget="popup" popovertargetaction="hide" class="close-popup-btn flex">
+            </button>
+        </div>
+    </ng-template>
+
+</div>
+<!-- Pagination -->
+<div class="pagination flex">
+  <button
+    class="arrow-btn btn"
+    [disabled]="currentPage === 1"
+    (click)="onPageChange(currentPage - 1)"
+  >
+    &lt;
+  </button>
+  <span> page {{ currentPage }} of {{ totalPages }}</span>
+  <button
+    class="arrow-btn btn"
+    [disabled]="currentPage === totalPages"
+    (click)="onPageChange(currentPage + 1)"
+  >
+    &gt;
+  </button>
+</div>
+
+</section>
