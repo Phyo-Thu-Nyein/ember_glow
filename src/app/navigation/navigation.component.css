@@ -131,6 +131,11 @@
     border: 1px solid #ffd900be;
     border-radius: 12px;
 }
+.right-part .profile-img {
+    width: 50px;
+    border: 2px solid var(--clr-gold);
+    border-radius: 50%;
+}
 
 .right-part a:hover>i {
     color: #fff;

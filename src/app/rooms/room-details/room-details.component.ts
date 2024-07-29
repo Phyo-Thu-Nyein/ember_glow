@@ -42,6 +42,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   roomId: string = ''; // pass to booking details page
   bookedDates: { checkIn: string, checkOut: string }[] = [];
   checkLoggedIn: boolean = true;
+  userRole: string | null = '0';
   // Image showcase
   bigImg: string = '';
   imgArray: OneRoomData['images'] = [];
@@ -69,7 +70,8 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   // OnInit & OnDestroy
   ngOnInit(): void {
     this.loginCheck(); // check the user is logged in or not
-    console.log("is logged in?",this.checkLoggedIn);
+    console.log("is logged in?", this.checkLoggedIn);
+    this.userRole = localStorage.getItem('role');
     // GET the Room ID passed from parameter
     this.route.params.subscribe((params) => {
       const roomId = params['roomId'];

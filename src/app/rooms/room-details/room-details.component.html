@@ -70,7 +70,7 @@
         </mat-error>
       </mat-form-field>
 
-      <button class="btn book-btn" type="submit" [disabled]="!(checkInDateSelected && checkOutDateSelected)">Book Now</button>
+      <button class="btn book-btn" type="submit" [disabled]="!(checkInDateSelected && checkOutDateSelected) || userRole=== '1'">Book Now</button>
     </form>
   </div>
 </section>

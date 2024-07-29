@@ -108,6 +108,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       next: (response: UserDetails) => {
         console.log('Profile picture uploaded successfully', response);
         this.profilePicture = `${response.data?.profilePicture}`;
+        localStorage.setItem('pfp', response.data?.profilePicture!);
         this.isLoadingUpload = false;
         this.resetFileInput();
       },

@@ -71,7 +71,7 @@
 .form-img-container .input-box input {
     background-color: transparent;
     color: var(--clr-amber50);
-    padding-left: 1rem;
+    padding: 0 1.8rem 0 1rem;
     border-radius: 10px;
     width: 100%;
     height: 100%;
