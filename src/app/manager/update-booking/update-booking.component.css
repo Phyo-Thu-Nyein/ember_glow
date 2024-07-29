@@ -29,6 +29,10 @@
     width: 100%;
     height: 100%;
 }
+.view-proof-btn:disabled {
+    opacity: .5;
+    cursor: default;
+}
 .payment-proof-img {
     width: 350px;
     margin: auto;
@@ -49,6 +53,11 @@ td {
     padding-left: .6rem;
 }
 
+/* Update mode -> form dropdowns */
+select {
+    font-size: var(--size-lg);
+}
+
 /* Toggle Button */
 .toggle-btn {
     margin: 0 auto;
@@ -56,5 +65,28 @@ td {
     gap: .3rem;
 }
 .toggle-btn i {
+    font-size: var(--size-2xl);
+}
+
+/* Cancel & Save buttons */
+.btn-group {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+.cancel-btn, .save-btn {
+    font-size: var(--size-lg);
+    padding: .5rem 1rem;
+    border-radius: .6rem;
+    width: 5.68rem;
+}
+.cancel-btn {
+    border: 1px solid #00000082;
+}
+.save-btn {
+    box-shadow: none;
+}
+.save-btn i {
     font-size: var(--size-2xl);
 }

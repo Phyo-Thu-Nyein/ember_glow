@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, TitleStrategy } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { OneBooking, OneBookingData } from 'src/app/interface/bookings-interface';
+import { BookingStatus, OneBooking, OneBookingData, PaymentStatus } from 'src/app/interface/bookings-interface';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -17,9 +17,14 @@ export class UpdateBookingComponent implements OnInit, OnDestroy {
   oneBooking: OneBookingData = {};
   bookingId: string = '';
   isFetching: boolean = false; // loading
-
+  bookingStatus = BookingStatus;
+  bookingStatusOptions: string[] = [];
+  paymentStatus = PaymentStatus;
+  paymentStatusOptions: string[] = [];
+  
   // Update Mode variables
   isUpdateMode: boolean = false;
+  isSaving: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -32,9 +37,9 @@ export class UpdateBookingComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params) => {
       this.bookingId = params['bookingId'];
       console.log('BOoking id is', this.bookingId);
+      // Pass it to the function
+      this.getBookingById(this.bookingId);
     });
-    // Pass it to the function
-    this.getBookingById(this.bookingId);
   }
   ngOnDestroy(): void {
     if (this.oneBookingSub) {
@@ -45,12 +50,44 @@ export class UpdateBookingComponent implements OnInit, OnDestroy {
   // LOGICS
   // Get Booking by id
   getBookingById(bookingId: string) {
+    this.isFetching = true;
     this.oneBookingSub = this.apiService.getOneBooking(bookingId).subscribe({
       next: (response: OneBooking) => {
         this.oneBooking = response.data!;
+        this.bookingStatusOptions = Object.values(BookingStatus).filter(
+          (bookingStatus) => bookingStatus != this.oneBooking.status
+        );
+        this.paymentStatusOptions = Object.values(PaymentStatus).filter(
+          (paymentStatus) => paymentStatus != this.oneBooking.paymentStatus
+        );
+        this.isFetching = false;
       },
       error: (err) => {
         console.log('Error fetching the booking data', err.error.message);
+        this.isFetching = false;
+      }
+    });
+  }
+
+  // Update Booking
+  updateBooking() {
+    this.isSaving = true;
+    const bookingData = {
+      status: this.oneBooking.status,
+      paymentStatus: this.oneBooking.paymentStatus
+    }
+
+    this.apiService.updateBooking(this.bookingId, bookingData).subscribe({
+      next: (response: any) => {
+        console.log('Booking updated successfully', response.data!);
+        this.isSaving = false;
+        this.toggleUpdateMode();
+        this.getBookingById(this.bookingId);
+      },
+      error: (err) => {
+        console.log('Error updating booking', err.error.message);
+        this.isSaving = false;
+        this.toggleUpdateMode();
       }
     });
   }

@@ -43,22 +43,22 @@
      </table>
 
     <!-- Update Booking Mode -->
-     <form *ngIf="isUpdateMode">
+     <form (ngSubmit)="updateBooking()" *ngIf="isUpdateMode">
         <table class="booking-card">
            <tr>
                <td class="booking-id" colspan="2">Id: {{oneBooking._id }}</td>
            </tr>
            <tr>
                <td>Room No: </td>
-               <td>{{ oneBooking.room?.room_number }}</td>
+               <td style="opacity: .5;">{{ oneBooking.room?.room_number }}</td>
            </tr>
            <tr>
                <td>Booked By: </td>
-               <td>{{ oneBooking.user?.name }}</td>
+               <td style="opacity: .5;">{{ oneBooking.user?.name }}</td>
            </tr>
            <tr>
                <td class="payment-proof" colspan="2">
-                   <button class="view-proof-btn" popovertarget="popup">Click To View Payment Proof</button>
+                   <button disabled class="view-proof-btn" popovertarget="popup">Click To View Payment Proof</button>
                </td>
                     <!-- View Payment Proof Image -->
                <div class="payment-proof-img" id="popup" popover>
@@ -70,33 +70,45 @@
            <tr>
                <td>Booking Status: </td>
                <td>
-                    <select name="" id="">
-                        <option value=""></option>
+                    <select [(ngModel)]="oneBooking.status" name="bookingStatus" id="bookingStatus">
+                        <option [value]="oneBooking.status">{{ oneBooking.status }}</option>
+                        <option *ngFor="let status of bookingStatusOptions" [value]="status">{{ status }}</option>
                     </select>
                </td>
            </tr>
            <tr>
                <td>Payment Status: </td>
                <td>
-                <select name="" id="">
-                    <option value=""></option>
+                <select [(ngModel)]="oneBooking.paymentStatus" name="paymentStatus" id="paymentStatus">
+                    <option [value]="oneBooking.paymentStatus">{{ oneBooking.paymentStatus }}</option>
+                    <option *ngFor="let status of paymentStatusOptions" [value]="status">{{ status }}</option>
                 </select>
            </td>
            </tr>
            <tr>
                <td>Check In: </td>
-               <td>{{ oneBooking.checkIn | date: 'yyyy-MMM-dd' }}</td>
+               <td style="opacity: .5;">{{ oneBooking.checkIn | date: 'yyyy-MMM-dd' }}</td>
            </tr>
            <tr>
                <td>Check Out: </td>
-               <td>{{ oneBooking.checkOut | date: 'yyyy-MMM-dd' }}</td>
+               <td style="opacity: .5;">{{ oneBooking.checkOut | date: 'yyyy-MMM-dd' }}</td>
            </tr>
         </table>
+
+        <!-- Cancel and Save buttons -->
+         <div *ngIf="isUpdateMode" class="btn-group flex">
+            <button class="cancel-btn" [disabled]="isSaving" (click)="toggleUpdateMode()" type="reset">Cancel</button>
+            <button class="save-btn btn" [disabled]="isSaving">
+                <span *ngIf="!isSaving">Save</span>
+                <i *ngIf="isSaving" class="bx bx-loader-circle bx-spin"></i>
+            </button>
+         </div>
     </form>
 
      <!-- Update Mode Toggle button -->
-      <button class="btn toggle-btn flex" (click)="toggleUpdateMode()">
+      <button *ngIf="!isUpdateMode" class="btn toggle-btn flex" (click)="toggleUpdateMode()">
         <span>Update</span>
         <i class='bx bx-edit'></i>
       </button>
+
 </section>

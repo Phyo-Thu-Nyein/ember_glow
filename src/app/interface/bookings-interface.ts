@@ -80,6 +80,19 @@ export interface OneBookingData {
     updatedAt?:     Date;
     __v?:           number;
 }
+export enum BookingStatus {
+    Pending = 'Pending',
+    Confirmed = 'Confirmed',
+    Failed = 'Failed',
+    Cancelled = 'Cancelled',
+    Archived = 'Archived'
+}
+export enum PaymentStatus {
+    Pending = 'Pending',
+    Paid = 'Paid',
+    Failed = 'Failed',
+    Cancelled = 'Cancelled'
+}
 
 // My Bookings
 export interface MyBookings {

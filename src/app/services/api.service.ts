@@ -169,9 +169,9 @@ export class ApiService {
     return this.http.post(`${this.newBookingUrl}/${roomId}`, formData, { headers });
   }
   // Update the booking
-  updateBooking(bookingId: string) {
+  updateBooking(bookingId: string, bookingData: any) {
     const headers = this.getAuthHeaders();
-    return this.http.patch(`${this.updateBookingUrl}/${bookingId}`, { headers });
+    return this.http.patch(`${this.updateBookingUrl}/${bookingId}`, bookingData, { headers });
   }
 
 }

@@ -67,8 +67,8 @@
             <p><span>Booked By: </span><span>{{ booking.user?.name!}}</span></p>
             <p><span>Issued At: </span><span>{{ booking.createdAt }}</span></p>
             <p><span>RoomNo: </span><span>{{ booking.room?.room_number!}}</span></p>
-            <p><span>CheckIn: </span><span>{{ booking.checkIn}}</span></p>
-            <p><span>CheckOut: </span><span>{{ booking.checkOut}}</span></p>
+            <p><span>CheckIn: </span><span>{{ booking.checkIn | date: 'yyyy-MMM-dd'}}</span></p>
+            <p><span>CheckOut: </span><span>{{ booking.checkOut | date: 'yyyy-MMM-dd'}}</span></p>
             <p><span>Booking Status: </span><span>{{ booking.status}}</span></p>
             <p><span>Payment Status: </span><span>{{ booking.paymentStatus}}</span></p>
             <button class="proof-btn" popovertarget="popup" (click)="getPaymentProof(booking.paymentProof!)" >
