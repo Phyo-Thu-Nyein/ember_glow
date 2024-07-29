@@ -1,0 +1,112 @@
+.room-container {
+    padding-top: 100px;
+    color: var(--clr-dark);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Room Card */
+.room-card {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    margin: 0 auto 1rem;
+    font-size: var(--size-lg);
+    border-collapse: collapse;
+}
+.room-id, .payment-proof, .room-desc-label {
+    text-align: center;
+}
+td {
+    border: 1px solid #0000001c;
+    width: 50%;
+    padding: 1rem;
+}
+.room-desc, .room-desc-label {
+    padding: .4rem 1rem;
+}
+/* font-size for all inputs */
+input, textarea {
+    font-size: var(--size-lg);
+}
+.room-no-input, .room-price-input {
+    width: 9.5rem;
+}
+textarea {
+    width: 100%;
+    height: 80px;
+    resize: none;
+}
+.imgs-row {
+    overflow-x: auto; 
+    white-space: nowrap; /* Prevent line breaks to keep images in one line */
+}
+
+.img-wrapper {
+    display: inline-block; /* Inline-block to allow horizontal scrolling */
+    position: relative;
+}
+
+.room-imgs {
+    display: inline-block; /* Display images inline-block for horizontal alignment */
+    width: 100px;
+    margin-right: 2rem; 
+}
+.custom-file-upload {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+}
+.custom-file-upload p {
+    background-color: #000000c7;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100px;
+}
+
+/* Update mode -> form dropdowns */
+select {
+    font-size: var(--size-lg);
+}
+
+/* Toggle Button */
+.toggle-btn {
+    margin: 0 auto;
+    font-size: var(--size-lg);
+    gap: .3rem;
+}
+.toggle-btn i {
+    font-size: var(--size-2xl);
+}
+
+/* Cancel & Save buttons */
+.btn-group {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+.cancel-btn, .save-btn {
+    font-size: var(--size-lg);
+    padding: .5rem 1rem;
+    border-radius: .6rem;
+    width: 5.68rem;
+}
+.cancel-btn {
+    border: 1px solid #00000082;
+}
+.save-btn {
+    box-shadow: none;
+}
+.save-btn i {
+    font-size: var(--size-2xl);
+}

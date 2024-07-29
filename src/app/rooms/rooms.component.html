@@ -78,7 +78,7 @@
     <ng-template #displayRooms>
       <div *ngFor="let room of allRooms" class="room-card flex">
         <div class="img-container">
-          <img class="room-img" src="{{ room.images }}" alt="hotel room image" />
+          <img class="room-img" src="{{ room.images![0] }}" alt="hotel room image" />
           <span class="room-number">RoomNo. {{ room.room_number! }}</span>
         </div>
         <div class="room-info">

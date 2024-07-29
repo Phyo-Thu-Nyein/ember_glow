@@ -1,0 +1,101 @@
+<section class="container room-container">
+    <h1>Update/ Delete Room</h1>
+    <!-- Displayed Booking Card -->
+    <table *ngIf="!isUpdateMode" class="room-card">
+        <tr>
+            <td class="room-id" colspan="2">Id: {{ roomDetails._id }}</td>
+        </tr>
+        <tr>
+            <td>Room No: </td>
+            <td>{{ roomDetails.room_number }}</td>
+        </tr>
+        <tr>
+            <td>Room Type: </td>
+            <td>{{ roomDetails.room_type }}</td>
+        </tr>
+        <tr>
+            <td>Room Price: </td>
+            <td>{{ roomDetails.price }}</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="room-desc-label">Room Description</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="room-desc">{{ roomDetails.description }}</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="imgs-row">
+                Note: Images can be updated
+            </td>
+        </tr>
+     </table>
+
+    <!-- Update Booking Mode -->
+     <form (ngSubmit)="updateRoom(roomId)" *ngIf="isUpdateMode">
+        <table class="room-card">
+            <tr>
+                <td style="opacity: .5;" class="room-id" colspan="2">Id: {{ roomDetails._id }}</td>
+            </tr>
+            <tr>
+                <td style="opacity: .5;">Room No: </td>
+                <td><input class="room-no-input" type="text" [(ngModel)]="roomDetails.room_number" name="roomNumber"></td>
+            </tr>
+            <tr>
+                <td style="opacity: .5;">Room Type: </td>
+                <td>
+                    <select [(ngModel)]="roomDetails.room_type" name="roomType" id="roomType">
+                        <option *ngFor="let type of roomTypes" [value]="type">{{type}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="opacity: .5;">Room Price: </td>
+                <td><input class="room-price-input" type="number" [(ngModel)]="roomDetails.price" name="roomPrice"></td>
+            </tr>
+            <tr>
+                <td style="opacity: .5;" colspan="2" class="room-desc-label">Room Description</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="room-desc">
+                    <textarea cols="30" [(ngModel)]="roomDetails.description" name="description" id="description"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="imgs-row">
+                    <div *ngFor="let img of imgArray; let i = index" class="img-wrapper flex">
+                        <img [src]="img" (click)="selectImage(i)" class="room-imgs">
+                        <label class="custom-file-upload">
+                            <input type="file" (change)="onImageChange($event, i)" style="display: none;">
+                            <p>Change <br> Image</p>
+                        </label>
+                    </div>
+                    <!-- Loop dummy images if less than 5 -->
+                    <div *ngFor="let n of dummyArray" class="img-wrapper flex">
+                        <img src="../../../assets/images/rooms/dummy-image-square.webp" (click)="selectDummyImage()" class="room-imgs">
+                        <label class="custom-file-upload">
+                            <input type="file" (change)="onImageChange($event, imgArray.length)" #fileInput style="display: none;">
+                            <p>Add <br> Image</p>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            
+        </table>
+
+        <!-- Cancel and Save buttons -->
+         <div *ngIf="isUpdateMode" class="btn-group flex">
+            <button class="cancel-btn" [disabled]="isSaving" (click)="toggleUpdateMode()" type="reset">Cancel</button>
+            <button class="save-btn btn" [disabled]="isSaving">
+                <span *ngIf="!isSaving">Save</span>
+                <i *ngIf="isSaving" class="bx bx-loader-circle bx-spin"></i>
+            </button>
+         </div>
+    </form>
+
+     <!-- Update Mode Toggle button -->
+      <button *ngIf="!isUpdateMode" class="btn toggle-btn flex" (click)="toggleUpdateMode()">
+        <span>Update</span>
+        <i class='bx bx-edit'></i>
+      </button>
+
+</section>

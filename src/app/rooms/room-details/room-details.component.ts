@@ -218,4 +218,9 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     const returnUrl = this.router.url; // Get the current url
     this.router.navigate(['/login'], { queryParams: { returnUrl } });
   }
+
+  // GOT TO ROOM UPDATE PAGE FOR ADMIN ROLES
+  goToRoomUpdate(roomId: string) {
+    this.router.navigateByUrl(`update-room/${roomId}`);
+  }
 }

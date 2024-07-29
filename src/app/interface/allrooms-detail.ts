@@ -16,8 +16,7 @@ export interface AllRoomsDatum {
     status?:      string;
     images?:      string[];
     description?: string;
-    checkIn?:     Date[];
-    checkOut?:    Date[];
+    bookings?:    string[];
     createdAt?:   Date;
     updatedAt?:   Date;
     __v?:         number;
@@ -38,8 +37,7 @@ export interface OneRoomData {
     status?:      string;
     images?:      string[];
     description?: string;
-    checkIn?:     Date[];
-    checkOut?:    Date[];
+    bookings?:    string[];
     createdAt?:   Date;
     updatedAt?:   Date;
     __v?:         number;

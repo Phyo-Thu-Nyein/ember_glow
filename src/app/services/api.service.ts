@@ -28,9 +28,11 @@ export class ApiService {
   deleteUserUrl: string = `${this.baseUrl}/api/v1/users/delete-user`;
 
   // Room related URLs
-  allRoomsUrl: string = `${this.baseUrl}/api/v1/rooms/all-rooms`;
-  getOneRoomUrl: string = `${this.baseUrl}/api/v1/rooms/one-room`;
-  // POST, PATCH, DELETE ROOMS will come later
+  allRoomsUrl: string = `${this.baseUrl}/api/v1/rooms/all`;
+  getOneRoomUrl: string = `${this.baseUrl}/api/v1/rooms/one`;
+  newRoomUrl: string = `${this.baseUrl}/api/v1/rooms/new`;
+  updateRoomUrl: string = `${this.baseUrl}/api/v1/rooms/update`;
+  deleteRoomUrl: string = `${this.baseUrl}/api/v1/rooms/delete`;
 
   // Booking related URLS
   allBookingsUrl: string = `${this.baseUrl}/api/v1/bookings/all`;
@@ -72,7 +74,7 @@ export class ApiService {
     return this.http.post(this.loginUrl, userData, this.options);
   }
 
-  // USER SECTION
+  // --------- USER SECTION ------------
   //Get user profile
   getUserProfile(): Observable<ProfileDetails> {
     const headers = this.getAuthHeaders();
@@ -111,7 +113,7 @@ export class ApiService {
     return this.http.delete(`${this.deleteUserUrl}/${userId}`, { headers });
   }
 
-  // ROOM SECTION
+  // --------- ROOM SECTION ------------
   // Get all rooms (with sorting, filtering, pagination)
   getAllRooms(params: any): Observable<AllRoomsDetails> {
     let queryParams = new HttpParams();
@@ -127,8 +129,23 @@ export class ApiService {
   getRoomById(roomId: string) {
     return this.http.get(`${this.getOneRoomUrl}/${roomId}`);
   }
+  // Create new room
+  createRoom() {
+    const headers = this.getAuthHeaders();
+    return this.http.post(`${this.newRoomUrl}`, { headers });
+  }
+  // Update room by id
+  updateRoomById(roomId: string, formData: FormData) {
+    const headers = this.getAuthHeaders();
+    return this.http.patch(`${this.updateRoomUrl}/${roomId}`, formData, {headers});
+  }
+  // Delete room by id
+  deleteRoomById(roomId: string) {
+    const headers = this.getAuthHeaders();
+    return this.http.delete(`${this.deleteRoomUrl}/${roomId}`, {headers});
+  }
 
-  // BOOKING SECTION
+  // --------- BOOKING SECTION ------------
   // Get all bookings
   getAllBookings(params: any) {
     let queryParams = new HttpParams();

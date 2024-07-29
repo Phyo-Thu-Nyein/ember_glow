@@ -35,6 +35,7 @@
           [matDatepicker]="checkInpicker"
           [matDatepickerFilter]="checkInDateFilter"
           (dateChange)="onCheckInDateChange($event.value)"
+          [disabled]="userRole !== '0'"
           placeholder="Choose a date"
           required
         />
@@ -70,7 +71,11 @@
         </mat-error>
       </mat-form-field>
 
-      <button class="btn book-btn" type="submit" [disabled]="!(checkInDateSelected && checkOutDateSelected) || userRole=== '1'">Book Now</button>
+      <!-- book button for Guests -->
+      <button class="btn book-btn" *ngIf="userRole === '0'" type="submit" [disabled]="!(checkInDateSelected && checkOutDateSelected)">Book Now</button>
     </form>
+    
+    <!-- Update button for Manager -->
+    <button (click)="goToRoomUpdate(oneRoomData._id!)" class="btn room-update-btn" *ngIf="userRole === '1'">Update Room</button>
   </div>
 </section>

@@ -18,6 +18,7 @@ import { PaymentComponent } from './rooms/payment/payment.component';
 import { BookingsComponent } from './profile/bookings/bookings.component';
 import { AllBookingsComponent } from './manager/all-bookings/all-bookings.component';
 import { UpdateBookingComponent } from './manager/update-booking/update-booking.component';
+import { UpdateRoomComponent } from './manager/update-room/update-room.component';
 
 const routes: Routes = [
   {
@@ -79,6 +80,12 @@ const routes: Routes = [
   {
     path: 'update-booking/:bookingId',
     component: UpdateBookingComponent,
+    canActivate: [authGuard],
+    data: { role: [1, 2] },
+  },
+  {
+    path: 'update-room/:roomId',
+    component: UpdateRoomComponent,
     canActivate: [authGuard],
     data: { role: [1, 2] },
   },
