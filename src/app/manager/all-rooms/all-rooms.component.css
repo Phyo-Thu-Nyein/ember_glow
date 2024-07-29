@@ -1,0 +1,7 @@
+.all-rooms-container {
+    padding-top: 100px;
+    color: var(--clr-dark);
+}
+h1 {
+    text-align: center;
+}

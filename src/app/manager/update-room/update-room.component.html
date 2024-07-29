@@ -92,10 +92,17 @@
          </div>
     </form>
 
-     <!-- Update Mode Toggle button -->
-      <button *ngIf="!isUpdateMode" class="btn toggle-btn flex" (click)="toggleUpdateMode()">
-        <span>Update</span>
-        <i class='bx bx-edit'></i>
-      </button>
+     <!-- Delete and Update Mode Toggle buttons -->
+    <div class="btn-group flex">
+        <button *ngIf="!isUpdateMode"class="btn delete-btn flex" (click)="deleteRoom(roomId)">
+            <span *ngIf="!isDeleting">Delete</span>
+            <i *ngIf="!isDeleting" class='bx bx-trash'></i>
+            <i *ngIf="isDeleting" class="bx bx-loader-circle bx-spin"></i>
+        </button>
+        <button *ngIf="!isUpdateMode" class="btn toggle-btn flex" (click)="toggleUpdateMode()">
+          <span>Update</span>
+          <i class='bx bx-edit'></i>
+        </button>
+    </div>
 
 </section>

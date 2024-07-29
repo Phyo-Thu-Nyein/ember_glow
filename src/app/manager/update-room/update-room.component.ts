@@ -24,6 +24,7 @@ export class UpdateRoomComponent implements OnInit, OnDestroy {
   // Update Mode variables
   isUpdateMode: boolean = false;
   isSaving: boolean = false;
+  isDeleting: boolean = false;
 
   // Image upload part
   roomTypes: string[] = ['Suite', 'Superior', 'Deluxe', 'Standard'];
@@ -140,5 +141,21 @@ export class UpdateRoomComponent implements OnInit, OnDestroy {
   // Toggle Update Mode
   toggleUpdateMode() {
     this.isUpdateMode = !this.isUpdateMode;
+  }
+
+  // Delete room
+  deleteRoom(roomId: string) {
+    this.isDeleting = true;
+    this.apiService.deleteRoomById(roomId).subscribe({
+      next: (response) => {
+        console.log('Room Deleted Successfully');
+        this.isDeleting = false;
+        this.router.navigateByUrl('all-rooms');
+      },
+      error: (err) => {
+        console.log('Error deleting the room', err.error.message);
+        this.isDeleting = false;
+      }
+    });
   }
 }

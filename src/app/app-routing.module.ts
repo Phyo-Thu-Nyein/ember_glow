@@ -19,6 +19,7 @@ import { BookingsComponent } from './profile/bookings/bookings.component';
 import { AllBookingsComponent } from './manager/all-bookings/all-bookings.component';
 import { UpdateBookingComponent } from './manager/update-booking/update-booking.component';
 import { UpdateRoomComponent } from './manager/update-room/update-room.component';
+import { AllRoomsComponent } from './manager/all-rooms/all-rooms.component';
 
 const routes: Routes = [
   {
@@ -76,6 +77,12 @@ const routes: Routes = [
     component: AllBookingsComponent,
     canActivate: [authGuard],
     data: { role: [1, 2] }, // Manager & Reception roles required
+  },
+  {
+    path: 'all-rooms',
+    component: AllRoomsComponent,
+    canActivate: [authGuard],
+    data: { role: [1, 2] },
   },
   {
     path: 'update-booking/:bookingId',
