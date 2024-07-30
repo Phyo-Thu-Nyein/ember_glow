@@ -7,15 +7,6 @@ import { Subscription } from 'rxjs';
 import { RoomFilterParams } from '../interface/filter-params';
 import { NotFoundService } from '../services/not-found.service';
 
-interface Location {
-  value: string;
-  viewValue: string;
-}
-interface roomType {
-  value: string;
-  viewValue: string;
-}
-
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
@@ -40,6 +31,7 @@ export class RoomsComponent implements OnInit, OnDestroy {
     sortBy: 'createdAt',
     sortOrder: 'desc',
     roomType: '',
+    roomNumber: '',
     status: '',
     minPrice: null!,
     maxPrice: null!,

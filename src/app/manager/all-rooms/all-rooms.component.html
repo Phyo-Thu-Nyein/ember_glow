@@ -1,3 +1,124 @@
 <section class="container all-rooms-container">
-    <h1>All Rooms</h1>
+  <h1>All Rooms</h1>
+
+  <!-- >>>> FILTER (search bar) <<<< -->
+  <form (ngSubmit)="filterRooms()" class="filter-bar flex">
+    <!-- dropdowns -->
+    <div class="dropdowns-containers flex">
+      <!-- room number search -->
+      <div class="room-name-search input-box flex">
+        <input
+          [(ngModel)]="params.roomNumber"
+          type="text"
+          placeholder="Enter Room Number..."
+          name="roomNumber"
+        />
+      </div>
+    </div>
+
+    <div class="dropdowns-containers flex">
+      <!-- room type -->
+      <select [(ngModel)]="params.roomType" name="type">
+        <option value="">Type</option>
+        <option value="Suite">Suite</option>
+        <option value="Superior">Superior</option>
+        <option value="Deluxe">Deluxe</option>
+        <option value="Standard">Standard</option>
+      </select>
+      <!-- sort order -->
+      <select [(ngModel)]="params.sortOrder" name="sortOrder">
+        <option value="asc">Sort Order</option>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
+
+    <!-- buttons -->
+    <div class="filter-btn-container flex">
+      <button class="reset-btn btn" type="reset">Clear</button>
+      <button type="submit" class="filter-btn btn flex" (click)="resetPage()">
+        Filter
+        <i class="bx bx-filter-alt"></i>
+      </button>
+    </div>
+  </form>
+
+  <!-- Display room cards -->
+  <div class="cards-wrapper">
+    <ng-container *ngIf="isFetching; else displayRooms">
+      <ngx-skeleton-loader
+        animation="pulse"
+        count="1"
+        [theme]="{
+          'width': '350px',
+          'height': '400px',
+          'background-color': '#fff',
+          'border-radius': '10px',
+        }"
+      ></ngx-skeleton-loader>
+    </ng-container>
+    <ng-template #displayRooms>
+      <div *ngFor="let room of allRooms" class="room-card flex">
+        <div class="img-container">
+          <img
+            class="room-img"
+            src="{{ room.images![0] }}"
+            alt="hotel room image"
+          />
+          <span class="room-number">RoomNo. {{ room.room_number! }}</span>
+        </div>
+        <div class="room-info">
+          <span class="room-type">
+            <i class="bx bx-building-house"></i>
+            {{ room.room_type! }}
+          </span>
+          <span class="room-price">
+            <i class="bx bx-money"></i>
+            {{ room.price }}
+          </span>
+          <span class="room-status">
+            <i
+              class="bx bxs-circle"
+              [ngStyle]="{
+                color: room.status === 'Available' ? '#a3e635' : '#ef4444'
+              }"
+            ></i>
+            {{ room.status! }}
+          </span>
+          <span class="room-desc">
+            {{ room.description! }}
+          </span>
+        </div>
+        <div class="btn-group flex">
+            <button class="btn delete-btn flex" (click)="goToRoomDetails(room._id!)">
+              Delete
+              <i class="bx bx-trash"></i>
+            </button>
+            <button class="btn flex" (click)="goToRoomDetails(room._id!)">
+              Update
+              <i class="bx bxs-chevron-right"></i>
+            </button>
+        </div>
+      </div>
+    </ng-template>
+</div>
+
+    <!-- pagination container -->
+    <div class="pagination flex">
+      <button
+        class="arrow-btn btn"
+        [disabled]="currentPage === 1"
+        (click)="onPageChange(currentPage - 1)"
+      >
+        &lt;
+      </button>
+      <span> page {{ currentPage }} of {{ totalPages }}</span>
+      <button
+        class="arrow-btn btn"
+        [disabled]="currentPage === totalPages"
+        (click)="onPageChange(currentPage + 1)"
+      >
+        &gt;
+      </button>
+    </div>
 </section>

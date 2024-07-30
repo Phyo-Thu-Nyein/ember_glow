@@ -15,6 +15,7 @@ export interface RoomFilterParams {
   sortBy:         string;
   sortOrder:      string;
   roomType:       string;
+  roomNumber:     string;
   status:         string;
   minPrice:       number;
   maxPrice:       number;
