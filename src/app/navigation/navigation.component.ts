@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -7,9 +7,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent implements OnInit, OnDestroy {
   // Subscriptions
   userDetailSub: Subscription = new Subscription();
+  routerEventSub: Subscription = new Subscription();
 
   // Variables
   userImgUrl: string | null = '';
@@ -21,8 +22,17 @@ export class NavigationComponent implements OnInit {
 
   // OnInit & OnDestroy
   ngOnInit() {
-    this.isLoggedIn();
-    this.getUserImg();
+    this.updateUserDetails();
+    this.routerEventSub = this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.updateUserDetails();
+      }
+    });
+  }
+  ngOnDestroy(): void {
+    if (this.routerEventSub) {
+      this.routerEventSub.unsubscribe();
+    }
   }
 
   // LOGICS
@@ -34,6 +44,12 @@ export class NavigationComponent implements OnInit {
     } else {
       this.userImgExist = true;
     }
+  }
+
+  // Update user details
+  updateUserDetails() {
+    this.getUserImg();
+    this.isLoggedIn();
   }
 
   isLoggedIn() {
