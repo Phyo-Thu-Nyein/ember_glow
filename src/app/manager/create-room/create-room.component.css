@@ -1,12 +1,14 @@
-.room-container {
+.create-room-container {
     padding-top: 100px;
     color: var(--clr-dark);
 }
 
 h1 {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
+
+/* Form to create a new room */
 
 /* Room Card */
 .room-card {
@@ -78,15 +80,6 @@ select {
     font-size: var(--size-lg);
 }
 
-/* Toggle Button */
-.toggle-btn {
-    font-size: var(--size-lg);
-    gap: .3rem;
-}
-.toggle-btn i {
-    font-size: var(--size-2xl);
-}
-
 /* Cancel & Save buttons */
 .btn-group {
     width: 100%;
@@ -110,68 +103,39 @@ select {
     font-size: var(--size-2xl);
 }
 
-/* Delete button */
-.btn-group {
-    width: 100%;
-    max-width: 680px;
-    justify-content: space-around;
-    margin-bottom: 1.5rem;
-}
-.delete-btn {
-    background-color: transparent;
-    border: 2px solid #ef4444;
-    color: #ef4444;
-    width: 119px;
-    box-shadow: none;
-    font-size: var(--size-lg);
-    gap: .3rem;
-}
-.delete-btn i {
-    font-size: var(--size-2xl);
-}
-
-/* Delete room confimation popup */
-#popup {
-    background-color: var(--clr-amber100);
-    border-radius: .6rem;
-    width: 300px;
+/* Success popup */
+.success-popup-wrapper {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background-color: #00000071;
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -20%);
-    box-shadow: 10px 10px 10px #00000034;
-    opacity: 0;
-    animation: pop-up ease-out .3s forwards;
+    transform: translate(-50%, -50%);
 }
-#popup::backdrop {
-    background-color: #0000004d;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-.warning-text {
-    background-color: #ef4444;
-    font-weight: bold;
-    color: #fff;
-    padding: .6rem;
+.success-popup {
+    width: 320px;
+    max-width: 400px;
+    background-color: var(--clr-amber100);
     text-align: center;
+    border-radius: .6rem;
+    margin: 10rem auto 0;
+    box-shadow: 10px 10px 10px #0000002a;
 }
-#popup p {
-    padding: 1rem;
-    font-size: var(--size-lg);
-    font-weight: bold;
+.success-popup i {
+    font-size: 15rem;
+    color: #a3e635;
 }
-.no-delete-btn, .yes-delete-btn {
-    width: 100px;
-    font-size: var(--size-lg);
-    box-shadow: none;
-    margin-top: .6rem;
+.success-popup h2 {
+    font-size: var(--size-4xl);
+    margin-bottom: 1rem;
 }
-.no-delete-btn {
-    background-color: transparent;
-    border: 1px solid var(--clr-dark);
-}
-.yes-delete-btn {
-    color: #fff;
-    background-color: #ef4444;
-    border: 1px solid #ef4444;
+.success-popup p {
+    background-color: #fff;
+    font-size: var(--size-2xl);
+    padding: .5rem 0 1.2rem;
+    border-radius: 0 0 .6rem .6rem;
 }

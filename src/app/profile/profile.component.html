@@ -249,8 +249,13 @@
   </div>
 
   <!-- Get My Bookings for Guest/ All Bookings for Manager -->
-  <button routerLink="/mybookings" [disabled]="isLoading" *ngIf="roleText =='Guest'" class="btn get-bookings-btn">My Bookings</button>
-  <button routerLink="/all-bookings" [disabled]="isLoading" *ngIf="roleText =='Manager'" class="btn get-bookings-btn">Manage Bookings</button>
+  <button
+    [routerLink]="roleText === 'Guest' ? '/mybookings' : '/all-bookings'"
+    [disabled]="isLoading"
+    class="btn get-bookings-btn"
+  >
+    {{ roleText === "Guest" ? "My Bookings" : "Manage Bookings" }}
+  </button>
 
   <!-- Get all users button/ link for Manager Role -->
   <div *ngIf="roleText == 'Manager'" class="all-users-wrapper">
@@ -260,7 +265,9 @@
     </button>
     <button class="btn get-all-btn flex" routerLink="/all-rooms">
       Manage All Rooms <i class="bx bx-building-house"></i>
-
+    </button>
+    <button class="btn get-all-btn flex" routerLink="/create-room">
+      Create New Room <i class="bx bx-plus-circle"></i>
     </button>
   </div>
 

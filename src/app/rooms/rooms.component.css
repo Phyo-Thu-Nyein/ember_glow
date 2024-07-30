@@ -131,7 +131,7 @@
 
 .room-info {
     display: grid;
-    grid-template-columns: 120px 120px 120px;
+    grid-template-columns: 100px 100px 140px;
     grid-template-rows: 50px auto;
     place-items: center;
 }

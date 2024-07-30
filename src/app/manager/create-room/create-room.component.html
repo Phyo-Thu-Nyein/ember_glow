@@ -1,0 +1,73 @@
+<section class="container create-room-container">
+    <h1>Create a New Room</h1>
+
+    <!-- Form to create a new room -->
+    <form [formGroup]="createRoomForm" (ngSubmit)="createNewRoom()">
+        <table class="room-card">
+            <tr>
+                <td style="opacity: .5;">Room No: </td>
+                <td><input class="room-no-input" formControlName="room_number" type="text"></td>
+            </tr>
+            <tr>
+                <td style="opacity: .5;">Room Status: </td>
+                <td>
+                    <select name="roomStatus" id="roomStatus" formControlName="status">
+                        <option *ngFor="let status of roomStatus" [value]="status">{{status}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="opacity: .5;">Room Type: </td>
+                <td>
+                    <select name="roomType" id="roomType" formControlName="room_type">
+                        <option *ngFor="let type of roomTypes" [value]="type">{{type}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td style="opacity: .5;">Room Price: </td>
+                <td><input class="room-price-input" formControlName="price" type="number" name="roomPrice"></td>
+            </tr>
+            <tr>
+                <td style="opacity: .5;" colspan="2" class="room-desc-label">Room Description</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="room-desc">
+                    <textarea cols="30" formControlName="description" name="description" id="description"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="imgs-row">
+                  <div class="image-upload-container">
+                    <div *ngFor="let img of tempFiles; let i = index" class="img-wrapper flex">
+                      <img [src]="img || '../../../assets/images/rooms/dummy-image-square.webp'" (click)="onFileClick(i)" class="room-imgs" />
+                      <label class="custom-file-upload">
+                        <input type="file" (change)="onFileChange($event, i)" #fileInput style="display: none;" />
+                        <p>{{ img ? 'Change' : 'Add' }} <br> Image</p>
+                      </label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            
+        </table>
+
+        <!-- Cancel and Save buttons -->
+         <div class="btn-group flex">
+            <button class="cancel-btn" [disabled]="isSaving" type="reset">Cancel</button>
+            <button class="save-btn btn" [disabled]="isSaving" type="submit">
+                <span *ngIf="!isSaving">Save</span>
+                <i *ngIf="isSaving" class="bx bx-loader-circle bx-spin"></i>
+            </button>
+         </div>
+    </form>
+
+    <div *ngIf="createSuccess" class="success-popup-wrapper">
+        <div class="success-popup">
+            <i class="bx bx-check-circle"></i>
+            <h2>Success!</h2>
+            <p>New room created successfully</p>
+        </div>
+    </div>
+
+</section>

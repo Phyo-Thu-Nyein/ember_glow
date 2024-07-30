@@ -25,9 +25,10 @@ export class UpdateRoomComponent implements OnInit, OnDestroy {
   isUpdateMode: boolean = false;
   isSaving: boolean = false;
   isDeleting: boolean = false;
+  roomStatus: string[] = ['Available', 'Maintenance', 'Unavailable'];
+  roomTypes: string[] = ['Suite', 'Superior', 'Deluxe', 'Standard'];
 
   // Image upload part
-  roomTypes: string[] = ['Suite', 'Superior', 'Deluxe', 'Standard'];
   tempFiles: File[] = []; // Temporary storage for images
   imgArray: string[] = [];
   dummyArray: number[] = []; // Array to hold dummy images
@@ -106,6 +107,7 @@ export class UpdateRoomComponent implements OnInit, OnDestroy {
 
     const formData = new FormData();
     formData.append('room_number', this.roomDetails.room_number!);
+    formData.append('status', this.roomDetails.status!);
     formData.append('room_type', this.roomDetails.room_type!);
     formData.append('price', this.roomDetails.price?.toString()!);
     formData.append('description', this.roomDetails.description!); 

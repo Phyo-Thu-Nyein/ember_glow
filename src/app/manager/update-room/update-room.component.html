@@ -10,6 +10,10 @@
             <td>{{ roomDetails.room_number }}</td>
         </tr>
         <tr>
+            <td>Room Status: </td>
+            <td>{{ roomDetails.status }}</td>
+        </tr>
+        <tr>
             <td>Room Type: </td>
             <td>{{ roomDetails.room_type }}</td>
         </tr>
@@ -30,7 +34,7 @@
         </tr>
      </table>
 
-    <!-- Update Booking Mode -->
+    <!-- Update Room Mode -->
      <form (ngSubmit)="updateRoom(roomId)" *ngIf="isUpdateMode">
         <table class="room-card">
             <tr>
@@ -39,6 +43,14 @@
             <tr>
                 <td style="opacity: .5;">Room No: </td>
                 <td><input class="room-no-input" type="text" [(ngModel)]="roomDetails.room_number" name="roomNumber"></td>
+            </tr>
+            <tr>
+                <td style="opacity: .5;">Room Status: </td>
+                <td>
+                    <select [(ngModel)]="roomDetails.status" name="roomStatus" id="roomStatus">
+                        <option *ngFor="let status of roomStatus" [value]="status">{{status}}</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td style="opacity: .5;">Room Type: </td>
@@ -94,7 +106,7 @@
 
      <!-- Delete and Update Mode Toggle buttons -->
     <div class="btn-group flex">
-        <button *ngIf="!isUpdateMode"class="btn delete-btn flex" (click)="deleteRoom(roomId)">
+        <button *ngIf="!isUpdateMode"class="btn delete-btn flex" popovertarget="popup">
             <span *ngIf="!isDeleting">Delete</span>
             <i *ngIf="!isDeleting" class='bx bx-trash'></i>
             <i *ngIf="isDeleting" class="bx bx-loader-circle bx-spin"></i>
@@ -104,5 +116,19 @@
           <i class='bx bx-edit'></i>
         </button>
     </div>
+
+    <!-- Delete confimation popup -->
+     <div id="popup" popover>
+        <h2 class="warning-text">Warning!</h2>
+        <p>Are you sure you want to delete this room?</p>
+        <div class="btn-group flex">
+            <button class="btn no-delete-btn" popovertarget="popup" popovertargetaction="hide">
+                No
+            </button>
+            <button class="btn yes-delete-btn" (click)="deleteRoom(roomId)" popovertarget="popup" popovertargetaction="hide">
+                Yes
+            </button>
+        </div>
+     </div>
 
 </section>

@@ -43,6 +43,10 @@
     </div>
   </form>
 
+  <!-- Create a new room link -->
+  <h1 class="create-new-room-text">--- OR ---</h1>
+  <a routerLink="/create-room" class="create-room-btn">Create a new room?</a>
+
   <!-- Display room cards -->
   <div class="cards-wrapper">
     <ng-container *ngIf="isFetching; else displayRooms">

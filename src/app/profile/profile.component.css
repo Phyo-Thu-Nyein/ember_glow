@@ -176,9 +176,12 @@ td {
     margin: 2rem 0;
 }
 .get-all-btn {
+    width: 100%;
     margin: 1rem 0 .5rem;
+    padding: .7rem;
     gap: .3rem;
     font-size: var(--size-lg);
+    box-shadow: none;
 }
 .get-all-btn i {
     font-size: var(--size-xl);

@@ -65,6 +65,17 @@ h1 {
     margin-top: .1rem;
 }
 
+/* Create a new room link */
+.create-room-btn {
+    width: 190px;
+    display: block;
+    border: 1px solid var(--clr-dark);
+    border-radius: .6rem;
+    color: var(--clr-dark);
+    padding: .4rem 1rem;
+    margin: .8rem auto 1.5rem;
+}
+
 /* ROOM CARD SECTION */
 .cards-wrapper {
     width: 100%;
@@ -107,7 +118,7 @@ h1 {
 
 .room-info {
     display: grid;
-    grid-template-columns: 120px 120px 120px;
+    grid-template-columns: 100px 100px 140px;
     grid-template-rows: 50px auto;
     place-items: center;
 }

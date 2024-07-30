@@ -130,9 +130,9 @@ export class ApiService {
     return this.http.get(`${this.getOneRoomUrl}/${roomId}`);
   }
   // Create new room
-  createRoom() {
+  createRoom(formData: FormData) {
     const headers = this.getAuthHeaders();
-    return this.http.post(`${this.newRoomUrl}`, { headers });
+    return this.http.post(`${this.newRoomUrl}`, formData, { headers });
   }
   // Update room by id
   updateRoomById(roomId: string, formData: FormData) {
