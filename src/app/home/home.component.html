@@ -2,16 +2,20 @@
 <div class="home-page">
   <!-- HOME PAGE -->
   <!-- LANDING SECTION  -->
-  <section class="landing-section">
+  <section class="landing-section flex">
     <img
       class="background"
       alt="hotel image"
     />
-    <div class="landing-section__welcome">
+    <div class="landing-section__welcome flex">
       <h2>Welcome to</h2>
       <h1>Ember Glow</h1>
       <p>where each moment ignites a new journey of warmth and wonder.</p>
     </div>
+    <button class="btn explore-btn flex" (click)="goToRooms()">
+      Explore Our Exquisite Rooms
+      <i class="bx bx-search-alt bx-tada"></i>
+    </button>
   </section>
 
   <!-- ROOMS SECTION  -->
