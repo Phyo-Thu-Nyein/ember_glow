@@ -33,6 +33,9 @@
     </div>
   </form>
 
+  <h1 *ngIf="noBookingsYet" class="no-booings-yet">
+    YOU HAVE NO BOOKINGS YET!
+  </h1>
   <div class="cards-wrapper">
     <ng-container *ngIf="isFetching; else myBookingCards">
       <ngx-skeleton-loader
