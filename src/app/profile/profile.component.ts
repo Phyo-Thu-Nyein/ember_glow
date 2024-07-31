@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { ApiService } from '../services/api.service';
 import { UserDetails } from '../interface/user-details';
 import { Subscription } from 'rxjs';
+import { PfpSharedService } from '../services/pfp-shared.service';
 
 @Component({
   selector: 'app-profile',
@@ -39,7 +40,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   passwordsMatch: boolean = true;
   pswLoading: boolean = false;
   
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private sharedService: PfpSharedService) {}
 
   ngOnInit() {
     this.fetchUserData();
@@ -111,13 +112,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
         localStorage.setItem('pfp', response.data?.profilePicture!);
         this.isLoadingUpload = false;
         this.resetFileInput();
+        this.sharedService.notifyProfilePicUpdated(); // Notify the nav component
       },
       error: (error) => {
         console.error('Error uploading profile picture', error);
         this.isLoadingUpload = false;
         this.resetFileInput();
       }
-    })
+    });
   }
 
   resetFileInput() {

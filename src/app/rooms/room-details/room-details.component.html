@@ -23,7 +23,9 @@
       <p class="number">Number: {{ oneRoomData.room_number }}</p>
       <p class="type">Type: {{ oneRoomData.room_type }}</p>
       <p class="price">Price: {{ oneRoomData.price }}</p>
-      <p class="status">Status: {{ oneRoomData.status }}</p>
+      <p class="status">Status: 
+        <span [ngClass]="oneRoomData.status==='Available' ? 'green-icon':'red-icon'">{{ oneRoomData.status }}</span>
+      </p>
     </div>
 
     <!-- Select check in/ out dates and book the room -->
@@ -35,7 +37,7 @@
           [matDatepicker]="checkInpicker"
           [matDatepickerFilter]="checkInDateFilter"
           (dateChange)="onCheckInDateChange($event.value)"
-          [disabled]="userRole !== '0'"
+          [disabled]="userRole !== '0' || oneRoomData.status !=='Available'"
           placeholder="Choose a date"
           required
         />

@@ -33,7 +33,7 @@
         <i class="bx bxs-user"></i>
       </ng-container>
       <ng-template #userImg>
-        <img class="profile-img" src="{{userImgUrl}}" alt="User Profile Image">
+        <img class="profile-img" [src]="userImgUrl" alt="User Profile Image">
       </ng-template>
       <span>{{ isLoggedIn() ? '' : 'Login' }}</span>
     </a>

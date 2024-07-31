@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { PfpSharedService } from '../services/pfp-shared.service';
 
 @Component({
   selector: 'app-navigation',
@@ -11,13 +12,15 @@ export class NavigationComponent implements OnInit, OnDestroy {
   // Subscriptions
   userDetailSub: Subscription = new Subscription();
   routerEventSub: Subscription = new Subscription();
+  profilePicUpdatedSub: Subscription = new Subscription();
 
   // Variables
-  userImgUrl: string | null = '';
+  userImgUrl: string | null = null;
   userImgExist: boolean = false;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private sharedService: PfpSharedService
   ) { }
 
   // OnInit & OnDestroy
@@ -27,6 +30,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
       if (event instanceof NavigationEnd) {
         this.updateUserDetails();
       }
+    });
+    this.profilePicUpdatedSub = this.sharedService.profilePicUpdated$.subscribe(() => {
+      this.updateUserDetails();
     });
   }
   ngOnDestroy(): void {
@@ -44,6 +50,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     } else {
       this.userImgExist = true;
     }
+    console.log('user image url', this.userImgUrl);
   }
 
   // Update user details
@@ -60,6 +67,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     localStorage.removeItem('role');
     localStorage.removeItem('pfp');
     this.userImgUrl = null;
+    this.userImgExist = false;
     this.router.navigateByUrl('login');
   }
 
