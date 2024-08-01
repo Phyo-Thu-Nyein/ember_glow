@@ -2,43 +2,69 @@
   <div class="left-part flex">
     <a appLoadingNavigate="/" class="flex">
       <span class="left-part__brand-name">Ember</span>
-      <img class="logo" src="../../assets/images/icons/hotel-logo-600.png" alt="" />
+      <img
+        class="logo"
+        src="../../assets/images/icons/hotel-logo-600.png"
+        alt=""
+      />
     </a>
   </div>
   <div class="mid-part flex">
-    <a appLoadingNavigate="/rooms" class="flex">
+    <a
+      [appLoadingNavigate]="userRole === '0' ? '/rooms' : '/all-rooms'"
+      class="flex"
+    >
       <i class="bx bxs-hotel" style="color: #ffffff"></i>
       Rooms
     </a>
-    <a appLoadingNavigate="/dining" class="flex">
-      <i class="bx bxs-bowl-hot" style="color: #ffffff"></i>
-      Dining
+    <a
+      [appLoadingNavigate]="userRole === '0' ? '/dining' : '/all-users'"
+      class="flex"
+    >
+      <i class="bx" [ngClass]=" userRole === '0' ? 'bxs-bowl-hot' : 'bxs-group' " style="color: #ffffff"></i>
+      {{ userRole === "0" ? "Dining" : "Users" }}
     </a>
-    <a appLoadingNavigate="/facilities" class="flex">
-      <i class="bx bx-swim" style="color: #ffffff"></i>
-      Facilities
+    <a
+      [appLoadingNavigate]="userRole === '0' ? '/facilities' : '/all-bookings'"
+      class="flex"
+    >
+      <i class="bx" [ngClass]=" userRole === '0' ? 'bx-swim' : 'bxs-book-bookmark' " style="color: #ffffff"></i>
+      {{ userRole === "0" ? "Facilities" : "Bookings" }}
     </a>
-    <a appLoadingNavigate="/about" class="flex">
-      <i class="bx bxs-group" style="color: #ffffff"></i>
-      About
+    <a
+      [appLoadingNavigate]="userRole === '0' ? '/about' : '/create-room'"
+      class="flex"
+    >
+      <i class="bx" [ngClass]=" userRole === '0' ? 'bxs-group' : 'bxs-clinic' " style="color: #ffffff"></i>
+      {{ userRole === "0" ? "About" : "Add Room" }}
     </a>
-    <a appLoadingNavigate="/contact" class="flex">
+    <a
+      *ngIf="userRole === '0'; else toGmail"
+      appLoadingNavigate="/contact"
+      class="flex"
+    >
       <i class="bx bxs-phone" style="color: #ffffff"></i>
       Contact
     </a>
+    <ng-template #toGmail>
+      <a href="https://mail.google.com" target="_blank" class="flex">
+        <i class="bx" [ngClass]=" userRole === '0' ? 'bxs-phone' : 'bxs-envelope' " style="color: #ffffff"></i>
+        Gmail
+      </a>
+    </ng-template>
   </div>
   <div class="right-part flex">
     <a [appLoadingNavigate]="isLoggedIn() ? '/profile' : '/login'" class="flex">
-      <ng-container *ngIf="!userImgExist else userImg">
+      <ng-container *ngIf="!userImgExist; else userImg">
         <i class="bx bxs-user"></i>
       </ng-container>
       <ng-template #userImg>
-        <img class="profile-img" [src]="userImgUrl" alt="User Profile Image">
+        <img class="profile-img" [src]="userImgUrl" alt="User Profile Image" />
       </ng-template>
-      <span>{{ isLoggedIn() ? '' : 'Login' }}</span>
+      <span>{{ isLoggedIn() ? "" : "Login" }}</span>
     </a>
     <button *ngIf="isLoggedIn()" class="desktop-logout flex" (click)="logOut()">
-      <span>Logout</span> 
+      <span>Logout</span>
       <i class="bx bx-log-out"></i>
     </button>
     <button class="right-part__menu" onclick="mobile_menu.showModal()">
@@ -50,14 +76,62 @@
 <!-- MOBILE NAV -->
 <dialog id="mobile_menu">
   <ul class="mobile___nav flex">
-    <li class="mobile__nav-link"><a appLoadingNavigate="/rooms" onclick="mobile_menu.close()">Rooms</a></li>
-    <li class="mobile__nav-link"><a appLoadingNavigate="/dining" onclick="mobile_menu.close()">Dining</a></li>
-    <li class="mobile__nav-link"><a appLoadingNavigate="/facilities" onclick="mobile_menu.close()">Facilities</a></li>
-    <li class="mobile__nav-link"><a appLoadingNavigate="/about" onclick="mobile_menu.close()">About</a></li>
-    <li class="mobile__nav-link"><a appLoadingNavigate="/contact" onclick="mobile_menu.close()">Contact</a></li>
+    <li class="mobile__nav-link">
+      <a
+        [appLoadingNavigate]="userRole === '0' ? '/rooms' : '/all-rooms'"
+        onclick="mobile_menu.close()"
+        >Rooms</a
+      >
+    </li>
+    <li class="mobile__nav-link">
+      <a
+        [appLoadingNavigate]="userRole === '0' ? '/dining' : '/all-users'"
+        onclick="mobile_menu.close()"
+      >
+        {{ userRole === "0" ? "Dining" : "Users" }}
+      </a>
+    </li>
+    <li class="mobile__nav-link">
+      <a
+        [appLoadingNavigate]="
+          userRole === '0' ? '/facilities' : '/all-bookings'
+        "
+        onclick="mobile_menu.close()"
+      >
+        {{ userRole === "0" ? "Facilities" : "Bookings" }}
+      </a>
+    </li>
+    <li class="mobile__nav-link">
+      <a
+        [appLoadingNavigate]="userRole === '0' ? '/about' : '/create-room'"
+        onclick="mobile_menu.close()"
+      >
+        {{ userRole === "0" ? "About" : "Add Room" }}
+      </a>
+    </li>
+    <li class="mobile__nav-link" *ngIf="userRole === '0'; else goToGmail">
+      <a appLoadingNavigate="/contact" onclick="mobile_menu.close()">
+        Contact
+      </a>
+    </li>
+    <ng-template #goToGmail>
+      <li class="mobile__nav-link">
+        <a
+          href="https://mail.google.com"
+          target="_blank"
+          onclick="mobile_menu.close()"
+        >
+          Gmail
+        </a>
+      </li>
+    </ng-template>
     <li class="mobile__nav-line"></li>
     <li *ngIf="isLoggedIn()">
-      <button class="logout-btn btn flex" (click)="logOut()" onclick="mobile_menu.close()">
+      <button
+        class="logout-btn btn flex"
+        (click)="logOut()"
+        onclick="mobile_menu.close()"
+      >
         Logout
       </button>
     </li>

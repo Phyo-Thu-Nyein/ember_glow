@@ -12,6 +12,7 @@ import {
   FormGroup,
   ValidatorFn,
   AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -19,13 +20,34 @@ import { OneRoomData, OneRoomDetails } from 'src/app/interface/allrooms-detail';
 import { ApiService } from 'src/app/services/api.service';
 import { LoadingService } from 'src/app/services/loading.service';
 
+// Validator to check if the date is before today
 const minDateValidator: ValidatorFn = (
   control: AbstractControl
-): { [key: string]: boolean } | null => {
-  if (control.value && control.value < new Date()) {
+): ValidationErrors | null => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset time to start of the day
+  if (control.value && control.value < today) {
     return { minDate: true };
   }
   return null;
+};
+
+// Custom validator to check if the date is already booked
+const bookedDateValidator = (bookedDates: { checkIn: string; checkOut: string }[]): ValidatorFn => {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (control.value) {
+      const date = new Date(control.value);
+      const isBooked = bookedDates.some((booking) => {
+        const checkIn = new Date(booking.checkIn);
+        const checkOut = new Date(booking.checkOut);
+        return date >= checkIn && date <= checkOut;
+      });
+      if (isBooked) {
+        return { alreadyBooked: true };
+      }
+    }
+    return null;
+  };
 };
 
 @Component({
@@ -50,8 +72,8 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Date picker
   range = new FormGroup({
-    start: new FormControl<Date | null>(null, minDateValidator),
-    end: new FormControl<Date | null>(null, minDateValidator),
+    start: new FormControl<Date | null>(null, [minDateValidator, bookedDateValidator(this.bookedDates)]),
+    end: new FormControl<Date | null>(null, [minDateValidator, bookedDateValidator(this.bookedDates)]),
   });
   checkInDateSelected = false;
   checkOutDateSelected = false;
@@ -125,9 +147,15 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     this.bookedDatesSub = this.apiService.getBookedDates(roomId).subscribe({
       next: (response: any) => {
         this.bookedDates = response.data;
+        // Update validators with the latest booked dates
+        this.range.controls.start.setValidators([
+          minDateValidator,
+          bookedDateValidator(this.bookedDates),
+        ]);
+        this.range.controls.start.updateValueAndValidity();
       },
       error: (err) => {
-        console.log('Error getting booded dates', err.message);
+        console.log('Error getting booked dates', err.message);
       },
     });
   }
@@ -171,6 +199,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
       return date >= checkIn && date <= checkOut;
     });
   }
+
   // Filter for check-in date picker (no date before today)
   checkInDateFilter = (date: Date | null): boolean => {
     if (!date) return true;
@@ -192,16 +221,22 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.minCheckOutDate = new Date(date);
       this.minCheckOutDate.setDate(this.minCheckOutDate.getDate() + 1); // Minimum check-out is the day after check-in
       this.range.controls.start.setValue(date);
+      this.range.controls.end.enable(); // Enable check-out date field
     } else {
       this.minCheckOutDate = null;
       this.range.controls.end.reset();
+      this.range.controls.end.disable(); // Disable check-out date field
     }
+    this.range.controls.start.markAsTouched();
+    this.range.controls.start.updateValueAndValidity(); // Update validity after setting a new value
   }
 
   onCheckOutDateChange(event: any) {
     console.log('Check-Out Date Changed:', event.value);
     this.checkOutDateSelected = !!event.value;
     this.range.controls.end.setValue(event.value);
+    this.range.controls.end.markAsTouched();
+    this.range.controls.end.updateValueAndValidity(); // Update validity after setting a new value
   }
 
   // REDIRECT TO THE BOOKING DETAILS PAGE AFTER SELECTING DATES

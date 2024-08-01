@@ -18,6 +18,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   // Variables
   userImgUrl: string | null = null;
   userImgExist: boolean = false;
+  userRole: string | null = '';
 
   constructor(
     private router: Router,
@@ -47,8 +48,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   // LOGICS
   // get the user's img
-  getUserImg() {
-    this.userImgUrl = localStorage.getItem('pfp');
+  getUserDetails() {
+    this.userImgUrl = localStorage.getItem('pfp'); // get the user profile pic
+    this.userRole = localStorage.getItem('role'); // get the user role
     if (this.userImgUrl == null) {
       this.userImgExist = false;
     } else {
@@ -59,7 +61,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   // Update user details
   updateUserDetails() {
-    this.getUserImg();
+    this.getUserDetails();
     this.isLoggedIn();
   }
 

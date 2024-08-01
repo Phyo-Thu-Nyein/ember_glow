@@ -35,60 +35,68 @@
     </div>
 
     <!-- Select check in/ out dates and book the room -->
-    <form (ngSubmit)="onSubmit()" class="checkin-out-wrapper flex">
+    <form [formGroup]="range" (ngSubmit)="onSubmit()" class="checkin-out-wrapper flex">
+      <!-- date picker tip -->
+      <span class="date-tip">
+        Tip: Use Calendar for more convenient pick!
+      </span>
+
       <mat-form-field>
         <mat-label>Check-In Date</mat-label>
         <input
           matInput
           [matDatepicker]="checkInpicker"
           [matDatepickerFilter]="checkInDateFilter"
+          formControlName="start"
           (dateChange)="onCheckInDateChange($event.value)"
           [disabled]="userRole !== '0' || oneRoomData.status !== 'Available'"
           placeholder="Choose a date"
           required
         />
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="checkInpicker"
-        ></mat-datepicker-toggle>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="checkInpicker"></mat-datepicker-toggle>
         <mat-datepicker #checkInpicker></mat-datepicker>
-        <mat-error *ngIf="range.controls.start.hasError('minDate')">
-          Check-in date cannot be before today.
+        <mat-error *ngIf="range.controls.start.hasError('minDate') && range.controls.start.touched">
+          Check In cannot be before today.
+        </mat-error>
+        <mat-error *ngIf="range.controls.start.hasError('alreadyBooked') && range.controls.start.touched">
+          Someone has already booked that date.
         </mat-error>
       </mat-form-field>
-
+    
       <mat-form-field>
         <mat-label>Check-Out Date</mat-label>
         <input
           matInput
           [matDatepicker]="checkOutpicker"
           [matDatepickerFilter]="checkOutDateFilter"
+          formControlName="end"
           placeholder="Choose a date"
           [disabled]="!checkInDateSelected"
           [min]="minCheckOutDate"
           (dateChange)="onCheckOutDateChange($event)"
           required
         />
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="checkOutpicker"
-        ></mat-datepicker-toggle>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="checkOutpicker"></mat-datepicker-toggle>
         <mat-datepicker #checkOutpicker></mat-datepicker>
-        <mat-error *ngIf="range.controls.end.hasError('minDate')">
-          Check-out date must be after check-in date.
+        <mat-error *ngIf="range.controls.end.hasError('minDate') && range.controls.end.touched">
+          Check Out must be after check-in date.
+        </mat-error>
+        <mat-error *ngIf="range.controls.end.hasError('alreadyBooked') && range.controls.end.touched">
+          Someone has already booked that date.
         </mat-error>
       </mat-form-field>
-
+    
       <!-- Book for guests/ Update for admins -->
       <button
         class="btn book-btn"
         (click)="handleButtonClick()"
-        [disabled]="
-          userRole === '0' && !(checkInDateSelected && checkOutDateSelected)
-        "
+        [disabled]="!checkInDateSelected || !checkOutDateSelected || range.invalid"
       >
         {{ userRole === "0" || userRole === null ? "Book Now" : "Update Room" }}
       </button>
     </form>
+    
   </div>
 </section>

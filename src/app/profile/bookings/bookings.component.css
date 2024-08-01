@@ -52,7 +52,7 @@ h1 {
 }
 
 /* No booking message */
-.no-booings-yet {
+.no-bookings-yet {
     color: #ef4444;
     margin: 6rem auto;
 }
@@ -93,7 +93,7 @@ h1 {
 }
 
 p {
-    font-size: var(--size-xl);
+    font-size: var(--size-lg);
     font-weight: bold;
     display: grid;
     place-items: center;
