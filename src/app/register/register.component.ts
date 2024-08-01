@@ -5,6 +5,7 @@ import { ApiService } from '../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserDetails } from '../interface/user-details';
 import { Subscription } from 'rxjs';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnDestroy {
   constructor(
     private router: Router,
     private apiService: ApiService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private loadingService: LoadingService
   ) { }
 
   //prevent the user from copy/pasting the password
@@ -98,7 +100,10 @@ export class RegisterComponent implements OnDestroy {
       next: (response: UserDetails) => {
         if (response.status == 'success') {
           this.onSubmit = false;
-          this.router.navigateByUrl('login');
+          this.loadingService.showLoading();
+          setTimeout(() => {
+            this.router.navigateByUrl('login');
+          }, 460);
         }
       },
       error: (err: HttpErrorResponse) => {

@@ -30,6 +30,7 @@ svg {
 
 a {
     color: var(--clr-amber100);
+    cursor: pointer;
 }
 
 button {
@@ -83,14 +84,15 @@ body {
 
 /* Dialog popup */
 dialog {
-    scale: 0;
+    /* scale: 0;
     opacity: 0;
-    transition: opacity .25s;
+    transition: opacity .25s; */
+    display: none;
+    animation: disappear .5s;
 }
 
 dialog[open] {
-    scale: 1;
-    opacity: 1;
+    animation: appear .5s;
 }
 
 dialog:modal {

@@ -1,34 +1,34 @@
 <div class="navigation flex">
   <div class="left-part flex">
-    <a routerLink="/" class="flex">
+    <a appLoadingNavigate="/" class="flex">
       <span class="left-part__brand-name">Ember</span>
       <img class="logo" src="../../assets/images/icons/hotel-logo-600.png" alt="" />
     </a>
   </div>
   <div class="mid-part flex">
-    <a routerLink="/rooms" class="flex">
+    <a appLoadingNavigate="/rooms" class="flex">
       <i class="bx bxs-hotel" style="color: #ffffff"></i>
       Rooms
     </a>
-    <a routerLink="/dining" class="flex">
+    <a appLoadingNavigate="/dining" class="flex">
       <i class="bx bxs-bowl-hot" style="color: #ffffff"></i>
       Dining
     </a>
-    <a routerLink="/facilities" class="flex">
+    <a appLoadingNavigate="/facilities" class="flex">
       <i class="bx bx-swim" style="color: #ffffff"></i>
       Facilities
     </a>
-    <a routerLink="/about" class="flex">
+    <a appLoadingNavigate="/about" class="flex">
       <i class="bx bxs-group" style="color: #ffffff"></i>
       About
     </a>
-    <a routerLink="/contact" class="flex">
+    <a appLoadingNavigate="/contact" class="flex">
       <i class="bx bxs-phone" style="color: #ffffff"></i>
       Contact
     </a>
   </div>
   <div class="right-part flex">
-    <a [routerLink]="isLoggedIn() ? '/profile' : '/login'" class="flex">
+    <a [appLoadingNavigate]="isLoggedIn() ? '/profile' : '/login'" class="flex">
       <ng-container *ngIf="!userImgExist else userImg">
         <i class="bx bxs-user"></i>
       </ng-container>
@@ -50,11 +50,11 @@
 <!-- MOBILE NAV -->
 <dialog id="mobile_menu">
   <ul class="mobile___nav flex">
-    <li class="mobile__nav-link"><a routerLink="/rooms" onclick="mobile_menu.close()">Rooms</a></li>
-    <li class="mobile__nav-link"><a routerLink="/dining" onclick="mobile_menu.close()">Dining</a></li>
-    <li class="mobile__nav-link"><a routerLink="/facilities" onclick="mobile_menu.close()">Facilities</a></li>
-    <li class="mobile__nav-link"><a routerLink="/about" onclick="mobile_menu.close()">About</a></li>
-    <li class="mobile__nav-link"><a routerLink="/contact" onclick="mobile_menu.close()">Contact</a></li>
+    <li class="mobile__nav-link"><a appLoadingNavigate="/rooms" onclick="mobile_menu.close()">Rooms</a></li>
+    <li class="mobile__nav-link"><a appLoadingNavigate="/dining" onclick="mobile_menu.close()">Dining</a></li>
+    <li class="mobile__nav-link"><a appLoadingNavigate="/facilities" onclick="mobile_menu.close()">Facilities</a></li>
+    <li class="mobile__nav-link"><a appLoadingNavigate="/about" onclick="mobile_menu.close()">About</a></li>
+    <li class="mobile__nav-link"><a appLoadingNavigate="/contact" onclick="mobile_menu.close()">Contact</a></li>
     <li class="mobile__nav-line"></li>
     <li *ngIf="isLoggedIn()">
       <button class="logout-btn btn flex" (click)="logOut()" onclick="mobile_menu.close()">

@@ -5,6 +5,7 @@ import { ApiService } from '../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserDetails } from '../interface/user-details';
 import { Subscription } from 'rxjs';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -15,16 +16,21 @@ export class LoginComponent implements OnDestroy {
   // Subscriptions
   loginSub: Subscription = new Subscription();
 
+  // Variables
+  isLoginError: boolean = false;
+  errorMessage: string = '';
+  onSubmit: boolean = false; //loading animation
+  email: string = '';
+  password: string = '';
+
   @ViewChild('loginForm') loginForm?: NgForm;
   constructor(
     private router: Router,
     private apiService: ApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loadingService: LoadingService
   ) {}
 
-  onSubmit: boolean = false; //loading animation
-  email: string = '';
-  password: string = '';
 
   //Turn green if valid else red
   isFieldValid(field: NgModel) {
@@ -56,13 +62,20 @@ export class LoginComponent implements OnDestroy {
           // Get the last page's url from query params or default route to 'rooms'
           const returnUrl =
             this.route.snapshot.queryParams['returnUrl'] || 'rooms';
-          this.router.navigateByUrl(returnUrl);
+          this.loadingService.showLoading();
+          setTimeout(() => {
+            this.router.navigateByUrl(returnUrl);
+          }, 460);
         }
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
-        alert(err.error.message);
+        this.isLoginError = true;
+        this.errorMessage = err.error.message;
         this.onSubmit = false;
+        setTimeout(() => {
+          this.isLoginError = false;
+        }, 3400);
       },
     });
   }

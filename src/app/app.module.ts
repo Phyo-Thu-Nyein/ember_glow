@@ -37,6 +37,8 @@ import { UpdateBookingComponent } from './manager/update-booking/update-booking.
 import { UpdateRoomComponent } from './manager/update-room/update-room.component';
 import { AllRoomsComponent } from './manager/all-rooms/all-rooms.component';
 import { CreateRoomComponent } from './manager/create-room/create-room.component';
+import { LoadingComponent } from './loading/loading.component';
+import { LoadingDirective } from './directives/loading.directive';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { CreateRoomComponent } from './manager/create-room/create-room.component
     UpdateRoomComponent,
     AllRoomsComponent,
     CreateRoomComponent,
+    LoadingComponent,
+    LoadingDirective,
   ],
   imports: [
     BrowserModule,

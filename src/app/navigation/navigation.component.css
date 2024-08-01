@@ -162,17 +162,22 @@
 /* MOBILE NAV STARTS HERE */
 
 #mobile_menu {
-    display: flex;
+    display: none;
     background-color: var(--clr-amber100);
     width: 100vw;
     height: 100vh;
     height: 100dvh;
     justify-content: center;
     align-items: center;
+    animation: disappear .5s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-
-.mobile__close {
-    display: block;
+#mobile_menu[open] {
+    display: flex;
+    animation: appear .5s;
 }
 
 .mobile___nav {

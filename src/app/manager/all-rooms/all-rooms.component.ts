@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AllRoomsDatum, AllRoomsDetails } from 'src/app/interface/allrooms-detail';
 import { RoomFilterParams } from 'src/app/interface/filter-params';
 import { ApiService } from 'src/app/services/api.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { NotFoundService } from 'src/app/services/not-found.service';
 
 @Component({
@@ -46,7 +47,8 @@ export class AllRoomsComponent implements OnInit, OnDestroy {
     private apiService: ApiService,
     private router: Router,
     private route: ActivatedRoute, 
-    private notFoundService: NotFoundService
+    private notFoundService: NotFoundService, 
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
@@ -119,9 +121,11 @@ export class AllRoomsComponent implements OnInit, OnDestroy {
   }
 
   // Go to one room deails page
-  goToRoomDetails(roomId : string) {
-    this.router.navigateByUrl(`update-room/${roomId}`);
-    console.log(roomId);
+  goToRoomDetails(roomId: string) {
+    this.loadingService.showLoading();
+    setTimeout(() => {
+      this.router.navigateByUrl(`update-room/${roomId}`);
+    }, 460);
   }
 
   // Unsubscribe on page leave

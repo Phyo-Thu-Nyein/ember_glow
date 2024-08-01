@@ -17,6 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OneRoomData, OneRoomDetails } from 'src/app/interface/allrooms-detail';
 import { ApiService } from 'src/app/services/api.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 const minDateValidator: ValidatorFn = (
   control: AbstractControl
@@ -40,7 +41,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   // Variables
   oneRoomData: OneRoomData = {};
   roomId: string = ''; // pass to booking details page
-  bookedDates: { checkIn: string, checkOut: string }[] = [];
+  bookedDates: { checkIn: string; checkOut: string }[] = [];
   checkLoggedIn: boolean = true;
   userRole: string | null = '0';
   // Image showcase
@@ -64,13 +65,14 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loadingService: LoadingService
   ) {}
 
   // OnInit & OnDestroy
   ngOnInit(): void {
     this.loginCheck(); // check the user is logged in or not
-    console.log("is logged in?", this.checkLoggedIn);
+    console.log('is logged in?', this.checkLoggedIn);
     this.userRole = localStorage.getItem('role');
     // GET the Room ID passed from parameter
     this.route.params.subscribe((params) => {
@@ -125,7 +127,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.bookedDates = response.data;
       },
       error: (err) => {
-        console.log("Error getting booded dates", err.message);
+        console.log('Error getting booded dates', err.message);
       },
     });
   }
@@ -167,7 +169,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
       const checkIn = new Date(booking.checkIn);
       const checkOut = new Date(booking.checkOut);
       return date >= checkIn && date <= checkOut;
-    })
+    });
   }
   // Filter for check-in date picker (no date before today)
   checkInDateFilter = (date: Date | null): boolean => {
@@ -206,16 +208,18 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   onSubmit() {
     if (this.checkLoggedIn == false) {
       this.redirectToLogin();
-    }
-    else if (this.range.valid) {
+    } else if (this.range.valid) {
       const { start, end } = this.range.value;
       console.log('Selected dates:', { start, end });
-      this.router.navigate(['/payment', this.roomId], {
-        queryParams: { start: start!.toISOString(), end: end!.toISOString() },
-      });
+      this.loadingService.showLoading(); // show loading b4 navigation
+      setTimeout(() => {
+        this.router.navigate(['/payment', this.roomId], {
+          queryParams: { start: start!.toISOString(), end: end!.toISOString() },
+        });
+      }, 460);
     }
   }
-  
+
   // Check if the user is logged in
   loginCheck() {
     const token = localStorage.getItem('token');
@@ -226,11 +230,17 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   // After log in, user should return back to his last page (position)
   redirectToLogin() {
     const returnUrl = this.router.url; // Get the current url
-    this.router.navigate(['/login'], { queryParams: { returnUrl } });
+    this.loadingService.showLoading(); // show loading b4 navigate
+    setTimeout(() => {
+      this.router.navigate(['/login'], { queryParams: { returnUrl } });
+    }, 460);
   }
 
   // GOT TO ROOM UPDATE PAGE FOR ADMIN ROLES
   goToRoomUpdate(roomId: string) {
-    this.router.navigateByUrl(`update-room/${roomId}`);
+    this.loadingService.showLoading(); // show loading b4 navigate
+    setTimeout(() => {
+      this.router.navigateByUrl(`update-room/${roomId}`);
+    }, 460);
   }
 }

@@ -2,11 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PfpSharedService } from '../services/pfp-shared.service';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css']
+  styleUrls: ['./navigation.component.css'],
 })
 export class NavigationComponent implements OnInit, OnDestroy {
   // Subscriptions
@@ -20,20 +21,23 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private sharedService: PfpSharedService
-  ) { }
+    private sharedService: PfpSharedService,
+    private loadingService: LoadingService
+  ) {}
 
   // OnInit & OnDestroy
   ngOnInit() {
     this.updateUserDetails();
-    this.routerEventSub = this.router.events.subscribe(event => {
+    this.routerEventSub = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.updateUserDetails();
       }
     });
-    this.profilePicUpdatedSub = this.sharedService.profilePicUpdated$.subscribe(() => {
-      this.updateUserDetails();
-    });
+    this.profilePicUpdatedSub = this.sharedService.profilePicUpdated$.subscribe(
+      () => {
+        this.updateUserDetails();
+      }
+    );
   }
   ngOnDestroy(): void {
     if (this.routerEventSub) {
@@ -42,7 +46,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
 
   // LOGICS
-  // get the user's img 
+  // get the user's img
   getUserImg() {
     this.userImgUrl = localStorage.getItem('pfp');
     if (this.userImgUrl == null) {
@@ -68,7 +72,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
     localStorage.removeItem('pfp');
     this.userImgUrl = null;
     this.userImgExist = false;
-    this.router.navigateByUrl('login');
+    this.loadingService.showLoading(); // show loading b4 navigate
+    setTimeout(() => {
+      this.router.navigateByUrl('login');
+    }, 460);
   }
-
 }

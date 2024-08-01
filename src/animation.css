@@ -1,7 +1,50 @@
 @keyframes fade-in {
-    to { scale: 1; opacity: 1;}
+    to {
+        scale: 1;
+        opacity: 1;
+    }
 }
 
 @keyframes pop-up {
-    to {opacity: 1; transform: translate(-50%, -50%);}
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Loading transition logo spin animation */
+@keyframes spinWithEase {
+    0% {
+        transform: rotate(0deg);
+        scale: 1;
+        animation-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        /* Ease in */
+    }
+
+    20% {
+        transform: rotate(72deg);
+        scale: 1.2;
+    }
+
+    80% {
+        transform: rotate(288deg);
+        scale: 1.2;
+        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        /* Ease out */
+    }
+
+    100% {
+        transform: rotate(360deg);
+        scale: 1;
+    }
+}
+
+/* Dialog animation for mobile navigation */
+@keyframes appear {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes disappear {
+    from { display: flex; opacity: 1;}
+    to { display: none; opacity: 0;}
 }

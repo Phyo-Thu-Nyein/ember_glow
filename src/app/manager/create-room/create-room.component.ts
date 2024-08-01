@@ -1,9 +1,17 @@
-import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfettiService } from 'src/app/services/confetti.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-create-room',
@@ -33,7 +41,8 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
     private apiService: ApiService,
     private router: Router,
     private fb: FormBuilder,
-    private confettiService: ConfettiService // Confetti for successful room creation
+    private confettiService: ConfettiService, // Confetti for successful room creation
+    private loadingService: LoadingService
   ) {
     this.createRoomForm = this.fb.group({
       room_number: ['', Validators.required],
@@ -50,7 +59,7 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
     this.createSuccess = false;
     this.createRoomForm.patchValue({
       status: this.roomStatus[0], // Set the default value to the first option
-      room_type: this.roomTypes[0]
+      room_type: this.roomTypes[0],
     });
   }
 
@@ -63,17 +72,23 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
   // LOGICS
   // Create a new room
   createNewRoom() {
-    console.log("Button is clicked");
+    console.log('Button is clicked');
     if (this.createRoomForm.invalid) {
-      console.log("FOrm invalid");
+      console.log('FOrm invalid');
       return;
     }
 
     const formData = new FormData();
-    formData.append('room_number', this.createRoomForm.get('room_number')?.value);
+    formData.append(
+      'room_number',
+      this.createRoomForm.get('room_number')?.value
+    );
     formData.append('room_type', this.createRoomForm.get('room_type')?.value);
     formData.append('price', this.createRoomForm.get('price')?.value);
-    formData.append('description', this.createRoomForm.get('description')?.value);
+    formData.append(
+      'description',
+      this.createRoomForm.get('description')?.value
+    );
     formData.append('status', this.createRoomForm.get('status')?.value);
 
     // Append files for images
@@ -93,14 +108,17 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
         this.confettiService.launchConfetti(); // Hoorayy!
         // navigate to all-rooms page after 1 second
         setTimeout(() => {
-          this.router.navigateByUrl('all-rooms');
+          this.loadingService.showLoading();
+          setTimeout(() => {
+            this.router.navigateByUrl('all-rooms');
+          }, 460);
         }, 2000);
       },
       error: (error) => {
         console.log('Error creating the room', error.message);
         this.isSaving = false;
         this.errorMessage = error.message;
-      }
+      },
     });
   }
 
@@ -126,5 +144,4 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
     const fileInput = this.fileInputs.toArray()[index].nativeElement;
     fileInput.click();
   }
-  
 }

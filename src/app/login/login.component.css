@@ -33,6 +33,17 @@
     height: 100vh;
 }
 
+/* Error msg if there's any */
+.error-msg {
+    border-radius: .6rem;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ef4444;
+    padding: .5rem 1rem;
+}
+
 /* FORM WRAPPER */
 .form-wrapper {
     flex-direction: column;

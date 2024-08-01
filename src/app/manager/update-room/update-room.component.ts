@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OneRoomData, OneRoomDetails } from 'src/app/interface/allrooms-detail';
 import { ApiService } from 'src/app/services/api.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-update-room',
@@ -36,7 +37,8 @@ export class UpdateRoomComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService
   ) {}
 
   // OnInit & OnDestroy
@@ -152,7 +154,10 @@ export class UpdateRoomComponent implements OnInit, OnDestroy {
       next: (response) => {
         console.log('Room Deleted Successfully');
         this.isDeleting = false;
-        this.router.navigateByUrl('all-rooms');
+        this.loadingService.showLoading(); // show loading b4 navigate
+        setTimeout(() => {
+          this.router.navigateByUrl('all-rooms');
+        }, 460);
       },
       error: (err) => {
         console.log('Error deleting the room', err.error.message);

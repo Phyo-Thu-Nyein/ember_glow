@@ -45,7 +45,9 @@
 
   <!-- Create a new room link -->
   <h1 class="create-new-room-text">--- OR ---</h1>
-  <a routerLink="/create-room" class="create-room-btn">Create a new room?</a>
+  <a appLoadingNavigate="/create-room" class="create-room-btn"
+    >Create a new room?</a
+  >
 
   <!-- Display room cards -->
   <div class="cards-wrapper">
@@ -80,13 +82,12 @@
             <i class="bx bx-money"></i>
             {{ room.price }}
           </span>
-          <span class="room-status">
-            <i
-              class="bx bxs-circle"
-              [ngStyle]="{
-                color: room.status === 'Available' ? '#a3e635' : '#ef4444'
-              }"
-            ></i>
+          <span
+            class="room-status"
+            [ngStyle]="{
+              color: room.status === 'Available' ? '#a3e635' : '#ef4444'
+            }"
+          >
             {{ room.status! }}
           </span>
           <span class="room-desc">
@@ -94,35 +95,38 @@
           </span>
         </div>
         <div class="btn-group flex">
-            <button class="btn delete-btn flex" (click)="goToRoomDetails(room._id!)">
-              Delete
-              <i class="bx bx-trash"></i>
-            </button>
-            <button class="btn flex" (click)="goToRoomDetails(room._id!)">
-              Update
-              <i class="bx bxs-chevron-right"></i>
-            </button>
+          <button
+            class="btn delete-btn flex"
+            (click)="goToRoomDetails(room._id!)"
+          >
+            Delete
+            <i class="bx bx-trash"></i>
+          </button>
+          <button class="btn flex" (click)="goToRoomDetails(room._id!)">
+            Update
+            <i class="bx bxs-chevron-right"></i>
+          </button>
         </div>
       </div>
     </ng-template>
-</div>
+  </div>
 
-    <!-- pagination container -->
-    <div class="pagination flex">
-      <button
-        class="arrow-btn btn"
-        [disabled]="currentPage === 1"
-        (click)="onPageChange(currentPage - 1)"
-      >
-        &lt;
-      </button>
-      <span> page {{ currentPage }} of {{ totalPages }}</span>
-      <button
-        class="arrow-btn btn"
-        [disabled]="currentPage === totalPages"
-        (click)="onPageChange(currentPage + 1)"
-      >
-        &gt;
-      </button>
-    </div>
+  <!-- pagination container -->
+  <div class="pagination flex">
+    <button
+      class="arrow-btn btn"
+      [disabled]="currentPage === 1"
+      (click)="onPageChange(currentPage - 1)"
+    >
+      &lt;
+    </button>
+    <span> page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+      class="arrow-btn btn"
+      [disabled]="currentPage === totalPages"
+      (click)="onPageChange(currentPage + 1)"
+    >
+      &gt;
+    </button>
+  </div>
 </section>

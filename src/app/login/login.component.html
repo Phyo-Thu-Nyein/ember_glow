@@ -5,6 +5,11 @@
 <div class="blur"></div>
 
 <div class="dummy-body flex">
+  <!-- Error Message if there's any -->
+   <div *ngIf="isLoginError" class="error-msg bx-flashing">
+      <p>Wrong Password</p>
+   </div>
+
   <!-- FORM SECTION  -->
   <div class="form-wrapper flex">
     <h1>Login</h1>
@@ -74,7 +79,7 @@
         <div class="register-link">
           <p>
             Haven't registered?
-            <a routerLink="/register">Register</a>
+            <a appLoadingNavigate="/register">Register</a>
             here!
           </p>
         </div>

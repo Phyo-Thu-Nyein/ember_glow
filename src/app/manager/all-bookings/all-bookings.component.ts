@@ -7,6 +7,7 @@ import {
 } from 'src/app/interface/bookings-interface';
 import { AllBookingsFilterParams } from 'src/app/interface/filter-params';
 import { ApiService } from 'src/app/services/api.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-all-bookings',
@@ -41,7 +42,8 @@ export class AllBookingsComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, 
+    private loadingService: LoadingService
   ) {}
 
   // OnInit & OnDestroy
@@ -80,7 +82,10 @@ export class AllBookingsComponent implements OnInit, OnDestroy {
   }
   // Pass that clicked booking's id to the update booking page
   goToUpdateBooking(bookingId: string) {
-    this.router.navigateByUrl(`update-booking/${bookingId}`);
+    this.loadingService.showLoading();
+    setTimeout(() => {
+      this.router.navigateByUrl(`update-booking/${bookingId}`);
+    }, 460);
   }
 
   // Pagination

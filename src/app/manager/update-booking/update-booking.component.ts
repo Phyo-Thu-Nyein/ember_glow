@@ -1,8 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, TitleStrategy } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { BookingStatus, OneBooking, OneBookingData, PaymentStatus } from 'src/app/interface/bookings-interface';
+import {
+  BookingStatus,
+  OneBooking,
+  OneBookingData,
+  PaymentStatus,
+} from 'src/app/interface/bookings-interface';
 import { ApiService } from 'src/app/services/api.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-update-booking',
@@ -21,15 +27,17 @@ export class UpdateBookingComponent implements OnInit, OnDestroy {
   bookingStatusOptions: string[] = [];
   paymentStatus = PaymentStatus;
   paymentStatusOptions: string[] = [];
-  
+
   // Update Mode variables
   isUpdateMode: boolean = false;
   isSaving: boolean = false;
 
   constructor(
     private apiService: ApiService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private loadingService: LoadingService
+  ) {}
 
   // OnInit & OnDestroy
   ngOnInit(): void {
@@ -65,7 +73,7 @@ export class UpdateBookingComponent implements OnInit, OnDestroy {
       error: (err) => {
         console.log('Error fetching the booking data', err.error.message);
         this.isFetching = false;
-      }
+      },
     });
   }
 
@@ -74,8 +82,8 @@ export class UpdateBookingComponent implements OnInit, OnDestroy {
     this.isSaving = true;
     const bookingData = {
       status: this.oneBooking.status,
-      paymentStatus: this.oneBooking.paymentStatus
-    }
+      paymentStatus: this.oneBooking.paymentStatus,
+    };
 
     this.apiService.updateBooking(this.bookingId, bookingData).subscribe({
       next: (response: any) => {
@@ -83,12 +91,16 @@ export class UpdateBookingComponent implements OnInit, OnDestroy {
         this.isSaving = false;
         this.toggleUpdateMode();
         this.getBookingById(this.bookingId);
+        this.loadingService.showLoading(); // show loading b4 navigate
+        setTimeout(() => {
+          this.router.navigateByUrl('all-bookings');
+        }, 460);
       },
       error: (err) => {
         console.log('Error updating booking', err.error.message);
         this.isSaving = false;
         this.toggleUpdateMode();
-      }
+      },
     });
   }
 

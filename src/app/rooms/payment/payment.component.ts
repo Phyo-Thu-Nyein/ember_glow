@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BookingPaymentDetails } from 'src/app/interface/bookings-interface';
 import { ConfettiService } from 'src/app/services/confetti.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-payment',
@@ -42,7 +43,8 @@ export class PaymentComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private confettiService: ConfettiService // Confetti for successful payment
+    private confettiService: ConfettiService, // Confetti for successful payment
+    private loadingService: LoadingService
   ) {
     this.bookingForm = this.fb.group({
       fileUpload: [null, Validators.required],
@@ -167,7 +169,10 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
   // Finished booking
   finish() {
-    this.router.navigateByUrl('/mybookings');
+    this.loadingService.showLoading();
+    setTimeout(() => {
+      this.router.navigateByUrl('/mybookings');
+    }, 460);
   }
 
   // Error dialog (modal/ handling)

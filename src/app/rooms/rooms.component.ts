@@ -6,6 +6,7 @@ import { AllRoomsDatum, AllRoomsDetails } from '../interface/allrooms-detail';
 import { Subscription } from 'rxjs';
 import { RoomFilterParams } from '../interface/filter-params';
 import { NotFoundService } from '../services/not-found.service';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-rooms',
@@ -46,8 +47,9 @@ export class RoomsComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private route: ActivatedRoute, 
-    private notFoundService: NotFoundService
+    private route: ActivatedRoute,
+    private notFoundService: NotFoundService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +61,7 @@ export class RoomsComponent implements OnInit, OnDestroy {
   }
 
   //LOGICS
-  // Check if the user has alrdy been redirected 
+  // Check if the user has alrdy been redirected
   checkNotFound() {
     if (this.notFoundService.getRedirectedToNotFound()) {
       this.notFoundService.setRedirectedToNotFound(false); // Reset the flag
@@ -67,7 +69,7 @@ export class RoomsComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Get all rooms with fitering sorting 
+  // Get all rooms with fitering sorting
   getAllRooms(params: RoomFilterParams) {
     this.isFetching = true; // loading
     var result = this.apiService.getAllRooms(params);
@@ -97,7 +99,6 @@ export class RoomsComponent implements OnInit, OnDestroy {
     this.filterRooms();
   }
 
-  
   // Update page param to reset it to 1
   resetPage() {
     // Update page param to reset it to 1
@@ -120,8 +121,11 @@ export class RoomsComponent implements OnInit, OnDestroy {
   }
 
   // Go to one room deails page
-  goToRoomDetails(roomId : string) {
-    this.router.navigateByUrl(`room-details/${roomId}`);
+  goToRoomDetails(roomId: string) {
+    this.loadingService.showLoading(); // show loading b4 navigate
+    setTimeout(() => {
+      this.router.navigateByUrl(`room-details/${roomId}`);
+    }, 460);
     console.log(roomId);
   }
 
