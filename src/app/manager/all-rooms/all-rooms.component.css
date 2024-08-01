@@ -1,6 +1,7 @@
 .all-rooms-container {
     padding-top: 100px;
     color: var(--clr-dark);
+    flex-direction: column;
 }
 h1 {
     text-align: center;
@@ -89,6 +90,7 @@ h1 {
     border-radius: 10px;
     flex-direction: column;
     width: 350px;
+    height: 550px;
     padding: .5rem .5rem 1rem;
     margin-bottom: 1.5rem;
     scale: .9; opacity: 0;
@@ -102,6 +104,9 @@ h1 {
 }
 .room-img {
     border-radius: 10px;
+    width: 334px;
+    aspect-ratio: 1;
+    object-fit: cover;
 }
 .room-number {
     background-color: #000000af;
@@ -118,7 +123,7 @@ h1 {
 
 .room-info {
     display: grid;
-    grid-template-columns: 100px 100px 140px;
+    grid-template-columns: 110px 110px 120px;
     grid-template-rows: 50px auto;
     place-items: center;
 }
@@ -140,6 +145,8 @@ h1 {
 
 .room-desc {
     text-align: center;
+    height: 81.6px;
+    overflow-y: auto;
     grid-row: 2 / 3;
     grid-column: 1 / 4;
     padding: .3rem 1rem;
@@ -185,66 +192,33 @@ h1 {
 
 
 
-/* xs */
-/* @media (min-width: 475px) {
-} */
-
+/* Responsive */
 /* sm */
-@media (min-width: 640px) {
+@media (min-width: 740px) {
 
     /* ROOM CARD SECTION */
     .cards-wrapper {
-        width: auto;
+        width: 740px;
         grid-template-columns: 50% 50%;
-        position: relative;
-        padding-bottom: 7rem;
-        margin: auto;
     }
-
-    .room-card {
-        width: 300px;
-    }
-
-    .room-info {
-        grid-template-columns: 100px 100px 100px;
-    }
-
 }
 
-/* md */
-/* @media (min-width: 768px) {
-    
-} */
 /* lg */
-@media (min-width: 1024px) {
+@media (min-width: 1124px) {
 
     /* ROOM CARD SECTION */
     .cards-wrapper {
+        width: 1124px;
         grid-template-columns: 33.33% 33.33% 33.33%;
-    }
-
-    .room-card {
-        width: 300px;
-    }
-
-    .room-info {
-        grid-template-columns: 100px 100px 100px;
     }
 }
 
 /* xl */
-@media (min-width: 1280px) {
+@media (min-width: 1480px) {
 
     /* ROOM CARD SECTION */
     .cards-wrapper {
+        width: 1480px;
         grid-template-columns: 25% 25% 25% 25%;
-    }
-
-    .room-card {
-        width: 300px;
-    }
-
-    .room-info {
-        grid-template-columns: 100px 100px 100px;
     }
 }

@@ -90,13 +90,9 @@
             <i class="bx bx-money"></i>
             {{ room.price }}
           </span>
-          <span class="room-status">
-            <i
-              class="bx bxs-circle"
-              [ngStyle]="{
-                color: room.status === 'Available' ? '#a3e635' : '#ef4444'
-              }"
-            ></i>
+          <span class="room-status" [ngStyle]="{
+            color: room.status === 'Available' ? '#a3e635' : '#ef4444'
+          }">
             {{ room.status! }}
           </span>
           <span class="room-desc">
@@ -111,23 +107,23 @@
     </ng-template>
 
     <!-- pagination container -->
-    <div class="pagination flex">
-      <button
-        class="arrow-btn btn"
-        [disabled]="currentPage === 1"
-        (click)="onPageChange(currentPage - 1)"
-      >
-        &lt;
-      </button>
-      <span> page {{ currentPage }} of {{ totalPages }}</span>
-      <button
-        class="arrow-btn btn"
-        [disabled]="currentPage === totalPages"
-        (click)="onPageChange(currentPage + 1)"
-      >
-        &gt;
-      </button>
-    </div>
+  </div>
+  <div class="pagination flex">
+    <button
+      class="arrow-btn btn"
+      [disabled]="currentPage === 1"
+      (click)="onPageChange(currentPage - 1)"
+    >
+      &lt;
+    </button>
+    <span> page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+      class="arrow-btn btn"
+      [disabled]="currentPage === totalPages"
+      (click)="onPageChange(currentPage + 1)"
+    >
+      &gt;
+    </button>
   </div>
 </div>
 

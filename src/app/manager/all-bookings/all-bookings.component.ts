@@ -20,7 +20,7 @@ export class AllBookingsComponent implements OnInit, OnDestroy {
   // Params filter
   params: AllBookingsFilterParams = {
     page: 1,
-    limit: 10,
+    limit: 12,
     sortBy: 'createdAt',
     sortOrder: 'desc',
     roomNumber: '',

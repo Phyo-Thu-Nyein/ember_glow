@@ -89,6 +89,16 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   // LOGICS
+  // Book for guests/ Update for Admins
+  handleButtonClick() {
+    if (this.userRole === '0') {
+      this.onSubmit();
+    }
+    if (this.userRole === '1' || this.userRole === '2') {
+      this.goToRoomUpdate(this.roomId);
+    }
+  }
+
   // Get Room By ID
   getRoomDetailsById(roomId: string) {
     var result = this.apiService.getRoomById(roomId);

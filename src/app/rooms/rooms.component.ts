@@ -27,7 +27,7 @@ export class RoomsComponent implements OnInit, OnDestroy {
   // Filtering, Sorting the rooms
   params: RoomFilterParams = {
     page: 1,
-    limit: 10,
+    limit: 12,
     sortBy: 'createdAt',
     sortOrder: 'desc',
     roomType: '',

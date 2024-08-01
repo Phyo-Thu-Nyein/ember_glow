@@ -26,7 +26,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   // Filtering, Sorting the users
   params: UserFilterParams = {
     page: 1,
-    limit: 10,
+    limit: 12,
     sortBy: 'createdAt',
     sortOrder: 'desc',
     filterByRole: '',

@@ -55,7 +55,9 @@ textarea {
 .room-imgs {
     display: inline-block; /* Display images inline-block for horizontal alignment */
     width: 100px;
+    aspect-ratio: 1;
     margin-right: 2rem; 
+    object-fit: cover;
 }
 .custom-file-upload {
     position: absolute;

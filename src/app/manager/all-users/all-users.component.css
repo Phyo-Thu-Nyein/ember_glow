@@ -357,5 +357,9 @@ dialog[open]::backdrop {
 }
 
 /* 2xl */
-/* @media (min-width: 1536px) {
-} */
+@media (min-width: 1536px) {
+    .desktop-view {
+        max-width: 1536px;
+        grid-template-columns: 25% 25% 25% 25%;
+    }
+}

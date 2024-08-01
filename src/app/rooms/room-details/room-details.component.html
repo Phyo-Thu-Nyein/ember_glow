@@ -23,8 +23,14 @@
       <p class="number">Number: {{ oneRoomData.room_number }}</p>
       <p class="type">Type: {{ oneRoomData.room_type }}</p>
       <p class="price">Price: {{ oneRoomData.price }}</p>
-      <p class="status">Status: 
-        <span [ngClass]="oneRoomData.status==='Available' ? 'green-icon':'red-icon'">{{ oneRoomData.status }}</span>
+      <p class="status">
+        Status:
+        <span
+          [ngClass]="
+            oneRoomData.status === 'Available' ? 'green-icon' : 'red-icon'
+          "
+          >{{ oneRoomData.status }}</span
+        >
       </p>
     </div>
 
@@ -37,7 +43,7 @@
           [matDatepicker]="checkInpicker"
           [matDatepickerFilter]="checkInDateFilter"
           (dateChange)="onCheckInDateChange($event.value)"
-          [disabled]="userRole !== '0' || oneRoomData.status !=='Available'"
+          [disabled]="userRole !== '0' || oneRoomData.status !== 'Available'"
           placeholder="Choose a date"
           required
         />
@@ -73,11 +79,16 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- book button for Guests -->
-      <button class="btn book-btn" *ngIf="userRole === '0'" type="submit" [disabled]="!(checkInDateSelected && checkOutDateSelected)">Book Now</button>
+      <!-- Book for guests/ Update for admins -->
+      <button
+        class="btn book-btn"
+        (click)="handleButtonClick()"
+        [disabled]="
+          userRole === '0' && !(checkInDateSelected && checkOutDateSelected)
+        "
+      >
+        {{ userRole === "0" ? "Book Now" : "Update Room" }}
+      </button>
     </form>
-    
-    <!-- Update button for Manager -->
-    <button (click)="goToRoomUpdate(oneRoomData._id!)" class="btn room-update-btn" *ngIf="userRole === '1'">Update Room</button>
   </div>
 </section>
