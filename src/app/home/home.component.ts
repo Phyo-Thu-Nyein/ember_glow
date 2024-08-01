@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingService } from '../services/loading.service';
 
@@ -7,9 +7,13 @@ import { LoadingService } from '../services/loading.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   constructor (private router:Router, private loadingService: LoadingService) {}
+
+  ngOnInit(): void {
+    this.loadingService.showLoading();
+  }
 
   goToRooms() {
     this.loadingService.showLoading(); // loading b4 navigate
