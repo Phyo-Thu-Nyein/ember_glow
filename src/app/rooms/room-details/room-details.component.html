@@ -87,7 +87,7 @@
           userRole === '0' && !(checkInDateSelected && checkOutDateSelected)
         "
       >
-        {{ userRole === "0" ? "Book Now" : "Update Room" }}
+        {{ userRole === "0" || userRole === null ? "Book Now" : "Update Room" }}
       </button>
     </form>
   </div>
