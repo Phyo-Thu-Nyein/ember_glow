@@ -90,7 +90,7 @@
       <button
         class="btn book-btn"
         (click)="handleButtonClick()"
-        [disabled]="!checkInDateSelected || !checkOutDateSelected || range.invalid "
+        [disabled]="(userRole === '0' && (!checkInDateSelected || !checkOutDateSelected || range.invalid))"
       >
         {{ userRole === "0" || userRole === null ? "Book Now" : "Update Room" }}
       </button>
