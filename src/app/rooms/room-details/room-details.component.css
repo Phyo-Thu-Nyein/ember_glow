@@ -61,6 +61,8 @@
 /* Date picker tip */
 .date-tip {
     font-size: var(--size-sm);
+    animation: date-tip 10s ease infinite;
+    margin-top: -1rem;
 }
 
 /* dates error messages */
