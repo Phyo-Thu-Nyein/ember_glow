@@ -11,35 +11,35 @@
   </div>
   <div class="mid-part flex">
     <a
-      [appLoadingNavigate]="userRole === '0' ? '/rooms' : '/all-rooms'"
+      [appLoadingNavigate]="userRole === '0' || userRole === null ? '/rooms' : '/all-rooms'"
       class="flex"
     >
       <i class="bx bxs-hotel" style="color: #ffffff"></i>
       Rooms
     </a>
     <a
-      [appLoadingNavigate]="userRole === '0' ? '/dining' : '/all-users'"
+      [appLoadingNavigate]="userRole === '0' || userRole === null ? '/dining' : '/all-users'"
       class="flex"
     >
-      <i class="bx" [ngClass]=" userRole === '0' ? 'bxs-bowl-hot' : 'bxs-group' " style="color: #ffffff"></i>
-      {{ userRole === "0" ? "Dining" : "Users" }}
+      <i class="bx" [ngClass]=" userRole === '0' || userRole === null ? 'bxs-bowl-hot' : 'bxs-group' " style="color: #ffffff"></i>
+      {{ userRole === '0' || userRole === null ? "Dining" : "Users" }}
     </a>
     <a
-      [appLoadingNavigate]="userRole === '0' ? '/facilities' : '/all-bookings'"
+      [appLoadingNavigate]="userRole === '0' || userRole === null ? '/facilities' : '/all-bookings'"
       class="flex"
     >
-      <i class="bx" [ngClass]=" userRole === '0' ? 'bx-swim' : 'bxs-book-bookmark' " style="color: #ffffff"></i>
-      {{ userRole === "0" ? "Facilities" : "Bookings" }}
+      <i class="bx" [ngClass]=" userRole === '0' || userRole === null ? 'bx-swim' : 'bxs-book-bookmark' " style="color: #ffffff"></i>
+      {{ userRole === '0' || userRole === null ? "Facilities" : "Bookings" }}
     </a>
     <a
-      [appLoadingNavigate]="userRole === '0' ? '/about' : '/create-room'"
+      [appLoadingNavigate]="userRole === '0' || userRole === null ? '/about' : '/create-room'"
       class="flex"
     >
-      <i class="bx" [ngClass]=" userRole === '0' ? 'bxs-group' : 'bxs-clinic' " style="color: #ffffff"></i>
-      {{ userRole === "0" ? "About" : "Add Room" }}
+      <i class="bx" [ngClass]=" userRole === '0' || userRole === null ? 'bxs-group' : 'bxs-clinic' " style="color: #ffffff"></i>
+      {{ userRole === '0' || userRole === null ? "About" : "Add Room" }}
     </a>
     <a
-      *ngIf="userRole === '0'; else toGmail"
+      *ngIf="userRole === '0' || userRole === null; else toGmail"
       appLoadingNavigate="/contact"
       class="flex"
     >
@@ -48,7 +48,7 @@
     </a>
     <ng-template #toGmail>
       <a href="https://mail.google.com" target="_blank" class="flex">
-        <i class="bx" [ngClass]=" userRole === '0' ? 'bxs-phone' : 'bxs-envelope' " style="color: #ffffff"></i>
+        <i class="bx" [ngClass]=" userRole === '0' || userRole === null ? 'bxs-phone' : 'bxs-envelope' " style="color: #ffffff"></i>
         Gmail
       </a>
     </ng-template>
@@ -78,38 +78,38 @@
   <ul class="mobile___nav flex">
     <li class="mobile__nav-link">
       <a
-        [appLoadingNavigate]="userRole === '0' ? '/rooms' : '/all-rooms'"
+        [appLoadingNavigate]="userRole === '0' || userRole === null ? '/rooms' : '/all-rooms'"
         onclick="mobile_menu.close()"
         >Rooms</a
       >
     </li>
     <li class="mobile__nav-link">
       <a
-        [appLoadingNavigate]="userRole === '0' ? '/dining' : '/all-users'"
+        [appLoadingNavigate]="userRole === '0' || userRole === null ? '/dining' : '/all-users'"
         onclick="mobile_menu.close()"
       >
-        {{ userRole === "0" ? "Dining" : "Users" }}
+        {{ userRole === '0' || userRole === null ? "Dining" : "Users" }}
       </a>
     </li>
     <li class="mobile__nav-link">
       <a
         [appLoadingNavigate]="
-          userRole === '0' ? '/facilities' : '/all-bookings'
+          userRole === '0' || userRole === null ? '/facilities' : '/all-bookings'
         "
         onclick="mobile_menu.close()"
       >
-        {{ userRole === "0" ? "Facilities" : "Bookings" }}
+        {{ userRole === '0' || userRole === null ? "Facilities" : "Bookings" }}
       </a>
     </li>
     <li class="mobile__nav-link">
       <a
-        [appLoadingNavigate]="userRole === '0' ? '/about' : '/create-room'"
+        [appLoadingNavigate]="userRole === '0' || userRole === null ? '/about' : '/create-room'"
         onclick="mobile_menu.close()"
       >
-        {{ userRole === "0" ? "About" : "Add Room" }}
+        {{ userRole === '0' || userRole === null ? "About" : "Add Room" }}
       </a>
     </li>
-    <li class="mobile__nav-link" *ngIf="userRole === '0'; else goToGmail">
+    <li class="mobile__nav-link" *ngIf="userRole === '0' || userRole === null; else goToGmail">
       <a appLoadingNavigate="/contact" onclick="mobile_menu.close()">
         Contact
       </a>
