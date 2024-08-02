@@ -47,6 +47,9 @@ export class RegisterComponent implements OnDestroy {
   password: string = '';
   conpassword: string = '';
 
+  isRegError: boolean = false; // register error
+  errorMsg: string = '';
+
   //Validate the ph no
   phoneNum: number | null = null;
   isPhoneValid: boolean = true;
@@ -108,8 +111,12 @@ export class RegisterComponent implements OnDestroy {
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
-        alert(err.error);
         this.onSubmit = false;
+        this.isRegError = true;
+        this.errorMsg = err.error.message;
+        setTimeout(() => {
+          this.isRegError = false;
+        }, 3400);
       }
     });
   }

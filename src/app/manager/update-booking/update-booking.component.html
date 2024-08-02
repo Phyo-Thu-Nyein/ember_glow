@@ -71,7 +71,6 @@
                <td>Booking Status: </td>
                <td>
                     <select [(ngModel)]="oneBooking.status" name="bookingStatus" id="bookingStatus">
-                        <option [value]="oneBooking.status">{{ oneBooking.status }}</option>
                         <option *ngFor="let status of bookingStatusOptions" [value]="status">{{ status }}</option>
                     </select>
                </td>
@@ -80,7 +79,6 @@
                <td>Payment Status: </td>
                <td>
                 <select [(ngModel)]="oneBooking.paymentStatus" name="paymentStatus" id="paymentStatus">
-                    <option [value]="oneBooking.paymentStatus">{{ oneBooking.paymentStatus }}</option>
                     <option *ngFor="let status of paymentStatusOptions" [value]="status">{{ status }}</option>
                 </select>
            </td>

@@ -24,9 +24,9 @@ export class UpdateBookingComponent implements OnInit, OnDestroy {
   bookingId: string = '';
   isFetching: boolean = false; // loading
   bookingStatus = BookingStatus;
-  bookingStatusOptions: string[] = [];
+  bookingStatusOptions: string[] = ['Pending', 'Confirmed', 'Failed', 'Cancelled', 'Archived'];
   paymentStatus = PaymentStatus;
-  paymentStatusOptions: string[] = [];
+  paymentStatusOptions: string[] = ['Pending', 'Paid', 'Failed', 'Cancelled'];
 
   // Update Mode variables
   isUpdateMode: boolean = false;
@@ -62,12 +62,6 @@ export class UpdateBookingComponent implements OnInit, OnDestroy {
     this.oneBookingSub = this.apiService.getOneBooking(bookingId).subscribe({
       next: (response: OneBooking) => {
         this.oneBooking = response.data!;
-        this.bookingStatusOptions = Object.values(BookingStatus).filter(
-          (bookingStatus) => bookingStatus != this.oneBooking.status
-        );
-        this.paymentStatusOptions = Object.values(PaymentStatus).filter(
-          (paymentStatus) => paymentStatus != this.oneBooking.paymentStatus
-        );
         this.isFetching = false;
       },
       error: (err) => {
@@ -85,6 +79,7 @@ export class UpdateBookingComponent implements OnInit, OnDestroy {
       paymentStatus: this.oneBooking.paymentStatus,
     };
 
+    this.loadingService.showLoading();
     this.apiService.updateBooking(this.bookingId, bookingData).subscribe({
       next: (response: any) => {
         console.log('Booking updated successfully', response.data!);
@@ -100,6 +95,7 @@ export class UpdateBookingComponent implements OnInit, OnDestroy {
         console.log('Error updating booking', err.error.message);
         this.isSaving = false;
         this.toggleUpdateMode();
+        this.loadingService.hideLoading();
       },
     });
   }

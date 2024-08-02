@@ -128,16 +128,22 @@ export class UpdateRoomComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.loadingService.showLoading();
     // Update the room
     this.apiService.updateRoomById(roomId, formData).subscribe({
       next: (response: any) => {
         console.log('Room updated successfully');
         this.isSaving = false;
         this.toggleUpdateMode();
+        this.loadingService.showLoading();
+        setTimeout(() => {
+          this.router.navigateByUrl('all-rooms');
+        }, 460);
       },
       error: (err) => {
         console.log('Error updating the room', err.error.message);
         this.isSaving = false;
+        this.loadingService.hideLoading();
       }
     });
   }

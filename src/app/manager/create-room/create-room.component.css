@@ -8,6 +8,23 @@ h1 {
     margin-bottom: 2rem;
 }
 
+
+/* Error msg if there's any */
+.error-msg {
+    width: 90%;
+    max-width: 400px;
+    border-radius: .6rem;
+    position: absolute;
+    top: 11%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ef4444;
+    color: #fff;
+    font-weight: bold;
+    padding: .5rem 1rem;
+    z-index: 10;
+}
+
 /* Form to create a new room */
 
 /* Room Card */

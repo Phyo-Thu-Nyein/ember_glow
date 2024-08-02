@@ -25,7 +25,11 @@
             <td colspan="2" class="room-desc-label">Room Description</td>
         </tr>
         <tr>
-            <td colspan="2" class="room-desc">{{ roomDetails.description }}</td>
+            <td colspan="2" class="room-desc">
+                <textarea disabled>
+                {{ roomDetails.description }}
+            </textarea>
+            </td>
         </tr>
         <tr>
             <td colspan="2" class="imgs-row">
@@ -42,7 +46,7 @@
             </tr>
             <tr>
                 <td style="opacity: .5;">Room No: </td>
-                <td><input class="room-no-input" type="text" [(ngModel)]="roomDetails.room_number" name="roomNumber"></td>
+                <td><input [disabled]="isSaving" class="room-no-input" type="text" [(ngModel)]="roomDetails.room_number" name="roomNumber"></td>
             </tr>
             <tr>
                 <td style="opacity: .5;">Room Status: </td>
@@ -62,14 +66,14 @@
             </tr>
             <tr>
                 <td style="opacity: .5;">Room Price: </td>
-                <td><input class="room-price-input" type="number" [(ngModel)]="roomDetails.price" name="roomPrice"></td>
+                <td><input [disabled]="isSaving" class="room-price-input" type="number" [(ngModel)]="roomDetails.price" name="roomPrice"></td>
             </tr>
             <tr>
                 <td style="opacity: .5;" colspan="2" class="room-desc-label">Room Description</td>
             </tr>
             <tr>
                 <td colspan="2" class="room-desc">
-                    <textarea cols="30" [(ngModel)]="roomDetails.description" name="description" id="description"></textarea>
+                    <textarea cols="30" [disabled]="isSaving" [(ngModel)]="roomDetails.description" name="description" id="description"></textarea>
                 </td>
             </tr>
             <tr class="img-row-wrapper">
@@ -81,7 +85,7 @@
                     <div *ngFor="let img of imgArray; let i = index" class="img-wrapper flex">
                         <img [src]="img" (click)="selectImage(i)" class="room-imgs">
                         <label class="custom-file-upload">
-                            <input type="file" (change)="onImageChange($event, i)" style="display: none;">
+                            <input [disabled]="isSaving" type="file" (change)="onImageChange($event, i)" style="display: none;">
                             <p>Change <br> Image</p>
                         </label>
                     </div>
@@ -89,7 +93,7 @@
                     <div *ngFor="let n of dummyArray" class="img-wrapper flex">
                         <img src="../../../assets/images/rooms/dummy-image-square.webp" (click)="selectDummyImage()" class="room-imgs">
                         <label class="custom-file-upload">
-                            <input type="file" (change)="onImageChange($event, imgArray.length)" #fileInput style="display: none;">
+                            <input [disabled]="isSaving" type="file" (change)="onImageChange($event, imgArray.length)" #fileInput style="display: none;">
                             <p>Add <br> Image</p>
                         </label>
                     </div>
@@ -110,12 +114,12 @@
 
      <!-- Delete and Update Mode Toggle buttons -->
     <div class="btn-group flex">
-        <button *ngIf="!isUpdateMode"class="btn delete-btn flex" popovertarget="popup">
+        <button [disabled]="isDeleting || isSaving" *ngIf="!isUpdateMode" class="btn delete-btn flex" popovertarget="popup">
             <span *ngIf="!isDeleting">Delete</span>
             <i *ngIf="!isDeleting" class='bx bx-trash'></i>
             <i *ngIf="isDeleting" class="bx bx-loader-circle bx-spin"></i>
         </button>
-        <button *ngIf="!isUpdateMode" class="btn toggle-btn flex" (click)="toggleUpdateMode()">
+        <button [disabled]="isDeleting || isSaving" *ngIf="!isUpdateMode" class="btn toggle-btn flex" (click)="toggleUpdateMode()">
           <span>Update</span>
           <i class='bx bx-edit'></i>
         </button>

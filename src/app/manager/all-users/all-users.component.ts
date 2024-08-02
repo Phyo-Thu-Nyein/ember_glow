@@ -5,6 +5,7 @@ import { AllUserDatum, AllUsersDetails } from '../../interface/allusers-detail';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserFilterParams } from '../../interface/filter-params';
 import { NotFoundService } from '../../services/not-found.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-all-users',
@@ -41,7 +42,8 @@ export class AllUsersComponent implements OnInit, OnDestroy {
     private apiService: ApiService,
     private router: Router,
     private route: ActivatedRoute,
-    private notFoundService: NotFoundService
+    private notFoundService: NotFoundService,
+    private loadingService: LoadingService
   ) {}
 
   // On Init
@@ -122,14 +124,17 @@ export class AllUsersComponent implements OnInit, OnDestroy {
 
   // Delete User By Id
   deleteUserById(userId: string) {
+    this.loadingService.showLoading();
     console.log('This user is going to be deleted:', userId);
     this.apiService.deleteUserById(userId).subscribe({
       next: (response: any) => {
         console.log(response.message);
         this.getAllUsers(this.params);
+        this.loadingService.hideLoading();
       },
       error: (err) => {
         console.log('Error deleting the user', err.message);
+        this.loadingService.hideLoading();
       },
     });
   }

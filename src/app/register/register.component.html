@@ -5,6 +5,11 @@
 <div class="blur"></div>
 
 <div class="dummy-body flex">
+  <!-- Error Message if there's any -->
+  <div *ngIf="isRegError" class="error-msg bx-flashing">
+    <p>{{ errorMsg }}</p>
+ </div>
+
   <!-- FORM SECTION  -->
   <div class="form-wrapper flex">
     <h1>Register</h1>
@@ -13,6 +18,7 @@
         <!-- USERNAME FIELD  -->
         <div class="input-box">
           <input
+            [disabled]="onSubmit"
             type="text"
             name="username"
             id="username"
@@ -40,6 +46,7 @@
         <!-- EMAIL FIELD -->
         <div class="input-box">
           <input
+            [disabled]="onSubmit"
             type="email"
             name="email"
             id="email"
@@ -68,6 +75,7 @@
         <!-- PHONE FIELD -->
         <div class="input-box">
           <input
+            [disabled]="onSubmit"
             type="number"
             name="phone"
             id="phone"
@@ -94,6 +102,7 @@
         <!-- PASSWORD FIELD -->
         <div class="input-box">
           <input
+            [disabled]="onSubmit"
             type="password"
             name="password"
             id="password"
@@ -123,6 +132,7 @@
         <!-- COFIRM PSW FIELD -->
         <div class="input-box">
           <input
+            [disabled]="onSubmit"
             type="password"
             name="conpassword"
             id="conpassword"

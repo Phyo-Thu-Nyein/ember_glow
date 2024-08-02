@@ -82,7 +82,7 @@
       />
       <p *ngIf="file">{{ file.name }}</p>
       <p class="file-error" *ngIf="fileError">{{ fileError }}</p>
-      <button class="btn prev-btn" type="reset" (click)="previousStep()">
+      <button class="btn prev-btn" type="reset" (click)="previousStep()" [disabled]="isPaymentLoading">
         Previous
       </button>
       <button

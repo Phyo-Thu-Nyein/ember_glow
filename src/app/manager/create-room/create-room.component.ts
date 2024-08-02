@@ -29,7 +29,8 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
   createRoomForm: FormGroup;
   isLoading: boolean = false; // loading
   isSaving: boolean = false;
-  errorMessage: string | null = null;
+  isError: boolean = false; // if any error 
+  errorMessage: string | null = null; // err msg
   roomStatus: string[] = ['Available', 'Maintenance', 'Unavailable'];
   roomTypes: string[] = ['Suite', 'Superior', 'Deluxe', 'Standard'];
   createSuccess: boolean = false;
@@ -72,23 +73,11 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
   // LOGICS
   // Create a new room
   createNewRoom() {
-    console.log('Button is clicked');
-    if (this.createRoomForm.invalid) {
-      console.log('FOrm invalid');
-      return;
-    }
-
     const formData = new FormData();
-    formData.append(
-      'room_number',
-      this.createRoomForm.get('room_number')?.value
-    );
+    formData.append('room_number', this.createRoomForm.get('room_number')?.value);
     formData.append('room_type', this.createRoomForm.get('room_type')?.value);
     formData.append('price', this.createRoomForm.get('price')?.value);
-    formData.append(
-      'description',
-      this.createRoomForm.get('description')?.value
-    );
+    formData.append('description', this.createRoomForm.get('description')?.value);
     formData.append('status', this.createRoomForm.get('status')?.value);
 
     // Append files for images
@@ -100,8 +89,10 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
     }
 
     this.isSaving = true;
+    this.loadingService.showLoading();
     this.createRoomSub = this.apiService.createRoom(formData).subscribe({
       next: (response: any) => {
+        this.loadingService.hideLoading();
         console.log('Room created successfully');
         this.isSaving = false;
         this.createSuccess = true; // Room Creation Successful
@@ -114,10 +105,15 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
           }, 460);
         }, 2000);
       },
-      error: (error) => {
-        console.log('Error creating the room', error.message);
+      error: (err) => {
+        this.loadingService.hideLoading();
+        console.log('Error creating the room', err.error.message);
         this.isSaving = false;
-        this.errorMessage = error.message;
+        this.isError = true;
+        this.errorMessage = err.error.message;
+        setTimeout(() => {
+          this.isError = false;
+        }, 5400);
       },
     });
   }
