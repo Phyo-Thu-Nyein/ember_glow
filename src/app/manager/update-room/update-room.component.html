@@ -72,8 +72,12 @@
                     <textarea cols="30" [(ngModel)]="roomDetails.description" name="description" id="description"></textarea>
                 </td>
             </tr>
-            <tr>
+            <tr class="img-row-wrapper">
                 <td colspan="2" class="imgs-row">
+                    <!-- tip for img upload -->
+                    <div class="upload-tip">
+                        1:1 ratio images are more suitable *
+                     </div>
                     <div *ngFor="let img of imgArray; let i = index" class="img-wrapper flex">
                         <img [src]="img" (click)="selectImage(i)" class="room-imgs">
                         <label class="custom-file-upload">
