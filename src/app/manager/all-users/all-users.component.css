@@ -119,11 +119,11 @@ dialog {
     left: 50%;
     top: 30%;
     transform: translateX(-50%);
+    display: none;
 }
 
 dialog[open] {
     display: block;
-    animation: appear .5s;
 }
 
 dialog[open]::backdrop {
@@ -257,10 +257,7 @@ dialog[open]::backdrop {
 .pagination {
     gap: 1rem;
     width: 100%;
-    position: absolute;
-    left: 50%;
-    bottom: 4%;
-    transform: translateX(-50%);
+    margin-top: 2rem;
 }
 
 .pagination .arrow-btn {
@@ -268,17 +265,6 @@ dialog[open]::backdrop {
     box-shadow: none;
 }
 
-
-/* Animation for dialog open/close */
-@keyframes appear {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
 
 /* RESPONSIVE */
 /* xs */
