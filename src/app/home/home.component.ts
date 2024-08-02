@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   constructor (private router:Router, private loadingService: LoadingService) {}
 
   ngOnInit(): void {
-    // this.loadingService.showLoading();
+    this.loadingService.showLoading();
   }
 
   goToRooms() {
