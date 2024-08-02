@@ -50,6 +50,16 @@ const bookedDateValidator = (bookedDates: { checkIn: string; checkOut: string }[
   };
 };
 
+// Custom validator to check if the check-out date is after the check-in date
+const dateOrderValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+  const start = group.get('start')?.value;
+  const end = group.get('end')?.value;
+  if (start && end && end <= start) {
+    return { dateOrder: true };
+  }
+  return null;
+};
+
 @Component({
   selector: 'app-room-details',
   templateUrl: './room-details.component.html',
@@ -62,6 +72,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Variables
   oneRoomData: OneRoomData = {};
+  roomStatus: string = '';
   roomId: string = ''; // pass to booking details page
   bookedDates: { checkIn: string; checkOut: string }[] = [];
   checkLoggedIn: boolean = true;
@@ -70,11 +81,16 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   bigImg: string = '';
   imgArray: OneRoomData['images'] = [];
 
+  // Error tracking variable
+  dateOrderError: boolean = false; // Variable to store the date order error status
+
   // Date picker
   range = new FormGroup({
     start: new FormControl<Date | null>(null, [minDateValidator, bookedDateValidator(this.bookedDates)]),
     end: new FormControl<Date | null>(null, [minDateValidator, bookedDateValidator(this.bookedDates)]),
-  });
+  },
+    { validators: dateOrderValidator }
+  );
   checkInDateSelected = false;
   checkOutDateSelected = false;
   minCheckOutDate: Date | null = null;
@@ -102,6 +118,11 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.getRoomDetailsById(roomId);
       this.getBookedDates(roomId);
     });
+
+    // Track form changes to update date order error status
+    this.range.valueChanges.subscribe(() => {
+      this.updateDateOrderError();
+    });
   }
   ngOnDestroy(): void {
     if (this.oneRoomSub) {
@@ -110,6 +131,11 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.bookedDatesSub) {
       this.bookedDatesSub.unsubscribe();
     }
+  }
+
+  // Method to update the dateOrderError status
+  updateDateOrderError() {
+    this.dateOrderError = !!this.range.errors?.['dateOrder'];
   }
 
   // LOGICS
@@ -129,6 +155,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     this.oneRoomSub = result.subscribe({
       next: (response: OneRoomDetails) => {
         this.oneRoomData = response.data!;
+        this.roomStatus = response.data?.status!;
         this.imgArray = this.oneRoomData.images!;
         this.bigImg = this.imgArray[0];
         this.roomId = this.oneRoomData._id!;
@@ -153,6 +180,12 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
           bookedDateValidator(this.bookedDates),
         ]);
         this.range.controls.start.updateValueAndValidity();
+
+        this.range.controls.end.setValidators([
+          minDateValidator,
+          bookedDateValidator(this.bookedDates),
+        ]);
+        this.range.controls.end.updateValueAndValidity();
       },
       error: (err) => {
         console.log('Error getting booked dates', err.message);
@@ -237,6 +270,10 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
     this.range.controls.end.setValue(event.value);
     this.range.controls.end.markAsTouched();
     this.range.controls.end.updateValueAndValidity(); // Update validity after setting a new value
+    
+    // Log error status to ensure error is being caught
+    console.log('Check-Out Error Status:', this.range.controls.end.errors);
+    console.log('Form Group Error Status:', this.range.errors);
   }
 
   // REDIRECT TO THE BOOKING DETAILS PAGE AFTER SELECTING DATES

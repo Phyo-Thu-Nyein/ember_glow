@@ -38,7 +38,7 @@
     <form [formGroup]="range" (ngSubmit)="onSubmit()" class="checkin-out-wrapper flex">
       <!-- date picker tip -->
       <span class="date-tip">
-        Tip: Use Calendar for more convenient pick!
+        Tip: Use Calendar for more precise pick!
       </span>
 
       <mat-form-field>
@@ -49,7 +49,6 @@
           [matDatepickerFilter]="checkInDateFilter"
           formControlName="start"
           (dateChange)="onCheckInDateChange($event.value)"
-          [disabled]="userRole !== '0' || oneRoomData.status !== 'Available'"
           placeholder="Choose a date"
           required
         />
@@ -72,7 +71,6 @@
           [matDatepickerFilter]="checkOutDateFilter"
           formControlName="end"
           placeholder="Choose a date"
-          [disabled]="!checkInDateSelected"
           [min]="minCheckOutDate"
           (dateChange)="onCheckOutDateChange($event)"
           required
@@ -80,11 +78,11 @@
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="checkOutpicker"></mat-datepicker-toggle>
         <mat-datepicker #checkOutpicker></mat-datepicker>
-        <mat-error *ngIf="range.controls.end.hasError('minDate') && range.controls.end.touched">
-          Check Out must be after check-in date.
-        </mat-error>
         <mat-error *ngIf="range.controls.end.hasError('alreadyBooked') && range.controls.end.touched">
           Someone has already booked that date.
+        </mat-error>
+        <mat-error *ngIf="dateOrderError || range.controls.end.touched || range.invalid">
+          Check-out must be after check-in date.
         </mat-error>
       </mat-form-field>
     
@@ -92,7 +90,7 @@
       <button
         class="btn book-btn"
         (click)="handleButtonClick()"
-        [disabled]="!checkInDateSelected || !checkOutDateSelected || range.invalid"
+        [disabled]="!checkInDateSelected || !checkOutDateSelected || range.invalid "
       >
         {{ userRole === "0" || userRole === null ? "Book Now" : "Update Room" }}
       </button>

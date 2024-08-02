@@ -16,7 +16,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   profilePicUpdatedSub: Subscription = new Subscription();
 
   // Variables
-  userImgUrl: string | null = null;
+  userImgUrl: string | null = '';
   userImgExist: boolean = false;
   userRole: string | null = '';
 
@@ -51,12 +51,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
   getUserDetails() {
     this.userImgUrl = localStorage.getItem('pfp'); // get the user profile pic
     this.userRole = localStorage.getItem('role'); // get the user role
-    if (this.userImgUrl == null) {
+    if (this.userImgUrl == 'null') {
       this.userImgExist = false;
     } else {
       this.userImgExist = true;
     }
-    console.log('user image url', this.userImgUrl);
   }
 
   // Update user details
