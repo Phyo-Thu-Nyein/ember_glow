@@ -109,6 +109,7 @@
     animation: fade-in linear forwards;
     animation-timeline: view();
     animation-range: 100px 300px;
+    position: relative;
 }
 
 .img-container {

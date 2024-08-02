@@ -75,3 +75,13 @@
         opacity: 1;
     }
 }
+
+/* border spin animation for home screen book button */
+@keyframes borderSpin {
+    from {
+        --angle: 0deg;
+    }
+    to {
+        --angle: 360deg;
+    }
+}
