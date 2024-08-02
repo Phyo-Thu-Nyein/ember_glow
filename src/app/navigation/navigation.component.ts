@@ -49,9 +49,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   // LOGICS
   // get the user's img
   getUserDetails() {
-    this.userImgUrl = localStorage.getItem('pfp'); // get the user profile pic
+    this.userImgUrl = localStorage.getItem('pfp') === 'null' ? null : localStorage.getItem('pfp'); // get the user profile pic
     this.userRole = localStorage.getItem('role'); // get the user role
-    if (this.userImgUrl == 'null') {
+    if (this.userImgUrl == null) {
       this.userImgExist = false;
     } else {
       this.userImgExist = true;
