@@ -42,9 +42,23 @@ textarea {
     height: 80px;
     resize: none;
 }
+.img-row-wrapper {
+    position: relative;
+}
 .imgs-row {
     overflow-x: auto; 
     white-space: nowrap; /* Prevent line breaks to keep images in one line */
+    padding-top: 1.8rem;
+}
+/* Img upload tip */
+.upload-tip {
+    color: #ef7a44;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--size-sm);
 }
 
 .img-wrapper {
@@ -67,7 +81,7 @@ textarea {
     height: 100px;
 }
 .custom-file-upload p {
-    background-color: #000000c7;
+    background-color: #000000ad;
     font-weight: bold;
     text-align: center;
     color: #fff;
