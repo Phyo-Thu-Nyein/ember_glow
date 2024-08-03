@@ -30,8 +30,8 @@
             pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
           />
           <i [ngClass]="{
-            'green-icon' : isFieldValid(mail),
-            'red-icon' : isFieldInvalid(mail)
+            'green-icon' : onSubmit || isFieldValid(mail),
+            'red-icon' : !onSubmit && isFieldInvalid(mail)
           }" class="bx bxs-envelope"></i>
           <!-- input error message -->
           <p
@@ -55,8 +55,8 @@
             #pass="ngModel"
           />
           <i [ngClass]="{
-            'green-icon': isFieldValid(pass),
-            'red-icon': isFieldInvalid(pass)
+            'green-icon': onSubmit || isFieldValid(pass),
+            'red-icon': !onSubmit && isFieldInvalid(pass)
           }" class="bx bxs-lock-alt"></i>
           <!-- input error message -->
           <p

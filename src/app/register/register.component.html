@@ -30,8 +30,8 @@
           />
           <i
             [ngClass]="{
-              'green-icon': isFieldValid(name),
-              'red-icon': isFieldInvalid(name)
+              'green-icon': onSubmit || isFieldValid(name),
+              'red-icon': !onSubmit && isFieldInvalid(name)
             }"
             class="bx bxs-user"
           ></i>
@@ -59,8 +59,8 @@
           />
           <i
             [ngClass]="{
-              'green-icon': isFieldValid(mail),
-              'red-icon': isFieldInvalid(mail)
+              'green-icon': onSubmit || isFieldValid(mail),
+              'red-icon': !onSubmit && isFieldInvalid(mail)
             }"
             class="bx bxs-envelope"
           ></i>
@@ -89,8 +89,8 @@
           />
           <i
             [ngClass]="{
-              'green-icon': isFieldValid(phno) && isPhoneValid,
-              'red-icon': isFieldInvalid(phno) || !isPhoneValid
+              'green-icon': onSubmit || (isFieldValid(phno) && isPhoneValid),
+              'red-icon': !onSubmit && (isFieldInvalid(phno) || !isPhoneValid)
             }"
             class="bx bxs-phone"
           ></i>
@@ -116,15 +116,15 @@
           />
           <i
             [ngClass]="{
-              'green-icon': isFieldValid(pass),
-              'red-icon': isFieldInvalid(pass)
+              'green-icon': onSubmit || isFieldValid(pass),
+              'red-icon': !onSubmit && isFieldInvalid(pass)
             }"
             class="bx bxs-lock-alt"
           ></i>
           <!-- input error message -->
           <p
             class="text-red-bold"
-            *ngIf="!pass.valid && pass.touched && pass.dirty"
+            *ngIf=" !onSubmit && (!pass.valid && pass.touched && pass.dirty)"
           >
             at least 8 characters
           </p>
@@ -146,8 +146,8 @@
           />
           <i
             [ngClass]="{
-              'green-icon': isFieldValid(cpass) && passwordsMatch,
-              'red-icon': isFieldInvalid(cpass) || !passwordsMatch
+              'green-icon': onSubmit || (isFieldValid(cpass) && passwordsMatch),
+              'red-icon': !onSubmit && (isFieldInvalid(cpass) || !passwordsMatch)
             }"
             class="bx bxs-lock-alt"
           ></i>
