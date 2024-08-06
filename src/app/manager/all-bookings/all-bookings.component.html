@@ -71,6 +71,8 @@
             <p><span>RoomNo: </span><span>{{ booking.room?.room_number!}}</span></p>
             <p><span>CheckIn: </span><span>{{ booking.checkIn | date: 'yyyy-MMM-dd'}}</span></p>
             <p><span>CheckOut: </span><span>{{ booking.checkOut | date: 'yyyy-MMM-dd'}}</span></p>
+            <p><span>Duration: </span><span>{{ booking.duration}}</span></p>
+            <p><span>Total Price: </span><span>{{ booking.totalPrice}}</span></p>
             <p><span>Booking Status: </span><span>{{ booking.status}}</span></p>
             <p><span>Payment Status: </span><span>{{ booking.paymentStatus}}</span></p>
             <button class="proof-btn" popovertarget="popup" (click)="getPaymentProof(booking.paymentProof!)" >

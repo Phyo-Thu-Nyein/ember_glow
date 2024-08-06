@@ -1,18 +1,19 @@
-import { Component, ElementRef, OnDestroy, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserDetails } from '../interface/user-details';
-import { Subscription } from 'rxjs';
+import { count, Subscription } from 'rxjs';
 import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  encapsulation: ViewEncapsulation.None // Disable encapsulation
 })
-export class RegisterComponent implements OnDestroy {
+export class RegisterComponent implements OnInit, OnDestroy {
 
   // Subscriptions
   regSub: Subscription = new Subscription();
@@ -49,6 +50,27 @@ export class RegisterComponent implements OnDestroy {
 
   isRegError: boolean = false; // register error
   errorMsg: string = '';
+
+  // Oninit
+  ngOnInit(): void {
+    this.loadCountryCodes();
+  }
+  // Load country codes from the JSON file
+  countryCodes: any[] = [];
+  selectedCountryCode: string = '+95'; // Default selection
+
+  loadCountryCodes() {
+    const result = this.apiService.getCountryCodes().subscribe({
+      next: (response) => {
+        this.countryCodes = response;
+        // Set the default country code to the first item in the array
+        if (this.countryCodes.length > 0) {
+          this.selectedCountryCode = this.countryCodes[0].dial_code;
+        }
+      }
+    });
+  }
+  
 
   //Validate the ph no
   phoneNum: number | null = null;
@@ -93,10 +115,14 @@ export class RegisterComponent implements OnDestroy {
   //Register
   register() {
     this.onSubmit = true;
+    // Combine the selected country code with the phone number
+    const fullPhoneNumber = `${this.selectedCountryCode}${this.phone}`;
+    console.log('Full phone number:', fullPhoneNumber);
+
     var result = this.apiService.register({
       'name': this.username,
       'email': this.email,
-      'phone': this.phone,
+      'phone': fullPhoneNumber,
       'password': this.password,
     });
     this.regSub = result.subscribe({

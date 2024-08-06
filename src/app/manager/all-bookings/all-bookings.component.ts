@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {
-  AllBookings,
-  AllBookingsDatum,
+  Bookings,
+  BookingsDatum,
 } from 'src/app/interface/bookings-interface';
 import { AllBookingsFilterParams } from 'src/app/interface/filter-params';
 import { ApiService } from 'src/app/services/api.service';
@@ -31,7 +31,7 @@ export class AllBookingsComponent implements OnInit, OnDestroy {
   };
 
   // Variables
-  bookingsDatum: AllBookingsDatum[] = [];
+  bookingsDatum: BookingsDatum[] = [];
   paymentProofUrl: string = '';
   isFetching: boolean = false;
 
@@ -64,7 +64,7 @@ export class AllBookingsComponent implements OnInit, OnDestroy {
   getAllBookings(params: AllBookingsFilterParams) {
     this.isFetching = true;
     this.allBookingsSub = this.apiService.getAllBookings(params).subscribe({
-      next: (response: AllBookings) => {
+      next: (response: Bookings) => {
         this.bookingsDatum = response?.data!;
         this.currentPage = response.currentPage!;
         this.totalPages = response.totalPages!;

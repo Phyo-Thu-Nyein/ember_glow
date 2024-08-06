@@ -17,37 +17,58 @@ h1 {
     font-size: var(--size-lg);
     border-collapse: collapse;
 }
-.room-id, .payment-proof, .room-desc-label {
+
+.room-id,
+.payment-proof,
+.room-desc-label {
     text-align: center;
 }
+
 td {
     border: 1px solid #0000001c;
     width: 50%;
     padding: 1rem;
 }
-.room-desc, .room-desc-label {
+
+.room-desc,
+.room-desc-label {
     padding: .4rem 1rem;
 }
+
 /* font-size for all inputs */
-input, textarea {
+input,
+textarea {
     font-size: var(--size-lg);
 }
-.room-no-input, .room-price-input {
+
+.room-no-input,
+.room-price-input,
+.room-floor-input,
+.room-capacity-input {
     width: 9.5rem;
 }
+
 textarea {
     width: 100%;
     height: 80px;
     resize: none;
 }
+
+textarea:disabled {
+    background-color: transparent;
+}
+
 .img-row-wrapper {
     position: relative;
 }
+
 .imgs-row {
-    overflow-x: auto; 
-    white-space: nowrap; /* Prevent line breaks to keep images in one line */
+    overflow-x: auto;
+    white-space: nowrap;
+    /* Prevent line breaks to keep images in one line */
     padding-top: 1.8rem;
 }
+
 /* Img upload tip */
 .upload-tip {
     color: #ef7a44;
@@ -60,15 +81,18 @@ textarea {
 }
 
 .img-wrapper {
-    display: inline-block; /* Inline-block to allow horizontal scrolling */
+    display: inline-block;
+    /* Inline-block to allow horizontal scrolling */
     position: relative;
 }
 
 .room-imgs {
-    display: inline-block; /* Display images inline-block for horizontal alignment */
+    display: inline-block;
+    /* Display images inline-block for horizontal alignment */
     width: 100px;
-    margin-right: 2rem; 
+    margin-right: 2rem;
 }
+
 .custom-file-upload {
     position: absolute;
     top: 0;
@@ -76,6 +100,7 @@ textarea {
     width: 100px;
     height: 100px;
 }
+
 .custom-file-upload p {
     background-color: #000000c7;
     font-weight: bold;
@@ -97,6 +122,7 @@ select {
     font-size: var(--size-lg);
     gap: .3rem;
 }
+
 .toggle-btn i {
     font-size: var(--size-2xl);
 }
@@ -108,18 +134,23 @@ select {
     margin: 0 auto;
     justify-content: space-around;
 }
-.cancel-btn, .save-btn {
+
+.cancel-btn,
+.save-btn {
     font-size: var(--size-lg);
     padding: .5rem 1rem;
     border-radius: .6rem;
     width: 5.68rem;
 }
+
 .cancel-btn {
     border: 1px solid #00000082;
 }
+
 .save-btn {
     box-shadow: none;
 }
+
 .save-btn i {
     font-size: var(--size-2xl);
 }
@@ -131,6 +162,7 @@ select {
     justify-content: space-around;
     margin-bottom: 1.5rem;
 }
+
 .delete-btn {
     background-color: transparent;
     border: 2px solid #ef4444;
@@ -140,6 +172,7 @@ select {
     font-size: var(--size-lg);
     gap: .3rem;
 }
+
 .delete-btn i {
     font-size: var(--size-2xl);
 }
@@ -157,11 +190,13 @@ select {
     opacity: 0;
     animation: pop-up ease-out .3s forwards;
 }
+
 #popup::backdrop {
     background-color: #0000004d;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
+
 .warning-text {
     background-color: #ef4444;
     font-weight: bold;
@@ -169,21 +204,26 @@ select {
     padding: .6rem;
     text-align: center;
 }
+
 #popup p {
     padding: 1rem;
     font-size: var(--size-lg);
     font-weight: bold;
 }
-.no-delete-btn, .yes-delete-btn {
+
+.no-delete-btn,
+.yes-delete-btn {
     width: 100px;
     font-size: var(--size-lg);
     box-shadow: none;
     margin-top: .6rem;
 }
+
 .no-delete-btn {
     background-color: transparent;
     border: 1px solid var(--clr-dark);
 }
+
 .yes-delete-btn {
     color: #fff;
     background-color: #ef4444;

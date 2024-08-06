@@ -65,13 +65,14 @@
 
 /* FORM IMGAE CONTAINER  */
 .form-img-container {
-    height: 430px;
+    height: 450px;
     /* border: 1px solid green; */
     justify-content: space-evenly;
 }
 
 .form-img-container form {
     flex-direction: column;
+    gap: .3rem;
     /* debug  */
     /* outline: 3px solid red; */
 }
@@ -163,6 +164,66 @@
     font-weight: 600;
     cursor: default;
 }
+
+
+/* Country codes for phone field */
+.phone-input-box {
+    width: 250px !important;
+}
+
+.country-codes {
+    width: 70px;
+    height: 100%;
+    position: absolute;
+    left: 10px;
+    align-content: center;
+}
+
+/* Style the dropdown panel */
+.ng-dropdown-panel {
+    backdrop-filter: blur(10px);
+    background-color: #00000088;
+    border-radius: .6rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.341);
+    margin: .58rem 0 0 -.5rem;
+}
+
+/* Style each option */
+.ng-option {
+    padding: 8px;
+    font-size: 14px;
+}
+
+/* Style the selected option */
+.ng-option-selected {
+    background-color: #000000b6;
+    border-radius: .6rem;
+    font-weight: bold;
+}
+
+/* Add custom styles for hovering over options */
+.ng-option:hover {
+    background-color: #e9e9e9;
+    cursor: pointer;
+}
+
+.flags {
+    width: 20px;
+    height: 20px;
+    display: inline;
+    vertical-align: middle;
+}
+
+#phone {
+    width: 73%;
+    margin-left: auto;
+}
+
+.ph-error {
+    position: absolute;
+    bottom: -1.5rem;
+}
+
 
 /* xs */
 /* @media (min-width: 475px) {

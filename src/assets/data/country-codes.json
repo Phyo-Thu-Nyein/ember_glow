@@ -1,0 +1,6 @@
+[
+  { "name": "Myanmar", "img_url": "../../assets/images/flags/myanmar.png", "dial_code": "+95" },
+  { "name": "United States", "img_url": "../../assets/images/flags/united-states.png", "dial_code": "+1" },
+  { "name": "United Kingdom", "img_url": "../../assets/images/flags/united-kingdom.png", "dial_code": "+44" },
+  { "name": "India", "img_url": "../../assets/images/flags/india.png", "dial_code": "+91" }
+]

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { OneRoomData, OneRoomDetails } from 'src/app/interface/allrooms-detail';
 import { ApiService } from 'src/app/services/api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BookingPaymentDetails } from 'src/app/interface/bookings-interface';
+import { OneBooking } from 'src/app/interface/bookings-interface';
 import { ConfettiService } from 'src/app/services/confetti.service';
 import { LoadingService } from 'src/app/services/loading.service';
 
@@ -26,10 +26,10 @@ export class PaymentComponent implements OnInit, OnDestroy {
   roomImages?: string[];
   roomPrice?: number;
   totalNights?: number;
-  totalAmount?: number;
+  totalAmount: number = 0;
   file: File | null = null;
   fileError: string | null = null;
-  currentStep: number = 0;
+  currentStep: number = 1;
   steps: number[] = [0, 1, 2];
   isPaymentLoading: boolean = false;
 
@@ -115,7 +115,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   makeBooking() {
     this.isPaymentLoading = true;
     if (this.bookingForm.invalid || !this.file) {
-      this.fileError = 'Please fill all required fields and upload a file';
+      this.fileError = 'Please upload your payment transaction check';
       this.isPaymentLoading = false;
       return;
     }
@@ -125,9 +125,10 @@ export class PaymentComponent implements OnInit, OnDestroy {
     formData.append('checkOut', this.endDate.toISOString());
     formData.append('paymentMethod', 'BankTransfer');
     formData.append('paymentProof', this.file);
+    formData.append('totalPrice', this.totalAmount.toString());
 
     this.apiService.createNewBooking(this.roomId, formData).subscribe({
-      next: (response: BookingPaymentDetails) => {
+      next: (response: OneBooking) => {
         console.log('Booking successful', response.message);
         // Handle successful booking
         this.isPaymentLoading = false;
@@ -155,6 +156,9 @@ export class PaymentComponent implements OnInit, OnDestroy {
     this.currentStep++;
   }
   previousStep() {
+    if (this.file) {
+      this.file = null;
+    }
     this.currentStep--;
   }
 

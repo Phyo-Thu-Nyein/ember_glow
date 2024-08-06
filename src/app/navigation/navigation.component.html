@@ -15,14 +15,14 @@
       class="flex"
     >
       <i class="bx bxs-hotel" style="color: #ffffff"></i>
-      Rooms
+      {{ userRole === '0' || userRole === null ? "Rooms" : "All Rooms" }}
     </a>
     <a
       [appLoadingNavigate]="userRole === '0' || userRole === null ? '/dining' : '/all-users'"
       class="flex"
     >
       <i class="bx" [ngClass]=" userRole === '0' || userRole === null ? 'bxs-bowl-hot' : 'bxs-group' " style="color: #ffffff"></i>
-      {{ userRole === '0' || userRole === null ? "Dining" : "Users" }}
+      {{ userRole === '0' || userRole === null ? "Dining" : "All Users" }}
     </a>
     <a
       [appLoadingNavigate]="userRole === '0' || userRole === null ? '/facilities' : '/all-bookings'"

@@ -51,7 +51,7 @@ td {
 input, textarea {
     font-size: var(--size-lg);
 }
-.room-no-input, .room-price-input {
+.room-no-input, .room-price-input, .room-floor-input, .room-capacity-input {
     width: 9.5rem;
 }
 textarea {

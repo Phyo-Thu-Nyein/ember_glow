@@ -40,6 +40,10 @@
             <td>Check Out: </td>
             <td>{{ oneBooking.checkOut | date: 'yyyy-MMM-dd' }}</td>
         </tr>
+        <tr>
+            <td>Duration: </td>
+            <td>{{ oneBooking.duration }}</td>
+        </tr>
      </table>
 
     <!-- Update Booking Mode -->
@@ -90,6 +94,10 @@
            <tr>
                <td>Check Out: </td>
                <td style="opacity: .5;">{{ oneBooking.checkOut | date: 'yyyy-MMM-dd' }}</td>
+           </tr>
+           <tr>
+               <td>Duration: </td>
+               <td style="opacity: .5;">{{ oneBooking.duration }}</td>
            </tr>
         </table>
 

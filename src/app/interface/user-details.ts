@@ -6,15 +6,23 @@ export interface UserDetails {
 }
 
 export interface UserData {
-  _id?:            string;
-  profilePicture?: null;
+  id?:             string;
+  profilePicture?: null | string;
+  name?:           string;
+  email?:          string;
+  phone?:          string;
+  address?:        string;
+  role?:           number;
+}
+
+export interface RegisterData {
   name?:           string;
   email?:          string;
   password?:       string;
-  phone?:          number;
-  address?:        string;
-  role?:           number;
-  createdAt?:      Date;
-  updatedAt?:      Date;
-  __v?:            number;
+  phone?:          string;
+}
+
+export interface LoginData {
+  email?: string;
+  password?: string;
 }

@@ -8,15 +8,14 @@ export interface AllUsersDetails {
 }
 
 export interface AllUserDatum {
-    _id?:            string;
+    id?:            string;
     profilePicture?: null | string;
     name?:           string;
     email?:          string;
-    password?:       string;
     phone?:          number;
+    address?:        string;
     role?:           number;
     createdAt?:      Date;
     updatedAt?:      Date;
     __v?:            number;
-    address?:        string;
 }

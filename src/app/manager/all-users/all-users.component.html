@@ -58,7 +58,7 @@
         <div
           class="user-card flex"
           *ngFor="let user of allUsers"
-          [ngStyle] = "{ display: user.role ===1 ? 'none' : 'flex'}"
+          [ngStyle]="{ display: user.role === 1 ? 'none' : 'flex' }"
         >
           <ng-container *ngIf="user.role != 1">
             <div class="user-info">
@@ -90,7 +90,7 @@
             </div>
             <button
               class="trash-btn"
-              (click)="showUserId(user._id!, user.name!)"
+              (click)="showUserId(user.id!, user.name!)"
               onclick="confirmDel.showModal()"
             >
               <i class="bx bxs-trash"></i>
@@ -113,28 +113,30 @@
     </ng-template>
 
     <!-- Dialog to confirm the user delete -->
-    <dialog id="confirmDel" class="flex">
-      <h1 class="flex">
-        <span>Warning</span>
-        <i class="bx bx-error-alt"></i>
-      </h1>
-      <p>
-        Are you sure you want to delete this user,
-        <span class="to-be-deleted-name">{{ user2BeDeletedName }}</span> ?
-        <br />
-        This action cannot be reversible!
-      </p>
-      <div class="btn-wrapper flex">
-        <button class="btn cancel-btn" onclick="confirmDel.close()">
-          Cancel
-        </button>
-        <button
-          class="btn confirm-btn"
-          (click)="deleteUserById(user2BeDeletedId)"
-          onclick="confirmDel.close()"
-        >
-          Delete
-        </button>
+    <dialog id="confirmDel">
+      <div class="del-box flex">
+        <h1 class="flex">
+          <span>Warning</span>
+          <i class="bx bx-error-alt"></i>
+        </h1>
+        <p>
+          Are you sure you want to delete this user,
+          <span class="to-be-deleted-name">{{ user2BeDeletedName }}</span> ?
+          <br />
+          This action cannot be reversible!
+        </p>
+        <div class="btn-wrapper flex">
+          <button class="btn cancel-btn" onclick="confirmDel.close()">
+            Cancel
+          </button>
+          <button
+            class="btn confirm-btn"
+            (click)="deleteUserById(user2BeDeletedId)"
+            onclick="confirmDel.close()"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </dialog>
 

@@ -112,6 +112,8 @@ export class UpdateRoomComponent implements OnInit, OnDestroy {
     formData.append('status', this.roomDetails.status!);
     formData.append('room_type', this.roomDetails.room_type!);
     formData.append('price', this.roomDetails.price?.toString()!);
+    formData.append('floor', this.roomDetails.floor?.toString()!);
+    formData.append('capacity', this.roomDetails.capacity?.toString()!);
     formData.append('description', this.roomDetails.description!); 
 
     // Append existing images that haven't been replaced

@@ -9,14 +9,16 @@ export interface AllRoomsDetails {
 }
 
 export interface AllRoomsDatum {
-    _id?:         string;
+    id?:         string;
     room_number?: string;
     room_type?:   string;
     price?:       number;
     status?:      string;
     images?:      string[];
     description?: string;
-    bookings?:    string[];
+    floor?:       number;
+    capacity?:    number;
+    amenities?:   string[];
     createdAt?:   Date;
     updatedAt?:   Date;
     __v?:         number;
@@ -30,14 +32,16 @@ export interface OneRoomDetails {
 }
 
 export interface OneRoomData {
-    _id?:         string;
+    id?:         string;
     room_number?: string;
     room_type?:   string;
     price?:       number;
     status?:      string;
     images?:      string[];
     description?: string;
-    bookings?:    string[];
+    floor?:       number;
+    capacity?:    number;
+    amenities?:   string[];
     createdAt?:   Date;
     updatedAt?:   Date;
     __v?:         number;

@@ -38,7 +38,7 @@
 }
 
 .selected-img {
-    filter:contrast(.4);
+    filter: contrast(.4);
 }
 
 /* Room Info Part */
@@ -60,6 +60,7 @@
     gap: 1rem;
     font-weight: bold;
 }
+
 /* Date picker tip */
 .date-tip {
     font-size: var(--size-sm);
@@ -87,6 +88,9 @@ mat-error {
 } */
 /* sm */
 @media (min-width: 640px) {
+    .room-detail-wrapper {
+        height: 710px;
+    }
 
     .room-container {
         max-width: 768px;
@@ -124,11 +128,19 @@ mat-error {
 
     /* CheckIn/Out part */
     .checkin-out-wrapper {
+        margin-top: 2rem;
         flex-direction: row;
         gap: .5rem;
     }
+
     .checkin-out-wrapper mat-form-field {
         width: 200px;
+    }
+
+    /* Date picker tip */
+    .date-tip {
+        margin-top: -6.8rem;
+        position: absolute;
     }
 }
 
@@ -216,11 +228,17 @@ mat-error {
         gap: 1rem;
         grid-row: 2 / 3;
         grid-column: 2 / 3;
-        margin-top: -3rem;
+        margin-top: 3rem;
     }
 
     .checkin-out-wrapper mat-form-field {
         width: unset;
+    }
+
+    /* Date picker tip */
+    .date-tip {
+        margin-top: -5rem;
+        position: static;
     }
 
 

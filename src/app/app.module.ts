@@ -39,6 +39,7 @@ import { AllRoomsComponent } from './manager/all-rooms/all-rooms.component';
 import { CreateRoomComponent } from './manager/create-room/create-room.component';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingDirective } from './directives/loading.directive';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { LoadingDirective } from './directives/loading.directive';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxSkeletonLoaderModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -49,6 +49,8 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
       room_number: ['', Validators.required],
       room_type: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
+      floor: ['', [Validators.required, Validators.min(1)]],
+      capacity: ['', [Validators.required, Validators.min(1)]],
       description: ['', Validators.required],
       status: ['', Validators.required],
       images: [null, Validators.required],
@@ -77,6 +79,8 @@ export class CreateRoomComponent implements OnInit, OnDestroy {
     formData.append('room_number', this.createRoomForm.get('room_number')?.value);
     formData.append('room_type', this.createRoomForm.get('room_type')?.value);
     formData.append('price', this.createRoomForm.get('price')?.value);
+    formData.append('floor', this.createRoomForm.get('floor')?.value);
+    formData.append('capacity', this.createRoomForm.get('capacity')?.value);
     formData.append('description', this.createRoomForm.get('description')?.value);
     formData.append('status', this.createRoomForm.get('status')?.value);
 

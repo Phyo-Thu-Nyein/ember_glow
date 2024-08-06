@@ -63,6 +63,8 @@ export class UpdateBookingComponent implements OnInit, OnDestroy {
       next: (response: OneBooking) => {
         this.oneBooking = response.data!;
         this.isFetching = false;
+        // log the duration
+        console.log("booking duration>>>", this.oneBooking.duration);
       },
       error: (err) => {
         console.log('Error fetching the booking data', err.error.message);

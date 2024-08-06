@@ -234,6 +234,7 @@
           *ngIf="!isEditMode"
           class="btn toggle-btn"
           (click)="toggleEditMode()"
+          [disabled]="isLoading"
         >
           Update
         </button>

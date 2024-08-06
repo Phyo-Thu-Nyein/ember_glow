@@ -158,7 +158,7 @@ export class RoomDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.roomStatus = response.data?.status!;
         this.imgArray = this.oneRoomData.images!;
         this.bigImg = this.imgArray[0];
-        this.roomId = this.oneRoomData._id!;
+        this.roomId = this.oneRoomData.id!;
         // Add the selected class to the first image after setting imgArray
         setTimeout(() => {
           this.addInitialSelectedClass();

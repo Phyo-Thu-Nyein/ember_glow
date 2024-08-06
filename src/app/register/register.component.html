@@ -8,7 +8,7 @@
   <!-- Error Message if there's any -->
   <div *ngIf="isRegError" class="error-msg bx-flashing">
     <p>{{ errorMsg }}</p>
- </div>
+  </div>
 
   <!-- FORM SECTION  -->
   <div class="form-wrapper flex">
@@ -73,7 +73,26 @@
           </p>
         </div>
         <!-- PHONE FIELD -->
-        <div class="input-box">
+        <div class="input-box phone-input-box flex">
+          <ng-select
+            [(ngModel)]="selectedCountryCode"
+            name="countryCode"
+            class="country-codes"
+            [clearable]="false"
+            [searchable]="false"
+          >
+            <ng-option
+              *ngFor="let country of countryCodes"
+              [value]="country.dial_code"
+              class="options"
+              ><img
+                class="flags"
+                src="{{ country.img_url }}"
+                alt="country flag"
+              />
+              {{ country.dial_code }}
+            </ng-option>
+          </ng-select>
           <input
             [disabled]="onSubmit"
             type="number"
@@ -95,7 +114,10 @@
             class="bx bxs-phone"
           ></i>
           <!-- input error message -->
-          <p class="text-red-bold" *ngIf="!isPhoneValid && phno.touched">
+          <p
+            class="text-red-bold ph-error"
+            *ngIf="!isPhoneValid && phno.touched"
+          >
             invalid phone number
           </p>
         </div>
@@ -124,7 +146,7 @@
           <!-- input error message -->
           <p
             class="text-red-bold"
-            *ngIf=" !onSubmit && (!pass.valid && pass.touched && pass.dirty)"
+            *ngIf="!onSubmit && !pass.valid && pass.touched && pass.dirty"
           >
             at least 8 characters
           </p>
@@ -147,7 +169,8 @@
           <i
             [ngClass]="{
               'green-icon': onSubmit || (isFieldValid(cpass) && passwordsMatch),
-              'red-icon': !onSubmit && (isFieldInvalid(cpass) || !passwordsMatch)
+              'red-icon':
+                !onSubmit && (isFieldInvalid(cpass) || !passwordsMatch)
             }"
             class="bx bxs-lock-alt"
           ></i>
@@ -163,7 +186,10 @@
           </label>
         </div>
 
-        <button class="btn flex" [disabled]="regForm.invalid || !passwordsMatch || onSubmit">
+        <button
+          class="btn flex"
+          [disabled]="regForm.invalid || !passwordsMatch || onSubmit"
+        >
           <ng-container *ngIf="onSubmit === false; else submittingEmail">
             Register
           </ng-container>

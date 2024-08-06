@@ -1,85 +1,65 @@
-// Booking details for payment
-export interface BookingPaymentDetails {
-    status?:  string;
-    message?: string;
-    data?:    BookingPaymentData;
-}
-export interface BookingPaymentData {
-    _id?:           string;
-    room?:          BookingPaymentRoom;
-    user?:          BookingPaymentUser;
-    checkIn?:       Date;
-    checkOut?:      Date;
-    status?:        string;
-    paymentMethod?: string;
-    paymentProof?:  string;
-    paymentStatus?: string;
-    createdAt?:     Date;
-    updatedAt?:     Date;
-    __v?:           number;
-}
-export interface BookingPaymentRoom {
-    _id?:         string;
-    room_number?: string;
-}
-export interface BookingPaymentUser {
-    _id?:             string;
-    name?:            string;
+// Base interface for common booking fields
+interface BaseBooking {
+  _id?: string;
+  room?: Room;
+  user?: User;
+  checkIn?: Date;
+  checkOut?: Date;
+  status?: string;
+  paymentMethod?: string;
+  paymentProof?: string;
+  paymentStatus?: string;
+  totalPrice?: number;
+  specialRequests?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  __v?: number;
+  duration?: number;
 }
 
-// All bookings
-export interface AllBookings {
-    status?:        string;
-    message?:       string;
-    data?:          AllBookingsDatum[];
-    totalBookings?: number;
-    totalPages?:    number;
-    currentPage?:   number;
-}
-export interface AllBookingsDatum {
-    _id?:           string;
-    room?:          AllBookingRoom;
-    user?:          AllBookingUser;
-    checkIn?:       Date;
-    checkOut?:      Date;
-    status?:        string;
-    paymentMethod?: string;
-    paymentProof?:  string;
-    paymentStatus?: string;
-    createdAt?:     Date;
-    updatedAt?:     Date;
-    __v?:           number;
-}
-export interface AllBookingRoom {
-    _id?:           string;
-    room_number?:   string;
-    room_type?:     string;
-}
-export interface AllBookingUser {
-    _id?:           string;
-    name?:          string;
+// Base interface for API response metadata
+interface ApiResponseMetadata {
+  status?: string;
+  message?: string;
 }
 
-// One Booking (will use the same interfaces, MyBookingsRoom and MyBookingsUser from MyBookings)
-export interface OneBooking {
-    status?:  string;
-    message?: string;
-    data?:    OneBookingData;
+// Interface for pagination metadata
+interface PaginationMetadata {
+  totalBookings?: number;
+  totalPages?: number;
+  currentPage?: number;
 }
-export interface OneBookingData {
-    _id?:           string;
-    room?:          MyBookingsRoom;
-    user?:          MyBookingsUser;
-    checkIn?:       Date;
-    checkOut?:      Date;
-    status?:        string;
-    paymentMethod?: string;
-    paymentProof?:  string;
-    paymentStatus?: string;
-    createdAt?:     Date;
-    updatedAt?:     Date;
-    __v?:           number;
+
+// Inheritance
+// Interface for a single booking response
+export interface OneBooking extends ApiResponseMetadata {
+  data?: OneBookingData;
 }
+// Interface for the data of a single booking
+export interface OneBookingData extends BaseBooking {}
+
+// Interface for a list of bookings response
+export interface Bookings extends ApiResponseMetadata, PaginationMetadata {
+  data?: BookingsDatum[];
+}
+// Interface for the data of multiple bookings
+export interface BookingsDatum extends BaseBooking {}
+
+// Room interface remains the same
+export interface Room {
+  _id?: string;
+  room_number?: string;
+  room_type?: string;
+  images?: string[]; // IMPORTANT: This response won't be present in all/new bookings
+}
+
+// User interface remains the same
+export interface User {
+  _id?: string;
+  name?: string;
+}
+
+// Enums for status
 export enum BookingStatus {
     Pending = 'Pending',
     Confirmed = 'Confirmed',
@@ -93,38 +73,3 @@ export enum PaymentStatus {
     Failed = 'Failed',
     Cancelled = 'Cancelled'
 }
-
-// My Bookings
-export interface MyBookings {
-    status?:        string;
-    message?:       string;
-    data?:          MyBookingsDatum[];
-    totalBookings?: number;
-    totalPages?:    number;
-    currentPage?:   number;
-}
-export interface MyBookingsDatum {
-    _id?:           string;
-    room?:          MyBookingsRoom;
-    user?:          MyBookingsUser;
-    checkIn?:       Date;
-    checkOut?:      Date;
-    status?:        string;
-    paymentMethod?: string;
-    paymentProof?:  string;
-    paymentStatus?: string;
-    createdAt?:     Date;
-    updatedAt?:     Date;
-    __v?:           number;
-}
-export interface MyBookingsRoom {
-    _id?:           string;
-    room_number?:   string;
-    room_type?:     string;
-    images?:        string[];
-}
-export interface MyBookingsUser {
-    _id?:           string;
-    name?:          string;
-}
-

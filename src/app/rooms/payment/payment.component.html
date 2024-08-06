@@ -1,13 +1,21 @@
 <section class="container payment-container">
   <div class="payment-form">
     <div class="payment-imgs">
-      <img *ngIf="currentStep === 0 || currentStep === 1" src="../../../assets/images/payment/payment1.png" alt="">
-      <img *ngIf="currentStep === 2" src="../../../assets/images/payment/payment2.png" alt="">
+      <img
+        *ngIf="currentStep === 0 || currentStep === 1"
+        src="../../../assets/images/payment/payment1.png"
+        alt=""
+      />
+      <img
+        *ngIf="currentStep === 2"
+        src="../../../assets/images/payment/payment2.png"
+        alt=""
+      />
     </div>
     <nav>
       <h1 *ngIf="currentStep === 0">Confirmation</h1>
       <h1 *ngIf="currentStep === 1">Payment</h1>
-      <h1 *ngIf="currentStep === 2">Booking Is Pending</h1>
+      <h1 *ngIf="currentStep === 2">Booking Is Sent</h1>
       <div class="steps">
         <div class="progress" [style.width.%]="currentStep * 50"></div>
         <span
@@ -26,8 +34,14 @@
           alt="Room Image"
         />
         <div class="room-info flex">
-          <p>RoomNo: {{ roomData.room_number }}</p>
-          <p>Type: {{ roomData.room_type }}</p>
+          <div>
+            <p>RoomNo: {{ roomData.room_number }}</p>
+            <p>Floor: {{ roomData.floor }}</p>
+          </div>
+          <div>
+            <p>Type: {{ roomData.room_type }}</p>
+            <p>Capacity: {{ roomData.capacity }}</p>
+          </div>
         </div>
       </div>
       <button class="btn room-confirm-btn" (click)="nextStep()">
@@ -35,65 +49,131 @@
       </button>
     </div>
 
-    <form
-      [formGroup]="bookingForm"
-      (ngSubmit)="makeBooking()"
-      class="confirmation-wrapper"
-      *ngIf="currentStep === 1"
-    >
-      <table class="booking-confirmation">
-        <tr>
-          <th>Check In</th>
-          <th>{{ startDate | date }}</th>
-        </tr>
-        <tr>
-          <th>Check Out</th>
-          <th>{{ endDate | date }}</th>
-        </tr>
-        <tr>
-          <th>Price</th>
-          <th>{{ roomPrice | currency : "MMK" }}<sub>/night</sub></th>
-        </tr>
-        <tr>
-          <th>Stays</th>
-          <th>{{ totalNights }} night(s)</th>
-        </tr>
-        <tr class="hr-line-row">
-          <td colspan="2">
-            <hr class="line" />
-          </td>
-        </tr>
-        <tr>
-          <th>Total</th>
-          <th>{{ totalAmount | currency : "MMK" }}</th>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-      </table>
-      <span class="file-msg flex" title="Image should be under 1MB">
-        Upload an image of payment check
-        <i class="bx bx-info-circle" title="Image should be under 1MB"></i>
-      </span>
-      <input
-        type="file"
-        formControlName="fileUpload"
-        (change)="onFileChange($event)"
-      />
-      <p *ngIf="file">{{ file.name }}</p>
-      <p class="file-error" *ngIf="fileError">{{ fileError }}</p>
-      <button class="btn prev-btn" type="reset" (click)="previousStep()" [disabled]="isPaymentLoading">
-        Previous
-      </button>
-      <button
-        [disabled]="!file || isPaymentLoading"
-        class="btn book-btn"
-        type="submit"
+    <div *ngIf="currentStep === 1" class="payment-proof-wrapper">
+      <form
+        [formGroup]="bookingForm"
+        (ngSubmit)="makeBooking()"
+        class="confirmation-wrapper"
+        
       >
-        <span *ngIf="!isPaymentLoading">Book</span>
-        <i *ngIf="isPaymentLoading" class="bx bx-loader-circle bx-spin"></i>
-      </button>
-    </form>
+        <table class="booking-confirmation">
+          <tr>
+            <th>Check In</th>
+            <th>{{ startDate | date }}</th>
+          </tr>
+          <tr>
+            <th>Check Out</th>
+            <th>{{ endDate | date }}</th>
+          </tr>
+          <tr>
+            <th>Price</th>
+            <th>{{ roomPrice | currency : "MMK" }}<sub>/night</sub></th>
+          </tr>
+          <tr>
+            <th>Stays</th>
+            <th>{{ totalNights }} night(s)</th>
+          </tr>
+          <tr class="hr-line-row">
+            <td colspan="2">
+              <hr class="line" />
+            </td>
+          </tr>
+          <tr>
+            <th>Total</th>
+            <th>{{ totalAmount | currency : "MMK" }}</th>
+          </tr>
+          <tr>
+            <td></td>
+          </tr>
+        </table>
+        <span class="file-msg flex" title="Image should be under 1MB">
+          Upload an image of payment check
+          <i class="bx bx-info-circle" title="Image should be under 1MB"></i>
+        </span>
+        <input
+          type="file"
+          formControlName="fileUpload"
+          (change)="onFileChange($event)"
+        />
+        <p *ngIf="file">Current file: {{ file.name }}</p>
+        <p class="file-error" *ngIf="fileError">{{ fileError }}</p>
+
+        <button
+          class="btn prev-btn"
+          type="reset"
+          (click)="previousStep()"
+          [disabled]="isPaymentLoading"
+        >
+          Previous
+        </button>
+        <button
+          [disabled]="!file || isPaymentLoading"
+          class="btn book-btn flex"
+          type="submit"
+        >
+          <span>Book</span>
+          <i *ngIf="isPaymentLoading" class="bx bx-loader-circle bx-spin"></i>
+        </button>
+      </form>
+
+      <div class="pay-icons-wrapper flex">
+        <!-- popups -->
+        <div class="popups" id="ayapopup" popover>
+          <button popovertarget="ayapopup" popovertargetaction="hide">
+            <h1>Aya Pay Receiver Account</h1>
+            <p>Name: Phyo Thu Nyein</p>
+            <p>Number: &nbsp; 09 952 067 117</p>
+          </button>
+        </div>
+        <div class="popups" id="cbpopup" popover>
+          <button popovertarget="cbpopup" popovertargetaction="hide">
+            <h1>CB Pay Receiver Account</h1>
+            <p>Name: Phyo Thu Nyein</p>
+            <p>Number: &nbsp; 09 952 067 117</p>
+          </button>
+        </div>
+        <div class="popups" id="kbzpopup" popover>
+          <button popovertarget="kbzpopup" opovertargetaction="hide">
+            <h1>KBZ Pay Receiver Account</h1>
+            <p>Name: Phyo Thu Nyein</p>
+            <p>Number: &nbsp; 09 952 067 117</p>
+          </button>
+        </div>
+        <div class="popups" id="wavepopup" popover>
+          <button popovertarget="wavepopup" opovertargetaction="hide">
+            <h1>Wave Pay Receiver Account</h1>
+            <p>Name: Phyo Thu Nyein</p>
+            <p>Number: &nbsp; 09 952 067 117</p>
+          </button>
+        </div>
+
+        <!-- buttons -->
+        <button class="pay-icons" popovertarget="ayapopup">
+          <img
+            src="../../../assets/images/pay-icons/ayapay.jpg"
+            alt="Aya pay icon"
+          />
+        </button>
+        <button class="pay-icons" popovertarget="cbpopup">
+          <img
+            src="../../../assets/images/pay-icons/cbpay.jpg"
+            alt="CB pay icon"
+          />
+        </button>
+        <button class="pay-icons" popovertarget="kbzpopup">
+          <img
+            src="../../../assets/images/pay-icons/kpay.png"
+            alt="KBZ pay icon"
+          />
+        </button>
+        <button class="pay-icons" popovertarget="wavepopup">
+          <img
+            src="../../../assets/images/pay-icons/wavepay.jpg"
+            alt="Wave pay icon"
+          />
+        </button>
+      </div>
+    </div>
 
     <div class="confirmation-wrapper" *ngIf="currentStep === 2">
       <div class="all-done-card flex">

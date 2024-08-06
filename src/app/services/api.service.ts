@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserDetails, UserData } from '../interface/user-details';
+import { UserDetails, UserData, RegisterData, LoginData } from '../interface/user-details';
 import { Observable } from 'rxjs';
 import { AllUsersDetails } from '../interface/allusers-detail';
-import { ProfileDetails } from '../interface/profile-details';
 import { AllRoomsDetails } from '../interface/allrooms-detail';
 
 @Injectable({
@@ -13,9 +12,11 @@ export class ApiService {
   private baseDataUrl = '../../assets/data/';
   private carouselUrl: string = `${this.baseDataUrl}facilities-carousel-data.json`;
   private ecoUrl: string = `${this.baseDataUrl}about-eco-data.json`;
+  private countryCodeUrl: string = `${this.baseDataUrl}country-codes.json`;
 
   constructor(private http: HttpClient) {}
   baseUrl: string = 'https://hotel-api-v2-ocur.onrender.com';
+  // baseUrl: string = 'http://localhost:8000';
 
   // User related URLs
   registerUrl: string = `${this.baseUrl}/api/v1/auth/register/`;
@@ -64,19 +65,22 @@ export class ApiService {
   getEcoData(): Observable<any> {
     return this.http.get<any>(this.ecoUrl);
   }
+  getCountryCodes(): Observable<any> {
+    return this.http.get<any>(this.countryCodeUrl);
+  }
 
   //BACK-END
   //AUTH
-  register(userData: UserData) {
-    return this.http.post(this.registerUrl, userData, this.options);
+  register(registerData: RegisterData) {
+    return this.http.post(this.registerUrl, registerData, this.options);
   }
-  login(userData: UserData) {
-    return this.http.post(this.loginUrl, userData, this.options);
+  login(loginData: LoginData) {
+    return this.http.post(this.loginUrl, loginData, this.options);
   }
 
   // --------- USER SECTION ------------
   //Get user profile
-  getUserProfile(): Observable<ProfileDetails> {
+  getUserProfile(): Observable<UserDetails> {
     const headers = this.getAuthHeaders();
     return this.http.get(this.profileUrl, { headers });
   }

@@ -57,6 +57,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.setRoleText(this.userData.data?.role!);
           if (this.userData.data.profilePicture) {
             this.profilePicture = `${this.userData.data.profilePicture}`;
+            console.log("pfp url", this.profilePicture);
           } 
         }
         this.isLoading = false;
