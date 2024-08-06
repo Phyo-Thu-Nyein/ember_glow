@@ -10,7 +10,7 @@
   background-color: #00000055;
   border-radius: 10px;
   padding: .7rem 1rem;
-  margin: 2rem auto 0;
+  margin: 1rem auto 0;
 }
 
 nav {
@@ -24,51 +24,6 @@ nav h1 {
   margin: .5rem 0 1rem;
 }
 
-.steps {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
-
-.steps span {
-  width: 15px;
-  height: 15px;
-  background-color: #d2b61a;
-  border-radius: 50%;
-  position: relative;
-  z-index: 1;
-  transition: color .4s;
-}
-
-.steps span.active {
-  background-color: var(--clr-gold);
-}
-
-.steps::before {
-  content: '';
-  border-radius: 2px;
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  height: 3px;
-  background-color: #d2b61a;
-  z-index: 0;
-}
-
-.steps .progress {
-  border-radius: 2px;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  height: 3px;
-  background-color: var(--clr-gold);
-  z-index: 0;
-  transition: width .2s;
-}
 
 /* Confirmation part */
 .confirmation-wrapper {
@@ -417,10 +372,3 @@ input[type="file"]::file-selector-button {
   }
 
 }
-
-/* xl */
-/* @media (min-width: 1280px) {
-} */
-/* 2xl */
-/* @media (min-width: 1536px) {
-} */

@@ -109,9 +109,6 @@ body {
 
 /* Dialog popup */
 dialog {
-    /* scale: 0;
-    opacity: 0;
-    transition: opacity .25s; */
     display: none;
     animation: disappear .5s;
 }
@@ -125,6 +122,53 @@ dialog:modal {
     max-height: 100svh;
 }
 
+/* insufficient budget (ref to payment.component.css) */
+
+.steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  
+  .steps span {
+    width: 15px;
+    height: 15px;
+    background-color: #d2b61a;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    transition: color .4s;
+  }
+  
+  .steps span.active {
+    background-color: var(--clr-gold);
+  }
+  
+  .steps::before {
+    content: '';
+    border-radius: 2px;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 3px;
+    background-color: #d2b61a;
+    z-index: 0;
+  }
+  
+  .steps .progress {
+    border-radius: 2px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 3px;
+    background-color: var(--clr-gold);
+    z-index: 0;
+    transition: width .2s;
+  }
 
 /* xs */
 @media (min-width: 475px) {

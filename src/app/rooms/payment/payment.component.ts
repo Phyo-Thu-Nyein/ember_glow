@@ -29,7 +29,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   totalAmount: number = 0;
   file: File | null = null;
   fileError: string | null = null;
-  currentStep: number = 1;
+  currentStep: number = 0;
   steps: number[] = [0, 1, 2];
   isPaymentLoading: boolean = false;
 
