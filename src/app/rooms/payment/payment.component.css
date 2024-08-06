@@ -161,21 +161,6 @@ td {
   font-size: var(--size-lg);
 }
 
-#ayapopup {
-  background: radial-gradient(circle, rgba(186, 27, 56, 0.535) 0%, rgba(0, 0, 0, 0.786) 100%);
-}
-
-#cbpopup {
-  background: radial-gradient(circle, rgba(0, 23, 136, 0.491) 0%, rgba(0, 103, 45, 0.493) 25%, rgba(113, 85, 0, 0.627) 50%, rgba(60, 0, 8, 0.792) 100%);
-}
-
-#kbzpopup {
-  background: radial-gradient(circle, rgba(0, 83, 171, 0.5269705294227065) 0%, rgba(0, 0, 0, 0.808) 100%);
-}
-
-#wavepopup {
-  background: radial-gradient(circle, rgba(174, 159, 26, 0.538) 0%, rgba(0, 0, 0, 0.838) 100%);
-}
 
 /* booking confirm step buttons */
 .prev-btn {
