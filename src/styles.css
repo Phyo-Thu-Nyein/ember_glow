@@ -81,32 +81,6 @@ body {
     color: var(--clr-amber50);
 }
 
-/* angle variable for rotation animations */
-@property --angle {
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
-}
-
-/* for home page 'book a room now' button */
-.explore-btn::before, .explore-btn::after {
-    content: '';
-    background-image: conic-gradient(from var(--angle) , var(--clr-amber50) 10%, var(--clr-dark) 50%, var(--clr-amber50));
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    translate: -50% -50%;
-    width: 100%;
-    height: 100%;
-    padding: .4rem;
-    border-radius: .6rem;
-    z-index: -1;
-    animation: borderSpin 3.5s infinite;
-}
-.explore-btn::before {
-    filter: blur(5px);
-}
-
 /* Dialog popup */
 dialog {
     display: none;
