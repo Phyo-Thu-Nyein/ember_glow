@@ -40,6 +40,10 @@ import { CreateRoomComponent } from './manager/create-room/create-room.component
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingDirective } from './directives/loading.directive';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { InvoiceDashboardComponent } from './manager/invoice-dashboard/invoice-dashboard.component';
+import { NgChartsModule } from 'ng2-charts';
+import { AllInvoicesComponent } from './manager/all-invoices/all-invoices.component';
+import { CreateInvoiceComponent } from './manager/create-invoice/create-invoice.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +77,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CreateRoomComponent,
     LoadingComponent,
     LoadingDirective,
+    InvoiceDashboardComponent,
+    AllInvoicesComponent,
+    CreateInvoiceComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,7 +90,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxSkeletonLoaderModule,
-    NgSelectModule
+    NgSelectModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

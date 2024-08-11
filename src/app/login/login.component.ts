@@ -56,16 +56,22 @@ export class LoginComponent implements OnDestroy {
           localStorage.setItem('token', response.accessToken!);
           localStorage.setItem('role', response.data?.role?.toString()!);
           localStorage.setItem('pfp', response.data?.profilePicture!);
-          console.log('profile pic url >>>>>>.', response.data?.profilePicture!);
           this.onSubmit = false;
 
-          // Get the last page's url from query params or default route to 'rooms'
-          const returnUrl =
-            this.route.snapshot.queryParams['returnUrl'] || 'rooms';
-          this.loadingService.showLoading();
-          setTimeout(() => {
-            this.router.navigateByUrl(returnUrl);
-          }, 460);
+          // Redirect based on user's role
+          const userRole = response.data?.role;
+          if (userRole === 1 || userRole === 2) {
+            this.router.navigateByUrl('dashboard');
+          } else {
+            // Get the last page's url from query params or default route to 'rooms'
+            const returnUrl =
+              this.route.snapshot.queryParams['returnUrl'] || 'rooms';
+            this.loadingService.showLoading();
+            setTimeout(() => {
+              this.router.navigateByUrl(returnUrl);
+            }, 460);
+          }
+
         }
       },
       error: (err: HttpErrorResponse) => {

@@ -51,45 +51,29 @@ h1 {
     font-size: var(--size-3xl);
 }
 
-input[type="file"] {
-    width: 200px;
-}
-
-input[type="file"]::file-selector-button {
+/* file input hide but label */
+.file-label {
     font-family: 'Chillax', sans-serif;
     background-color: transparent;
     color: white;
+    font-size: var(--size-sm);
     font-weight: bold;
-    padding: .5rem;
+    padding: .3rem .5rem;
     border: 2px solid var(--clr-gold);
     border-radius: 5px;
     cursor: pointer;
 }
 
-/* tooltip for pfp size limit */
-.tooltip-wrapper {
-    /* border: 1px solid green; */
-    position: absolute;
-    top: .55rem;
-    right: 4.6rem;
+input[type="file"] {
+    display: none;
 }
 
-.tooltip-wrapper span {
-    background-color: var(--clr-dark);
-    border-radius: 5px;
-    font-size: var(--size-sm);
-    font-weight: lighter;
-    width: 95px;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.822);
-    padding: .2rem;
-    position: absolute;
-    top: -2rem;
-    right: 0;
-    opacity: 0;
-}
-
-.tooltip:hover+span {
-    opacity: 1;
+.selected-file {
+    width: 100px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 /* Forms' wrapper */
@@ -156,11 +140,18 @@ td {
 .toggle-btn {
     margin-top: 1rem;
 }
+
 .save-btn {
+    width: 67.48px;
     margin: 1rem -30% 0 0;
     box-shadow: none;
     padding: .5rem 1.2rem;
 }
+
+.save-btn i {
+    font-size: var(--size-2xl);
+}
+
 .cancel-btn {
     background-color: transparent;
     border: 1px solid #fa3e25;
@@ -175,6 +166,7 @@ td {
 .all-users-wrapper {
     margin: 2rem 0;
 }
+
 .get-all-btn {
     width: 100%;
     margin: 1rem 0 .5rem;
@@ -183,12 +175,14 @@ td {
     font-size: var(--size-lg);
     box-shadow: none;
 }
+
 .get-all-btn i {
     font-size: var(--size-xl);
 }
 
 /* Other settings heading */
-.manager-settings-h3, h3.other-settings {
+.manager-settings-h3,
+h3.other-settings {
     font-size: var(--size-2xl);
     color: var(--clr-dark);
     margin: 2rem auto 1rem;
@@ -197,23 +191,28 @@ td {
 /* UPDATE PASSWORD SETTING */
 .update-psw-wrapper {
     color: var(--clr-dark);
-    
+
 }
+
 .psw-update-form {
     background-color: rgba(27, 27, 27, 0.397);
     padding: 1rem;
     border-radius: .6rem;
 }
-.psw-update-form .input-box input{
+
+.psw-update-form .input-box input {
     height: 40px;
     margin: .3rem 0;
 }
+
 .psw-update-form .input-box input::placeholder {
     color: var(--clr-amber50);
 }
+
 .save-psw-btn {
     width: 8rem;
 }
+
 .save-psw-btn i {
     font-size: var(--size-2xl);
 }
@@ -223,6 +222,60 @@ td {
     font-size: var(--size-xl);
     display: block;
     margin: 1rem auto;
+}
+
+/* Error popup if any  */
+.error-container {
+    background-color: #0000006e;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
+    align-content: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    overflow-y: hidden;
+}
+
+.err-card {
+    background-color: var(--clr-amber50);
+    color: var(--clr-dark);
+    border-radius: .6rem;
+    margin: 0 auto;
+    width: 300px;
+    min-height: 200px;
+    position: relative;
+}
+
+.err-status {
+    background-color: #ef4444;
+    color: #fff;
+    padding-block: 1rem;
+    margin-bottom: 0rem;
+    font-size: var(--size-4xl);
+    text-align: center;
+    border-radius: .6rem .6rem 0 0;
+}
+
+.err-message {
+    padding: .5rem 1rem 4rem;
+    font-size: var(--size-lg);
+    font-weight: bold;
+}
+
+.close-err {
+    border: 1px solid black;
+    border-radius: .6rem;
+    position: absolute;
+    left: 50%;
+    bottom: .6rem;
+    transform: translateX(-50%);
+    font-size: var(--size-lg);
+    font-weight: bold;
+    padding: .4rem 1.2rem;
 }
 
 /* xs */
@@ -254,15 +307,9 @@ td {
         width: 280px;
     }
 
-    .tooltip-wrapper {
-        /* border: 1px solid green; */
-        position: absolute;
-        top: .55rem;
-        right: 4.15rem;
-    }
-
     /* buttons */
-    .save-btn, .cancel-btn {
+    .save-btn,
+    .cancel-btn {
         margin-left: 1rem;
     }
 }

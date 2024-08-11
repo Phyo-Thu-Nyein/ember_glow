@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { UserDetails } from '../interface/user-details';
 import { Subscription } from 'rxjs';
@@ -17,14 +23,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
   uploadSub: Subscription = new Subscription();
   updateUserInfoSub: Subscription = new Subscription();
 
+  // Error popup if any
+  isError: boolean = false;
+  errorStatus: number = 400;
+  errorMsg: string = 'Some dummy error.';
+
   // Update info
   userData?: UserDetails = {};
   roleText: string = 'Guest';
   isEditMode: boolean = false;
 
   //Profile pic
-  selectedFile?: File;
+  selectedFile: File | null = null;
   profilePicture: string = 'assets/images/default-profile.svg'; //default profile
+  selectedFileErr: boolean = false;
   isLoading: boolean = false;
   isLoadingUpload: boolean = false;
   isLoadingUpdateInfo: boolean = false;
@@ -39,15 +51,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
   confirmNewPassword: string = '';
   passwordsMatch: boolean = true;
   pswLoading: boolean = false;
-  
-  constructor(private apiService: ApiService, private sharedService: PfpSharedService) {}
+
+  constructor(
+    private apiService: ApiService,
+    private sharedService: PfpSharedService
+  ) {}
 
   ngOnInit() {
     this.fetchUserData();
+    console.log("selected file", this.selectedFile);
   }
 
   fetchUserData() {
-    console.log("fetching user data!")
+    console.log('fetching user data!');
     this.isLoading = true;
     var result = this.apiService.getUserProfile();
     this.userProfileSub = result.subscribe({
@@ -57,16 +73,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.setRoleText(this.userData.data?.role!);
           if (this.userData.data.profilePicture) {
             this.profilePicture = `${this.userData.data.profilePicture}`;
-            console.log("pfp url", this.profilePicture);
-          } 
+            console.log('pfp url', this.profilePicture);
+          }
         }
         this.isLoading = false;
-        console.log("user data fetched!");
+        console.log('user data fetched!');
       },
       error: (err) => {
-        console.log("Error fetching user data: ", err.message);
+        console.log('Error fetching user data: ', err.message);
         this.isLoading = false;
-      }
+        this.isError = true;
+        this.errorStatus = err.status;
+        this.errorMsg = err.error.message;
+      },
     });
   }
 
@@ -93,6 +112,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   //Upload/ change PROFILE PIC
   onFileChange(event: any) {
     this.selectedFile = event.target.files[0];
+    console.log("selected file", this.selectedFile);
+
+    if (this.selectedFile!.size > 2000000) {
+      alert("File exceeded 2MB limit.")
+      this.selectedFile = null;
+      this.selectedFileErr = true;
+      return;
+    }
   }
 
   uploadProfilePicture() {
@@ -115,15 +142,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.resetFileInput();
         this.sharedService.notifyProfilePicUpdated(); // Notify the nav component
       },
-      error: (error) => {
-        console.error('Error uploading profile picture', error);
+      error: (err) => {
+        console.error('Error uploading profile picture', err);
         this.isLoadingUpload = false;
         this.resetFileInput();
-      }
+        this.selectedFileErr = false;
+        this.isError = true;
+        this.errorStatus = err.status;
+        this.errorMsg = err.error.message + ', exceeded 2MB limit.';
+      },
     });
   }
 
   resetFileInput() {
+    this.selectedFile = null;
     if (this.fileInput) {
       this.fileInput.nativeElement.value = '';
     }
@@ -135,16 +167,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   saveUserInfo() {
+    this.isLoadingUpdateInfo = true;
     if (this.userData && this.userData.data) {
       var result = this.apiService.updateUserInfo(this.userData!.data!);
       this.updateUserInfoSub = result.subscribe({
         next: (response) => {
+          this.isLoadingUpdateInfo = false;
           console.log('info updated', response);
           this.isEditMode = false;
         },
         error: (err) => {
+          this.isLoadingUpdateInfo = false;
           console.error('Error updating user info', err.message);
-        }
+          this.isError = true;
+          this.errorStatus = err.status;
+          this.errorMsg = err.error.message;
+        },
       });
     }
   }
@@ -165,7 +203,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   //Validate the passwords
   validatePasswords() {
-    this.passwordsMatch = this.newPassword === this.confirmNewPassword && this.confirmNewPassword.length == this.newPassword.length;
+    this.passwordsMatch =
+      this.newPassword === this.confirmNewPassword &&
+      this.confirmNewPassword.length == this.newPassword.length;
   }
   onPasswordChange() {
     this.validatePasswords();
@@ -196,8 +236,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
       error: (err) => {
         alert(`Error updating password: ${err.message}`);
         this.pswLoading = false;
+        this.isError = true;
+        this.errorStatus = err.status;
+        this.errorMsg = err.error.message;
       },
     });
+  }
+
+  // Close the error popup
+  closeError() {
+    this.isError = false;
+    this.errorStatus = 400;
+    this.errorMsg = '';
   }
 
   // Unsubscribe after view
@@ -211,7 +261,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this.updateUserInfoSub) {
       this.updateUserInfoSub.unsubscribe();
     }
-    console.log('unsubscribed!!!!!!!!1')
+    this.isError = false; // reset the error
   }
-
 }

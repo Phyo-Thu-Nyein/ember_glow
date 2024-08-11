@@ -39,16 +39,21 @@
           (ngSubmit)="uploadProfilePicture()"
           enctype="multipart/form-data"
         >
+        <label [ariaDisabled]="isLoadingUpload" class="file-label" for="fileInput">{{ selectedFile ? 'Pick Another' : 'Choose Image'}}</label>
+        <span class="selected-file" *ngIf="selectedFile">{{ selectedFile.name }}</span>
           <input
+            id="fileInput"
             #fileInput
             (change)="onFileChange($event)"
             type="file"
             (change)="onFileChange($event)"
           />
           <button
+            *ngIf="selectedFile"
             class="btn"
             type="submit"
-            [disabled]="
+            [disabled]=" 
+              selectedFile === null ||
               !fileInput.files ||
               fileInput.files.length === 0 ||
               isLoadingUpload
@@ -63,10 +68,6 @@
             >
             </i>
           </button>
-          <div class="tooltip-wrapper">
-            <i class="bx bx-info-circle tooltip"></i>
-            <span>limit < 1MB</span>
-          </div>
         </form>
       </div>
 
@@ -81,7 +82,7 @@
         >
           <table class="info">
             <tr>
-              <td>Name</td>
+              <td><i class="bx bxs-user"></i></td>
               <td class="input-box">
                 <input
                   [(ngModel)]="userData!.data!.name"
@@ -96,7 +97,7 @@
               </td>
             </tr>
             <tr>
-              <td>Email</td>
+              <td><i class="bx bxs-envelope"></i></td>
               <td class="input-box">
                 <input
                   disabled
@@ -106,7 +107,7 @@
               </td>
             </tr>
             <tr *ngIf="roleText != 'Guest'">
-              <td>Address</td>
+              <td><i class="bx bxs-building"></i></td>
               <td class="input-box">
                 <input
                   [(ngModel)]="userData!.data!.address"
@@ -123,7 +124,7 @@
               </td>
             </tr>
             <tr>
-              <td>Phone</td>
+              <td><i class="bx bxs-phone"></i></td>
               <td class="input-box">
                 <input
                   [(ngModel)]="userData!.data!.phone"
@@ -144,17 +145,18 @@
             </tr>
           </table>
           <button
-            class="btn save-btn"
-            [disabled]="editForm.invalid || !isPhoneValid"
+            class="btn save-btn flex"
+            [disabled]="editForm.invalid || !isPhoneValid || isLoadingUpdateInfo"
           >
-            Save
+            {{ isLoadingUpdateInfo ? '' : 'Save' }}
+            <i *ngIf="isLoadingUpdateInfo" class="bx bx-loader-circle bx-spin"></i>
           </button>
         </form>
 
         <!-- Displayed Form -->
         <table class="info non-edit-info" *ngIf="!isEditMode">
           <tr>
-            <td>Name</td>
+            <td><i class="bx bxs-user"></i></td>
             <ng-container *ngIf="isLoading; else nameField">
               <ngx-skeleton-loader
                 count="1"
@@ -173,7 +175,7 @@
             </ng-template>
           </tr>
           <tr>
-            <td>Email</td>
+            <td><i class="bx bxs-envelope"></i></td>
             <ng-container *ngIf="isLoading; else emailField">
               <ngx-skeleton-loader
                 count="1"
@@ -192,7 +194,7 @@
             </ng-template>
           </tr>
           <tr *ngIf="roleText != 'Guest'">
-            <td>Address</td>
+            <td><i class="bx bxs-building"></i></td>
             <ng-container *ngIf="isLoading; else addrField">
               <ngx-skeleton-loader
                 count="1"
@@ -211,7 +213,7 @@
             </ng-template>
           </tr>
           <tr>
-            <td>Phone</td>
+            <td><i class="bx bxs-phone"></i></td>
             <ng-container *ngIf="isLoading; else phField">
               <ngx-skeleton-loader
                 count="1"
@@ -242,6 +244,7 @@
           *ngIf="isEditMode"
           class="btn toggle-btn cancel-btn"
           (click)="toggleEditMode(); fetchUserData()"
+          [disabled] = "isLoadingUpdateInfo"
         >
           Cancel
         </button>
@@ -251,7 +254,9 @@
 
   <!-- Get My Bookings for Guest/ All Bookings for Manager -->
   <button
-    [appLoadingNavigate]="roleText === 'Guest' ? '/mybookings' : '/all-bookings'"
+    [appLoadingNavigate]="
+      roleText === 'Guest' ? '/mybookings' : '/all-bookings'
+    "
     [disabled]="isLoading"
     class="btn get-bookings-btn"
   >
@@ -338,3 +343,12 @@
     </form>
   </div>
 </section>
+
+<!-- Error popup if any -->
+<div *ngIf="isError" class="error-container">
+  <div class="err-card">
+    <h1 class="err-status">{{ errorStatus }}</h1>
+    <p class="err-message">{{ errorMsg }}</p>
+    <button class="close-err" (click)="closeError()">Close</button>
+  </div>
+</div>

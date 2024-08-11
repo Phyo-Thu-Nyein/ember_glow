@@ -10,7 +10,7 @@ import { FacilitiesComponent } from './facilities/facilities.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
-import { authGuard } from './auth.guard';
+import { authGuard } from './guards/auth.guard';
 import { alreadyLoggedInGuard } from './already-logged-in.guard';
 import { AllUsersComponent } from './manager/all-users/all-users.component';
 import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
@@ -21,16 +21,21 @@ import { UpdateBookingComponent } from './manager/update-booking/update-booking.
 import { UpdateRoomComponent } from './manager/update-room/update-room.component';
 import { AllRoomsComponent } from './manager/all-rooms/all-rooms.component';
 import { CreateRoomComponent } from './manager/create-room/create-room.component';
+import { InvoiceDashboardComponent } from './manager/invoice-dashboard/invoice-dashboard.component';
+import { homeGuard } from './guards/home.guard';
+import { CreateInvoiceComponent } from './manager/create-invoice/create-invoice.component';
+import { AllInvoicesComponent } from './manager/all-invoices/all-invoices.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/home', // Default redirect to home
     pathMatch: 'full',
   },
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [homeGuard]
   },
   {
     path: 'rooms',
@@ -100,6 +105,24 @@ const routes: Routes = [
   {
     path: 'create-room',
     component: CreateRoomComponent,
+    canActivate: [authGuard],
+    data: { role: [1, 2] },
+  },
+  {
+    path: 'dashboard',
+    component: InvoiceDashboardComponent,
+    canActivate: [authGuard],
+    data: { role: [1, 2] },
+  },
+  {
+    path: 'all-invoices',
+    component: AllInvoicesComponent,
+    canActivate: [authGuard],
+    data: { role: [1, 2] },
+  },
+  {
+    path: 'create-invoice',
+    component: CreateInvoiceComponent,
     canActivate: [authGuard],
     data: { role: [1, 2] },
   },

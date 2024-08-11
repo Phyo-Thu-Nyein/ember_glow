@@ -44,3 +44,15 @@ export interface AllBookingsFilterParams {
   paymentStatus:  string;
   bookingId:      string;
 }
+
+// All Invoices Filters
+export interface AllInvoicesFilterParams {
+  page:           number;
+  limit:          number;
+  sortBy:         string;
+  sortOrder:      string;
+  status:         string;
+  user:           string;
+  room:           string;
+  bookingId:      string;
+}

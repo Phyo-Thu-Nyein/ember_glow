@@ -60,6 +60,7 @@ h1 {
 /* Booking cards */
 .booking-cards {
     max-width: 344px;
+    height: 510px;
     margin: 2rem auto 0;
     padding: 1rem;
     border-radius: .6rem;
@@ -72,6 +73,9 @@ h1 {
     animation-range: 100px 300px;
 
 }
+h4 {
+    padding-block: .4rem;
+}
 .booking-status {
     background-color: #000000c7;
     border-radius: 0 10px 0 0;
@@ -81,7 +85,7 @@ h1 {
     font-weight: bold;
     position: absolute;
     left: 4.6%;
-    bottom: 31.2%;
+    bottom: 34.6%;
 }
 .amber100 { color: var(--clr-amber100);}
 .green { color: #a3e635;}

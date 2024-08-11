@@ -51,6 +51,7 @@
     </ng-container>
     <ng-template #myBookingCards>
       <div *ngFor="let booking of myBookings" class="booking-cards">
+        <img src="{{ (booking.room?.images)![0] }}" alt="Room Image" />
         <span
           class="booking-status"
           [ngClass]="{
@@ -62,7 +63,6 @@
         >
           {{ booking.status }}
         </span>
-        <img src="{{ (booking.room?.images)![0] }}" alt="Room Image" />
         <p>
           <span class="room-no">
             RoomNo. {{ booking.room?.room_number! }}
@@ -75,6 +75,7 @@
             {{ booking.checkOut! | date : "yyyy-MMM-dd" }}
           </span>
         </p>
+        <h4> Booking ID: {{ booking._id }}</h4>
         <button
           class="proof-btn" 
           popovertarget="popup"

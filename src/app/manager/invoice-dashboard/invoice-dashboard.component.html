@@ -1,0 +1,77 @@
+<section class="container-invoice-dashboard-container">
+  <h1 class="dashboard-title">Dashboard</h1>
+
+  <!-- Invoice Routes Buttons -->
+  <div class="invoice-links flex">
+    <a appLoadingNavigate="all-invoices" class="link-btn flex">
+      <i class='bx bx-notepad'></i>
+      <span>All Invoices</span>
+    </a>
+    <a appLoadingNavigate="create-invoice" class="link-btn flex">
+      <i class='bx bx-plus-circle'></i>
+      <span>New Invoice</span>
+    </a>
+  </div>
+
+  <!-- Year Filter buttons -->
+  <div class="filter-buttons flex">
+    <button
+      class="year-btn"
+      [ngClass]="{ active: activeTimeFrame === 'lastYear' }"
+      (click)="setTimeFrame('lastYear')"
+    >
+      Last Year
+    </button>
+    <button
+      class="year-btn"
+      [ngClass]="{ active: activeTimeFrame === 'thisYear' }"
+      (click)="setTimeFrame('thisYear')"
+    >
+      This Year
+    </button>
+    <button
+      class="year-btn"
+      [ngClass]="{ active: activeTimeFrame === 'all' }"
+      (click)="setTimeFrame('all')"
+    >
+      All Time
+    </button>
+  </div>
+
+  <!-- Toggle Chart Type Button -->
+  <button class="change-chart-btn" (click)="toggleChartType()">
+    Change to {{ isLineChart ? " Bar Chart" : " Line Chart" }}
+  </button>
+
+  <!-- Line Chart and Bar Chart -->
+  <div class="line-chart-wrapper" style="display: block">
+    <!-- Conditionally render the canvas with or without the [type] attribute -->
+    <canvas
+      *ngIf="isLineChart"
+      baseChart
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [legend]="lineChartLegend"
+      [type]="'line'"
+    >
+    </canvas>
+
+    <canvas
+      *ngIf="!isLineChart"
+      baseChart
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [legend]="lineChartLegend"
+    >
+    </canvas>
+  </div>
+
+  <!-- All Time Card -->
+  <div class="extra-info">
+    <div class="extra-info-card">
+      <p>This Year Revenue - {{ thisYearRevenueSum | currency : "MMK" }}</p>
+      <p>All Time Revenue - {{ totalRevenueSum | currency : "MMK" }}</p>
+      <p>All Time Invoices - {{ totalInvoiceCount }}</p>
+    </div>
+  </div>
+</section>
