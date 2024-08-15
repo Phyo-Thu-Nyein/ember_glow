@@ -44,6 +44,8 @@ import { InvoiceDashboardComponent } from './manager/invoice-dashboard/invoice-d
 import { NgChartsModule } from 'ng2-charts';
 import { AllInvoicesComponent } from './manager/all-invoices/all-invoices.component';
 import { CreateInvoiceComponent } from './manager/create-invoice/create-invoice.component';
+import { InvoiceDetailsComponent } from './manager/invoice-details/invoice-details.component';
+import { PreCreateInvoiceComponent } from './manager/pre-create-invoice/pre-create-invoice.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +82,8 @@ import { CreateInvoiceComponent } from './manager/create-invoice/create-invoice.
     InvoiceDashboardComponent,
     AllInvoicesComponent,
     CreateInvoiceComponent,
+    InvoiceDetailsComponent,
+    PreCreateInvoiceComponent,
   ],
   imports: [
     BrowserModule,

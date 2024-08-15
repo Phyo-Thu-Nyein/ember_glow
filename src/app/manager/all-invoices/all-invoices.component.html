@@ -1,3 +1,129 @@
 <section class="container all-invoices-container">
-    <h1>All Invoices</h1>
+  <!-- Heading -->
+  <h1>All Invoices</h1>
+  <h3>Search by user name, room number or booking id.</h3>
+
+  <!-- >>>> FILTER (search bar) <<<< -->
+  <form (ngSubmit)="filterBookings()" class="filter-bar flex">
+    <div class="dropdowns-containers flex">
+      <!-- Search with booking id (Main search) -->
+      <input
+        class="bookingId-search"
+        type="text"
+        [(ngModel)]="params.bookingId"
+        name="bookingId"
+        placeholder="Booking Id"
+      />
+    </div>
+    
+    <div class="dropdowns-containers flex">
+      <!-- Search with User Name -->
+      <input
+        type="text"
+        [(ngModel)]="params.user"
+        name="userName"
+        placeholder="User Name"
+      />
+  
+      <!-- Search by Room Number -->
+      <input
+        type="text"
+        [(ngModel)]="params.room"
+        name="roomNumber"
+        placeholder="Room Number"
+      />
+      <!-- invoice status -->
+      <select
+        class="booking-status"
+        [(ngModel)]="params.status"
+        name="bookingStatus"
+      >
+        <option value="">Status</option>
+        <option value="Paid">Paid</option>
+        <option value="Unpaid">Unpaid</option>
+      </select>
+    </div>
+
+    <!-- buttons -->
+    <div class="filter-btn-container flex">
+      <button class="reset-btn btn" type="reset">Clear</button>
+      <button type="submit" class="filter-btn btn flex" (click)="resetPage()">
+        Filter
+        <i class="bx bx-filter-alt"></i>
+      </button>
+    </div>
+  </form>
+
+  <!-- Display the booking cards -->
+  <div class="invoice-cards-wrapper">
+    <ng-container *ngIf="isFetching; else displayCards">
+      <ngx-skeleton-loader
+        count="1"
+        [theme]="{
+          'width': '344px',
+          'height': '313px',
+          'margin-top': '2rem',
+          'background-color': '#fff8db',
+          'border-radius': '10px',
+        }"
+      ></ngx-skeleton-loader>
+    </ng-container>
+    <ng-template #displayCards>
+      <div class="invoice-card" *ngFor="let invoice of invoices">
+        <p>Invoice Id: {{ invoice._id }}</p>
+        <p>
+          <span>Issued At: </span><span>{{ invoice.createdAt }}</span>
+        </p>
+        <p>Booking Id: {{ invoice.booking }}</p>
+        <p>
+          <span>Booked By: </span><span>{{ invoice.user?.name }}</span>
+        </p>
+        <p>
+          <span>RoomNo: </span><span>{{ invoice.room?.room_number! }}</span>
+        </p>
+        <p>
+          <span>CheckIn: </span
+          ><span>{{ invoice.checkIn | date : "yyyy-MMM-dd" }}</span>
+        </p>
+        <p>
+          <span>CheckOut: </span
+          ><span>{{ invoice.checkOut | date : "yyyy-MMM-dd" }}</span>
+        </p>
+        <p>
+          <span>Duration: </span><span>{{ invoice.totalNights }}</span>
+        </p>
+        <p>
+          <span>Total Amount: </span><span>{{ invoice.totalAmount }}</span>
+        </p>
+        <p>
+          <span>Invoice Status: </span><span>{{ invoice.status }}</span>
+        </p>
+          <button
+          class="btn invoice-details-btn"
+          (click)="goToInvoiceDetails(invoice._id!)"
+        >
+          Go to Details
+        </button>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination flex">
+    <button
+      class="arrow-btn btn"
+      [disabled]="currentPage === 1"
+      (click)="onPageChange(currentPage - 1)"
+    >
+      &lt;
+    </button>
+    <span> page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+      class="arrow-btn btn"
+      [disabled]="currentPage === totalPages"
+      (click)="onPageChange(currentPage + 1)"
+    >
+      &gt;
+    </button>
+  </div>
 </section>

@@ -25,6 +25,8 @@ import { InvoiceDashboardComponent } from './manager/invoice-dashboard/invoice-d
 import { homeGuard } from './guards/home.guard';
 import { CreateInvoiceComponent } from './manager/create-invoice/create-invoice.component';
 import { AllInvoicesComponent } from './manager/all-invoices/all-invoices.component';
+import { PreCreateInvoiceComponent } from './manager/pre-create-invoice/pre-create-invoice.component';
+import { InvoiceDetailsComponent } from './manager/invoice-details/invoice-details.component';
 
 const routes: Routes = [
   {
@@ -121,14 +123,22 @@ const routes: Routes = [
     data: { role: [1, 2] },
   },
   {
-    path: 'create-invoice',
+    path: 'validate-bookingId', // Validate the booking Id before creating a new invoice
+    component: PreCreateInvoiceComponent,
+    canActivate: [authGuard],
+    data: { role: [1, 2] },
+  },
+  {
+    path: 'create-invoice/:bookingId',
     component: CreateInvoiceComponent,
     canActivate: [authGuard],
     data: { role: [1, 2] },
   },
   {
-    path: 'not-found',
-    component: NotfoundComponent,
+    path: 'invoice-details/:invoiceId',
+    component: InvoiceDetailsComponent,
+    canActivate: [authGuard],
+    data: { role: [1, 2] },
   },
   {
     path: 'room-details/:roomId',
@@ -143,6 +153,10 @@ const routes: Routes = [
     component: BookingsComponent,
     canActivate: [authGuard],
     data: { role: 0 },
+  },
+  {
+    path: 'not-found',
+    component: NotfoundComponent,
   },
   {
     path: '**', //Wildcard

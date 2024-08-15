@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AllInvoicesFilterParams } from 'src/app/interface/filter-params';
-import { AllInvoices, AllInvoicesDatum } from 'src/app/interface/invoice';
+import { AllInvoices, InvoiceData } from 'src/app/interface/invoice';
 import { ApiService } from 'src/app/services/api.service';
 import { LoadingService } from 'src/app/services/loading.service';
 
@@ -16,7 +16,7 @@ export class AllInvoicesComponent implements OnInit, OnDestroy {
   allInvoicesSub: Subscription = new Subscription();
 
   // Variables
-  invoice: AllInvoicesDatum[] = [];
+  invoices: InvoiceData[] = [];
 
   // Loadings
   isFetching: boolean = false;
@@ -32,7 +32,7 @@ export class AllInvoicesComponent implements OnInit, OnDestroy {
     limit: 12,
     sortBy: 'createdAt',
     sortOrder: 'desc',
-    status: '',
+    status: 'Paid',
     user: '',
     room: '',
     bookingId: '',
@@ -70,7 +70,7 @@ export class AllInvoicesComponent implements OnInit, OnDestroy {
       .getAllInvoices(params)
       .subscribe({
         next: (response: AllInvoices) => {
-          this.invoice = response.data!;
+          this.invoices = response.data!;
           this.totalPages = response.totalPages!;
           this.currentPage = response.currentPage!;
           this.isFetching = false;
@@ -83,5 +83,33 @@ export class AllInvoicesComponent implements OnInit, OnDestroy {
           console.log('Error fetching invoice(s)', err.error.message);
         },
       });
+  }
+
+  // Pagination
+  onPageChange(pageNumber: number) {
+    this.params.page = pageNumber;
+    this.filterBookings();
+  }
+  resetPage() {
+    // Update page param to reset it to 1
+    this.params.page = 1;
+  }
+
+  // Filter invoices via filter bar
+  filterBookings() {
+    this.router
+      .navigate([], {
+        relativeTo: this.route,
+        queryParams: this.params,
+        queryParamsHandling: 'merge',
+      })
+      .then(() => {
+        this.getAllInvoices(this.params);
+      });
+  }
+
+  // Go to invoice detail page
+  goToInvoiceDetails(invoiceId: string) {
+    this.router.navigateByUrl(`invoice-details/${invoiceId}`);
   }
 }

@@ -1,4 +1,113 @@
 .all-invoices-container {
-    padding-top: 80px;
+    padding-top: 90px;
     color: var(--clr-dark);
+    margin-bottom: 3rem;
+}
+h1, h3 {
+    text-align: center;
+}
+
+/* FILTER SECTION */
+.filter-bar {
+    width: 100%;
+    margin: 1rem auto 0;
+    display: grid;
+    grid-template-rows: 50px 50px 50px;
+}
+.dropdowns-containers {
+    width: 100%;
+    gap: .5rem;
+}
+.dropdowns-containers > * {
+    /* flex: 1; */
+    width: 50%;
+    border-radius: 10px;
+    height: 40px;
+    font-size: var(--size-lg);
+    font-weight: bold;
+    color: var(--clr-dark);
+    padding: 0 .5rem;
+}
+.bookingId-search {
+    text-align: center;
+    flex: 1;
+}
+
+/* Buttons to clear or submit */
+.filter-btn-container {
+    gap: 2rem;
+}
+.filter-btn-container button {
+    box-shadow: none;
+}
+.reset-btn {
+    border: 1px solid var(--clr-dark);
+    background-color: transparent;
+    padding: .35rem .9rem;
+}
+.filter-btn-container > * {
+    font-size: var(--size-base);
+}
+.filter-btn i {
+    margin-top: .1rem;
+}
+
+/* Display Booking cards */
+.invoice-card {
+    width: 344px;
+    background-color: #fff8db;
+    border-radius: .6rem;
+    margin: 2rem auto 0;
+    padding: 1rem;
+    position: relative;
+    scale: .9; opacity: 0;
+    animation: fade-in linear forwards;
+    animation-timeline: view();
+    animation-range: 100px 300px;
+}
+.invoice-card:hover {
+    box-shadow: -10px -10px 10px #fff9e2,
+        10px 10px 10px #00000025;
+}
+
+/* button to go to invoice detail page via its id */
+.invoice-details-btn {
+    display: block;
+    margin: .4rem auto;
+}
+
+/* Page navigation controller arrow buttons */
+.pagination {
+    gap: 1rem;
+    width: 100%;
+    margin: 2rem 0;
+}
+.pagination .arrow-btn {
+    font-size: var(--size-2xl);
+    box-shadow: none;
+}
+
+
+/* Responsive */
+@media (min-width: 768px) {
+    
+}
+/* xs */
+/* @media (min-width: 475px) {
+} */
+/* sm */
+/* @media (min-width: 640px) {
+} */
+/* md */
+@media (min-width: 768px) {
+    .invoice-cards-wrapper {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+}
+/* xl */
+@media (min-width: 1280px) {
+    .invoice-cards-wrapper {
+        grid-template-columns: 33.33% 33.33% 33.33%;
+    }
 }

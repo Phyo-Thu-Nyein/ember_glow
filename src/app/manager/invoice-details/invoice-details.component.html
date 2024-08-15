@@ -1,0 +1,100 @@
+<section class="container invoice-details-container">
+    <!-- Invoice Heading -->
+    <h1>Invoice Details</h1>
+
+    <!-- Invoice Details -->
+     <div class="invoice-paper-wrapper">
+        <div class="invoice-paper">
+            <!-- logo section -->
+            <div class="logo-section flex">
+                <img src="../../../assets/images/icons/hotel-logo-600.png" alt="hotel logo">
+                <h2>Invoice</h2>
+            </div>
+
+            <!-- Bill to information -->
+            <div class="bill-section flex">
+                <div class="bill-wrapper">
+                    <h3> BILL TO </h3>
+                    <p> {{ invoice.user?.name! }} </p>
+                    <p> {{ invoice.user?.phone! }} </p>
+                    <p> {{ invoice.user?.email! }} </p>
+                </div>
+                <div class="issue-wrapper">
+                    <h3> CREATED BY </h3>
+                    <p>{{ invoice.createdBy?.name! }}</p>
+                    <p>Invoice ID: {{ invoice._id! }}</p>
+                    <p>Issued at: {{ invoice.createdAt | date : 'yyyy-MMM-dd hh:mm:ss' }} </p>
+                </div>
+            </div>
+
+            <!-- Total Amount section (height auto) -->
+             <div class="total-section">
+                 <table class="total-section-table">
+                     <thead>
+                         <tr>
+                             <th class="item">Room/ Item</th>
+                             <th>Nights/ Quantity</th>
+                             <th>Price</th>
+                             <th>Total</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <!-- loop the items + price = total -->
+                         <tr>
+                             <td class="item">{{ invoice.room?.room_number }} ({{ invoice.room?.room_type }})</td>
+                             <td>{{ invoice.totalNights }}</td>
+                             <td>{{ invoice.roomRate | currency : 'MMK' }}</td>
+                             <td>{{ roomTotalPrice | currency : 'MMK' }}</td>
+                          </tr>
+                          <tr *ngFor="let service of additionalServices">
+                             <td class="item">{{ service.description }}</td>
+                             <td>{{ service.quantity }}</td>
+                             <td>{{ service.unitPrice | currency : 'MMK' }}</td>
+                             <td>{{ service.amount | currency : 'MMK' }}</td>
+                          </tr>
+     
+                          <!-- Caculate the total -->
+                           <tr class="total-row">
+                             <td></td>
+                             <td></td>
+                             <th>Total </th>
+                             <th>{{ invoice.totalAmount | currency : 'MMK' }}</th>
+                           </tr>
+                     </tbody>
+                 </table>
+             </div>
+
+            <!-- Thank you section -->
+             <div class="thank-section">
+                <h2 class="thank-text">Thank You!</h2>
+                <img class="paid-stamp" src="https://res.cloudinary.com/dlodsw9lh/image/upload/v1723706450/invoice_stamp/vheek7auf2fxsuwpogvt.png" alt="Paid stamp">
+             </div>
+
+             <!-- Information section (ph, email, web url, ...) -->
+             <div class="info-section flex">
+                <p class="info-url flex">
+                    <i class="bx bx-globe"></i>
+                    www.emberglow.vercel.app
+                </p>
+                <p class="info-ph flex">
+                    <i class="bx bx-phone"></i>
+                    +949342342398
+                </p>
+                <p class="info-email flex">
+                    <i class="bx bx-envelope"></i>
+                    emberglow.hotel&#64;gmail.com
+                </p>
+                <hr class="info-hr-line">
+                <p class="info-closing-text">~ Ember Glow Hotel ~</p>
+              </div>
+              <hr>
+        </div>
+
+        <!-- Button to print out or save as PDF -->
+         <button class="btn print-btn flex" (click)="printInvoice()">
+            <i class="bx bx-printer"></i>
+            <span>Print Invoice</span>
+         </button>
+     </div>
+
+</section>

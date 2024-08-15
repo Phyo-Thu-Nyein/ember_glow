@@ -1,0 +1,19 @@
+<section class="container pre-create-invoice-container">
+    <!-- Heading -->
+     <h1>Booking ID to be Validated</h1>
+    <!-- Validate the booking Id -->
+    <div class="validation-wrapper flex">
+        <input type="text" [(ngModel)]="bookingId" placeholder="Enter Booking ID" required>
+        <button class="btn check-btn flex" (click)="validateBookingId()" [disabled]="isChecking || isValid !== null || bookingId === ''">
+            <i class="bx" 
+                [ngClass]="isChecking ? 'bx-loader-circle bx-spin' : 
+                            isValid === true ? 'bx-check' : 
+                            isValid === false? 'bx-x' : '' "></i>
+            <span *ngIf="!isChecking && isValid === null ">Check</span>
+
+        </button>
+        <!-- Valid/ Invalid Message -->
+         <p class="message" [ngClass]="isValid ? 'text-green-bold' : 'text-red-bold'">{{ message }}</p>
+    </div>
+      
+</section>

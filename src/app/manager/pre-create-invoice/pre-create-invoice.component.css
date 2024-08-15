@@ -1,0 +1,41 @@
+.pre-create-invoice-container {
+    /* padding-top: 90px; */
+    /* margin-bottom: 3rem; */
+    color: var(--clr-dark);
+    text-align: center;
+    align-content: center;
+    height: 100vh;
+    height: 100svh;
+}
+
+h1 {
+    margin-bottom: 1rem;
+}
+
+.validation-wrapper {
+    gap: .5rem;
+    position: relative;
+}
+
+input[type="text"] {
+    width: 230px;
+    padding: .5rem;
+    border-radius: .6rem;
+    font-size: var(--size-base);
+}
+
+.check-btn {
+    width: 70px;
+    font-size: var(--size-base);
+}
+.check-btn i {
+    font-size: var(--size-2xl);
+}
+
+.message {
+    font-size: var(--size-lg);
+    position: absolute;
+    top: 104%;
+    left: 50%;
+    transform: translateX(-50%);
+}

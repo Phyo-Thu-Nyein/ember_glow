@@ -65,7 +65,7 @@
     </ng-container>
     <ng-template #displayBookings> 
         <div class="booking-card" *ngFor="let booking of bookingsDatum">
-            <p class="booking-id">Booking Id: {{ booking._id }}</p>
+            <p>Booking Id: {{ booking._id }}</p>
             <p><span>Booked By: </span><span>{{ booking.user?.name!}}</span></p>
             <p><span>Issued At: </span><span>{{ booking.createdAt }}</span></p>
             <p><span>RoomNo: </span><span>{{ booking.room?.room_number!}}</span></p>

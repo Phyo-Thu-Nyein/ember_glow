@@ -230,6 +230,12 @@ export class ApiService {
     const headers = this.getAuthHeaders();
     return this.http.get(`${this.invoicesUrl}/${invoiceId}`, { headers });
   }
+  // Validate the booking ID 
+  validateBookingId(bookingId: string) {
+    const headers = this.getAuthHeaders();
+    const body = { bookingId }
+    return this.http.post(`${this.invoicesUrl}/validate-bookingId`, body, { headers });
+  }
   // Create an invoice
   createInvoice(bookingId: string, formData: FormData) {
     const headers = this.getAuthHeaders();
