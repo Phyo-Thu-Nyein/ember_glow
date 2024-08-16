@@ -1,4 +1,77 @@
 .create-invoice-container {
-    padding-top: 80px;
+    padding-top: 90px;
     color: var(--clr-dark);
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* ---------- Invoice Form --------- */
+.invoice-form {
+    background-color: #ffffff;
+    border-radius: .6rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+/* --- select section --- */
+select {
+    background-color: rgba(0, 0, 0, 0.074);
+    margin: 0 .4rem;
+    padding: .4rem;
+    border-radius: .6rem;
+    font-size: var(--size-base);
+    font-weight: bold;
+}
+
+/* --- table section --- */
+.service-table {
+    /* background-color: rgba(255, 0, 0, 0.589); */
+    border-collapse: collapse;
+    margin: 1rem 0;
+    width: 100%;
+    max-width: 640px;
+    font-size: var(--size-base);
+}
+th, td {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: .3rem;
+}
+input[type="text"],
+input[type="number"] {
+    text-align: center;
+    width: 100%;
+}
+input[type="text"],
+.description-col {
+    text-align: left;
+}
+
+/* --- btns group --- */
+.btn-group {
+    gap: 2rem;
+    margin-top: 1rem;
+}
+/* --- add btn --- */
+.add-btn {
+    border: 1px solid black;
+    background-color: transparent;
+    box-shadow: none;
+}
+/* --- remove btn --- */
+.remove-btn {
+    width: 50px;
+    font-size: var(--size-xl);
+    color: #ef4444;
+}
+/* --- submit btn --- */
+.submit-btn {
+    width: 68px;
+}
+.submit-btn i {
+    font-size: var(--size-2xl);
 }

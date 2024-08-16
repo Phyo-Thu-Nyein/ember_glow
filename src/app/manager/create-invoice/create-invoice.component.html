@@ -1,3 +1,55 @@
 <section class="container create-invoice-container">
+    <!-- Heading -->
     <h1>Create New Invoice</h1>
+
+    <!-- Invoice Form to create a new invoice -->
+    <form [formGroup]="invoiceForm" (ngSubmit)="submitForm()" class="invoice-form">
+        <!-- Payment Method Dropdown -->
+        <label for="paymentMethod">Payment Method:</label>
+        <select id="paymentMethod" formControlName="paymentMethod">
+          <option value="Cash">Cash</option>
+          <option value="BankTransfer">Bank Transfer</option>
+        </select>
+      
+        <!-- Additional Services Table -->
+        <table class="service-table">
+          <thead>
+            <tr>
+              <th class="description-col">Item</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <!-- <th>Actions</th> -->
+            </tr>
+          </thead>
+          <tbody formArrayName="additionalServices">
+            <tr *ngFor="let service of additionalServices.controls; let i = index" [formGroupName]="i">
+              <td>
+                <input type="text" formControlName="description" placeholder="Name" class="description-col" />
+              </td>
+              <td>
+                <input type="number" formControlName="unitPrice" placeholder="Unit Price" />
+              </td>
+              <td>
+                <input type="number" formControlName="quantity" placeholder="Quantity" />
+              </td>
+              <td>
+                <button [disabled]="isOnSubmit" type="button" class="remove-btn" (click)="removeServiceRow(i)"><i class="bx bxs-trash"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <!-- Buttons group -->
+        <div class="btn-group flex">
+            <!-- Button to Add a New Row -->
+            <button [disabled]="isOnSubmit" type="button" class="btn add-btn" (click)="addServiceRow()">+ New Row</button>
+          
+            <!-- Submit Button -->
+            <button [disabled]="isOnSubmit" type="submit" class="btn submit-btn flex">
+                <span *ngIf="!isOnSubmit">Submit</span>
+                <i *ngIf="isOnSubmit" class="bx bx-loader-circle bx-spin"></i>
+            </button>
+        </div>
+      </form>
+      
 </section>
