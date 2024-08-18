@@ -51,6 +51,7 @@ export interface Room {
   room_number?: string;
   room_type?: string;
   images?: string[]; // IMPORTANT: This response won't be present in all/new bookings
+  price?: number; // IMPORTANT: This response won't be present in all/new bookings
 }
 
 // User interface remains the same

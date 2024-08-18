@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { OneBooking, OneBookingData } from 'src/app/interface/bookings-interface';
 import { ApiService } from 'src/app/services/api.service';
 import { LoadingService } from 'src/app/services/loading.service';
 
@@ -13,13 +14,16 @@ import { LoadingService } from 'src/app/services/loading.service';
 export class CreateInvoiceComponent implements OnInit, OnDestroy {
   // Subscriptions
   createInvoiceSub: Subscription = new Subscription();
+  oneBookingSub: Subscription = new Subscription(); // get some booking details for previewing the invoice
 
   // Variables
-  bookingId: string = '';
+  bookingId: string = ''; // get the booking id passed from before
   invoiceId: string = ''; // pass it to the invoice details page
 
   invoiceForm!: FormGroup;
   isOnSubmit: boolean = false;
+  isPreviewMode: boolean = false;
+  bookingData: OneBookingData = {}; // for preview
 
   constructor(
     private apiService: ApiService,
@@ -38,6 +42,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
       paymentMethod: ['Cash', Validators.required],
       additionalServices: this.fb.array([])
     });
+    this.getBookingDetailForPreview(this.bookingId); // for preview
   }
   ngOnDestroy(): void {
     if (this.createInvoiceSub) {
@@ -96,6 +101,34 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   // Remove a service row
   removeServiceRow(index: number) {
     this.additionalServices.removeAt(index);
+  }
+
+  // Preview toggle button
+  togglePreview() {
+    this.isPreviewMode = !this.isPreviewMode;
+  }
+
+  // Get some booking details for previewing the invoice
+  getBookingDetailForPreview(bookingId: string) {
+    this.oneBookingSub = this.apiService.getOneBooking(bookingId).subscribe({
+      next: (response: OneBooking) => {
+        this.bookingData = response.data!;
+        console.log("customer's name>>", this.bookingData.user?.name);
+      },
+      error: (err) => {
+        console.log("Error fetching the booking: ", err.error.message);
+      }
+    });
+  }
+
+
+  // Calculate the total amount (room total price + total services)
+  calculateTotal() {
+    return this.additionalServices.controls.reduce((total, service) => {
+      const quantity = service.get('quantity')?.value || 0;
+      const unitPrice = service.get('unitPrice')?.value || 0;
+      return total + (quantity * unitPrice);
+    }, this.bookingData.totalPrice || 0);
   }
 
 }

@@ -304,17 +304,17 @@
 /* 2xl */
 @media (min-width: 1536px) {
     .left-part {
-        width: 20%;
+        width: 15%;
         justify-content: flex-end;
         flex: none;
     }
 
     .mid-part {
-        width: 30%;
+        width: 40%;
     }
 
     .right-part {
-        width: 20%;
+        width: 15%;
         justify-content: flex-start;
         flex: none;
     }

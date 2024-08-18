@@ -32,9 +32,9 @@
                  <table class="total-section-table">
                      <thead>
                          <tr>
-                             <th class="item">Room/ Item</th>
-                             <th>Nights/ Quantity</th>
+                             <th class="item">Room/Item</th>
                              <th>Price</th>
+                             <th>Nights/Quantity</th>
                              <th>Total</th>
                          </tr>
                      </thead>
@@ -48,8 +48,8 @@
                           </tr>
                           <tr *ngFor="let service of additionalServices">
                              <td class="item">{{ service.description }}</td>
-                             <td>{{ service.quantity }}</td>
                              <td>{{ service.unitPrice | currency : 'MMK' }}</td>
+                             <td>{{ service.quantity }}</td>
                              <td>{{ service.amount | currency : 'MMK' }}</td>
                           </tr>
      

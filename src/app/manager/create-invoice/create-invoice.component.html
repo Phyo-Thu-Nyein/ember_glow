@@ -1,55 +1,305 @@
 <section class="container create-invoice-container">
-    <!-- Heading -->
+  <!-- Heading Part -->
+  <div class="heading flex">
     <h1>Create New Invoice</h1>
-
+    <button class="btn preview-btn" (click)="togglePreview()">
+      {{ !isPreviewMode ? "Preview Invoice" : "Close Preview" }}
+    </button>
+  </div>
+  
+  <div class="invoice-form-preview-wrapper">
     <!-- Invoice Form to create a new invoice -->
-    <form [formGroup]="invoiceForm" (ngSubmit)="submitForm()" class="invoice-form">
-        <!-- Payment Method Dropdown -->
-        <label for="paymentMethod">Payment Method:</label>
-        <select id="paymentMethod" formControlName="paymentMethod">
-          <option value="Cash">Cash</option>
-          <option value="BankTransfer">Bank Transfer</option>
-        </select>
-      
-        <!-- Additional Services Table -->
-        <table class="service-table">
+    <form
+      *ngIf="!isPreviewMode"
+      [formGroup]="invoiceForm"
+      (ngSubmit)="submitForm()"
+      class="invoice-form"
+    >
+      <!-- Payment Method Dropdown -->
+      <label for="paymentMethod">Payment Method:</label>
+      <select id="paymentMethod" formControlName="paymentMethod">
+        <option value="Cash">Cash</option>
+        <option value="BankTransfer">Bank Transfer</option>
+      </select>
+  
+      <!-- Additional Services Table -->
+      <table class="service-table">
+        <thead>
+          <tr>
+            <th class="description-col">Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="additionalServices">
+          <tr
+            *ngFor="let service of additionalServices.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <td>
+              <input
+                type="text"
+                formControlName="description"
+                placeholder="Name"
+                class="description-col"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                formControlName="unitPrice"
+                placeholder="Unit Price"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                formControlName="quantity"
+                placeholder="Quantity"
+              />
+            </td>
+            <td>
+              <button
+                [disabled]="isOnSubmit"
+                type="button"
+                class="remove-btn"
+                (click)="removeServiceRow(i)"
+              >
+                <i class="bx bxs-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- Buttons group -->
+      <div class="btn-group flex">
+        <!-- Button to Add a New Row -->
+        <button
+          [disabled]="isOnSubmit"
+          type="button"
+          class="btn add-btn"
+          (click)="addServiceRow()"
+        >
+          + New Row
+        </button>
+  
+        <!-- Submit Button -->
+        <button [disabled]="isOnSubmit" type="submit" class="btn submit-btn flex">
+          <span *ngIf="!isOnSubmit">Submit</span>
+          <i *ngIf="isOnSubmit" class="bx bx-loader-circle bx-spin"></i>
+        </button>
+      </div>
+    </form>
+  
+    <!-- Preview Invoice Mobile -->
+    <div *ngIf="isPreviewMode" class="invoice-paper">
+      <!-- logo section -->
+      <div class="logo-section flex">
+        <img
+          src="../../../assets/images/icons/hotel-logo-600.png"
+          alt="hotel logo"
+        />
+        <h2>Invoice</h2>
+      </div>
+  
+      <!-- Bill to information -->
+      <div class="bill-section flex">
+        <div class="bill-wrapper">
+          <h3>BILL TO</h3>
+          <p>{{ bookingData.user?.name }}</p>
+          <p>Phone number</p>
+          <p>Email address</p>
+        </div>
+        <div class="issue-wrapper">
+          <h3>CREATED BY</h3>
+          <p>Reception</p>
+          <p>Invoice ID: invoice id</p>
+          <p>Issued at: Date and time</p>
+        </div>
+      </div>
+  
+      <!-- Total Amount section (height auto) -->
+      <div class="total-section">
+        <table class="total-section-table">
           <thead>
             <tr>
-              <th class="description-col">Item</th>
+              <th class="item">Room/Item</th>
               <th>Price</th>
-              <th>Quantity</th>
-              <!-- <th>Actions</th> -->
+              <th>Nights/Quantity</th>
+              <th>Total</th>
             </tr>
           </thead>
-          <tbody formArrayName="additionalServices">
-            <tr *ngFor="let service of additionalServices.controls; let i = index" [formGroupName]="i">
-              <td>
-                <input type="text" formControlName="description" placeholder="Name" class="description-col" />
+          <tbody>
+            <!-- loop the items + price = total -->
+            <tr>
+              <td class="item">
+                {{ bookingData.room?.room_number }} ({{
+                  bookingData.room?.room_type
+                }})
               </td>
+              <td>{{ bookingData.duration }}</td>
+              <td>{{ bookingData.room?.price | currency : "MMK" }}</td>
+              <td>{{ bookingData.totalPrice | currency : "MMK" }}</td>
+            </tr>
+            <tr
+              *ngFor="let service of additionalServices.controls; let i = index"
+            >
+              <td class="item">{{ service.get("description")?.value }}</td>
+              <td>{{ service.get("unitPrice")?.value }}</td>
+              <td>{{ service.get("quantity")?.value }}</td>
               <td>
-                <input type="number" formControlName="unitPrice" placeholder="Unit Price" />
+                {{
+                  service.get("quantity")?.value * service.get("unitPrice")?.value
+                    | currency : "MMK"
+                }}
               </td>
-              <td>
-                <input type="number" formControlName="quantity" placeholder="Quantity" />
-              </td>
-              <td>
-                <button [disabled]="isOnSubmit" type="button" class="remove-btn" (click)="removeServiceRow(i)"><i class="bx bxs-trash"></i></button>
-              </td>
+            </tr>
+  
+            <!-- Caculate the total -->
+            <tr class="total-row">
+              <td></td>
+              <td></td>
+              <th>Total</th>
+              <th>{{ calculateTotal() | currency : "MMK" }}</th>
             </tr>
           </tbody>
         </table>
-        
-        <!-- Buttons group -->
-        <div class="btn-group flex">
-            <!-- Button to Add a New Row -->
-            <button [disabled]="isOnSubmit" type="button" class="btn add-btn" (click)="addServiceRow()">+ New Row</button>
-          
-            <!-- Submit Button -->
-            <button [disabled]="isOnSubmit" type="submit" class="btn submit-btn flex">
-                <span *ngIf="!isOnSubmit">Submit</span>
-                <i *ngIf="isOnSubmit" class="bx bx-loader-circle bx-spin"></i>
-            </button>
+      </div>
+  
+      <!-- Thank you section -->
+      <div class="thank-section">
+        <h2 class="thank-text">Thank You!</h2>
+        <img
+          class="paid-stamp"
+          src="https://res.cloudinary.com/dlodsw9lh/image/upload/v1723706450/invoice_stamp/vheek7auf2fxsuwpogvt.png"
+          alt="Paid stamp"
+        />
+      </div>
+  
+      <!-- Information section (ph, email, web url, ...) -->
+      <div class="info-section flex">
+        <p class="info-url flex">
+          <i class="bx bx-globe"></i>
+          www.emberglow.vercel.app
+        </p>
+        <p class="info-ph flex">
+          <i class="bx bx-phone"></i>
+          +949342342398
+        </p>
+        <p class="info-email flex">
+          <i class="bx bx-envelope"></i>
+          emberglow.hotel&#64;gmail.com
+        </p>
+        <hr class="info-hr-line" />
+        <p class="info-closing-text">~ Ember Glow Hotel ~</p>
+      </div>
+      <hr />
+    </div>
+  
+    <!-- Preview Invoice Desktop -->
+    <div class="invoice-paper desktop-view">
+      <!-- logo section -->
+      <div class="logo-section flex">
+        <img
+          src="../../../assets/images/icons/hotel-logo-600.png"
+          alt="hotel logo"
+        />
+        <h2>Invoice</h2>
+      </div>
+  
+      <!-- Bill to information -->
+      <div class="bill-section flex">
+        <div class="bill-wrapper">
+          <h3>BILL TO</h3>
+          <p>{{ bookingData.user?.name }}</p>
+          <p>Phone number</p>
+          <p>Email address</p>
         </div>
-      </form>
-      
+        <div class="issue-wrapper">
+          <h3>CREATED BY</h3>
+          <p>Reception</p>
+          <p>Invoice ID: invoice id</p>
+          <p>Issued at: Date and time</p>
+        </div>
+      </div>
+  
+      <!-- Total Amount section (height auto) -->
+      <div class="total-section">
+        <table class="total-section-table">
+          <thead>
+            <tr>
+              <th class="item">Room/Item</th>
+              <th>Price</th>
+              <th>Nights/Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- loop the items + price = total -->
+            <tr>
+              <td class="item">
+                {{ bookingData.room?.room_number }} ({{
+                  bookingData.room?.room_type
+                }})
+              </td>
+              <td>{{ bookingData.duration }}</td>
+              <td>{{ bookingData.room?.price | currency : "MMK" }}</td>
+              <td>{{ bookingData.totalPrice | currency : "MMK" }}</td>
+            </tr>
+            <tr
+              *ngFor="let service of additionalServices.controls; let i = index"
+            >
+              <td class="item">{{ service.get("description")?.value }}</td>
+              <td>{{ service.get("unitPrice")?.value }}</td>
+              <td>{{ service.get("quantity")?.value }}</td>
+              <td>
+                {{
+                  service.get("quantity")?.value * service.get("unitPrice")?.value
+                    | currency : "MMK"
+                }}
+              </td>
+            </tr>
+  
+            <!-- Caculate the total -->
+            <tr class="total-row">
+              <td></td>
+              <td></td>
+              <th>Total</th>
+              <th>{{ calculateTotal() | currency : "MMK" }}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Thank you section -->
+      <div class="thank-section">
+        <h2 class="thank-text">Thank You!</h2>
+        <img
+          class="paid-stamp"
+          src="https://res.cloudinary.com/dlodsw9lh/image/upload/v1723706450/invoice_stamp/vheek7auf2fxsuwpogvt.png"
+          alt="Paid stamp"
+        />
+      </div>
+  
+      <!-- Information section (ph, email, web url, ...) -->
+      <div class="info-section flex">
+        <p class="info-url flex">
+          <i class="bx bx-globe"></i>
+          www.emberglow.vercel.app
+        </p>
+        <p class="info-ph flex">
+          <i class="bx bx-phone"></i>
+          +949342342398
+        </p>
+        <p class="info-email flex">
+          <i class="bx bx-envelope"></i>
+          emberglow.hotel&#64;gmail.com
+        </p>
+        <hr class="info-hr-line" />
+        <p class="info-closing-text">~ Ember Glow Hotel ~</p>
+      </div>
+      <hr />
+    </div>
+  </div>
 </section>
