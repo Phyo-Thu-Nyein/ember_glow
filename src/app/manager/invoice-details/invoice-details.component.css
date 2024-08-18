@@ -23,6 +23,7 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: .6rem;
+    position: relative;
 }
 /* logo section */
 .logo-section {
@@ -78,6 +79,7 @@ td, th {
 /* Thank you section */
 .thank-section {
     /* background-color: rgba(0, 255, 0, 0.416); */
+    margin-bottom: 3rem;
     padding: .6rem;
     font-size: var(--size-xs);
     position: relative;
@@ -95,10 +97,14 @@ td, th {
 /* Information section */
 .info-section {
     /* background-color: rgba(255, 0, 0, 0.482); */
+    width: 93.5%;
     padding: .6rem;
     font-size: .4rem;
     justify-content: space-between;
-    position: relative;
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .info-hr-line, .info-closing-text {
     position: absolute;
