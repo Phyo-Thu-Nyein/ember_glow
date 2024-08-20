@@ -20,8 +20,8 @@ export class ApiService {
   private countryCodeUrl: string = `${this.baseDataUrl}country-codes.json`;
 
   constructor(private http: HttpClient) {}
-  // baseUrl: string = 'https://hotel-api-v2-ocur.onrender.com'; // Production URL
-  baseUrl: string = 'http://localhost:8000'; // Development URL
+  baseUrl: string = 'https://hotel-api-v2-ocur.onrender.com'; // Production URL
+  // baseUrl: string = 'http://localhost:8000'; // Development URL
 
   // Auth URL
   authUrl: string = `${this.baseUrl}/api/v1/auth/`;
