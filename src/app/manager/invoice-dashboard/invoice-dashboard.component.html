@@ -43,28 +43,39 @@
     Change to {{ isLineChart ? " Bar Chart" : " Line Chart" }}
   </button>
 
-  <!-- Line Chart and Bar Chart -->
-  <div class="line-chart-wrapper" style="display: block">
-    <!-- Conditionally render the canvas with or without the [type] attribute -->
-    <canvas
-      *ngIf="isLineChart"
-      baseChart
-      [data]="lineChartData"
-      [options]="lineChartOptions"
-      [legend]="lineChartLegend"
-      [type]="'line'"
-    >
-    </canvas>
 
-    <canvas
-      *ngIf="!isLineChart"
-      baseChart
-      [data]="lineChartData"
-      [options]="lineChartOptions"
-      [legend]="lineChartLegend"
-    >
-    </canvas>
-  </div>
+  <!-- Loading while fetching invoice data -->
+   <ng-container *ngIf="isFetching else showChart">
+    <div class="fetching-data flex">
+      <h1>Fetching Data</h1>
+      <i class='bx bx-loader-circle bx-spin' ></i>
+    </div>
+   </ng-container>
+   
+  <!-- Line Chart and Bar Chart -->
+   <ng-template #showChart>
+     <div class="line-chart-wrapper" style="display: block">
+       <!-- Conditionally render the canvas with or without the [type] attribute -->
+       <canvas
+         *ngIf="isLineChart"
+         baseChart
+         [data]="lineChartData"
+         [options]="lineChartOptions"
+         [legend]="lineChartLegend"
+         [type]="'line'"
+       >
+       </canvas>
+   
+       <canvas
+         *ngIf="!isLineChart"
+         baseChart
+         [data]="lineChartData"
+         [options]="lineChartOptions"
+         [legend]="lineChartLegend"
+       >
+       </canvas>
+     </div>
+   </ng-template>
 
   <!-- All Time Card -->
   <div class="extra-info">

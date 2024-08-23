@@ -32,6 +32,9 @@ export class InvoiceDashboardComponent implements OnInit, OnDestroy {
   thisYearRevenueSum: number = 0;
   activeTimeFrame: string = 'all'; // Add an active effect to selected time frame
 
+  // Loading
+  isFetching: boolean = false;
+
   // Boolean variable to track the chart type
   isLineChart: boolean = true;
 
@@ -104,6 +107,7 @@ export class InvoiceDashboardComponent implements OnInit, OnDestroy {
   // LOGICS
   // Get the invoice report
   getInvoiceReport() {
+    this.isFetching = true;
     this.invoiceReportSub = this.apiService.getInvoiceReport().subscribe({
       next: (report: InvoiceReport) => {
         const currentYear = new Date().getFullYear(); // Get current year
@@ -141,9 +145,11 @@ export class InvoiceDashboardComponent implements OnInit, OnDestroy {
 
         // Force chart update after setting data
         this.updateChart();
+        this.isFetching = false;
       },
       error: (err) => {
         console.log('Error fetching invoice report.', err.error.message);
+        this.isFetching = false;
       },
     });
   }

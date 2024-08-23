@@ -63,6 +63,21 @@
   font-weight: bold;
 }
 
+/* Loading while fetching invoice data */
+.fetching-data {
+  background-color: var(--clr-amber50);
+  gap: .3rem;
+  border-radius: .6rem;
+  margin: 1rem auto;
+  width: 95vw;
+  height: 60vh;
+  height: 60svh;
+}
+.fetching-data i {
+  font-size: var(--size-2xl);
+}
+
+/* Chart styles */
 .line-chart-wrapper {
   background-color: var(--clr-amber50);
   border-radius: .6rem;
