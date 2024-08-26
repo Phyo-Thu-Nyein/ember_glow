@@ -108,6 +108,12 @@ export class ApiService {
       headers,
     });
   }
+  // Update User Role
+  updateUserRole(userId: string, role: number) {
+    const headers = this.getAuthHeaders();
+    const body = { role };
+    return this.http.patch(`${this.usersUrl}/${userId}/update-role`, body, { headers });
+  }
   // Update Password
   updatePsw(payload: { oldPassword: string; newPassword: string }) {
     const headers = this.getAuthHeaders();

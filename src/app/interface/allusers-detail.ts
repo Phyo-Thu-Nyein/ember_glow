@@ -19,3 +19,17 @@ export interface AllUserDatum {
     updatedAt?:      Date;
     __v?:            number;
 }
+
+
+// Update role response
+export interface UpdateRoleDetails {
+    status?: string;
+    message?: string;
+    data?: UpdateData;
+}
+export interface UpdateData {
+    id?: string;
+    name?: string;
+    email?: string;
+    role?: number;
+}

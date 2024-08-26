@@ -24,9 +24,8 @@
         <select [(ngModel)]="params.filterByRole" name="role">
           <option value="">Role</option>
           <option value="0">Guest</option>
+          <option value="3">Manager</option>
           <option value="2">Reception</option>
-          <option value="3">Housekeeper</option>
-          <option value="4">Server</option>
         </select>
         <select [(ngModel)]="params.sortOrder" name="order">
           <option value="">Order</option>
@@ -58,9 +57,8 @@
         <div
           class="user-card flex"
           *ngFor="let user of allUsers"
-          [ngStyle]="{ display: user.role === 1 ? 'none' : 'flex' }"
         >
-          <ng-container *ngIf="user.role != 1">
+          
             <div class="user-info">
               <table>
                 <tr>
@@ -70,8 +68,12 @@
                 </tr>
                 <tr>
                   <td class="icons"><i class="bx bxs-user-badge"></i></td>
-                  <td>
-                    <p>{{ getRoleText(user.role!) }}</p>
+                  <td class="user-role-td">
+                    <select (change)="onRoleChange(user.id!, $event)">
+                      <option *ngFor="let role of getAvailableRoles(user.role!)" [value]="role.value" [selected]="role.value === user.role">
+                        {{ role.text }}
+                      </option>
+                    </select>
                   </td>
                 </tr>
                 <tr>
@@ -95,15 +97,12 @@
             >
               <i class="bx bxs-trash"></i>
             </button>
-          </ng-container>
           <img
-            *ngIf="user.role != 1"
             class="left-corner"
             src="../../assets/images/about/team/corner.svg"
             alt="corner art"
           />
           <img
-            *ngIf="user.role != 1"
             class="right-corner"
             src="../../assets/images/about/team/corner.svg"
             alt="corner art"

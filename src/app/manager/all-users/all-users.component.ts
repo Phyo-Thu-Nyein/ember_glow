@@ -1,7 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from '../../services/api.service';
-import { AllUserDatum, AllUsersDetails } from '../../interface/allusers-detail';
+import {
+  AllUserDatum,
+  AllUsersDetails,
+  UpdateRoleDetails,
+} from '../../interface/allusers-detail';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserFilterParams } from '../../interface/filter-params';
 import { NotFoundService } from '../../services/not-found.service';
@@ -15,6 +19,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 export class AllUsersComponent implements OnInit, OnDestroy {
   // Subscriptions
   allUsersSub: Subscription = new Subscription();
+  updateRoleSub: Subscription = new Subscription();
 
   // Variables
   allUsers: AllUserDatum[] = [];
@@ -148,19 +153,52 @@ export class AllUsersComponent implements OnInit, OnDestroy {
         return 'Manager';
       case 2:
         return 'Reception';
-      case 3:
-        return 'Housekeeper';
-      case 4:
-        return 'Server';
       default:
         return 'Guest';
     }
+  }
+
+  // Helper function for updating user role
+  getAvailableRoles(currentRole: number): { value: number; text: string }[] {
+    const roles = [
+      { value: 0, text: 'Guest' },
+      { value: 1, text: 'Manager' },
+      { value: 2, text: 'Reception' },
+    ];
+    
+    return roles;
+  }
+
+  // Method to handle the change event
+  onRoleChange(userId: string, event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const role = +selectElement.value; // Convert value to number
+
+    this.updateUserRole(userId, role);
+  }
+
+  // Update User Role
+  updateUserRole(userId: string, role: number) {
+    this.updateRoleSub = this.apiService
+      .updateUserRole(userId, role)
+      .subscribe({
+        next: (response: UpdateRoleDetails) => {
+          this.getAllUsers(this.params);
+          console.log('Sucess: ', response.message);
+        },
+        error: (err) => {
+          console.log('Error: ', err.error.message);
+        },
+      });
   }
 
   // On Destroy
   ngOnDestroy(): void {
     if (this.allUsersSub) {
       this.allUsersSub.unsubscribe();
+    }
+    if (this.updateRoleSub) {
+      this.updateRoleSub.unsubscribe();
     }
   }
 }

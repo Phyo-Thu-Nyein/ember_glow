@@ -72,6 +72,22 @@ td {
     text-align: left;
     vertical-align: top;
 }
+.user-role-td {
+    height: 20px;
+}
+.user-role-td select {
+    width: 120px;
+    height: 100%;
+    font-size: var(--size-lg);
+    font-weight: bold;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.097);
+    border-radius: .6rem;
+}
+.user-role-td select > option {
+    color: var(--clr-dark);
+    font-size: var(--size-sm);
+}
 
 .icons {
     padding-right: .5rem;

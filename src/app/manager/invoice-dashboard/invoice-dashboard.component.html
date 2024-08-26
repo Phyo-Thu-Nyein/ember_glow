@@ -78,7 +78,7 @@
    </ng-template>
 
   <!-- All Time Card -->
-  <div class="extra-info">
+  <div *ngIf="!isFetching" class="extra-info">
     <div class="extra-info-card">
       <p>This Year Revenue - {{ thisYearRevenueSum | currency : "MMK" }}</p>
       <p>All Time Revenue - {{ totalRevenueSum | currency : "MMK" }}</p>
