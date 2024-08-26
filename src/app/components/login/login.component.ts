@@ -1,11 +1,11 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from '../services/api.service';
+import { ApiService } from 'src/app/services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UserDetails } from '../interface/user-details';
+import { UserDetails } from 'src/app/interface/user-details';
 import { Subscription } from 'rxjs';
-import { LoadingService } from '../services/loading.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-login',

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { PfpSharedService } from '../services/pfp-shared.service';
-import { LoadingService } from '../services/loading.service';
+import { PfpSharedService } from 'src/app/services/pfp-shared.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-navigation',
@@ -16,7 +16,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   profilePicUpdatedSub: Subscription = new Subscription();
 
   // Variables
-  userImgUrl: string | null = '';
+  userImgUrl: string | null = null;
   userImgExist: boolean = false;
   userRole: string | null = '';
 

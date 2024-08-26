@@ -5,10 +5,10 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { ApiService } from '../services/api.service';
-import { UserDetails } from '../interface/user-details';
+import { ApiService } from 'src/app/services/api.service';
+import { UserDetails } from 'src/app/interface/user-details';
 import { Subscription } from 'rxjs';
-import { PfpSharedService } from '../services/pfp-shared.service';
+import { PfpSharedService } from 'src/app/services/pfp-shared.service';
 
 @Component({
   selector: 'app-profile',

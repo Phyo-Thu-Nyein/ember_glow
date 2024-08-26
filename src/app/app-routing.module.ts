@@ -1,32 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
-import { NotfoundComponent } from './notfound/notfound.component';
-import { RoomsComponent } from './rooms/rooms.component';
-import { DiningComponent } from './dining/dining.component';
-import { FacilitiesComponent } from './facilities/facilities.component';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
-import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './components/home/home.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { RoomsComponent } from './components/rooms/rooms.component';
+import { DiningComponent } from './components/dining/dining.component';
+import { FacilitiesComponent } from './components/facilities/facilities.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { authGuard } from './guards/auth.guard';
-import { alreadyLoggedInGuard } from './already-logged-in.guard';
-import { AllUsersComponent } from './manager/all-users/all-users.component';
-import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
-import { PaymentComponent } from './rooms/payment/payment.component';
-import { BookingsComponent } from './profile/bookings/bookings.component';
-import { AllBookingsComponent } from './manager/all-bookings/all-bookings.component';
-import { UpdateBookingComponent } from './manager/update-booking/update-booking.component';
-import { UpdateRoomComponent } from './manager/update-room/update-room.component';
-import { AllRoomsComponent } from './manager/all-rooms/all-rooms.component';
-import { CreateRoomComponent } from './manager/create-room/create-room.component';
-import { InvoiceDashboardComponent } from './manager/invoice-dashboard/invoice-dashboard.component';
+import { alreadyLoggedInGuard } from './guards/already-logged-in.guard';
+import { AllUsersComponent } from './components/manager/all-users/all-users.component';
+import { RoomDetailsComponent } from './components/rooms/room-details/room-details.component';
+import { PaymentComponent } from './components/rooms/payment/payment.component';
+import { BookingsComponent } from './components/profile/bookings/bookings.component';
+import { AllBookingsComponent } from './components/manager/all-bookings/all-bookings.component';
+import { UpdateBookingComponent } from './components/manager/update-booking/update-booking.component';
+import { UpdateRoomComponent } from './components/manager/update-room/update-room.component';
+import { AllRoomsComponent } from './components/manager/all-rooms/all-rooms.component';
+import { CreateRoomComponent } from './components/manager/create-room/create-room.component';
+import { InvoiceDashboardComponent } from './components/manager/invoice-dashboard/invoice-dashboard.component';
 import { homeGuard } from './guards/home.guard';
-import { CreateInvoiceComponent } from './manager/create-invoice/create-invoice.component';
-import { AllInvoicesComponent } from './manager/all-invoices/all-invoices.component';
-import { PreCreateInvoiceComponent } from './manager/pre-create-invoice/pre-create-invoice.component';
-import { InvoiceDetailsComponent } from './manager/invoice-details/invoice-details.component';
+import { CreateInvoiceComponent } from './components/manager/create-invoice/create-invoice.component';
+import { AllInvoicesComponent } from './components/manager/all-invoices/all-invoices.component';
+import { PreCreateInvoiceComponent } from './components/manager/pre-create-invoice/pre-create-invoice.component';
+import { InvoiceDetailsComponent } from './components/manager/invoice-details/invoice-details.component';
 
 const routes: Routes = [
   {
@@ -37,7 +37,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [homeGuard]
+    canActivate: [homeGuard],
   },
   {
     path: 'rooms',

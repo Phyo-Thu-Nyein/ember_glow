@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ApiService } from '../services/api.service';
-import { Carousel } from '../interface/carousel-detail';
+import { ApiService } from 'src/app/services/api.service';
+import { Carousel } from 'src/app/interface/carousel-detail';
 
 @Component({
   selector: 'app-facilities',

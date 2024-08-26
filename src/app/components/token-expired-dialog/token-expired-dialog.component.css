@@ -1,0 +1,15 @@
+.session-expired-container, .session-title {
+    font-family: 'Chillax', sans-serif !important;
+    font-weight: bold;
+}
+.session-title {
+    font-size: var(--size-2xl);
+}
+p {
+    font-weight: bold;
+}
+button {
+    background-color: rgb(225, 225, 225);
+    margin: 0 0 .6rem 1rem;
+    box-shadow: none;
+}

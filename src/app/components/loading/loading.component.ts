@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingService } from '../services/loading.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({

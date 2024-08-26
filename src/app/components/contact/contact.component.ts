@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
-import { MailService } from '../services/mail.service';
+import { MailService } from '../../services/mail.service';
 import { NgForm, NgModel } from '@angular/forms';
 import { env } from 'src/env/env';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.css']
+  styleUrls: ['./contact.component.css'],
 })
 export class ContactComponent {
-  constructor(
-    private mailService: MailService
-  ) { }
+  constructor(private mailService: MailService) {}
 
   private color: string = '';
   showAlert: boolean = false;
@@ -23,13 +21,13 @@ export class ContactComponent {
     body: '',
   };
 
-    //Turn green if valid else red
-    isFieldValid(field: NgModel) {
-      return field.valid && (field.touched || field.dirty)
-    }
-    isFieldInvalid(field: NgModel) {
-      return !field.valid && (field.touched || field.dirty)
-    }
+  //Turn green if valid else red
+  isFieldValid(field: NgModel) {
+    return field.valid && (field.touched || field.dirty);
+  }
+  isFieldInvalid(field: NgModel) {
+    return !field.valid && (field.touched || field.dirty);
+  }
 
   get alertColor() {
     return `text-${this.color}-bold`;
@@ -60,7 +58,7 @@ export class ContactComponent {
         throw new Error();
       }
       this.color = 'green';
-      this.alertMessage = 'Email sent successfully!'
+      this.alertMessage = 'Email sent successfully!';
       contactForm.resetForm();
     } catch (err) {
       // handle error
@@ -72,5 +70,4 @@ export class ContactComponent {
     this.showAlert = true;
     this.hideAlert();
   }
-
 }

@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ApiService } from '../../services/api.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-about-eco',

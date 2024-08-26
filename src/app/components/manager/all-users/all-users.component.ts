@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ApiService } from '../../services/api.service';
+import { ApiService } from 'src/app/services/api.service';
 import {
   AllUserDatum,
   AllUsersDetails,
   UpdateRoleDetails,
-} from '../../interface/allusers-detail';
+} from 'src/app/interface/allusers-detail';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserFilterParams } from '../../interface/filter-params';
-import { NotFoundService } from '../../services/not-found.service';
+import { UserFilterParams } from 'src/app/interface/filter-params';
+import { NotFoundService } from 'src/app/services/not-found.service';
 import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
@@ -89,6 +89,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
           console.error('Error getting all users', err.message);
         }
         this.isFetching = false;
+        console.log('Error: ', err.error.message);
       },
     });
   }

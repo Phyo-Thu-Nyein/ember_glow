@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from '../services/api.service';
-import { AllRoomsDatum, AllRoomsDetails } from '../interface/allrooms-detail';
+import { ApiService } from 'src/app/services/api.service';
+import { AllRoomsDatum, AllRoomsDetails } from 'src/app/interface/allrooms-detail';
 import { Subscription } from 'rxjs';
-import { RoomFilterParams } from '../interface/filter-params';
-import { NotFoundService } from '../services/not-found.service';
-import { LoadingService } from '../services/loading.service';
+import { RoomFilterParams } from 'src/app/interface/filter-params';
+import { NotFoundService } from 'src/app/services/not-found.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-rooms',

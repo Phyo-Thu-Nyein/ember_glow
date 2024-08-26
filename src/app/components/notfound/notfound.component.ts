@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NotFoundService } from '../services/not-found.service';
+import { NotFoundService } from 'src/app/services/not-found.service';
 import { Location } from '@angular/common';
 
 

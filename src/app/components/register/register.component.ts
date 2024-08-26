@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService } from '../services/api.service';
+import { ApiService } from 'src/app/services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UserDetails } from '../interface/user-details';
-import { count, Subscription } from 'rxjs';
-import { LoadingService } from '../services/loading.service';
+import { UserDetails } from 'src/app/interface/user-details';
+import { Subscription } from 'rxjs';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-register',
