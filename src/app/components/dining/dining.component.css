@@ -1,5 +1,5 @@
 .bg-img {
-    background-image: url(../../assets/images/backgrounds/landing-dining.jpg);
+    background-image: url('src/assets/images/backgrounds/landing-dining.jpg');
     width: 100vw;
     height: 100vh;
     background-position: center;

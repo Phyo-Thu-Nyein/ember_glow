@@ -150,7 +150,7 @@ mat-error {
     .room-detail-wrapper::before,
     .room-detail-wrapper::after {
         content: '';
-        background-image: url('../../../assets/images/rooms/hotel-room-art.svg');
+        background-image: url('src/assets/images/rooms/hotel-room-art.svg');
         background-repeat: no-repeat;
         background-size: contain;
         position: absolute;

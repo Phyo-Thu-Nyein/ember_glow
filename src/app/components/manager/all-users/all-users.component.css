@@ -39,20 +39,15 @@
 .user-card:hover {
     transform: translateY(-6px);
     background-color: rgba(27, 27, 27, 0.882);
-    ;
-
-    th {
-        color: var(--clr-gold);
-    }
-
-    td {
-        color: var(--clr-amber100);
-    }
-
-    .left-corner,
-    .right-corner {
-        opacity: 1;
-    }
+}
+.user-card:hover th {
+    color: var(--clr-gold);
+}
+.user-card:hover td {
+    color: var(--clr-amber100);
+}
+.user-card:hover .left-corner, .user-card:hover .right-corner {
+    opacity: 1;
 }
 
 .user-info {
