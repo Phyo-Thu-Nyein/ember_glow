@@ -308,6 +308,7 @@
           placeholder="New Password"
           (input)="onPasswordChange()"
           required
+          minlength="8"
           #newPsw="ngModel"
           #passwordField
         />
@@ -324,6 +325,7 @@
           placeholder="Confirm New Password"
           (input)="onConfirmPasswordChange()"
           required
+          minlength="8"
           #cNewPsw="ngModel"
           #confirmPasswordField
         />
