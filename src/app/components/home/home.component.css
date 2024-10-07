@@ -24,9 +24,9 @@
 }
 
 .landing-section .background {
-    background-image: url('src/assets/images/backgrounds/ai-bg.jpg');
+    background-image: url('src/assets/images/backgrounds/landing-bg.png');
     background-size: cover;
-    background-position: center;
+    background-position: top;
     border-image: fill 1 linear-gradient(0deg, rgba(254,243,199,1) 0%, rgba(255,255,255,0) 30%);;
     position: absolute;
     height: 100%;
